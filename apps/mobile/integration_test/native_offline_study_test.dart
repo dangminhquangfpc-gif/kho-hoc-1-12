@@ -258,7 +258,9 @@ void main() {
       debugPrint(
         'Offline QA: saved result opened from the real history screen',
       );
-      await tester.pageBack();
+      // WidgetTester.pageBack() searches for the English tooltip "Back";
+      // the real Vietnamese app uses a localized AppBar BackButton instead.
+      await _tap(tester, find.byType(BackButton));
       final documentsTab = find.widgetWithText(
         NavigationDestination,
         'Tài liệu',
