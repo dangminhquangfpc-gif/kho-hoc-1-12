@@ -28,6 +28,7 @@ from .models import (
     LearningSession,
     LearningUser,
     Attempt,
+    AttemptDraft,
 )
 
 COOKIE = "khohoc_session"
@@ -448,6 +449,15 @@ class AccountService:
                 db.delete(group)
             db.execute(delete(GroupMember).where(GroupMember.user_id == user.id))
             db.execute(
+                delete(AttemptDraft).where(
+                    AttemptDraft.attempt_id.in_(
+                        select(AccountAttempt.attempt_id).where(
+                            AccountAttempt.user_id == user.id
+                        )
+                    )
+                )
+            )
+            db.execute(
                 delete(Attempt).where(
                     Attempt.id.in_(
                         select(AccountAttempt.attempt_id).where(
@@ -617,6 +627,15 @@ class AccountService:
             if owner.role != "manager" and student.manager_id != owner.id:
                 raise HTTPException(403, "Chỉ người cấp tài khoản được xóa tài khoản.")
             db.execute(delete(GroupMember).where(GroupMember.user_id == student.id))
+            db.execute(
+                delete(AttemptDraft).where(
+                    AttemptDraft.attempt_id.in_(
+                        select(AccountAttempt.attempt_id).where(
+                            AccountAttempt.user_id == student.id
+                        )
+                    )
+                )
+            )
             db.execute(
                 delete(Attempt).where(
                     Attempt.id.in_(

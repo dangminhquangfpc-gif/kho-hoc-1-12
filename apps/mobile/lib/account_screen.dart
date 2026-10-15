@@ -14,6 +14,13 @@ final serverResultsProvider = FutureProvider.autoDispose<List<Json>>((ref) {
       : ref.watch(apiProvider).accountResults();
 });
 
+final pendingAttemptsProvider = FutureProvider.autoDispose<List<Json>>((ref) {
+  final user = ref.watch(authUserProvider);
+  return user == null
+      ? Future.value(<Json>[])
+      : ref.watch(apiProvider).pendingAttempts();
+});
+
 String accountError(Object error) {
   if (error is StateError) return error.message.toString();
   if (error is DioException) {
@@ -289,6 +296,86 @@ class _AccountState extends ConsumerState<AccountScreen> {
                   label: const Text('Quản lý học viên và kết quả'),
                 ),
               if (user['role'] == 'student') const GroupPanel(student: true),
+              Row(
+                children: [
+                  const Expanded(child: Text('Bài đang làm trên các thiết bị')),
+                  IconButton(
+                    tooltip: 'Đồng bộ lại',
+                    icon: const Icon(Icons.sync),
+                    onPressed: () {
+                      ref.invalidate(pendingAttemptsProvider);
+                      ref.invalidate(serverResultsProvider);
+                    },
+                  ),
+                ],
+              ),
+              ref
+                  .watch(pendingAttemptsProvider)
+                  .when(
+                    data: (rows) => Column(
+                      children: [
+                        if (rows.isEmpty)
+                          const Text('Chưa có bài đang làm trên máy chủ.'),
+                        for (final row in rows)
+                          ListTile(
+                            leading: const Icon(Icons.cloud_sync),
+                            title: Text(row['title']),
+                            trailing: const Icon(Icons.play_arrow),
+                            onTap: busy
+                                ? null
+                                : () => act(() async {
+                                    final prefs = await ref.read(
+                                      preferencesProvider.future,
+                                    );
+                                    final previous = LocalStore(prefs).current;
+                                    if (!context.mounted) return;
+                                    if (previous != null) {
+                                      final confirmed = await showDialog<bool>(
+                                        context: context,
+                                        builder: (c) => AlertDialog(
+                                          title: const Text(
+                                            'Mở bản lưu trên máy chủ?',
+                                          ),
+                                          content: const Text(
+                                            'Bản đang lưu trên thiết bị sẽ được thay bằng bản máy chủ. Hãy đồng bộ những thay đổi chưa lưu trước khi tiếp tục.',
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(c, false),
+                                              child: const Text('Hủy'),
+                                            ),
+                                            FilledButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(c, true),
+                                              child: const Text(
+                                                'Mở bản máy chủ',
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                      if (confirmed != true) return;
+                                    }
+                                    final attempt = await ref
+                                        .read(apiProvider)
+                                        .resumeAttempt(row['id']);
+                                    await LocalStore(prefs).save({
+                                      ...attempt,
+                                      'backend_url': ref
+                                          .read(apiProvider)
+                                          .baseUrl,
+                                    });
+                                    if (context.mounted) {
+                                      context.go('/practice');
+                                    }
+                                  }),
+                          ),
+                      ],
+                    ),
+                    loading: () => const LinearProgressIndicator(),
+                    error: (e, _) => Text(accountError(e)),
+                  ),
               ...[
                 const Text(
                   'Kết quả được lưu theo tài khoản trên máy chủ (hiển thị tối đa 500 bài gần nhất). Người quản lý có thể theo dõi bài đã nộp và chủ đề cần ôn.',

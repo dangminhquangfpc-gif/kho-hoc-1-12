@@ -12,3 +12,5 @@
 !data/library/documents.json
 !data/library/files/
 !data/library/files/**
+!data/library/*.json
+**/__pycache__/**

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -72,7 +73,11 @@ class _LibraryState extends ConsumerState<LibraryScreen> {
         'answers': <String, List<String>>{},
       });
       if (mounted) context.go('/practice');
-    } catch (_) {
+    } catch (e) {
+      if (e is DioException && e.response?.statusCode == 401) {
+        if (mounted) context.go('/account');
+        return;
+      }
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

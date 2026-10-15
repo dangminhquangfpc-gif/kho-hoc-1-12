@@ -39,9 +39,20 @@ def seeded(tmp_path):
                 f"/admin/questions/{q['id']}/publish", headers=ADMIN
             ).raise_for_status()
         with Session(app.state.engine) as db:
-            db.add(LearningUser(id="teacher", username="teacher", display_name="Giáo viên", role="teacher", password_hash=password_hash("Teacher-password-123")))
+            db.add(
+                LearningUser(
+                    id="teacher",
+                    username="teacher",
+                    display_name="Giáo viên",
+                    role="teacher",
+                    password_hash=password_hash("Teacher-password-123"),
+                )
+            )
             db.commit()
-        client.post("/auth/login", json={"username": "teacher", "password": "Teacher-password-123"}).raise_for_status()
+        client.post(
+            "/auth/login",
+            json={"username": "teacher", "password": "Teacher-password-123"},
+        ).raise_for_status()
         client.engine = app.state.engine
         yield client, qs
 
@@ -122,7 +133,8 @@ def test_targeted_review_uses_only_published_questions_and_snapshot(seeded):
         ).status_code
         == 422
     )
-    assert client.get(f"/attempts/{attempt['id']}/result").status_code == 404
+    # The authenticated owner can now resume and retrieve results on another device.
+    assert client.get(f"/attempts/{attempt['id']}/result").status_code == 200
 
 
 def test_multiple_topics_are_balanced_and_all_selected_topics_appear(seeded):

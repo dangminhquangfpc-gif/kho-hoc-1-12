@@ -61,3 +61,11 @@ python scripts/store_preflight.py --platform ios --api-base-url https://TEN-MIEN
 ```
 
 Các địa chỉ và đường dẫn minh họa trong lệnh không phải endpoint được triển khai.
+
+## Cập nhật mã nguồn 0.2.0+12
+
+Có nền tảng PostgreSQL và pilot HTTPS dùng chung; đồng bộ bản nháp/kết quả giữa
+thiết bị và chống ghi đè bằng revision. Xem `docs/SHARED_SERVER.md`. Chưa triển
+khai endpoint Internet, backup PostgreSQL định kỳ hoặc hoàn tất điều kiện cửa
+hàng. Health của pilot trả `mode=shared`; preflight vẫn yêu cầu production để
+ngăn nhầm bản pilot thành bản phát hành.

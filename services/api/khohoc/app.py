@@ -2,13 +2,18 @@ import hashlib
 import secrets
 import uuid
 from contextlib import asynccontextmanager
+from functools import partial
+from starlette.concurrency import run_in_threadpool
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.trustedhost import TrustedHostMiddleware
+from .database import make_engine, verify_schema
+from .server_security import validate_shared, reserve
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from sqlalchemy import create_engine, select, update
+from sqlalchemy import select, update, delete
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -22,6 +27,7 @@ from .models import (
     Exam,
     AccountAttempt,
     LearningRecord,
+    AttemptDraft,
 )
 from .accounts import AccountService, ensure_manager
 from .content_fixes import QUESTION_REPLACEMENTS
@@ -31,15 +37,31 @@ from .practice import create_practice_router, topic_name, canonical_topic
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="KHOHOC_")
+    database_password_file: str | None = None
     database_url: str = "sqlite:////workspace/state/khohoc.db"
     admin_token: str = ""
     mode: str = "development"
+    public_origin: str = ""
     manager_credentials_file: str | None = None
     cors_origins: list[str] = [
         "http://localhost:3000",
         "http://localhost:8080",
         "http://127.0.0.1:8080",
     ]
+
+    def resolved_database_url(self):
+        if not self.database_password_file:
+            return self.database_url
+        from sqlalchemy.engine import make_url
+
+        password = Path(self.database_password_file).read_text().strip()
+        if not password:
+            raise ValueError("Database password file is empty")
+        return (
+            make_url(self.database_url)
+            .set(password=password)
+            .render_as_string(hide_password=False)
+        )
 
 
 def public_question(payload: dict) -> dict:
@@ -71,33 +93,40 @@ def fingerprint(question: Question) -> str:
 
 def create_app(settings: Settings | None = None) -> FastAPI:
     config = settings or Settings()
-    if config.mode != "development":
+    if config.mode not in {"development", "shared"}:
         raise RuntimeError(
-            "Production adapter/JWT authentication are not implemented; refusing to start"
+            "Use development or controlled shared pilot mode; production release remains locked"
         )
     if config.database_url.startswith("sqlite:////"):
         Path(config.database_url.removeprefix("sqlite:///")).parent.mkdir(
             parents=True, exist_ok=True
         )
-    engine = create_engine(
-        config.database_url,
-        connect_args={"check_same_thread": False}
-        if config.database_url.startswith("sqlite")
-        else {},
-    )
+    shared = config.mode == "shared"
+    public_host = validate_shared(config) if shared else None
+    engine = make_engine(config.resolved_database_url())
 
     @asynccontextmanager
     async def lifespan(app):
-        Base.metadata.create_all(engine)
-        ensure_manager(engine, config.manager_credentials_file)
+        if shared:
+            verify_schema(engine)
+        else:
+            Base.metadata.create_all(engine)
+            ensure_manager(engine, config.manager_credentials_file)
         yield
         engine.dispose()
 
-    app = FastAPI(title="Tự học 111 — local MVP", lifespan=lifespan)
+    app = FastAPI(
+        title="Tự học 111",
+        lifespan=lifespan,
+        docs_url=None if shared else "/docs",
+        redoc_url=None if shared else "/redoc",
+        openapi_url=None if shared else "/openapi.json",
+    )
     app.state.engine = engine
     app.add_middleware(
         CORSMiddleware,
         allow_origins=config.cors_origins,
+        allow_credentials=True,
         allow_methods=["GET", "POST", "DELETE"],
         allow_headers=["Content-Type", "Authorization", "X-Attempt-Token"],
     )
@@ -107,6 +136,33 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     async def limits(request: Request, call_next):
         from fastapi.responses import JSONResponse
 
+        if shared:
+            if request.url.scheme != "https":
+                return JSONResponse({"detail": "HTTPS required"}, 400)
+            if request.url.path.startswith("/admin"):
+                return JSONResponse({"detail": "Not found"}, 404)
+            origin = request.headers.get("origin")
+            if request.method not in ("GET", "HEAD", "OPTIONS") and (
+                (origin and origin != config.public_origin)
+                or request.headers.get("sec-fetch-site") == "cross-site"
+            ):
+                return JSONResponse({"detail": "Cross-site request denied"}, 403)
+            peer = request.client.host if request.client else "unknown"
+            if not await run_in_threadpool(
+                partial(reserve, engine, "request:" + peer, 300, 60)
+            ):
+                return JSONResponse(
+                    {"detail": "Too many requests"}, 429, headers={"Retry-After": "60"}
+                )
+            if request.url.path in {"/auth/login", "/auth/register"}:
+                if not await run_in_threadpool(
+                    partial(reserve, engine, "auth-ip:" + peer, 60, 900)
+                ):
+                    return JSONResponse(
+                        {"detail": "Too many authentication requests"},
+                        429,
+                        headers={"Retry-After": "900"},
+                    )
         if request.method in ("POST", "PUT", "PATCH"):
             body = bytearray()
             async for chunk in request.stream():
@@ -116,10 +172,32 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                         {"detail": "Request too large"}, status_code=413
                     )
             request._body = bytes(body)
+            if shared and request.url.path in {"/auth/login", "/auth/register"}:
+                import json
+
+                try:
+                    username = json.loads(body).get("username", "")
+                except (ValueError, AttributeError):
+                    username = ""
+                if isinstance(username, str) and not await run_in_threadpool(
+                    partial(reserve, engine, "auth-user:" + username.lower(), 10, 900)
+                ):
+                    return JSONResponse(
+                        {"detail": "Too many authentication requests"},
+                        429,
+                        headers={"Retry-After": "900"},
+                    )
         response = await call_next(request)
         response.headers["Cache-Control"] = "no-store"
         response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["Referrer-Policy"] = "no-referrer"
+        if shared:
+            response.headers["Strict-Transport-Security"] = "max-age=31536000"
+            response.headers["X-Frame-Options"] = "DENY"
         return response
+
+    if shared:
+        app.add_middleware(TrustedHostMiddleware, allowed_hosts=[public_host])
 
     def db():
         with Session(engine) as session:
@@ -127,6 +205,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     accounts = AccountService(db)
     app.include_router(accounts.router)
+    from .sync import create_sync_router
+
+    app.include_router(create_sync_router(db, accounts, public_question))
 
     def admin(authorization: str = Header(default="")):
         if not config.admin_token or not secrets.compare_digest(
@@ -138,8 +219,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def audit(session, action, target):
         session.add(AuditEvent(actor="local-admin", action=action, target=target))
 
-    def owned_attempt(session, attempt_id, token):
+    def owned_attempt(session, attempt_id, token, request):
         attempt = session.get(Attempt, attempt_id)
+        owner = session.get(AccountAttempt, attempt_id)
+        if owner:
+            accounts.authorize_attempt(request, session, attempt_id)
+            if attempt:
+                return attempt
         if not attempt or not secrets.compare_digest(
             attempt.token_hash, hashlib.sha256(token.encode()).hexdigest()
         ):
@@ -370,7 +456,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.post("/exams/{exam_id}/attempts", status_code=201)
     def start(exam_id: str, request: Request, session: Session = Depends(db)):
-        user = accounts.optional_user(request, session)
+        user = (
+            accounts.required(request, session)
+            if shared
+            else accounts.optional_user(request, session)
+        )
         if not accounts.can_access_exam(request, session, exam_id):
             raise HTTPException(404, "Exam unavailable")
         exam, questions = published_exam(session, exam_id)
@@ -389,8 +479,20 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         x_attempt_token: str = Header(default=""),
         session: Session = Depends(db),
     ):
-        attempt = owned_attempt(session, attempt_id, x_attempt_token)
+        attempt = owned_attempt(session, attempt_id, x_attempt_token, request)
         accounts.authorize_attempt(request, session, attempt_id)
+        attempt = session.scalar(
+            select(Attempt)
+            .where(Attempt.id == attempt_id)
+            .with_for_update()
+            .execution_options(populate_existing=True)
+        )
+        if attempt.result is None and body.draft_revision is not None:
+            draft = session.get(AttemptDraft, attempt_id)
+            if body.draft_revision != (draft.revision if draft else 0):
+                raise HTTPException(
+                    409, "Bài đã thay đổi trên thiết bị khác. Tải lại trước khi nộp."
+                )
         if attempt.result is not None:
             if attempt.answers != body.answers:
                 raise HTTPException(409, "Already submitted with different answers")
@@ -475,7 +577,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         x_attempt_token: str = Header(default=""),
         session: Session = Depends(db),
     ):
-        attempt = owned_attempt(session, attempt_id, x_attempt_token)
+        attempt = owned_attempt(session, attempt_id, x_attempt_token, request)
         accounts.authorize_attempt(request, session, attempt_id)
         if attempt.result is None:
             raise HTTPException(409, "Not submitted")
@@ -488,8 +590,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         x_attempt_token: str = Header(default=""),
         session: Session = Depends(db),
     ):
-        attempt = owned_attempt(session, attempt_id, x_attempt_token)
+        attempt = owned_attempt(session, attempt_id, x_attempt_token, request)
         accounts.authorize_attempt(request, session, attempt_id)
+        session.execute(
+            delete(AttemptDraft).where(AttemptDraft.attempt_id == attempt_id)
+        )
         session.delete(attempt)
         owner = session.get(AccountAttempt, attempt_id)
         if owner:

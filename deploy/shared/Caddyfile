@@ -1,0 +1,24 @@
+{
+    email {$TUHOC_ACME_EMAIL}
+}
+{$TUHOC_DOMAIN} {
+    request_body {
+        max_size 2MB
+    }
+    header {
+        Strict-Transport-Security "max-age=31536000"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "no-referrer"
+        X-Frame-Options "DENY"
+        Permissions-Policy "camera=(), microphone=(), geolocation=()"
+    }
+    handle_path /api/* {
+        reverse_proxy api:8000
+    }
+    handle {
+        root * /srv/web
+        header Cache-Control "no-cache"
+        try_files {path} /index.html
+        file_server
+    }
+}
