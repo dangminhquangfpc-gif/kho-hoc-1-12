@@ -98,19 +98,52 @@ class KhoHocApp extends ConsumerWidget {
     }
     if (auth.hasError) {
       return MaterialApp(
-        home: Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'Chưa xác thực được tài khoản. Kiểm tra máy chủ rồi thử lại.',
+        title: 'Tự học 111',
+        debugShowCheckedModeBanner: false,
+        locale: const Locale('vi'),
+        supportedLocales: const [Locale('vi')],
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
+        theme: ThemeData(
+          fontFamily: 'NotoSans',
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff2563c7)),
+          useMaterial3: true,
+        ),
+        darkTheme: ThemeData(
+          fontFamily: 'NotoSans',
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xff2563c7),
+            brightness: Brightness.dark,
+          ),
+          useMaterial3: true,
+        ),
+        themeMode: ref.watch(darkProvider) ? ThemeMode.dark : ThemeMode.light,
+        home: Builder(
+          builder: (offlineContext) => Scaffold(
+            body: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Chưa xác thực được tài khoản. Kiểm tra máy chủ rồi thử lại.',
+                    ),
+                    FilledButton(
+                      onPressed: () => ref.invalidate(authBootstrapProvider),
+                      child: const Text('Thử lại'),
+                    ),
+                    TextButton.icon(
+                      onPressed: () => Navigator.of(offlineContext).push<void>(
+                        MaterialPageRoute(
+                          builder: (_) => const AiOcrScreen(ocrOnly: true),
+                        ),
+                      ),
+                      icon: const Icon(Icons.document_scanner_outlined),
+                      label: const Text('Nhận chữ từ ảnh trên thiết bị'),
+                    ),
+                  ],
                 ),
-                FilledButton(
-                  onPressed: () => ref.invalidate(authBootstrapProvider),
-                  child: const Text('Thử lại'),
-                ),
-              ],
+              ),
             ),
           ),
         ),
@@ -243,7 +276,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
           const Text(
             'Chọn lớp và môn để luyện tập. Đăng nhập để đồng bộ bài làm và kết quả.',
           ),
-          const Text('Bản thử 2026.10.15.16'),
+          const Text('Bản thử 2026.10.15.17'),
           if (widget.index == 2 &&
               [
                 'manager',

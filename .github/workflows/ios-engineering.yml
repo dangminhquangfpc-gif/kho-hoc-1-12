@@ -1,10 +1,13 @@
 name: iOS engineering build (unsigned)
 on:
   push:
-    branches: [demo/tu-hoc-111-2026-10-15]
+    branches: [demo/tu-hoc-111-2026-10-15, feature/native-ocr-ai-activation-20261015]
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: ios-engineering-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   ios:
     runs-on: macos-latest

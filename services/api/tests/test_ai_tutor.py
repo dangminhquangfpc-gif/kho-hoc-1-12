@@ -402,6 +402,45 @@ def test_private_regular_key_file_and_environment_configuration(
     assert replace(config, model="secret\nmodel").key() is None
 
 
+def test_secret_environment_injection_and_ambiguous_key_sources(tutor, monkeypatch):
+    app_for, engine, config, requests, _, key = tutor
+    monkeypatch.setenv("KHOHOC_AI_ENABLED", "true")
+    monkeypatch.setenv("KHOHOC_AI_MODEL", "gpt-4.1-mini")
+    monkeypatch.delenv("KHOHOC_AI_API_KEY_FILE", raising=False)
+    monkeypatch.setenv("KHOHOC_AI_API_KEY", KEY)
+    settings = AITutorConfig.from_env()
+    assert settings.key() == KEY
+    assert settings.api_key_file is None
+    assert settings.api_key_env_name == "KHOHOC_AI_API_KEY"
+    assert KEY not in repr(settings)
+    assert KEY not in str(settings.__dict__)
+    with app_for(settings) as client:
+        status = client.get("/ai/status", headers=AUTH)
+        assert status.json()["configured"] and KEY not in status.text
+        assert client.post("/ai/explain", headers=AUTH, json=BODY).status_code == 200
+    assert requests[0].headers["authorization"] == "Bearer " + KEY
+    monkeypatch.setenv("KHOHOC_AI_API_KEY_FILE", str(key))
+    ambiguous = AITutorConfig.from_env()
+    assert ambiguous.key() is None
+    with app_for(ambiguous) as client:
+        assert not client.get("/ai/status", headers=AUTH).json()["configured"]
+        assert client.post("/ai/explain", headers=AUTH, json=BODY).status_code == 503
+    assert len(requests) == 1
+    assert replace(config, api_key_file=None, api_key_env_name="PATH").key() is None
+    monkeypatch.delenv("KHOHOC_AI_API_KEY_FILE")
+    monkeypatch.setenv("KHOHOC_AI_API_KEY", "short")
+    assert AITutorConfig.from_env().key() is None
+    monkeypatch.setenv("KHOHOC_AI_API_KEY", KEY + "\nprivate text")
+    assert AITutorConfig.from_env().key() is None
+    monkeypatch.delenv("KHOHOC_AI_API_KEY")
+    # A rotated/deleted runtime secret fails closed, rather than retaining a copy.
+    assert settings.key() is None
+    with Session(engine) as db:
+        assert KEY not in "".join(
+            item.target for item in db.scalars(select(AuditEvent))
+        )
+
+
 @pytest.mark.parametrize(
     "content",
     [

@@ -27,6 +27,7 @@ class AiOcrScreen extends ConsumerStatefulWidget {
     super.key,
     this.initialText = '',
     this.returnTextOnly = false,
+    this.ocrOnly = false,
     this.recognizer,
     this.attemptId,
     this.questionId,
@@ -35,6 +36,9 @@ class AiOcrScreen extends ConsumerStatefulWidget {
   });
   final String initialText;
   final bool returnTextOnly;
+
+  /// Local OCR and explicit clipboard export without auth or backend access.
+  final bool ocrOnly;
   final OcrRecognizer? recognizer;
   final String? attemptId, questionId, initialSubject;
   final int? initialGrade;
@@ -46,8 +50,10 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
   late final TextEditingController text;
   late final OcrRecognizer recognizer;
   bool recognizing = false, acknowledged = false, aiBusy = false;
+  bool copying = false;
   bool statusBusy = false;
   bool useReference = true;
+  bool hasOcrResult = false;
   int generation = 0, grade = 5;
   String? subject, ocrError, aiError, statusError;
   double? confidence;
@@ -60,13 +66,10 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
     super.initState();
     text = TextEditingController(text: widget.initialText);
     recognizer = widget.recognizer ?? const DeviceOcrRecognizer();
-    grade =
-        (widget.initialGrade ??
-                ref.read(authUserProvider)?['grade'] as int? ??
-                5)
-            .clamp(1, 12);
+    final user = widget.ocrOnly ? null : ref.read(authUserProvider);
+    grade = (widget.initialGrade ?? user?['grade'] as int? ?? 5).clamp(1, 12);
     subject = widget.initialSubject;
-    if (!widget.returnTextOnly && ref.read(authUserProvider) != null) {
+    if (!widget.ocrOnly && !widget.returnTextOnly && user != null) {
       unawaited(loadStatus());
     }
   }
@@ -104,6 +107,27 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
     });
   }
 
+  Future<void> copyCheckedText() async {
+    if (!acknowledged || copying || text.text.trim().isEmpty) return;
+    setState(() => copying = true);
+    try {
+      await Clipboard.setData(ClipboardData(text: text.text.trim()));
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Đã sao chép văn bản.')));
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() {
+          ocrError = 'Chưa sao chép được. Văn bản đang có được giữ nguyên.';
+        });
+      }
+    } finally {
+      if (mounted) setState(() => copying = false);
+    }
+  }
+
   Future<void> scan() async {
     final current = ++generation;
     setState(() {
@@ -131,6 +155,7 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
         }
       }
       setState(() {
+        hasOcrResult = true;
         preview = image;
         confidence = result.confidence;
         warnings = result.warnings;
@@ -249,12 +274,14 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(authUserProvider);
-    final locked = recognizing || aiBusy;
+    final user = widget.ocrOnly ? null : ref.watch(authUserProvider);
+    final locked = recognizing || aiBusy || copying;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.returnTextOnly
+          widget.ocrOnly
+              ? 'Nhận chữ trên thiết bị'
+              : widget.returnTextOnly
               ? 'Nhập câu trả lời từ ảnh'
               : 'Ảnh và trợ lý học tập',
         ),
@@ -270,7 +297,14 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
             const Text(
               kIsWeb
                   ? 'Bộ nhận chữ chưa tải được. Hãy tải lại trang hoặc nhập, dán văn bản bên dưới.'
-                  : 'Nhận chữ từ ảnh hiện có trên bản web và demo Windows chạy trong trình duyệt. Trên bản điện thoại này, bạn có thể nhập hoặc dán văn bản bên dưới.',
+                  : 'Bản chạy trên thiết bị này chưa hỗ trợ nhận chữ từ ảnh. Bạn có thể nhập, dán văn bản bên dưới hoặc dùng bản web.',
+            ),
+          if (!kIsWeb &&
+              recognizer.available &&
+              (defaultTargetPlatform == TargetPlatform.android ||
+                  defaultTargetPlatform == TargetPlatform.iOS))
+            const Text(
+              'Google ML Kit có thể gửi thông tin thiết bị, ứng dụng và hiệu năng cho Google để chẩn đoán và thống kê sử dụng.',
             ),
           FilledButton.icon(
             onPressed: locked || !recognizer.available ? null : scan,
@@ -280,7 +314,9 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
           if (recognizing) ...[
             const LinearProgressIndicator(),
             const Text(
-              'Lần đầu có thể cần tải bộ nhận chữ. Bạn có thể hủy bất kỳ lúc nào.',
+              kIsWeb
+                  ? 'Lần đầu có thể cần tải bộ nhận chữ. Bạn có thể hủy bất kỳ lúc nào.'
+                  : 'Đang nhận chữ trên thiết bị. Bạn có thể hủy bất kỳ lúc nào.',
             ),
             TextButton(
               onPressed: cancelOcr,
@@ -295,7 +331,7 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
                 preview!,
                 height: 240,
                 fit: BoxFit.contain,
-                semanticLabel: 'Ảnh vừa chọn, chỉ lưu trong bộ nhớ trang',
+                semanticLabel: 'Ảnh vừa chọn để nhận chữ',
                 errorBuilder: (_, __, ___) =>
                     const Text('Không hiển thị được ảnh xem trước.'),
               ),
@@ -307,6 +343,10 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
           if (confidence != null && confidence! < 80)
             const Text(
               'Ảnh có độ tin cậy thấp. Hãy kiểm tra kỹ từng số, dấu tiếng Việt và phép tính.',
+            ),
+          if (hasOcrResult && confidence == null)
+            const Text(
+              'Bộ nhận chữ không cung cấp chỉ số độ tin cậy. Hãy kiểm tra kỹ từng số, dấu tiếng Việt và phép tính.',
             ),
           for (final warning in warnings) Text(warning),
           const SizedBox(height: 12),
@@ -339,7 +379,18 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
                 ? null
                 : (v) => setState(() => acknowledged = v ?? false),
           ),
-          if (widget.returnTextOnly) ...[
+          if (widget.ocrOnly) ...[
+            const Text(
+              'Bạn có thể nhận chữ, chỉnh sửa và sao chép mà không cần kết nối máy chủ. Văn bản chỉ được chép vào bộ nhớ tạm khi bạn chọn sao chép.',
+            ),
+            FilledButton.icon(
+              onPressed: !locked && acknowledged && text.text.trim().isNotEmpty
+                  ? copyCheckedText
+                  : null,
+              icon: const Icon(Icons.copy_outlined),
+              label: const Text('Sao chép văn bản đã kiểm tra'),
+            ),
+          ] else if (widget.returnTextOnly) ...[
             const Text(
               'Chỉ đưa văn bản đã sửa vào ô trả lời. Bạn vẫn cần kiểm tra bài và tự bấm nộp.',
             ),
@@ -393,7 +444,7 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
                   status?['configured'] != true &&
                   statusError == null)
                 const Text(
-                  'AI chưa được cấu hình trên máy chủ này. Bạn vẫn có thể nhận chữ, chỉnh sửa và dùng tài liệu, bài luyện có sẵn.',
+                  'AI chưa được cấu hình trên máy chủ này. Hãy liên hệ người quản lý để bật dịch vụ AI. Bạn vẫn có thể nhận chữ, chỉnh sửa và dùng tài liệu, bài luyện có sẵn.',
                 ),
               TextButton.icon(
                 onPressed: statusBusy || aiBusy ? null : loadStatus,
@@ -518,7 +569,7 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
           ],
           const SizedBox(height: 24),
           const Text(
-            'Ảnh và văn bản ở màn hình này chỉ giữ trong bộ nhớ trong lúc mở trang, không tự lưu vào lịch sử hoặc bản nháp.',
+            'Ứng dụng chỉ dùng ảnh và văn bản ở màn hình này để xử lý yêu cầu hiện tại, không tự thêm vào lịch sử hoặc bản nháp.',
           ),
         ],
       ),

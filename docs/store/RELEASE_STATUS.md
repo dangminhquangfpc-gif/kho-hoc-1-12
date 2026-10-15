@@ -1,6 +1,6 @@
 # Tự học 111 — chuẩn bị Google Play và App Store
 
-Bản mã nguồn 0.2.0+16 / demo .16; các mốc kỹ thuật cũ được giữ bên dưới.
+Bản mã nguồn 0.2.0+17 / demo .17; các mốc kỹ thuật cũ được giữ bên dưới.
 Chưa phát hành lên cửa hàng.
 Người dùng xác nhận chưa có Play Console, Apple Developer hoặc backend HTTPS dùng chung.
 Không tạo tài khoản, thanh toán hoặc đưa backend development chứa dữ liệu học viên ra Internet.
@@ -10,6 +10,10 @@ Không tạo tài khoản, thanh toán hoặc đưa backend development chứa d
 - Tên hiển thị Android, web, iOS: Tự học 111; giữ application ID Android để giữ dữ liệu khi nâng cấp.
 - Android compile/target API 36; cấu hình ký upload dùng android/key.properties ngoài Git, không dùng khóa debug cho release.
 - Khung iOS, Podfile, privacy manifest cho UserDefaults (CA92.1), không bật tracking.
+- Native OCR có chọn ảnh từ thư viện bằng image_picker 1.2.2 và Google ML Kit Latin
+  qua google_mlkit_text_recognition 0.15.0; ứng dụng yêu cầu Android 7.0/API 24
+  hoặc iOS 15.5 trở lên. Chưa có camera/cắt ảnh.
+  SDK xử lý ảnh trên thiết bị nhưng có dữ liệu chẩn đoán/định danh cần khai cửa hàng.
 - Tài khoản tự đăng ký có thể xóa trong ứng dụng sau khi xác nhận mật khẩu.
   Xóa tài khoản giáo viên giữ tài khoản/kết quả học sinh cho quản lý hệ thống;
   các bài/kết quả đã chia sẻ thuộc học viên khác không bị xóa theo.
@@ -34,6 +38,7 @@ Không tạo tài khoản, thanh toán hoặc đưa backend development chứa d
 6. Khóa Android upload signing và Apple team/certificate/profile ở kho bí mật riêng, ngoài Git.
    Tăng version/build, kiểm tra AAB/IPA đã ký; kiểm thử nội bộ/kín/TestFlight theo loại tài khoản.
 7. Khai Data Safety/App Privacy, độ tuổi, content rating, SDK, quyền nội dung, tài khoản demo cho reviewer;
+   đối chiếu dữ liệu chẩn đoán/định danh ML Kit và dữ liệu văn bản gửi nhà cung cấp AI thực tế;
    kiểm tra lần cuối trước khi gửi bản cụ thể xét duyệt. Chưa gửi submission hay thanh toán phí.
 
 ## Yêu cầu chính thức đã truy cập ngày 15/10/2026
@@ -120,3 +125,36 @@ khai đúng tài sản/SDK và luồng dữ liệu của bản cụ thể trong 
 Privacy; không dùng trạng thái mặc định tắt để tuyên bố mọi cấu hình không gửi
 dữ liệu ra ngoài. Chưa triển khai Internet, kiểm thử/ký bản .16 trên thiết bị
 thật hoặc mở khóa chế độ production; điều kiện phát hành vẫn chưa hoàn tất.
+
+## Bản thử .17 — OCR native và cấu hình AI
+
+Đã tích hợp luồng chọn ảnh thư viện trên Android/iOS, xử lý OCR Latin bằng
+Google ML Kit trên thiết bị, xem ảnh và sửa/xác nhận văn bản trước khi dùng.
+Không thêm camera vào luồng này. Ảnh được chuẩn hóa bỏ EXIF/GPS; bản tạm riêng
+được dọn sau xử lý. Native không có chỉ số độ tin cậy tổng thể nên không hiển
+thị phần trăm giả. Hủy bỏ kết quả đến muộn, không bảo đảm ML Kit dừng xử lý
+ngay. Bản web/demo Windows tiếp tục dùng Tesseract đóng gói local.
+
+Thêm công cụ cấu hình AI bằng khóa nhập ẩn, tệp cấu hình riêng và tệp khóa
+ngoài mã nguồn/gói phát hành. AI chỉ hoạt động khi người vận hành cung cấp
+dịch vụ, model và khóa hợp lệ; kiểm tra cấu hình không thay thế một yêu cầu
+AI thật thành công. Chưa có khóa của người dùng để kích hoạt hoặc đánh giá
+model thật trong môi trường này. Xem [AI_ACTIVATION.md](../AI_ACTIVATION.md).
+
+ML Kit có thể gửi thông tin thiết bị/ứng dụng, mã định danh theo lần cài đặt
+và thông tin hiệu năng, chẩn đoán cho Google. Nhận dạng ảnh trên thiết bị không
+đồng nghĩa không có dữ liệu gửi ra ngoài. Trước xét duyệt cần đối chiếu bản
+SDK và khai Data Safety/App Privacy, nhất là khi phục vụ trẻ em:
+
+- https://developers.google.com/ml-kit/android-data-disclosure
+- https://developers.google.com/ml-kit/ios-data-disclosure
+
+Đã build Android ARM64 APK debug version 17, minSdk 24/targetSdk 36 và iOS
+engineering unsigned bằng Xcode/iOS SDK 26.5. ML Kit thật đọc được trang tiếng
+Việt trên Android giả lập khi tắt Wi-Fi/dữ liệu di động; pipeline không mô
+phỏng OCR, chỉ bỏ qua picker hệ điều hành. Chưa kiểm tra OCR iOS runtime.
+Có lối mở OCR-only khi máy chủ lỗi mà không đổi dữ liệu tài khoản đã lưu.
+Còn kiểm thử quyền thư viện, vòng đời/picker, dấu tiếng Việt, hiệu năng và độ
+chính xác trên Android/iPhone vật lý; ký AAB/IPA và thử nghiệm cửa hàng vẫn
+phụ thuộc tài khoản/hạ tầng của chủ app.
+Bản .17 không thay đổi trạng thái production hoặc hoàn tất điều kiện phát hành.

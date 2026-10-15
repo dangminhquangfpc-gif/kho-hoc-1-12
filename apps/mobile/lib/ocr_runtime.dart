@@ -11,7 +11,7 @@ class OcrResult {
     this.previewDataUrl,
   });
   final String text;
-  final double confidence;
+  final double? confidence;
   final List<String> warnings;
   final String? previewDataUrl;
 }
@@ -32,7 +32,7 @@ class DeviceOcrRecognizer implements OcrRecognizer {
     if (data == null || data['cancelled'] == true) return null;
     return OcrResult(
       text: data['text'] as String? ?? '',
-      confidence: (data['confidence'] as num? ?? 0).toDouble(),
+      confidence: (data['confidence'] as num?)?.toDouble(),
       warnings: (data['warnings'] as List? ?? []).map((v) => '$v').toList(),
       previewDataUrl: data['preview_data_url'] as String?,
     );
