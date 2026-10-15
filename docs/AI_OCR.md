@@ -18,6 +18,10 @@ Không cần đăng nhập để nhận chữ. Đợi kết quả, đối chiế
 chữ, số và công thức rồi đánh dấu **Tôi đã kiểm tra văn bản**. Có thể hủy nhận
 dạng; văn bản đang có được giữ khi lỗi hoặc không đọc được chữ.
 
+Nếu tài khoản đã lưu nhưng máy chủ mất kết nối, màn hình lỗi có nút
+**Nhận chữ từ ảnh trên thiết bị**. Lối này chỉ nhận/sửa/xác nhận và sao chép
+văn bản, không gọi AI hoặc thay đổi tài khoản, bài làm và lịch sử đã lưu.
+
 Trong câu trả lời ngắn, số hoặc tự luận, **Nhập từ ảnh hoặc văn bản** mở cùng
 luồng kiểm tra. Chọn
 **Dùng văn bản này cho câu trả lời** mới điền vào ô bài làm; thao tác này không

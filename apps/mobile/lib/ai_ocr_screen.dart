@@ -27,6 +27,7 @@ class AiOcrScreen extends ConsumerStatefulWidget {
     super.key,
     this.initialText = '',
     this.returnTextOnly = false,
+    this.ocrOnly = false,
     this.recognizer,
     this.attemptId,
     this.questionId,
@@ -35,6 +36,9 @@ class AiOcrScreen extends ConsumerStatefulWidget {
   });
   final String initialText;
   final bool returnTextOnly;
+
+  /// Local OCR and explicit clipboard export without auth or backend access.
+  final bool ocrOnly;
   final OcrRecognizer? recognizer;
   final String? attemptId, questionId, initialSubject;
   final int? initialGrade;
@@ -46,6 +50,7 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
   late final TextEditingController text;
   late final OcrRecognizer recognizer;
   bool recognizing = false, acknowledged = false, aiBusy = false;
+  bool copying = false;
   bool statusBusy = false;
   bool useReference = true;
   bool hasOcrResult = false;
@@ -61,13 +66,10 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
     super.initState();
     text = TextEditingController(text: widget.initialText);
     recognizer = widget.recognizer ?? const DeviceOcrRecognizer();
-    grade =
-        (widget.initialGrade ??
-                ref.read(authUserProvider)?['grade'] as int? ??
-                5)
-            .clamp(1, 12);
+    final user = widget.ocrOnly ? null : ref.read(authUserProvider);
+    grade = (widget.initialGrade ?? user?['grade'] as int? ?? 5).clamp(1, 12);
     subject = widget.initialSubject;
-    if (!widget.returnTextOnly && ref.read(authUserProvider) != null) {
+    if (!widget.ocrOnly && !widget.returnTextOnly && user != null) {
       unawaited(loadStatus());
     }
   }
@@ -103,6 +105,27 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
       recognizing = false;
       ocrError = 'Đã hủy nhận dạng. Văn bản đang có được giữ nguyên.';
     });
+  }
+
+  Future<void> copyCheckedText() async {
+    if (!acknowledged || copying || text.text.trim().isEmpty) return;
+    setState(() => copying = true);
+    try {
+      await Clipboard.setData(ClipboardData(text: text.text.trim()));
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Đã sao chép văn bản.')));
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() {
+          ocrError = 'Chưa sao chép được. Văn bản đang có được giữ nguyên.';
+        });
+      }
+    } finally {
+      if (mounted) setState(() => copying = false);
+    }
   }
 
   Future<void> scan() async {
@@ -251,12 +274,14 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(authUserProvider);
-    final locked = recognizing || aiBusy;
+    final user = widget.ocrOnly ? null : ref.watch(authUserProvider);
+    final locked = recognizing || aiBusy || copying;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.returnTextOnly
+          widget.ocrOnly
+              ? 'Nhận chữ trên thiết bị'
+              : widget.returnTextOnly
               ? 'Nhập câu trả lời từ ảnh'
               : 'Ảnh và trợ lý học tập',
         ),
@@ -354,7 +379,18 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
                 ? null
                 : (v) => setState(() => acknowledged = v ?? false),
           ),
-          if (widget.returnTextOnly) ...[
+          if (widget.ocrOnly) ...[
+            const Text(
+              'Bạn có thể nhận chữ, chỉnh sửa và sao chép mà không cần kết nối máy chủ. Văn bản chỉ được chép vào bộ nhớ tạm khi bạn chọn sao chép.',
+            ),
+            FilledButton.icon(
+              onPressed: !locked && acknowledged && text.text.trim().isNotEmpty
+                  ? copyCheckedText
+                  : null,
+              icon: const Icon(Icons.copy_outlined),
+              label: const Text('Sao chép văn bản đã kiểm tra'),
+            ),
+          ] else if (widget.returnTextOnly) ...[
             const Text(
               'Chỉ đưa văn bản đã sửa vào ô trả lời. Bạn vẫn cần kiểm tra bài và tự bấm nộp.',
             ),

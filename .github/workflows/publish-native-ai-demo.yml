@@ -1,0 +1,30 @@
+name: Publish native OCR and AI activation demo
+on:
+  push:
+    branches: [feature/native-ocr-ai-activation-20261015]
+permissions:
+  contents: write
+concurrency:
+  group: publish-native-ai-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify and upload Windows demo and Android engineering APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd demo-package
+          sha256sum --check tu-hoc-111-demo-windows.zip.sha256
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          with ZipFile('tu-hoc-111-android-debug.apk.zip') as archive:
+              assert archive.namelist() == ['tu-hoc-111-android-debug.apk']
+              assert archive.testzip() is None
+              archive.extractall('.')
+          PY
+          sha256sum --check tu-hoc-111-android-debug.apk.sha256
+          gh release view demo-tu-hoc-111-2026-10-15-v17 --repo "$GITHUB_REPOSITORY" || gh release create demo-tu-hoc-111-2026-10-15-v17 --draft --target "$GITHUB_SHA" --title 'Tự học 111 · v17 · OCR native và cấu hình AI' --notes 'Bản thử Windows và APK Android debug. Có OCR native; AI cần khóa nhà cung cấp riêng và backend được cấu hình. iOS build unsigned chưa cài được như ứng dụng App Store. Chưa phát hành cửa hàng. Dừng bản Windows cũ, sao lưu và chép nguyên state trước khi nâng cấp.' --repo "$GITHUB_REPOSITORY"
+          gh release upload demo-tu-hoc-111-2026-10-15-v17 tu-hoc-111-demo-windows.zip tu-hoc-111-demo-windows.zip.sha256 tu-hoc-111-android-debug.apk tu-hoc-111-android-debug.apk.sha256 --clobber --repo "$GITHUB_REPOSITORY"

@@ -1,8 +1,8 @@
 # Tiến độ
 
-Trạng thái mới nhất: bản thử **.16 / 0.2.0+16**. Các mốc bên dưới ghi lại tiến
+Trạng thái mới nhất: bản thử **.17 / 0.2.0+17**. Các mốc bên dưới ghi lại tiến
 độ từng bản; không coi hạn chế của một mốc cũ là trạng thái hiện hành. Xem phần
-.16 cuối tài liệu và [AI_OCR.md](AI_OCR.md) cho phạm vi AI/OCR đang có.
+.17 cuối tài liệu và [AI_OCR.md](AI_OCR.md) cho phạm vi AI/OCR đang có.
 
 ## Giai đoạn 1
 - Đã có: kiến trúc, schema, 108 câu hỏi gốc/12 đề, catalog lớp/môn, FastAPI chấm điểm xác định, quyền admin cục bộ, capability cho guest, snapshot bài, nhập/duyệt/xuất bản, Flutter luyện đề/lưu bài/lịch sử, Next.js admin; thư viện 4 ghi chú/PDF gốc, tìm kiếm tiếng Việt không dấu, yêu thích/đọc gần đây; đánh dấu câu và tiến độ thiết bị; sửa câu hỏi/rollback revision, duyệt lại và giữ nguyên snapshot bài đang làm.
@@ -10,10 +10,11 @@ Trạng thái mới nhất: bản thử **.16 / 0.2.0+16**. Các mốc bên dư�
 - Database SQL có RLS được kiểm tra trên PostgreSQL local với shim auth.uid; không khẳng định đã triển khai Supabase hosted.
 
 ## Giai đoạn 2
-Đã có OCR chữ in tiếng Việt/Anh cục bộ ở web/Windows, xem trước/sửa/xác nhận
-văn bản, nhập văn bản vào câu tự luận và backend trợ giảng AI tùy chọn có
-consent/quota. AI mặc định tắt, chưa gọi hay đánh giá provider thật. Còn OCR
-native/cắt ảnh, chấm tự luận theo rubric, báo lỗi/lưu phản hồi AI, đánh giá sư
+Đã có OCR chữ in tiếng Việt/Anh cục bộ ở web/Windows và tích hợp ML Kit native
+Android/iOS, xem trước/sửa/xác nhận văn bản, nhập văn bản vào câu tự luận và
+backend trợ giảng AI tùy chọn có consent/quota, công cụ cấu hình khóa riêng.
+Chưa có khóa nên chưa gọi hay đánh giá provider thật. Còn camera/cắt ảnh,
+chấm tự luận theo rubric, báo lỗi/lưu phản hồi AI, đánh giá sư
 phạm và quản lý chi phí; chưa hoàn tất giai đoạn này.
 
 ## Giai đoạn 3
@@ -175,3 +176,20 @@ mô hình thật. Còn chấm rubric, báo lỗi/xem xét phản hồi AI, nhậ
 người duyệt, chi phí, retention và chính sách trẻ em/nhà cung cấp. Không tăng
 phạm vi dữ liệu đã thẩm định SGK. Backend Internet, thiết bị thật và ký/phát
 hành cửa hàng vẫn chưa hoàn tất. Xem [AI_OCR.md](AI_OCR.md).
+
+## Bản .17 — OCR native và cấu hình AI thật
+
+Đã thêm OCR ảnh thư viện trên Android 7.0/API 24+ và iOS15.5+, chuẩn hóa ảnh
+bỏ metadata, xem trước/sửa/xác nhận, hủy kết quả muộn và dọn cache tạm. Android
+APK debug và iOS unsigned engineering đã build đạt. Kiểm thử ML Kit thật trên
+Android emulator đọc được chữ in tiếng Việt khi Wi-Fi/dữ liệu di động tắt;
+chưa nghiệm thu picker/quyền/chất lượng trên điện thoại vật lý hoặc OCR iOS
+runtime. ML Kit có dữ liệu chẩn đoán SDK; không coi native hoàn toàn không có
+lưu lượng mạng. OCR web/Windows tiếp tục dùng Tesseract local.
+
+Có configure-ai.bat nhập khóa ẩn, tệp cấu hình/khóa riêng và hỗ trợ secret từ
+môi trường. Đã kiểm tra cấu hình được launcher/backend tiếp nhận bằng khóa
+synthetic, không gọi nhà cung cấp. Đã chuẩn bị yêu cầu bí mật trong cấu hình
+cloud; chưa được cung cấp khóa thật nên chưa bật/đánh giá AI thật. Xem
+[AI_ACTIVATION.md](AI_ACTIVATION.md). Còn camera/cắt ảnh, HEIC, chấm tự luận,
+đánh giá mô hình, backend HTTPS của chủ app, ký/kiểm thử/phát hành cửa hàng.

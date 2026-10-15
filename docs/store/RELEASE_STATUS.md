@@ -149,8 +149,12 @@ SDK và khai Data Safety/App Privacy, nhất là khi phục vụ trẻ em:
 - https://developers.google.com/ml-kit/android-data-disclosure
 - https://developers.google.com/ml-kit/ios-data-disclosure
 
-Tích hợp mã nguồn/kiểm thử mô phỏng chưa chứng minh chất lượng nhận chữ trên
-thiết bị thật. Còn kiểm thử quyền thư viện, vòng đời/picker, dấu tiếng Việt,
-hiệu năng và độ chính xác trên Android/iPhone thật; build iOS bằng Xcode,
-ký/AAB/IPA và thử nghiệm cửa hàng vẫn phụ thuộc tài khoản/hạ tầng của chủ app.
+Đã build Android ARM64 APK debug version 17, minSdk 24/targetSdk 36 và iOS
+engineering unsigned bằng Xcode/iOS SDK 26.5. ML Kit thật đọc được trang tiếng
+Việt trên Android giả lập khi tắt Wi-Fi/dữ liệu di động; pipeline không mô
+phỏng OCR, chỉ bỏ qua picker hệ điều hành. Chưa kiểm tra OCR iOS runtime.
+Có lối mở OCR-only khi máy chủ lỗi mà không đổi dữ liệu tài khoản đã lưu.
+Còn kiểm thử quyền thư viện, vòng đời/picker, dấu tiếng Việt, hiệu năng và độ
+chính xác trên Android/iPhone vật lý; ký AAB/IPA và thử nghiệm cửa hàng vẫn
+phụ thuộc tài khoản/hạ tầng của chủ app.
 Bản .17 không thay đổi trạng thái production hoặc hoàn tất điều kiện phát hành.

@@ -168,3 +168,41 @@ ngoài origin, ảnh trong POST hoặc lỗi JavaScript. Nâng cấp từ databa
 giữ nguyên từng dòng tài khoản, kết quả, nhóm và phản hồi cũ. Backend/web/docs
 và toàn bộ 14 tài sản OCR trong ZIP khớp nguồn/build; ZIP không chứa state.
 Runtime/batch Windows chỉ kiểm tra tĩnh, chưa chạy máy Windows thật.
+
+## Bản .17 — OCR native và cấu hình khóa AI
+
+- Backend: **225 passed,20 skipped**. Công cụ cấu hình/launcher: **57 passed**,
+  gồm quyền tệp, rollback khi lỗi, Windows ACL mô phỏng và chọn duy nhất nguồn
+  môi trường hoặc tệp. Flutter đầy đủ: **55 passed** (8 kiểm thử lifecycle/ảnh
+  native), analyze sạch; Ruff và web release build đạt.
+- Android ARM64 debug build đạt, versionCode17/minSdk24/targetSdk36, chữ ký
+  Android Debug được xác minh, có sẵn tài sản mô hình ML Kit Latin. Đây là
+  APK thử nghiệm có địa chỉ backend mặc định chưa triển khai; OCR local dùng
+  được, chức năng máy chủ cần backend HTTPS thật trong phần Kết nối máy chủ.
+- iOS engineering unsigned build bằng Xcode/iOS SDK26.5 đạt trên macOS;
+  version17/minimumOS15.5, có LatinOCRResources.bundle và privacy manifest,
+  không có provisioning profile phân phối. Chưa có IPA được ký hoặc OCR iOS
+  runtime/thiết bị vật lý được kiểm chứng.
+- ML Kit thật trên Android emulator API35 đạt: đọc trang PNG tự tạo gồm chữ
+  tiếng Việt có dấu và số12/5/60; Wi-Fi/dữ liệu di động tắt khi chạy, không
+  dùng OCR/đáp án mô phỏng. Pipeline giải mã/chuẩn hóa/model là mã sản phẩm,
+  chỉ bỏ qua UI picker hệ điều hành. Giữ nguyên ảnh gốc, previewPNG và
+  confidence=null đúng API. Run38725379799 tại commitb65c199a1fb9cb748ffa82c2ae2c790068bfc1a8.
+- Chính ZIP Windows .17 giải nén: OCR picker thật confidence95, sửa chữ bỏ
+  xác nhận, giữ đáp án cũ và nhập một ký tự5 không tự nộp, mở trợ lý báo chưa
+  cấu hình. Không request ngoài origin/ảnh trongPOST/lỗiJS. Sau đó dùng helper
+  và khóa synthetic để xác nhận launcher/backend đọc cấu hình qua API đăng
+  nhập; **không gửi bất kỳ yêu cầu tới provider AI**. Không coi configured=true
+  với khóa synthetic là kết nối AI thật.
+- Nâng cấp .16 giữ nguyên từng dòng tài khoản/kết quả/nhóm/phản hồi. ZIP không
+  chứa state/khóa; helper/docs/web/backend trong gói khớp nguồn/build.
+
+Sửa thêm lối mở OCR-only khi xác thực máy chủ lỗi: không gọi auth/status/môn
+học từ màn hình OCR, có nhận/sửa/xác nhận/sao chép và giữ nguyên account,
+bản nháp/lịch sử. Hai kiểm thử mới đã xác nhận các dữ liệu này và chức năng
+thử xác thực lại. Web và APK được build lại sau thay đổi này; không coi kết
+quả nhận chữ trên Android giả lập là kiểm tra picker hoặc thiết bị vật lý.
+
+AI thật còn chờ khóa được nhập trong cài đặt môi trường bảo mật hoặc công cụ
+Windows. Chưa nghiệm thu chất lượng AI, ảnh viết tay/công thức/HEIC hoặc điện
+thoại thật; ML Kit telemetry được công bố riêng trong bản nháp quyền riêng tư.

@@ -80,7 +80,7 @@ có thể tắt AI và bỏ qua cấu hình local bị hỏng.
 
 Khóa chỉ nằm trên backend. Chạy native trên điện thoại không làm localhost
 của máy Windows/cloud trở thành máy chủ truy cập được từ điện thoại. Cần một
-backend HTTPS dùng chung và cấu hình địa chỉ trong **Cá nhân → Địa chỉ máy chủ**
+backend HTTPS dùng chung và cấu hình địa chỉ trong **Cá nhân → Kết nối máy chủ**
 để đăng nhập, học/đồng bộ và gọi AI trên thiết bị khác.
 
 Pilot Docker mặc định chưa bật AI. Cách bind tệp riêng cho UID `10001` và

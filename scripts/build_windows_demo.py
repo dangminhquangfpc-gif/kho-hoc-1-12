@@ -188,6 +188,7 @@ def build(artifacts: Path):
     guide += "\nBản .15: nhóm có Bài giao và tiến độ > Giao đề có sẵn; học sinh mở Bài được giao ở Tài khoản. Có trạng thái chưa nộp/đang làm/đã nộp và CSV từng đề; điểm lấy lần nộp gần nhất. Giữ bài chưa đồng bộ khi mở đề khác. Xem docs/GROUP_ASSIGNMENTS.md.\n"
     guide += "\nBản .16: Ảnh và trợ lý học tập có OCR tiếng Việt local, xem ảnh/sửa chữ/xác nhận trước khi dùng. Có nút nhập OCR ở câu trả lời dạng gõ. AI mặc định tắt vì chưa có dịch vụ; chỉ gửi văn bản sau xác nhận, không gửi ảnh. Xem docs/AI_OCR.md; OCR ảnh hiện chạy web/Windows, chưa native Android/iOS.\n"
     guide += "\nBản .17: cấu hình AI thật bằng configure-ai.bat, nhập khóa ẩn và khởi động lại demo. Khóa phải do người vận hành cung cấp, gói không có khóa dùng chung; lưu cấu hình không tự xác minh kết nối hay thanh toán. Đọc docs/AI_ACTIVATION.md. Có tích hợp OCR native Android/iOS bằng ML Kit, chọn ảnh từ thư viện; OCR web/Windows tiếp tục dùng Tesseract. Gói Windows không phải APK/IPA. Native cần kiểm thử nền tảng và thiết bị như trạng thái phát hành; ML Kit có thể thu thập dữ liệu chẩn đoán SDK.\n"
+    guide += "\nKhi tài khoản đã lưu nhưng máy chủ mất kết nối, dùng Nhận chữ từ ảnh trên thiết bị ở màn hình lỗi. Lối này chỉ nhận/sửa/xác nhận và sao chép văn bản, không gọi AI hoặc xóa tài khoản/bài đã lưu.\n"
     (staging / "HUONG-DAN.txt").write_text(guide, encoding="utf-8-sig")
     for bat in [staging / "start-demo.bat", staging / "configure-ai.bat"]:
         content = (
