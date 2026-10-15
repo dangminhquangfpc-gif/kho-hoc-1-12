@@ -27,30 +27,36 @@ class ReportContentButton extends ConsumerWidget {
   final String kind, targetId;
   final String? attemptId;
   @override
-  Widget build(BuildContext context, WidgetRef ref) => TextButton.icon(
-    icon: const Icon(Icons.flag_outlined),
-    label: const Text('Báo lỗi nội dung'),
-    onPressed: () async {
-      if (ref.read(authUserProvider) == null) {
-        context.go('/account');
-        return;
-      }
-      final sent = await showDialog<bool>(
-        context: context,
-        builder: (_) =>
-            _ReportDialog(kind: kind, targetId: targetId, attemptId: attemptId),
-      );
-      if (sent == true && context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'Đã gửi phản hồi. Theo dõi trả lời tại Cá nhân → Phản hồi của tôi.',
-            ),
-          ),
+  Widget build(BuildContext context, WidgetRef ref) =>
+      ref.watch(apiProvider).isOffline
+      ? const SizedBox.shrink()
+      : TextButton.icon(
+          icon: const Icon(Icons.flag_outlined),
+          label: const Text('Báo lỗi nội dung'),
+          onPressed: () async {
+            if (ref.read(authUserProvider) == null) {
+              context.go('/account');
+              return;
+            }
+            final sent = await showDialog<bool>(
+              context: context,
+              builder: (_) => _ReportDialog(
+                kind: kind,
+                targetId: targetId,
+                attemptId: attemptId,
+              ),
+            );
+            if (sent == true && context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(
+                    'Đã gửi phản hồi. Theo dõi trả lời tại Cá nhân → Phản hồi của tôi.',
+                  ),
+                ),
+              );
+            }
+          },
         );
-      }
-    },
-  );
 }
 
 class _ReportDialog extends ConsumerStatefulWidget {

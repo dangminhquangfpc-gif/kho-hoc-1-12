@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'offline_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,6 +24,7 @@ class LearningApi {
             ),
           );
   final Dio client;
+  bool get isOffline => false;
   String? expectedAccountId;
   void Function()? onSessionLost;
   Json checkedAttempt(Json value) {
@@ -184,6 +186,7 @@ class LearningApi {
   Future<Json> resumeAttempt(String id) async =>
       checkedAttempt((await client.get<Json>('/account/attempts/$id')).data!);
   Future<int> saveDraft(Json session) async {
+    requireServerAttempt(session);
     final response = await client.post<Json>(
       '/account/attempts/${session['id']}/draft',
       data: {
@@ -264,18 +267,38 @@ class LearningApi {
   Future<Json> createPractice(Json filter) async => checkedAttempt(
     (await client.post<Json>('/practice-attempts', data: filter)).data!,
   );
-  Future<Json> submit(Json session) async => (await client.post<Json>(
-    '/attempts/${session['id']}/submit',
-    data: {
-      'answers': session['answers'] ?? {},
-      if (session['account_id'] != null)
-        'draft_revision': session['draft_revision'] ?? 0,
-    },
-    options: Options(headers: {'X-Attempt-Token': session['token']}),
-  )).data!;
+  void requireServerAttempt(Json session) {
+    if (session['local_self_practice'] == true ||
+        (session['id'] as String? ?? '').startsWith('offline_') ||
+        (session['backend_url'] as String? ?? '').startsWith('offline://')) {
+      throw StateError(
+        'Bài tự luyện ngoại tuyến chỉ được mở trong chế độ ngoại tuyến.',
+      );
+    }
+    final source = session['backend_url'];
+    if (source != null && source != baseUrl) {
+      throw StateError(
+        'Bài làm thuộc máy chủ khác. Hãy kết nối lại đúng máy chủ.',
+      );
+    }
+  }
+
+  Future<Json> submit(Json session) async {
+    requireServerAttempt(session);
+    return (await client.post<Json>(
+      '/attempts/${session['id']}/submit',
+      data: {
+        'answers': session['answers'] ?? {},
+        if (session['account_id'] != null)
+          'draft_revision': session['draft_revision'] ?? 0,
+      },
+      options: Options(headers: {'X-Attempt-Token': session['token']}),
+    )).data!;
+  }
 
   /// Open a new server attempt; keep answers only for identical public questions.
   Future<Json> recover(Json previous) async {
+    requireServerAttempt(previous);
     final examId = previous['exam']?['id'];
     final customFilter = previous['practice_filter'];
     if (customFilter is! Map && (examId is! String || examId.isEmpty)) {
@@ -329,11 +352,16 @@ class LearningApi {
     ],
   ]);
 
-  Future<Json> attemptResult(Json session) async => (await client.get<Json>(
-    '/attempts/${session['id']}/result',
-    options: Options(headers: {'X-Attempt-Token': session['token']}),
-  )).data!;
+  Future<Json> attemptResult(Json session) async {
+    requireServerAttempt(session);
+    return (await client.get<Json>(
+      '/attempts/${session['id']}/result',
+      options: Options(headers: {'X-Attempt-Token': session['token']}),
+    )).data!;
+  }
+
   Future<void> delete(Json session) async {
+    requireServerAttempt(session);
     try {
       await client.delete(
         '/attempts/${session['id']}',
@@ -381,14 +409,74 @@ String validateBackendUrl(String value) {
       .toString();
 }
 
+/// Tests and existing online callers stay online unless the application startup
+/// selects the bundled native default or a saved explicit choice.
+final studyOfflineProvider = StateProvider<bool>((ref) => false);
+
+bool initialStudyOffline(
+  SharedPreferences preferences, {
+  bool? web,
+  String? configuredBackend,
+}) {
+  final saved = preferences.getBool('study_offline');
+  if (saved != null) return saved;
+  if (web ?? kIsWeb) return false;
+  final address =
+      preferences.getString('backend_url') ??
+      configuredBackend ??
+      const String.fromEnvironment(
+        'API_BASE_URL',
+        defaultValue: 'http://10.0.2.2:8000',
+      );
+  final uri = Uri.tryParse(address);
+  return uri == null ||
+      uri.scheme != 'https' ||
+      uri.host.isEmpty ||
+      uri.host.endsWith('.invalid') ||
+      uri.host == 'localhost';
+}
+
+Future<bool> initializeStudyOffline(SharedPreferences preferences) async {
+  final offline = initialStudyOffline(preferences);
+  if (preferences.getBool('study_offline') == null &&
+      !await preferences.setBool('study_offline', offline)) {
+    throw StateError('Chưa lưu được chế độ học trên thiết bị.');
+  }
+  return offline;
+}
+
+Future<void> changeStudyMode(WidgetRef ref, bool offline) async {
+  final preferences = await ref.read(preferencesProvider.future);
+  if (!await preferences.setBool('study_offline', offline)) {
+    throw StateError('Chưa lưu được chế độ học. Dữ liệu cũ vẫn được giữ.');
+  }
+  ref.read(authUserProvider.notifier).state = null;
+  ref.read(studyOfflineProvider.notifier).state = offline;
+  ref.invalidate(authBootstrapProvider);
+}
+
 final backendUrlProvider = StateProvider<String?>((ref) => null);
 final Provider<LearningApi> apiProvider = Provider<LearningApi>((ref) {
+  if (ref.watch(studyOfflineProvider)) {
+    final preferences = ref.read(preferencesProvider.future);
+    final local = OfflineLearningApi(preferences: () => preferences);
+    ref.onDispose(() => local.client.close(force: true));
+    return local;
+  }
   final api = LearningApi(baseUrl: ref.watch(backendUrlProvider));
-  api.onSessionLost = () => ref.invalidate(authBootstrapProvider);
+  var disposed = false;
+  ref.onDispose(() {
+    disposed = true;
+    api.client.close(force: true);
+  });
+  api.onSessionLost = () {
+    if (!disposed) ref.invalidate(authBootstrapProvider);
+  };
   api.client.interceptors.add(
     InterceptorsWrapper(
       onError: (error, handler) {
-        if (error.response?.statusCode == 401 &&
+        if (!disposed &&
+            error.response?.statusCode == 401 &&
             !['/auth/me', '/auth/login'].contains(error.requestOptions.path)) {
           ref.invalidate(authBootstrapProvider);
         }
@@ -418,14 +506,24 @@ final authUserProvider = StateProvider<Json?>((ref) => null);
 final FutureProvider<Json?> authBootstrapProvider = FutureProvider<Json?>((
   ref,
 ) async {
+  var discarded = false;
+  ref.onDispose(() => discarded = true);
   final api = ref.watch(apiProvider);
   final prefs = await ref.watch(preferencesProvider.future);
+  if (discarded) return null;
+  if (api.isOffline) {
+    api.expectedAccountId = null;
+    ref.read(authUserProvider.notifier).state = null;
+    return null;
+  }
   Json? user;
   try {
     user = await api.currentUser();
   } catch (_) {
+    if (discarded) return null;
     if (prefs.getString('active_account_id') != null) rethrow;
   }
+  if (discarded) return null;
   if (user == null) {
     await prefs.remove('active_account_id');
   } else {
@@ -437,45 +535,92 @@ final FutureProvider<Json?> authBootstrapProvider = FutureProvider<Json?>((
 });
 
 class LocalStore {
-  LocalStore(this.preferences);
+  LocalStore(this.preferences, {bool? offline})
+    : _offlineOverride = offline,
+      offline = offline ?? preferences.getBool('study_offline') ?? false,
+      accountId = preferences.getString('active_account_id');
   final SharedPreferences preferences;
-  String get _suffix => preferences.getString('active_account_id') == null
+  final bool? _offlineOverride;
+  final bool offline;
+  final String? accountId;
+  String get _suffix => offline
+      ? '.offline'
+      : accountId == null
       ? ''
-      : '.${preferences.getString('active_account_id')}';
+      : '.$accountId';
   String get _currentKey => 'current_attempt$_suffix';
   String get _historyKey => 'history$_suffix';
+  String get _readSuffix {
+    final local =
+        _offlineOverride ?? preferences.getBool('study_offline') ?? false;
+    final active = preferences.getString('active_account_id');
+    return local
+        ? '.offline'
+        : active == null
+        ? ''
+        : '.$active';
+  }
+
+  void _checkScope() {
+    if ((preferences.getBool('study_offline') ?? false) != offline ||
+        (!offline && preferences.getString('active_account_id') != accountId)) {
+      throw StateError(
+        'Chế độ học hoặc tài khoản đã thay đổi. Hãy mở lại bài đang làm.',
+      );
+    }
+  }
+
+  void _checkSession(Json session) {
+    _checkScope();
+    final isLocal =
+        session['local_self_practice'] == true ||
+        (session['id'] as String? ?? '').startsWith('offline_') ||
+        (session['backend_url'] as String? ?? '').startsWith('offline://');
+    if (isLocal != offline ||
+        session['account_id'] != (offline ? null : accountId)) {
+      throw StateError(
+        'Bài làm thuộc chế độ học hoặc tài khoản khác. Dữ liệu cũ vẫn được giữ.',
+      );
+    }
+  }
+
   Json? get current {
-    final value = preferences.getString(_currentKey);
+    final value = preferences.getString('current_attempt$_readSuffix');
     return value == null ? null : jsonDecode(value) as Json;
   }
 
   List<Json> get history =>
-      (jsonDecode(preferences.getString(_historyKey) ?? '[]') as List)
+      (jsonDecode(preferences.getString('history$_readSuffix') ?? '[]') as List)
           .cast<Json>();
+
   Future<void> save(Json session) async {
-    if (session['account_id'] != preferences.getString('active_account_id')) {
-      throw StateError(
-        'Tài khoản đã thay đổi. Hãy đăng nhập lại trước khi làm bài.',
-      );
-    }
+    _checkSession(session);
     if (!await preferences.setString(_currentKey, jsonEncode(session))) {
       throw StateError('Không thể lưu bài làm trên thiết bị.');
     }
   }
 
   Future<void> complete(Json session, Json result) async {
+    _checkSession(session);
+    if (result['attempt_id'] != session['id']) {
+      throw StateError('Kết quả không thuộc bài đang làm.');
+    }
     final records = history.where((h) => h['id'] != session['id']).toList();
     records.insert(0, {...session, 'result': result});
     if (!await preferences.setString(_historyKey, jsonEncode(records))) {
       throw StateError('Không thể lưu kết quả.');
     }
+    _checkScope();
     await preferences.remove(_currentKey);
   }
 
   Future<void> removeHistory(String id) async {
-    await preferences.setString(
+    _checkScope();
+    if (!await preferences.setString(
       _historyKey,
       jsonEncode(history.where((h) => h['id'] != id).toList()),
-    );
+    )) {
+      throw StateError('Chưa xóa được kết quả trên thiết bị.');
+    }
   }
 }

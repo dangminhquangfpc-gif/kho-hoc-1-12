@@ -1,6 +1,6 @@
 # Bản nháp chính sách quyền riêng tư — Tự học 111
 
-**Trạng thái: chưa công bố.** Phạm vi: bản 0.2.0+18, ngày 15/10/2026.
+**Trạng thái: chưa công bố.** Phạm vi: bản 0.2.0+19, ngày 15/10/2026.
 Tài liệu mô tả mã nguồn hiện tại để đơn vị phát hành hoàn thiện chính sách.
 Không dùng tài liệu làm URL chính sách đã có hiệu lực khi các ô sau còn trống.
 
@@ -22,12 +22,24 @@ không yêu cầu email, số điện thoại, địa chỉ, ngày sinh hay vị
 Mật khẩu được băm bằng scrypt với salt riêng; cơ sở dữ liệu không lưu mật
 khẩu gốc. Máy chủ lưu mã tài khoản, quan hệ cấp tài khoản, nhóm và thành viên.
 
-Khi làm bài, máy chủ lưu đề, câu trả lời, bản nháp khi đồng bộ, thời gian nộp
-và kết quả để chấm bài, tiếp tục bài trên thiết bị khác và hiển thị tiến độ.
-**Chế độ khách cũng dùng máy chủ để tạo và chấm bài.** Lịch sử và bài đang làm
-còn được lưu trên thiết bị; chế độ khách không đồng nghĩa mọi dữ liệu chỉ ở
-trên thiết bị. Phần luyện tập/tài liệu cần backend; riêng nhận chữ từ ảnh có
-thể mở không cần tài khoản hay backend.
+Ứng dụng có hai chế độ. **Học trên thiết bị** đọc dữ liệu tự biên soạn đã
+đóng gói trong app, tạo và chấm bài tại thiết bị. Bài, câu trả lời, kết quả,
+lịch sử và tiến độ tự luyện lưu riêng trên thiết bị; không tự gửi tới
+backend, tài khoản hay giáo viên khi kết nối lại. Không có tài khoản, nhóm,
+đồng bộ hoặc điểm được giáo viên giám sát trong chế độ này. Câu tự luận cần
+đánh giá thủ công, không được AI tự chấm. Gói dữ liệu có đáp án để tự luyện;
+không được coi là ngân hàng đề bí mật hoặc kết quả thi có giám sát.
+
+**Học với máy chủ** gửi dữ liệu qua API. Máy chủ lưu đề, câu trả lời, bản
+nháp khi đồng bộ, thời gian nộp và kết quả để chấm bài, tiếp tục bài trên
+thiết bị khác và hiển thị tiến độ. **Bài khách ở chế độ máy chủ vẫn được
+tạo và chấm trên máy chủ.** Không đồng nhất bài khách với bài ngoại tuyến.
+Lịch sử/bài đang làm của chế độ này được giữ riêng với dữ liệu tự luyện.
+
+Dữ liệu học đã đóng gói có thể đọc ngoại tuyến; nguồn Internet và các PDF
+bên ngoài không được đóng gói đầy đủ cần kết nối khi mở. Chế độ Học trên
+thiết bị không ngăn kết nối website do người dùng mở hoặc dữ liệu chẩn
+đoán Google ML Kit được mô tả bên dưới.
 
 Phiên đăng nhập có thời hạn 8 giờ. Web dùng cookie HttpOnly/SameSite=Strict;
 bản native giữ token đăng nhập trong bộ nhớ. Ứng dụng lưu lựa chọn máy chủ,
@@ -64,7 +76,7 @@ nhật ký ứng dụng, proxy và bản sao lưu để công bố cho người 
 
 ## Nhận chữ từ ảnh
 
-Bản 0.2.0+18 không tích hợp trợ giảng AI trả phí hay gửi yêu cầu đến nhà cung
+Bản 0.2.0+19 không tích hợp trợ giảng AI trả phí hay gửi yêu cầu đến nhà cung
 cấp mô hình AI. Không cần khóa AI. Chức năng nhận chữ trên thiết bị được giữ
 lại; bản hiện tại không có quảng cáo hay thanh toán trong ứng dụng.
 
@@ -83,7 +95,8 @@ cache có thể còn tới khi hệ điều hành dọn. Chưa có công cụ ch
 lịch sử. Người dùng cần sửa, kiểm tra và xác nhận văn bản trước khi dùng.
 Khi chọn sao chép, văn bản được đưa vào bộ nhớ tạm hệ điều hành. Khi dùng
 văn bản cho câu trả lời rồi lưu/nộp bài, văn bản đó được xử lý như câu trả
-lời thông thường, bao gồm gửi đến máy chủ. Hủy thao tác ngăn kết quả muộn
+lời thông thường: chỉ lưu cục bộ khi Học trên thiết bị; gửi API khi Học với
+máy chủ. Hủy thao tác ngăn kết quả muộn
 hiển thị; không bảo đảm tác vụ nhận chữ native dừng ngay.
 
 Google công bố ML Kit có thể gửi dữ liệu thiết bị, ứng dụng, mã định danh
@@ -98,6 +111,13 @@ Không tuyên bố Google nhận nội dung ảnh để nhận dạng từ xa tr
 - Phiên bản và đối chiếu khai báo: [DATA_SAFETY_WORKSHEET.md](DATA_SAFETY_WORKSHEET.md).
 
 ## Lưu giữ và xóa
+
+Ở chế độ Học trên thiết bị, người dùng xóa từng bài/kết quả qua Lịch sử.
+Dữ liệu nằm trong vùng lưu trữ ứng dụng, không có bản đồng bộ của dự án;
+gỡ app hoặc xóa dữ liệu hệ điều hành có thể làm mất dữ liệu này. Cài đè bản
+cùng mã ứng dụng và chứng thư giữ vùng dữ liệu theo cơ chế Android. Ứng dụng
+không tự mã hóa riêng vùng tùy chọn/bài làm; không coi đây là kho bí mật.
+Xóa dữ liệu ngoại tuyến không xóa tài khoản hay hồ sơ trên máy chủ.
 
 Tài khoản học sinh/giáo viên có thể tự xóa tại **Cá nhân → Tài khoản → Xóa tài
 khoản**, nhập mật khẩu xác nhận rồi chọn **Xóa vĩnh viễn**. Máy chủ xóa tài

@@ -133,6 +133,13 @@ class _LibraryState extends ConsumerState<LibraryScreen> {
       child: ListView(
         padding: const EdgeInsets.all(20),
         children: [
+          if (ref.watch(apiProvider).isOffline)
+            const Padding(
+              padding: EdgeInsets.only(bottom: 12),
+              child: Text(
+                'Nội dung bài học và đề luyện trong app dùng được trên thiết bị. Liên kết nguồn tham khảo cần Internet; PDF gốc chưa được lưu trong app.',
+              ),
+            ),
           Text(
             widget.examMode
                 ? 'Các thẻ có đề luyện cho phép làm và chấm trực tiếp. Đây là đề tự biên soạn cùng lớp/môn, khác với bản gốc trên trang tham khảo. Những nguồn chưa đủ câu hỏi vẫn được ghi rõ là liên kết.'
@@ -579,19 +586,24 @@ class _DocumentState extends ConsumerState<DocumentScreen> {
                 const SizedBox(height: 20),
               ],
             ],
-            if (d['source_url'] != null)
+            if (d['source_url'] != null) ...[
+              if (ref.watch(apiProvider).isOffline)
+                const Text(
+                  'Mở trang nguồn cần Internet và có thể có quảng cáo hoặc yêu cầu tài khoản.',
+                ),
               TextButton.icon(
                 onPressed: () => openSource(d['source_url']),
                 icon: const Icon(Icons.open_in_new),
                 label: const Text('Mở nguồn gốc tài liệu'),
               ),
-            if (d['can_view_pdf'] == true)
+            ],
+            if (d['can_view_pdf'] == true && !ref.watch(apiProvider).isOffline)
               FilledButton.icon(
                 onPressed: () => openPdf(d, false),
                 icon: const Icon(Icons.picture_as_pdf),
                 label: const Text('Mở PDF'),
               ),
-            if (d['can_download'] == true)
+            if (d['can_download'] == true && !ref.watch(apiProvider).isOffline)
               TextButton.icon(
                 onPressed: () => openPdf(d, true),
                 icon: const Icon(Icons.download),

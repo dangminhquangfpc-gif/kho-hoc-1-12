@@ -1,0 +1,33 @@
+name: Publish Android offline study demo
+on:
+  push:
+    branches: [feature/native-offline-study-20261015]
+permissions:
+  contents: write
+concurrency:
+  group: publish-offline-study-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify packaged Android test APK
+        run: |
+          cd demo-package
+          sha256sum --check tu-hoc-111-android-debug.apk.zip.sha256
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          with ZipFile('tu-hoc-111-android-debug.apk.zip') as archive:
+              assert archive.namelist() == ['tu-hoc-111-android-debug.apk']
+              assert archive.testzip() is None
+              archive.extractall('.')
+          PY
+          sha256sum --check tu-hoc-111-android-debug.apk.sha256
+      - name: Prepare the Android prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd demo-package
+          gh release view demo-tu-hoc-111-2026-10-15-v19 --repo "$GITHUB_REPOSITORY" || gh release create demo-tu-hoc-111-2026-10-15-v19 --draft --target "$GITHUB_SHA" --title 'Tự học 111 · v19 · Học ngoại tuyến trên Android' --notes 'Sửa APK đã mở nhưng không tải được dữ liệu khi chưa có backend: đóng gói 7.886 câu hỏi, 1.461 đề và 733 hướng dẫn Toán 1–12. Bài tự luyện/điểm lưu riêng trên thiết bị, không tự đồng bộ thành kết quả giáo viên giám sát; tài khoản/nhóm vẫn cần máy chủ HTTPS. Giữ OCR miễn phí, không có trợ lý AI trả phí. Cài đè bản .18; không gỡ app/xóa dữ liệu. APK debug có cùng mã ứng dụng/chữ ký .18, chưa phát hành CH Play. ZIP chứa cùng APK đã ký, cần giải nén để cài.' --repo "$GITHUB_REPOSITORY"
+          gh release upload demo-tu-hoc-111-2026-10-15-v19 tu-hoc-111-android-debug.apk tu-hoc-111-android-debug.apk.sha256 tu-hoc-111-android-debug.apk.zip tu-hoc-111-android-debug.apk.zip.sha256 --clobber --repo "$GITHUB_REPOSITORY"

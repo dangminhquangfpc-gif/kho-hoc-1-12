@@ -19,6 +19,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final preferences = await SharedPreferences.getInstance();
+  final offline = await initializeStudyOffline(preferences);
   LicenseRegistry.addLicense(() async* {
     yield LicenseEntryWithLineBreaks([
       'Noto Sans',
@@ -33,6 +34,7 @@ Future<void> main() async {
         backendUrlProvider.overrideWith(
           (ref) => preferences.getString('backend_url'),
         ),
+        studyOfflineProvider.overrideWith((ref) => offline),
       ],
       child: const KhoHocApp(),
     ),
@@ -131,6 +133,25 @@ class KhoHocApp extends ConsumerWidget {
                     FilledButton(
                       onPressed: () => ref.invalidate(authBootstrapProvider),
                       child: const Text('Thử lại'),
+                    ),
+                    OutlinedButton.icon(
+                      onPressed: () async {
+                        try {
+                          await changeStudyMode(ref, true);
+                        } catch (_) {
+                          if (offlineContext.mounted) {
+                            ScaffoldMessenger.of(offlineContext).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  'Chưa lưu được chế độ học. Hãy thử lại.',
+                                ),
+                              ),
+                            );
+                          }
+                        }
+                      },
+                      icon: const Icon(Icons.offline_bolt_outlined),
+                      label: const Text('Học trên thiết bị, không cần máy chủ'),
                     ),
                     TextButton.icon(
                       onPressed: () => Navigator.of(offlineContext).push<void>(
@@ -237,6 +258,88 @@ class Failure extends StatelessWidget {
   );
 }
 
+/// Both modes keep their own drafts and results; local practice is never
+/// uploaded when the learner later connects to a classroom server.
+class StudyModeCard extends ConsumerStatefulWidget {
+  const StudyModeCard({super.key, this.showConnect = true});
+  final bool showConnect;
+  @override
+  ConsumerState<StudyModeCard> createState() => _StudyModeCardState();
+}
+
+class _StudyModeCardState extends ConsumerState<StudyModeCard> {
+  bool busy = false;
+  String? error;
+
+  Future<void> useOffline() async {
+    final router = GoRouter.maybeOf(context);
+    setState(() {
+      busy = true;
+      error = null;
+    });
+    try {
+      await changeStudyMode(ref, true);
+      router?.go('/');
+    } catch (_) {
+      if (mounted) {
+        setState(() => error = 'Chưa lưu được chế độ học. Hãy thử lại.');
+      }
+    } finally {
+      if (mounted) setState(() => busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final offline = ref.watch(apiProvider).isOffline;
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  offline ? Icons.offline_bolt_outlined : Icons.cloud_outlined,
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    offline ? 'Học trên thiết bị' : 'Học với máy chủ',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              offline
+                  ? 'Đọc tài liệu và làm đề đã có trong app mà không cần Internet. Bài làm và điểm tự luyện chỉ lưu trên thiết bị; không tự đồng bộ vào tài khoản hoặc gửi cho giáo viên.'
+                  : 'Dữ liệu và bài làm sử dụng máy chủ đã kết nối. Đăng nhập để đồng bộ kết quả với lớp học.',
+            ),
+            if (offline && widget.showConnect)
+              TextButton.icon(
+                onPressed: () => context.go('/settings'),
+                icon: const Icon(Icons.cloud_outlined),
+                label: const Text('Kết nối máy chủ lớp học'),
+              ),
+            if (!offline)
+              TextButton.icon(
+                onPressed: busy ? null : useOffline,
+                icon: const Icon(Icons.offline_bolt_outlined),
+                label: Text(
+                  busy ? 'Đang chuyển…' : 'Chuyển sang học trên thiết bị',
+                ),
+              ),
+            if (error != null) Text(error!),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 final coverageProvider = FutureProvider.family<List<Json>, int>(
   (ref, grade) => ref.watch(apiProvider).coverage(grade),
 );
@@ -255,6 +358,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
   String? error;
   @override
   Widget build(BuildContext context) {
+    final offline = ref.watch(apiProvider).isOffline;
     final subjects = ref.watch(subjectsProvider(grade));
     final filter = (grade: grade, subject: subject, search: search);
     final exams = ref.watch(examsProvider(filter));
@@ -271,11 +375,15 @@ class _HomeState extends ConsumerState<HomeScreen> {
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Chọn lớp và môn để luyện tập. Đăng nhập để đồng bộ bài làm và kết quả.',
+          Text(
+            offline
+                ? 'Chọn lớp và môn để tự luyện ngay trên thiết bị.'
+                : 'Chọn lớp và môn để luyện tập. Đăng nhập để đồng bộ bài làm và kết quả.',
           ),
-          const Text('Bản thử 2026.10.15.18'),
+          const Text('Bản thử 2026.10.15.19'),
+          const StudyModeCard(),
           if (widget.index == 2 &&
+              !offline &&
               [
                 'manager',
                 'teacher',
@@ -370,7 +478,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Text(
-                  '${row["question_count"]} câu · ${row["exam_count"]} đề làm trực tiếp · ${row["external_paper_count"] ?? 0} liên kết tham khảo Internet',
+                  '${row["question_count"]} câu · ${row["exam_count"]} đề làm trực tiếp · ${row["external_paper_count"] ?? 0} liên kết tham khảo cần Internet',
                 ),
               );
             },
@@ -512,6 +620,8 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
       setState(() {
         session = s;
         if (s != null &&
+            s['local_self_practice'] != true &&
+            !ref.read(apiProvider).isOffline &&
             DateTime.now()
                     .toUtc()
                     .difference(DateTime.parse(s['created_at']))
@@ -558,7 +668,9 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
         q['id']: values,
       };
       error = null;
-      syncStatus = 'Đang chờ đồng bộ những thay đổi mới.';
+      syncStatus = ref.read(apiProvider).isOffline
+          ? 'Bài tự luyện chỉ lưu trên thiết bị.'
+          : 'Đang chờ đồng bộ những thay đổi mới.';
     });
     saveCurrent();
   }
@@ -811,6 +923,7 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final offline = ref.watch(apiProvider).isOffline;
     if (result != null) {
       return Scaffold(
         appBar: AppBar(title: const Text('Kết quả luyện tập')),
@@ -839,6 +952,13 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
+            if (offline)
+              const Padding(
+                padding: EdgeInsets.only(bottom: 16),
+                child: Text(
+                  'Tự luyện trên thiết bị. Bài làm và điểm chỉ lưu tại đây, không gửi cho giáo viên.',
+                ),
+              ),
             if (session!['account_id'] != null) ...[
               Text(syncStatus),
               TextButton.icon(
@@ -988,7 +1108,7 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
               ),
             if (q['type'] == 'essay')
               const Text(
-                'Tự luận cần người duyệt. Trợ lý chỉ đưa gợi ý, không tự đổi điểm.',
+                'Tự luận cần người kiểm tra theo lời giải và tiêu chí; ứng dụng không tự chấm điểm phần này.',
               ),
             if (session!['recovery_notice'] != null)
               Padding(
@@ -1049,8 +1169,10 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
               ],
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Bài luyện tập được lưu trên thiết bị. Đồng hồ mang tính tham khảo; có thể nộp khi kết nối lại trong vòng 24 giờ.',
+            Text(
+              offline
+                  ? 'Bài tự luyện lưu trên thiết bị. Đồng hồ mang tính tham khảo; có thể nộp và xem đáp án mà không cần Internet.'
+                  : 'Bài luyện tập được lưu trên thiết bị. Đồng hồ mang tính tham khảo; có thể nộp khi kết nối lại trong vòng 24 giờ.',
             ),
           ],
         ),
@@ -1059,11 +1181,11 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
   }
 }
 
-class ResultView extends StatelessWidget {
+class ResultView extends ConsumerWidget {
   const ResultView({super.key, required this.result});
   final Json result;
   @override
-  Widget build(BuildContext context) => ListView(
+  Widget build(BuildContext context, WidgetRef ref) => ListView(
     padding: const EdgeInsets.all(24),
     children: [
       Text(result['title'], style: Theme.of(context).textTheme.titleLarge),
@@ -1074,8 +1196,10 @@ class ResultView extends StatelessWidget {
             : '${result['score']} / ${result['max_score']}',
         style: Theme.of(context).textTheme.displaySmall,
       ),
-      const Text(
-        'Điểm luyện tập theo đáp án đã duyệt, không phải điểm chính thức của giáo viên.',
+      Text(
+        ref.watch(apiProvider).isOffline
+            ? 'Điểm tự luyện được chấm trên thiết bị theo đáp án trong app; không phải điểm chính thức và không tự đồng bộ hoặc gửi cho giáo viên.'
+            : 'Điểm luyện tập theo đáp án đã duyệt, không phải điểm chính thức của giáo viên.',
       ),
       if (result['notice'] != null) Text(result['notice']),
       const SizedBox(height: 24),
@@ -1168,8 +1292,10 @@ class _HistoryState extends ConsumerState<HistoryScreen> {
                                   context: context,
                                   builder: (c) => AlertDialog(
                                     title: const Text('Xóa kết quả?'),
-                                    content: const Text(
-                                      'Xóa cả bản lưu trên thiết bị và attempt trên server.',
+                                    content: Text(
+                                      ref.read(apiProvider).isOffline
+                                          ? 'Xóa bài tự luyện và kết quả khỏi thiết bị này.'
+                                          : 'Xóa cả bản lưu trên thiết bị và bài làm tương ứng trên máy chủ.',
                                     ),
                                     actions: [
                                       TextButton(
@@ -1194,7 +1320,7 @@ class _HistoryState extends ConsumerState<HistoryScreen> {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         content: Text(
-                                          'Chưa xóa được trên server. Hãy kết nối mạng rồi thử lại.',
+                                          'Chưa xóa được kết quả. Hãy thử lại.',
                                         ),
                                       ),
                                     );
@@ -1223,15 +1349,22 @@ class SettingsScreen extends ConsumerWidget {
     child: ListView(
       padding: const EdgeInsets.all(24),
       children: [
+        const StudyModeCard(showConnect: false),
         Card(
           child: ListTile(
             leading: const Icon(Icons.account_circle),
             title: Text(
-              ref.watch(authUserProvider) == null
+              ref.watch(apiProvider).isOffline
+                  ? 'Tài khoản và lớp học'
+                  : ref.watch(authUserProvider) == null
                   ? 'Đăng nhập hoặc đăng ký'
                   : 'Tài khoản: ${ref.watch(authUserProvider)!["display_name"]}',
             ),
-            subtitle: const Text('Tài khoản học viên và quản lý kết quả'),
+            subtitle: Text(
+              ref.watch(apiProvider).isOffline
+                  ? 'Cần kết nối máy chủ để đăng nhập và quản lý kết quả'
+                  : 'Tài khoản học viên và quản lý kết quả',
+            ),
             onTap: () => context.go('/account'),
           ),
         ),
@@ -1255,7 +1388,7 @@ class SettingsScreen extends ConsumerWidget {
         ),
         const Divider(),
         const Text(
-          'Bài làm khách được gửi tới máy chủ để chấm; lịch sử khách lưu trên thiết bị. Khi đăng nhập, kết quả được máy chủ lưu theo tài khoản và người quản lý của bạn có thể xem. Xóa lịch sử trên thiết bị không xóa hồ sơ kết quả của lớp. OCR xử lý ảnh ngay trên thiết bị; ở bản web/Windows, ảnh được xử lý trong trình duyệt. Ứng dụng không tải ảnh OCR lên máy chủ. Trên Android/iOS, Google ML Kit có thể gửi thông tin thiết bị, ứng dụng và hiệu năng cho Google.',
+          'Ở chế độ học trên thiết bị, bài làm và điểm tự luyện chỉ lưu tại đây, không tự đồng bộ lên máy chủ. Khi học với máy chủ, bài làm được gửi để chấm; khi đăng nhập, kết quả lưu theo tài khoản và người quản lý của bạn có thể xem. Xóa lịch sử trên thiết bị không xóa hồ sơ kết quả của lớp. OCR xử lý ảnh ngay trên thiết bị; ở bản web/Windows, ảnh được xử lý trong trình duyệt. Ứng dụng không tải ảnh OCR lên máy chủ. Trên Android/iOS, Google ML Kit có thể gửi thông tin thiết bị, ứng dụng và hiệu năng cho Google.',
         ),
         const SizedBox(height: 16),
         const Text(
@@ -1279,7 +1412,15 @@ class _BackendSettingsState extends ConsumerState<BackendSettings> {
   @override
   void initState() {
     super.initState();
-    controller.text = ref.read(apiProvider).baseUrl;
+    final current =
+        ref.read(backendUrlProvider) ??
+        const String.fromEnvironment('API_BASE_URL', defaultValue: '');
+    final uri = Uri.tryParse(current);
+    controller.text =
+        (kIsWeb && current == '/api') ||
+            (uri?.scheme == 'https' && !uri!.host.endsWith('.invalid'))
+        ? current
+        : '';
   }
 
   @override
@@ -1296,12 +1437,21 @@ class _BackendSettingsState extends ConsumerState<BackendSettings> {
     try {
       final url = validateBackendUrl(controller.text);
       final prefs = await SharedPreferences.getInstance();
-      final store = LocalStore(prefs);
-      if (ref.read(authUserProvider) != null &&
-          url != ref.read(apiProvider).baseUrl) {
-        throw StateError('Hãy đăng xuất trước khi đổi máy chủ.');
+      final store = LocalStore(prefs, offline: false);
+      final previousUrl =
+          ref.read(backendUrlProvider) ??
+          const String.fromEnvironment(
+            'API_BASE_URL',
+            defaultValue: 'http://10.0.2.2:8000',
+          );
+      if ((ref.read(authUserProvider) != null ||
+              prefs.getString('active_account_id') != null) &&
+          url != previousUrl) {
+        throw StateError(
+          'Hãy kết nối lại máy chủ đang lưu và đăng xuất trước khi đổi sang máy chủ khác.',
+        );
       }
-      if (url != ref.read(apiProvider).baseUrl &&
+      if (url != previousUrl &&
           (store.current != null || store.history.isNotEmpty)) {
         throw StateError(
           'Hãy hoàn thành bài đang làm và xóa lịch sử trước khi đổi máy chủ.',
@@ -1312,6 +1462,7 @@ class _BackendSettingsState extends ConsumerState<BackendSettings> {
         throw StateError('Không thể lưu địa chỉ máy chủ.');
       }
       ref.read(backendUrlProvider.notifier).state = url;
+      await changeStudyMode(ref, false);
       if (mounted) {
         setState(() => message = 'Kết nối thành công. Đã lưu địa chỉ máy chủ.');
       }
@@ -1338,7 +1489,7 @@ class _BackendSettingsState extends ConsumerState<BackendSettings> {
       Text('Kết nối máy chủ', style: Theme.of(context).textTheme.titleLarge),
       const SizedBox(height: 8),
       const Text(
-        'Nhập địa chỉ được cung cấp cho bản thử. Bài làm sẽ được gửi đến máy chủ này.',
+        'Chỉ cần kết nối khi dùng tài khoản, lớp học và đồng bộ. Nhập địa chỉ HTTPS do người quản lý cung cấp; bài làm trong chế độ máy chủ sẽ được gửi đến địa chỉ này. Bài tự luyện trên thiết bị được giữ riêng.',
       ),
       const SizedBox(height: 12),
       TextField(

@@ -172,6 +172,7 @@ void main() {
         'q1': ['B'],
       };
       await LocalStore(p).complete(old, {
+        'attempt_id': old['id'],
         'title': 'Đề kiểm thử',
         'score': 0,
         'max_score': 1,

@@ -1,8 +1,9 @@
 # Hướng dẫn kiểm tra Google Play — Tự học 111
 
-Phạm vi: 0.2.0+18. Tài liệu dành cho chuẩn bị nội bộ và trường App access
+Phạm vi: 0.2.0+19. Tài liệu dành cho chuẩn bị nội bộ và trường App access
 trong Play Console sau khi có backend HTTPS thật. Hiện chưa có tài khoản
-reviewer hay máy chủ production để người duyệt đăng nhập; không gửi thông tin
+reviewer hay máy chủ production để người duyệt đăng nhập. Học trên thiết bị
+được kiểm tra riêng không cần đăng nhập; không gửi thông tin
 mẫu bên dưới như tài khoản có thể dùng. Không đưa tài khoản học sinh thật,
 khóa AI, token quản trị hoặc khóa ký vào gói xét duyệt.
 
@@ -43,9 +44,12 @@ phải trường bắt buộc. Không hướng reviewer tới localhost hoặc I
 
 | Bước | Thao tác | Kết quả cần quan sát |
 | --- | --- | --- |
-| Mở app | Mở bản cài mới với backend HTTPS đã cấu hình | Màn hình đọc được, không bắt nhập khóa dịch vụ; không có mục trợ giảng AI |
+| Mở app chưa có backend | Cài mới bản Android .19 không có URL HTTPS thật | Thẻ Học trên thiết bị hiện ra; danh mục tải từ dữ liệu trong app, không yêu cầu khóa |
+| Tự luyện ngoại tuyến | Tắt mạng, chọn lớp/môn, mở đề, làm, đóng/mở app rồi nộp | Bài và kết quả lưu cục bộ, có lời giải; câu tự luận chờ đánh giá, không tự chấm |
+| Tài liệu ngoại tuyến | Mở hướng dẫn Toán đã đóng gói | Đọc kiến thức/ví dụ/bài tập được; nguồn/PDF ngoài vẫn cần mạng |
+| Mở app với backend | Kết nối backend HTTPS đã cấu hình | Màn hình đọc được, không bắt nhập khóa dịch vụ; không có mục trợ giảng AI |
 | Chọn nội dung | Chọn lớp/môn, mở tài liệu, luyện đề | Nội dung thật có thể đọc/làm; tài liệu nêu phạm vi, không hứa phủ hết SGK |
-| Làm bài khách | Bắt đầu, nhập câu trả lời, tiếp tục bài đã lưu, nộp | Chấm trên backend; kết quả và lời giải hiển thị; không kẹt nút nộp |
+| Làm bài khách với máy chủ | Ở Học với máy chủ, bắt đầu, nhập câu trả lời, tiếp tục bài đã lưu, nộp | Chấm trên backend; kết quả và lời giải hiển thị; không kẹt nút nộp |
 | Đăng ký học sinh | Cá nhân → Tài khoản → Đăng ký, chọn Học sinh | Đăng nhập được; không được tạo đề giáo viên |
 | Học sinh vào nhóm | Nhập mã nhóm mẫu, mở Bài được giao | Chỉ thấy nội dung được phép, làm và nộp bài giao được |
 | Giáo viên | Đăng nhập tài khoản giáo viên, chọn nhiều chủ đề khi tạo đề | Tạo/giao đề, quản lý đúng nhóm của mình; không thấy lớp giáo viên khác |
@@ -54,7 +58,23 @@ phải trường bắt buộc. Không hướng reviewer tới localhost hoặc I
 | Đồng bộ | Cùng tài khoản trên hai thiết bị, lưu rồi mở lại bản máy chủ | Có thể tiếp tục bài; thay đổi xung đột không âm thầm ghi đè bài đã nộp |
 | Báo lỗi | Gửi phiếu lỗi ở câu hỏi/tài liệu | Người gửi thấy phiếu; giáo viên có quyền xử lý theo phạm vi, không thay điểm bài cũ |
 | Xóa tài khoản | Dùng tài khoản xóa riêng, Cá nhân → Tài khoản → Xóa tài khoản, nhập mật khẩu → Xóa vĩnh viễn | Tài khoản/phiên/kết quả thuộc tài khoản bị xóa; kiểm tra đăng nhập cũ và thiết bị thứ hai |
-| Lỗi mạng | Ngắt backend khi đang dùng; mở Nhận chữ từ ảnh trên thiết bị | Thông báo và thử lại rõ ràng; OCR độc lập mở được, không làm mất bản bài đang lưu |
+| Chuyển chế độ | Tạo bài/lịch sử tự luyện; kết nối máy chủ rồi trở lại Học trên thiết bị | Lịch sử và bài mỗi chế độ tách riêng, không tự tải điểm ngoại tuyến vào tài khoản/nhóm |
+| Lỗi mạng | Ngắt backend khi đang dùng; chọn Học trên thiết bị hoặc mở Nhận chữ từ ảnh trên thiết bị | Có lối tiếp tục tự luyện/OCR; bản nháp máy chủ được giữ riêng, không đổi thành bài ngoại tuyến |
+
+## Dữ liệu tự luyện và kết quả có giám sát
+
+Bản .19 có 7.886 câu, 1.461 đề và 733 hướng dẫn Toán lớp 1–12; 2.866 mục tài
+liệu bao gồm cả siêu dữ liệu nguồn, không phải toàn bộ hướng dẫn SGK/PDF.
+Chỉ nội dung được đóng gói đọc được khi mất mạng. Đáp án nằm trong APK để
+chấm tự luyện, có thể trích xuất; không mô tả ngân hàng này thành đề bí mật.
+Đánh giá có giám sát cần câu hỏi riêng giữ trên máy chủ. Bài/điểm ngoại
+tuyến không tự gửi cho giáo viên, dù sau đó người dùng đăng nhập.
+
+Kiểm tra cập nhật .18 → .19 bằng cùng mã ứng dụng/chứng thư, không gỡ app;
+giữ được dữ liệu cũ và có vùng tự luyện riêng. Xác nhận từ APK/AAB thực tế,
+không suy ra chỉ từ phiên bản nguồn. Cảnh báo nhà phát triển chưa được biết
+đến của Play Protect có thể còn trên bản debug; không hướng người duyệt
+tắt bảo vệ toàn cục hoặc coi APK debug là bản Google Play đã duyệt.
 
 ## Nhận chữ từ ảnh
 

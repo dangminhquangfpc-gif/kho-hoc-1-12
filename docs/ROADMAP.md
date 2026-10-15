@@ -1,8 +1,8 @@
 # Tiến độ
 
-Trạng thái mới nhất: bản thử **.18 / 0.2.0+18**. Các mốc bên dưới ghi lại tiến
+Trạng thái mới nhất: bản thử **.19 / 0.2.0+19**. Các mốc bên dưới ghi lại tiến
 độ từng bản; không coi hạn chế của một mốc cũ là trạng thái hiện hành. Xem phần
-.18 cuối tài liệu và [OCR.md](OCR.md) cho phạm vi nhận chữ đang có.
+.19 cuối tài liệu và [OFFLINE_STUDY.md](OFFLINE_STUDY.md), [OCR.md](OCR.md) cho phạm vi nhận chữ đang có.
 
 ## Giai đoạn 1
 - Đã có: kiến trúc, schema, 108 câu hỏi gốc/12 đề, catalog lớp/môn, FastAPI chấm điểm xác định, quyền admin cục bộ, capability cho guest, snapshot bài, nhập/duyệt/xuất bản, Flutter luyện đề/lưu bài/lịch sử, Next.js admin; thư viện 4 ghi chú/PDF gốc, tìm kiếm tiếng Việt không dấu, yêu thích/đọc gần đây; đánh dấu câu và tiến độ thiết bị; sửa câu hỏi/rollback revision, duyệt lại và giữ nguyên snapshot bài đang làm.
@@ -213,3 +213,22 @@ Còn adapter production/backend HTTPS thật, Play Console/khóa ký, quy trình
 em/xác minh giáo viên, thẩm định nội dung, thiết bị vật lý/screenshot native và
 kiểm thử kín. Không mua/triển khai/phát hành cửa hàng trong mốc này. Xem
 [Google Play checklist](PLAY_STORE_CHECKLIST.md) và [xác minh](VALIDATION.md).
+
+## Bản .19 — học trên điện thoại khi chưa có backend
+
+Sửa lỗi APK đã mở nhưng không tải được dữ liệu ở địa chỉ backend minh họa.
+Thiết bị native chưa có backend thật mặc định dùng Học trên thiết bị. Bundle
+đóng gói 7.886 câu, 1.461 đề, 2.866 mục tài liệu/nguồn và 733 hướng dẫn Toán,
+đối chiếu chính dữ liệu fixture hiện hành; không tự thêm nội dung SGK mới.
+
+Có đọc/tìm tài liệu, chọn lớp/môn/đề, lưu/tiếp tục, chấm sáu loại câu, lịch sử
+và ôn câu chưa đúng trên thiết bị. Tự luận giữ trạng thái cần kiểm tra thủ
+công. Đối chiếu chấm với backend cho mọi câu đang dùng và các tình huống biên
+Unicode/số/phân số/đơn vị. Đáp án nằm trong gói phục vụ tự luyện, không phải
+ngân hàng đề bí mật. Chế độ này không cấp vai trò giáo viên, đăng ký tài khoản
+hoặc tự gửi điểm cho giáo viên.
+
+Bài/điểm ngoại tuyến và dữ liệu máy chủ giữ riêng, bảo vệ ghi chậm khi đổi
+chế độ/tài khoản; cấu hình và lịch sử online cũ được giữ. Kết nối HTTPS thật
+vẫn dùng các luồng tài khoản/nhóm/giao bài hiện có. Chưa triển khai backend
+production hoặc đưa lên Google Play. Xem OFFLINE_STUDY.md và VALIDATION.md.
