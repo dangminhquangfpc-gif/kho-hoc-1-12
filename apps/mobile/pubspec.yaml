@@ -1,7 +1,7 @@
 name: kho_hoc_mobile
 description: Tự học 111 — MVP học tập và luyện đề
 publish_to: none
-version: 0.2.0+12
+version: 0.2.0+13
 environment:
   sdk: ^3.9.0
 dependencies:

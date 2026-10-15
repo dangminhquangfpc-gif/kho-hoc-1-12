@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'main.dart' show Shell, Failure, ResultView;
 import 'repository.dart';
 import 'study_progress.dart';
+import 'report_export.dart';
 
 final serverResultsProvider = FutureProvider.autoDispose<List<Json>>((ref) {
   final user = ref.watch(authUserProvider);
@@ -913,6 +914,33 @@ class _GroupPanelState extends ConsumerState<GroupPanel> {
                       children: widget.student
                           ? const []
                           : [
+                              const Padding(
+                                padding: EdgeInsets.all(12),
+                                child: Text(
+                                  'Bảng điểm gồm mọi môn, mọi lần nộp của thành viên hiện tại. Điểm trung bình tính theo phần trăm; chưa nộp bài thì để trống.',
+                                ),
+                              ),
+                              TextButton.icon(
+                                icon: const Icon(Icons.table_view),
+                                label: Text(reportExportLabel),
+                                onPressed: busy
+                                    ? null
+                                    : () => act(() async {
+                                        final csv = await ref
+                                            .read(apiProvider)
+                                            .groupResultsCsv(group['id']);
+                                        if (!mounted) return;
+                                        await exportReport(csv);
+                                        if (!context.mounted) return;
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          SnackBar(
+                                            content: Text(reportExportMessage),
+                                          ),
+                                        );
+                                      }),
+                              ),
                               TextButton(
                                 onPressed: busy
                                     ? null

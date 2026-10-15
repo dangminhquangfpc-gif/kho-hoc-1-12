@@ -1,0 +1,19 @@
+name: Publish classroom report Windows demo
+on:
+  push:
+    branches: [feature/classroom-reports-20261015]
+permissions:
+  contents: write
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify and upload classroom demo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd demo-package
+          sha256sum --check tu-hoc-111-demo-windows.zip.sha256
+          gh release view demo-tu-hoc-111-2026-10-15-v13 --repo "$GITHUB_REPOSITORY" || gh release create demo-tu-hoc-111-2026-10-15-v13 --draft --target "$GITHUB_SHA" --title 'Tự học 111 · v13 · Bảng điểm theo nhóm' --notes 'Bản thử Windows local. Thêm xuất CSV bảng điểm nhóm; chưa triển khai backend Internet hoặc phát hành cửa hàng. Dừng bản cũ, sao lưu và chép nguyên thư mục state sang bản mới trước khi chạy.' --repo "$GITHUB_REPOSITORY"
+          gh release upload demo-tu-hoc-111-2026-10-15-v13 tu-hoc-111-demo-windows.zip tu-hoc-111-demo-windows.zip.sha256 --clobber --repo "$GITHUB_REPOSITORY"

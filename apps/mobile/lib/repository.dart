@@ -96,6 +96,10 @@ class LearningApi {
       )).data!;
   Future<List<Json>> classroomGroups() async =>
       (await client.get<List<dynamic>>('/classroom/groups')).data!.cast<Json>();
+  Future<String> groupResultsCsv(String id) async => (await client.get<String>(
+    '/classroom/groups/$id/results.csv',
+    options: Options(responseType: ResponseType.plain),
+  )).data!;
   Future<void> createGroup(String name) async {
     await client.post('/classroom/groups', data: {'name': name});
   }

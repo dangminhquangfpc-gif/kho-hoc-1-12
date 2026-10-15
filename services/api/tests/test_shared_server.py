@@ -449,3 +449,34 @@ def test_shared_readiness_rejects_changed_schema_and_budget_failures_are_503(
     assert response.status_code == 503
     assert "private diagnostic" not in response.text
     assert one.get("/ready").status_code == 200
+
+
+def test_group_report_aggregate_on_postgresql_and_sqlite(school):
+    import csv
+    import io
+    from khohoc.models import LearningRecord
+
+    one, two, engine, q, postgres = school
+    login(one, "manager")
+    group = one.post("/classroom/groups", json={"name": "Nhóm kiểm thử"}).json()
+    assert (
+        one.post(
+            f"/classroom/groups/{group['id']}/members", json={"username": "student"}
+        ).status_code
+        == 200
+    )
+    with Session(engine) as db:
+        db.add(
+            LearningRecord(
+                attempt_id="report-record",
+                user_id="student",
+                payload={"result": {"score": 3, "max_score": 4}},
+            )
+        )
+        db.commit()
+    response = one.get(f"/classroom/groups/{group['id']}/results.csv")
+    assert response.status_code == 200
+    rows = list(csv.reader(io.StringIO(response.content.decode("utf-8-sig"))))
+    assert len(rows) == 2 and rows[1][4:6] == ["1", "75.0"]
+    login(two, "student")
+    assert two.get(f"/classroom/groups/{group['id']}/results.csv").status_code == 403
