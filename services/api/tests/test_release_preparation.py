@@ -165,3 +165,18 @@ def test_store_preflight_rejects_local_http_and_ios_identity_is_branded():
         "CA92.1"
         in privacy["NSPrivacyAccessedAPITypes"][0]["NSPrivacyAccessedAPITypeReasons"]
     )
+
+
+def test_ios_privacy_manifest_is_in_runner_resources_not_test_resources():
+    text = (ROOT / "apps/mobile/ios/Runner.xcodeproj/project.pbxproj").read_text()
+    resources = text.split("/* Begin PBXResourcesBuildPhase section */", 1)[1].split(
+        "/* End PBXResourcesBuildPhase section */", 1
+    )[0]
+    tests = resources.split("331C807F294A63A400263BE5 /* Resources */ = {", 1)[1].split(
+        "};", 1
+    )[0]
+    runner = resources.split("97C146EC1CF9000F007C117D /* Resources */ = {", 1)[
+        1
+    ].split("};", 1)[0]
+    assert "PrivacyInfo.xcprivacy in Resources" not in tests
+    assert "PrivacyInfo.xcprivacy in Resources" in runner

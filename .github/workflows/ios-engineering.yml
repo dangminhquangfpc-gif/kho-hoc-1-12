@@ -25,6 +25,20 @@ jobs:
           SDK_VERSION="$sdk_version" python3 -c 'import os; assert int(os.environ["SDK_VERSION"].split(".")[0]) >= 26, "Xcode/iOS SDK 26+ required"'
       - run: flutter pub get --enforce-lockfile
       - run: flutter build ios --release --no-codesign
+      - name: Verify the built application and its privacy manifest
+        run: |
+          python3 - <<'PYIOS'
+          import plistlib
+          from pathlib import Path
+          app = Path('build/ios/iphoneos/Runner.app')
+          info = plistlib.loads((app / 'Info.plist').read_bytes())
+          assert info['CFBundleDisplayName'] == 'Tự học 111'
+          assert int(info['DTSDKName'].removeprefix('iphoneos').split('.')[0]) >= 26
+          manifest = plistlib.loads((app / 'PrivacyInfo.xcprivacy').read_bytes())
+          assert manifest['NSPrivacyTracking'] is False
+          assert not (app / 'embedded.mobileprovision').exists()
+          print('Unsigned iOS engineering app: name, SDK and bundled app privacy manifest verified.')
+          PYIOS
       - uses: actions/upload-artifact@v4
         with:
           name: tu-hoc-111-ios-unsigned-engineering
