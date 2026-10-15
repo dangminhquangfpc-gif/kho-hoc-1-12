@@ -1,8 +1,11 @@
 # Tiến độ
 
-Trạng thái mới nhất: bản thử **.19 / 0.2.0+19**. Các mốc bên dưới ghi lại tiến
+Trạng thái mã nguồn mới nhất: bản thử **.20 / 0.2.0+20**. Các mốc bên dưới ghi lại tiến
 độ từng bản; không coi hạn chế của một mốc cũ là trạng thái hiện hành. Xem phần
-.19 cuối tài liệu và [OFFLINE_STUDY.md](OFFLINE_STUDY.md), [OCR.md](OCR.md) cho phạm vi nhận chữ đang có.
+.20 cuối tài liệu, [FREE_HOSTING.md](FREE_HOSTING.md),
+[SECURE_SESSIONS.md](SECURE_SESSIONS.md), [OFFLINE_STUDY.md](OFFLINE_STUDY.md)
+và [OCR.md](OCR.md). Bản .20 đang kiểm thử/chuẩn bị phát hành; chưa có backend
+HTTPS công khai hoặc tài khoản hosting của chủ app được cấu hình.
 
 ## Giai đoạn 1
 - Đã có: kiến trúc, schema, 108 câu hỏi gốc/12 đề, catalog lớp/môn, FastAPI chấm điểm xác định, quyền admin cục bộ, capability cho guest, snapshot bài, nhập/duyệt/xuất bản, Flutter luyện đề/lưu bài/lịch sử, Next.js admin; thư viện 4 ghi chú/PDF gốc, tìm kiếm tiếng Việt không dấu, yêu thích/đọc gần đây; đánh dấu câu và tiến độ thiết bị; sửa câu hỏi/rollback revision, duyệt lại và giữ nguyên snapshot bài đang làm.
@@ -26,7 +29,7 @@ JWT/server auth production, backup/retention, kiểm thử tải, Google Play po
 
 ## Dữ liệu mở rộng 15/10/2026
 
-Bản thử hiện có 1.566 câu, 219 đề và 199 tài liệu; có dữ liệu cho mọi tổ hợp lớp–môn trong danh mục. Đây là dữ liệu tự biên soạn hướng tới Kết nối tri thức, chưa đối chiếu toàn bộ SGK hiện hành. Xem `docs/CURRICULUM_EXPANSION.md` để phân biệt biến thể Toán, bộ ôn nền và phần còn thiếu.
+Tại mốc mở rộng này có 1.566 câu, 219 đề và 199 tài liệu; có dữ liệu cho mọi tổ hợp lớp–môn trong danh mục. Đây là dữ liệu tự biên soạn hướng tới Kết nối tri thức, chưa đối chiếu toàn bộ SGK hiện hành. Xem `docs/CURRICULUM_EXPANSION.md` để phân biệt biến thể Toán, bộ ôn nền và phần còn thiếu; số lượng mới hơn được ghi ở các mốc sau.
 
 
 ### Thư viện Internet 15/10/2026
@@ -232,3 +235,43 @@ Bài/điểm ngoại tuyến và dữ liệu máy chủ giữ riêng, bảo vệ
 chế độ/tài khoản; cấu hình và lịch sử online cũ được giữ. Kết nối HTTPS thật
 vẫn dùng các luồng tài khoản/nhóm/giao bài hiện có. Chưa triển khai backend
 production hoặc đưa lên Google Play. Xem OFFLINE_STUDY.md và VALIDATION.md.
+
+## Bản .20 — chuẩn bị hosting miễn phí và giữ phiên đăng nhập native
+
+Đã có Blueprint và entry point riêng cho **Render Free Singapore**, HTTPS dưới
+`/api`, dùng **Neon Free PostgreSQL tại AWS Singapore**. API chạy bằng role SQL
+`tuhoc_app` có quyền dữ liệu cần thiết, không dùng owner để vận hành web service.
+Không tự migrate, tạo manager hoặc duyệt/nạp fixture khi khởi động. Hợp đồng
+ingress và Host được kiểm tra; không tin địa chỉ IP học viên từ X-Forwarded-For.
+Xem [FREE_HOSTING.md](FREE_HOSTING.md) cho cấu hình, hạn mức và cold start.
+
+CLI và bộ công cụ Windows chuẩn bị database mới từ máy tính của chủ app:
+**`1-KIEM-TRA.bat`** chỉ đọc kế hoạch; **`2-KHOI-TAO.bat`** áp dụng rõ ràng,
+khởi tạo schema, tài khoản quản lý và role runtime trong transaction. Owner URL
+direct được nhập ẩn, không lưu hoặc chuyển cho Render. Tệp tài khoản quản lý
+và URL runtime nằm riêng trên máy bảo trì. Công cụ từ chối đích/role đã tồn tại,
+không tự đặt lại mật khẩu hoặc ghi đè dữ liệu cũ.
+
+Gói content-only chuyển 7.886 câu, 1.461 đề và 2.866 mục tài liệu/nguồn đã công
+khai từ dữ liệu tự biên soạn của app; không chuyển tài khoản, nhóm, đề riêng,
+phiên, bài làm, điểm hoặc danh tính người sửa. Manifest/checksum, dry-run,
+đối chiếu PDF công khai và kiểm tra xung đột được thực hiện trước khi nhập;
+giữ phiên bản hiện tại với revision không mang danh tính nguồn. Không tăng
+phạm vi SGK đã thẩm định hoặc sao chép nguyên văn đề Internet. Xem
+[CONTENT_TRANSFER.md](CONTENT_TRANSFER.md).
+
+Phiên Android/iOS được khôi phục từ nơi lưu an toàn của hệ điều hành, gắn với
+đúng host/cổng/đường dẫn HTTPS. Android KeyStore bảo vệ khóa mã hóa; iOS dùng
+Keychain trên thiết bị, không đồng bộ iCloud. Web giữ cookie HttpOnly. Đổi chế
+độ học hoặc mất mạng không xóa phiên còn hạn; 401, đăng xuất và xóa tài khoản
+chỉ tác động phiên đúng backend. Không kéo dài thời hạn 8 giờ của máy chủ,
+không tự chuyển điểm ngoại tuyến thành điểm lớp. Xem
+[SECURE_SESSIONS.md](SECURE_SESSIONS.md).
+
+Chủ app đã xác nhận bản .19 hiển thị dữ liệu và lưu kết quả tại Tiến độ → Lịch
+sử bài làm trên điện thoại. Mốc .20 đã đạt kiểm thử local, HTTPS/PostgreSQL cô
+lập, build APK/web/AAB engineering; còn CI/native và công bố tệp, tạo tài khoản
+Render/Neon bằng chủ app và nghiệm thu HTTPS trên hai
+thiết bị. Chưa triển khai endpoint thật, không có trợ lý AI trả phí và không
+mở khóa production. Play Console/Apple Developer, khóa ký, chính sách trẻ em,
+thẩm định nội dung và thử nghiệm cửa hàng vẫn còn trong kế hoạch.

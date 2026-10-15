@@ -14,6 +14,7 @@ jobs:
       - run: python scripts/build_offline_grading_cases.py --check
       - run: PYTHONPATH=services/api pytest services/api/tests
       - run: pytest scripts/test_demo_ai_launcher.py
+      - run: pytest scripts/test_prepare_free_server.py
       - run: python data/pipelines/import_cli.py data/seeds/questions.json
       - run: PYTHONPATH=services/api python data/pipelines/validate_language_seeds.py
       - run: python scripts/test_shared_postgres.py

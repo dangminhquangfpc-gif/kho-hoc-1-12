@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'offline_repository.dart';
+import 'secure_session_store.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 typedef Json = Map<String, dynamic>;
 
 class LearningApi {
-  LearningApi({Dio? client, String? baseUrl})
+  LearningApi({Dio? client, String? baseUrl, this.sessionStore})
     : client =
           client ??
           Dio(
@@ -22,8 +23,148 @@ class LearningApi {
               connectTimeout: const Duration(seconds: 10),
               receiveTimeout: const Duration(seconds: 20),
             ),
-          );
+          ) {
+    _sessionScope = nativeSessionScope(this.client.options.baseUrl);
+    if (hasPersistentSession) {
+      this.client.interceptors.add(
+        InterceptorsWrapper(
+          onRequest: (options, handler) async {
+            try {
+              await restoreSession();
+              if (_disposed) throw StateError('Phiên kết nối đã thay đổi.');
+              final scope = Uri.parse(_sessionScope!);
+              final target = options.uri;
+              final withinBackend =
+                  target.scheme == scope.scheme &&
+                  target.host.toLowerCase() == scope.host &&
+                  target.port == scope.port &&
+                  (scope.path.isEmpty ||
+                      target.path == scope.path ||
+                      target.path.startsWith('${scope.path}/'));
+              final login = const {
+                '/auth/login',
+                '/auth/register',
+              }.contains(options.path);
+              final token = withinBackend && !login ? _bearerToken : null;
+              options.headers.removeWhere(
+                (key, _) => key.toLowerCase() == 'authorization',
+              );
+              if (token != null) {
+                options.headers['Authorization'] = 'Bearer $token';
+                _requestTokens[options] = token;
+              }
+              _requestGenerations[options] = _sessionGeneration;
+              // Never forward a password or bearer token through a redirect.
+              if (token != null ||
+                  options.path.startsWith('/auth/') ||
+                  options.path == '/account/delete') {
+                options.followRedirects = false;
+              }
+              handler.next(options);
+            } catch (_) {
+              handler.reject(
+                DioException(
+                  requestOptions: options,
+                  error: const SecureSessionStorageException(),
+                  message: const SecureSessionStorageException().toString(),
+                ),
+              );
+            }
+          },
+          onError: (error, handler) async {
+            if (error.response?.statusCode == 401 &&
+                !const {
+                  '/auth/login',
+                  '/auth/register',
+                }.contains(error.requestOptions.path)) {
+              final token = _requestTokens[error.requestOptions];
+              try {
+                if (token != null) await _clearSessionIfToken(token);
+                if (!_disposed &&
+                    error.requestOptions.path != '/auth/me' &&
+                    _requestGenerations[error.requestOptions] ==
+                        _sessionGeneration &&
+                    _bearerToken == null) {
+                  onSessionLost?.call();
+                }
+              } catch (_) {
+                handler.reject(
+                  DioException(
+                    requestOptions: error.requestOptions,
+                    error: const SecureSessionStorageException(),
+                    message: const SecureSessionStorageException().toString(),
+                  ),
+                );
+                return;
+              }
+            }
+            handler.next(error);
+          },
+        ),
+      );
+    }
+  }
   final Dio client;
+  final SecureSessionStore? sessionStore;
+  String? _sessionScope;
+  Future<void>? _restoration;
+  var _sessionGeneration = 0;
+  var _disposed = false;
+  final _requestTokens = Expando<String>();
+  final _requestGenerations = Expando<int>();
+  bool get hasPersistentSession =>
+      sessionStore != null && _sessionScope != null;
+  String? get _bearerToken {
+    final value = client.options.headers['Authorization'];
+    return value is String && value.startsWith('Bearer ')
+        ? value.substring(7)
+        : null;
+  }
+
+  Future<void> restoreSession() {
+    if (!hasPersistentSession) return Future<void>.value();
+    if (nativeSessionScope(client.options.baseUrl) != _sessionScope) {
+      throw StateError('Địa chỉ máy chủ đã thay đổi. Hãy mở lại kết nối.');
+    }
+    if (_restoration != null) return _restoration!;
+    final work = _restoreSession(_sessionGeneration);
+    _restoration = work;
+    work.then<void>(
+      (_) {},
+      onError: (Object _, StackTrace __) {
+        if (identical(_restoration, work)) _restoration = null;
+      },
+    );
+    return work;
+  }
+
+  Future<void> _restoreSession(int generation) async {
+    final saved = await sessionStore!.read(_sessionScope!);
+    if (_disposed || generation != _sessionGeneration) return;
+    if (saved != null) {
+      client.options.headers['Authorization'] = 'Bearer ${saved.token}';
+      expectedAccountId = saved.accountId;
+    }
+  }
+
+  Future<void> _clearSessionIfToken(String token) async {
+    if (hasPersistentSession) {
+      await sessionStore!.clearIfToken(_sessionScope!, token);
+    }
+    if (_bearerToken == token) {
+      client.options.headers.remove('Authorization');
+      expectedAccountId = null;
+    }
+  }
+
+  void dispose() {
+    _disposed = true;
+    _sessionGeneration++;
+    client.options.headers.remove('Authorization');
+    expectedAccountId = null;
+    client.close(force: true);
+  }
+
   bool get isOffline => false;
   String? expectedAccountId;
   void Function()? onSessionLost;
@@ -37,6 +178,7 @@ class LearningApi {
 
   String get baseUrl => client.options.baseUrl;
   Future<Json?> currentUser() async {
+    await restoreSession();
     try {
       return (await client.get<Json>('/auth/me')).data;
     } on DioException catch (e) {
@@ -52,7 +194,7 @@ class LearningApi {
     int? grade,
     String role = 'student',
   }) async {
-    if (kIsWeb || kReleaseMode) {
+    if (kIsWeb || kReleaseMode || sessionStore != null) {
       final target = kIsWeb
           ? Uri.base.resolve(client.options.baseUrl)
           : Uri.parse(client.options.baseUrl);
@@ -64,6 +206,8 @@ class LearningApi {
         );
       }
     }
+    await restoreSession();
+    final generation = ++_sessionGeneration;
     final response = (await client.post<Json>(
       displayName == null ? '/auth/login' : '/auth/register',
       data: {
@@ -76,19 +220,42 @@ class LearningApi {
       },
     )).data!;
     if (!kIsWeb) {
+      if (hasPersistentSession) {
+        if (_disposed || generation != _sessionGeneration) {
+          throw StateError('Phiên kết nối đã thay đổi. Hãy đăng nhập lại.');
+        }
+        final saved = await sessionStore!.write(
+          _sessionScope!,
+          NativeSession(
+            token: response['token'] as String,
+            accountId: response['user']['id'] as String,
+          ),
+          isCurrent: () => !_disposed && generation == _sessionGeneration,
+        );
+        if (!saved || _disposed || generation != _sessionGeneration) {
+          throw StateError('Phiên kết nối đã thay đổi. Hãy đăng nhập lại.');
+        }
+      }
       client.options.headers['Authorization'] = 'Bearer ${response['token']}';
+      if (hasPersistentSession) {
+        expectedAccountId = response['user']['id'] as String;
+      }
     }
     return response['user'] as Json;
   }
 
   Future<void> deleteAccount(String password) async {
+    await restoreSession();
+    final token = _bearerToken;
     await client.post('/account/delete', data: {'password': password});
-    client.options.headers.remove('Authorization');
+    if (token != null) await _clearSessionIfToken(token);
   }
 
   Future<void> signOut() async {
+    await restoreSession();
+    final token = _bearerToken;
     await client.post('/auth/logout');
-    client.options.headers.remove('Authorization');
+    if (token != null) await _clearSessionIfToken(token);
   }
 
   Future<Json> changePassword(String current, String next) async =>
@@ -456,18 +623,24 @@ Future<void> changeStudyMode(WidgetRef ref, bool offline) async {
 }
 
 final backendUrlProvider = StateProvider<String?>((ref) => null);
+final secureSessionStoreProvider = Provider<SecureSessionStore?>(
+  (ref) => nativeSecureSessionStore(),
+);
 final Provider<LearningApi> apiProvider = Provider<LearningApi>((ref) {
   if (ref.watch(studyOfflineProvider)) {
     final preferences = ref.read(preferencesProvider.future);
     final local = OfflineLearningApi(preferences: () => preferences);
-    ref.onDispose(() => local.client.close(force: true));
+    ref.onDispose(local.dispose);
     return local;
   }
-  final api = LearningApi(baseUrl: ref.watch(backendUrlProvider));
+  final api = LearningApi(
+    baseUrl: ref.watch(backendUrlProvider),
+    sessionStore: ref.watch(secureSessionStoreProvider),
+  );
   var disposed = false;
   ref.onDispose(() {
     disposed = true;
-    api.client.close(force: true);
+    api.dispose();
   });
   api.onSessionLost = () {
     if (!disposed) ref.invalidate(authBootstrapProvider);
@@ -476,6 +649,7 @@ final Provider<LearningApi> apiProvider = Provider<LearningApi>((ref) {
     InterceptorsWrapper(
       onError: (error, handler) {
         if (!disposed &&
+            !api.hasPersistentSession &&
             error.response?.statusCode == 401 &&
             !['/auth/me', '/auth/login'].contains(error.requestOptions.path)) {
           ref.invalidate(authBootstrapProvider);
@@ -519,8 +693,13 @@ final FutureProvider<Json?> authBootstrapProvider = FutureProvider<Json?>((
   Json? user;
   try {
     user = await api.currentUser();
-  } catch (_) {
+  } catch (error) {
     if (discarded) return null;
+    if (error is SecureSessionStorageException ||
+        (error is DioException &&
+            error.error is SecureSessionStorageException)) {
+      rethrow;
+    }
     if (prefs.getString('active_account_id') != null) rethrow;
   }
   if (discarded) return null;

@@ -40,6 +40,7 @@ command = [
     "--sdk_root=" + str(sdk),
     "--install",
     "platform-tools",
+    "platforms;android-34",  # Pinned secure-storage plugin compile SDK.
     "platforms;android-36",
     "build-tools;35.0.0",
     "ndk;27.0.12077973",

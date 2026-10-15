@@ -1,10 +1,22 @@
-# Disposable personal testing only. No persistent user data on the free tier.
+# Controlled shared pilot. PostgreSQL is external Neon Free, never local SQLite.
+# Prepare the database and SQL runtime role offline before creating this service.
+# See docs/FREE_HOSTING.md. This does not deploy or upgrade a paid service.
 services:
   - type: web
-    name: khohoc-phone-preview
+    name: tu-hoc-111-api
+    branch: feature/shared-server-launch-20261015
     runtime: docker
     plan: free
-    dockerfilePath: ./deploy/phone-preview.Dockerfile
+    region: singapore
+    dockerfilePath: ./deploy/shared/api.Dockerfile
     dockerContext: .
-    healthCheckPath: /health
-    autoDeploy: false
+    dockerCommand: python -m khohoc.render_server
+    healthCheckPath: /api/ready
+    autoDeployTrigger: "off"
+    envVars:
+      - key: KHOHOC_MODE
+        value: shared
+      - key: KHOHOC_DATABASE_URL
+        sync: false
+      - key: PGSSLROOTCERT
+        value: /etc/ssl/certs/ca-certificates.crt

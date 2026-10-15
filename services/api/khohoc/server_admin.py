@@ -1,6 +1,7 @@
 """Offline server maintenance. No public administration endpoints or secret output."""
 
 import argparse
+import json
 import sqlite3
 import tempfile
 from pathlib import Path
@@ -60,7 +61,29 @@ def main():
     bootstrap.add_argument("--credentials-file", required=True)
     transfer = commands.add_parser("import-sqlite")
     transfer.add_argument("--source", required=True)
+    export_content = commands.add_parser(
+        "export-content", help="Export only already-published public SQLite content"
+    )
+    export_content.add_argument("--source", required=True)
+    export_content.add_argument("--output", required=True)
+    export_content.add_argument("--library-root", type=Path)
+    import_content = commands.add_parser(
+        "import-content", help="Validate public content; dry-run unless --apply"
+    )
+    import_content.add_argument("--archive", required=True)
+    import_content.add_argument("--apply", action="store_true")
+    import_content.add_argument("--expected-sha256")
+    import_content.add_argument("--library-root", type=Path)
     args = parser.parse_args()
+    if args.command == "export-content":
+        from .content_transfer import export_published_content
+
+        options = {"library_root": args.library_root} if args.library_root else {}
+        result = export_published_content(args.source, args.output, **options)
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+        return
+    if args.command == "import-content" and args.apply and not args.expected_sha256:
+        parser.error("--apply requires the reviewed --expected-sha256")
     config = Settings()
     engine = make_engine(config.resolved_database_url())
     try:
@@ -73,11 +96,26 @@ def main():
 
             verify_schema(engine)
             ensure_manager(engine, args.credentials_file)
-        else:
+        elif args.command == "import-sqlite":
             from .database import verify_schema
 
             verify_schema(engine)
             copy_sqlite(args.source, engine)
+        elif args.command == "import-content":
+            from .content_transfer import import_published_content
+            from .database import verify_schema
+
+            verify_schema(engine)
+            options = {"library_root": args.library_root} if args.library_root else {}
+            result = import_published_content(
+                engine,
+                args.archive,
+                apply=args.apply,
+                expected_sha256=args.expected_sha256,
+                **options,
+            )
+            print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+            return
     finally:
         engine.dispose()
     print("Hoàn tất. Không đưa tệp tài khoản hoặc thông tin kết nối lên Git.")

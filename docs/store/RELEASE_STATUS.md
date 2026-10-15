@@ -1,11 +1,39 @@
 # Tự học 111 — chuẩn bị Google Play và App Store
 
-Bản mã nguồn 0.2.0+19 / demo .19; các mốc kỹ thuật cũ được giữ bên dưới.
+Bản mã nguồn 0.2.0+20 / demo .20 đang kiểm thử và chuẩn bị tệp; các mốc kỹ thuật cũ được giữ bên dưới.
 Chưa phát hành lên cửa hàng.
 Người dùng xác nhận chưa có Play Console, Apple Developer hoặc backend HTTPS dùng chung.
-Không tạo tài khoản, thanh toán hoặc đưa backend development chứa dữ liệu học viên ra Internet.
+Chủ app chọn thử hosting miễn phí; chưa tạo tài khoản Render/Neon hoặc endpoint
+thật trong workspace. Công cụ không tự đăng ký, thanh toán hoặc đưa backend
+development chứa dữ liệu học viên ra Internet.
 
-## Bản hiện hành .19
+## Bản hiện hành .20
+
+Chuẩn bị **Render Free Singapore + Neon Free PostgreSQL tại AWS Singapore**
+cho pilot có kiểm soát. Render chạy API HTTPS dưới `/api`; database giữ tài
+khoản, nhóm và kết quả qua restart. Bộ công cụ Windows chạy trên máy chủ app:
+`1-KIEM-TRA.bat` xem kế hoạch chỉ đọc, `2-KHOI-TAO.bat` khởi tạo database mới
+rõ ràng. Owner URL direct nhập ẩn, không lưu hoặc cấp cho Render; web service
+chỉ nhận URL role `tuhoc_app` có quyền dữ liệu hạn chế. Nội dung công khai nhập
+qua gói có manifest/checksum, không chuyển tài khoản/bài làm từ demo. Xem
+[FREE_HOSTING](../FREE_HOSTING.md), [CONTENT_TRANSFER](../CONTENT_TRANSFER.md).
+
+Phiên Android/iOS được lưu bằng nơi lưu an toàn của hệ điều hành, ràng buộc
+backend HTTPS; không giữ mật khẩu, không đưa token thô vào SharedPreferences.
+Android KeyStore bảo vệ khóa mã hóa và tắt OS backup/transfer dữ liệu app; iOS
+dùng Keychain `unlocked_this_device`, không iCloud. Web tiếp tục cookie
+HttpOnly. Khôi phục phiên không kéo dài thời hạn của máy chủ hoặc nhập điểm
+ngoại tuyến thành điểm lớp. Xem [SECURE_SESSIONS](../SECURE_SESSIONS.md).
+
+Hiện chưa triển khai tài khoản hosting hoặc HTTPS công khai; thử nghiệm
+HTTPS/PostgreSQL riêng không phải bằng chứng đã có production. Free hosting
+có thời gian ngủ/quota và cần backup riêng. Backend trả `mode=shared`;
+preflight cửa hàng vẫn yêu cầu production. Không mở khóa production để dùng
+pilot làm backend của bản gửi xét duyệt. APK/kit .20 dự kiến ở tag
+`demo-tu-hoc-111-2026-10-15-v20`, chỉ coi đã phát hành khi có tệp và xác minh
+của chính bản đó. Kết quả thử/build ở [VALIDATION](../VALIDATION.md).
+
+## Học ngoại tuyến tiếp tục từ .19
 
 Android/iOS chưa cấu hình backend HTTPS thật mặc định học trên thiết bị:
 dữ liệu tự luyện trong app, đọc/luyện/chấm/lưu lịch sử không cần máy chủ.
@@ -31,6 +59,9 @@ triển khai trong bước này; không mở khóa production để vượt ki�
 - Tài khoản tự đăng ký có thể xóa trong ứng dụng sau khi xác nhận mật khẩu.
   Xóa tài khoản giáo viên giữ tài khoản/kết quả học sinh cho quản lý hệ thống;
   các bài/kết quả đã chia sẻ thuộc học viên khác không bị xóa theo.
+- Lưu token native bằng secure storage theo đúng backend; máy chủ vẫn kiểm
+  tra hạn và thu hồi phiên. Không coi đăng nhập tự giữ phiên là xác minh vai
+  trò giáo viên hoặc đáp ứng đầy đủ chính sách trẻ em.
 - scripts/store_preflight.py kiểm tra URL HTTPS, metadata nhà phát hành,
   trạng thái production của backend, thẩm định nội dung/trẻ em và cấu hình ký trước lệnh build dùng để phát hành.
 - Gói AAB engineering có thể biên dịch không ký để kiểm tra kỹ thuật; không đủ điều kiện tải lên Play.

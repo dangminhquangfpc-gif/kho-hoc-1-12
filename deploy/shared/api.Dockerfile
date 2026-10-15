@@ -7,6 +7,9 @@ RUN --mount=type=secret,id=proxy_ca \
     pip install --no-cache-dir -r requirements.lock.txt
 COPY services/api/khohoc /app/services/api/khohoc
 COPY data/library /app/data/library
+# Read-only curriculum, source mappings and Vietnamese topic labels used at runtime.
+# Copying metadata does not import, approve or publish any database content.
+COPY data/seeds/textbook_units.json data/seeds/source_practice_map.json data/seeds/exams.json data/seeds/language_exams.json data/seeds/curriculum_exams.json data/seeds/subject_exams.json /app/data/seeds/
 ENV PYTHONPATH=/app/services/api PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 RUN useradd --uid 10001 --create-home api \
     && chmod -R a+rX /app/services /app/data

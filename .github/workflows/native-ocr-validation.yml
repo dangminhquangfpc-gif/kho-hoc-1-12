@@ -1,7 +1,7 @@
 name: Native OCR validation
 on:
   push:
-    branches: [feature/native-ocr-ai-activation-20261015, feature/play-prep-without-paid-ai-20261015, feature/native-offline-study-20261015]
+    branches: [feature/native-ocr-ai-activation-20261015, feature/play-prep-without-paid-ai-20261015, feature/native-offline-study-20261015, feature/shared-server-launch-20261015]
   workflow_dispatch:
 permissions:
   contents: read
@@ -31,7 +31,7 @@ jobs:
           packages: platform-tools
           log-accepted-android-sdk-licenses: false
       - name: Install the app compile SDK
-        run: sdkmanager 'platforms;android-36' 'build-tools;35.0.0' 'platform-tools'
+        run: sdkmanager 'platforms;android-34' 'platforms;android-36' 'build-tools;35.0.0' 'platform-tools'
       - run: flutter pub get --enforce-lockfile
       - name: Allow the runner to use its Android emulator accelerator
         run: |
@@ -56,3 +56,4 @@ jobs:
             adb shell svc data disable
             flutter test integration_test/native_ocr_test.dart --no-pub -d emulator-5554
             flutter test integration_test/native_offline_study_test.dart --no-pub -d emulator-5554 --dart-define=API_BASE_URL=https://backend.invalid/api
+            flutter test integration_test/native_secure_session_test.dart --no-pub -d emulator-5554

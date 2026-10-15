@@ -1,5 +1,6 @@
 """Disposable HTTPS/Compose smoke test. Requires built shared image and Flutter web."""
 
+import hashlib
 import json
 from pathlib import Path
 import secrets
@@ -10,6 +11,152 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCKER = ["docker", "--host=unix:///var/run/docker.sock"]
+
+
+def runtime_content_fixture():
+    """Select a small real fixture set; never publish a whole development bank."""
+    from khohoc.content_fixes import QUESTION_REPLACEMENTS
+    from khohoc.library import DocumentInput, is_textbook_lesson
+    from khohoc.schemas import ExamInput, Question
+
+    def read(relative):
+        return json.loads((ROOT / relative).read_text(encoding="utf-8"))
+
+    book = next(
+        book
+        for book in read("data/seeds/textbook_units.json")["books"]
+        if book["grade"] == 5 and book["subject"] == "toan"
+    )
+    guide = next(
+        DocumentInput.model_validate(document).model_dump(mode="json")
+        for document in read("data/library/curriculum_documents.json")["documents"]
+        if document["grade"] == 5
+        and document["subject"] == "toan"
+        and is_textbook_lesson(document)
+    )
+    pairs = read("data/seeds/source_practice_map.json")["papers"]
+    source = next(
+        DocumentInput.model_validate(document).model_dump(mode="json")
+        for document in read("data/library/external_documents.json")["documents"]
+        if document["id"] in pairs
+        and document["grade"] == 5
+        and document["subject"] == "toan"
+    )
+    mapping = pairs[source["id"]]
+    exam = next(
+        ExamInput.model_validate(exam).model_dump(mode="json")
+        for exam in read("data/seeds/source_practice_exams.json")
+        if exam["id"] == mapping["exam_id"]
+    )
+    exam["question_ids"] = [
+        QUESTION_REPLACEMENTS.get(qid, qid) for qid in exam["question_ids"]
+    ]
+    # This topic's display name comes from curriculum_exams.json, not a Python label.
+    topic_exam = next(
+        exam
+        for exam in read("data/seeds/curriculum_exams.json")
+        if exam["id"] == "kntt_math_1_dem_so"
+    )
+    needed = set(exam["question_ids"]) | {topic_exam["question_ids"][0]}
+    questions = {}
+    for filename in (
+        "questions.json",
+        "language_questions.json",
+        "curriculum_questions.json",
+        "subject_questions.json",
+        "practice_questions.json",
+        "extended_practice_questions.json",
+        "multigrade_questions.json",
+        "subject_practice_questions.json",
+        "clean_questions.json",
+    ):
+        for question in read("data/seeds/" + filename)["questions"]:
+            if question["id"] in needed:
+                questions[question["id"]] = Question.model_validate(
+                    question
+                ).model_dump(mode="json")
+    if set(questions) != needed:
+        raise RuntimeError("Runtime smoke fixture is missing source-exam questions")
+    return dict(
+        guide=guide,
+        source=source,
+        mapping=mapping,
+        exam=exam,
+        questions=questions,
+        unit_count=len(book["units"]),
+        topic=dict(
+            grade=topic_exam["grade"],
+            subject=topic_exam["subject"],
+            id=topic_exam["topic"],
+            name=topic_exam["title"].split(" · ")[1],
+        ),
+    )
+
+
+def add_runtime_content(db, fixture):
+    """Only used by disposable smoke databases, never by deployment startup."""
+    from khohoc.library import LibraryDocument
+    from khohoc.models import ContentQuestion, Exam
+
+    for question in fixture["questions"].values():
+        if not db.get(ContentQuestion, question["id"]):
+            db.add(
+                ContentQuestion(
+                    id=question["id"],
+                    payload=question,
+                    fingerprint=hashlib.sha256(question["id"].encode()).hexdigest(),
+                    state="published",
+                    rights_confirmed=True,
+                )
+            )
+    for document in (fixture["guide"], fixture["source"]):
+        db.add(
+            LibraryDocument(
+                id=document["id"],
+                payload=document,
+                fingerprint=hashlib.sha256(document["id"].encode()).hexdigest(),
+                state="published",
+                rights_confirmed=True,
+            )
+        )
+    db.add(Exam(id=fixture["exam"]["id"], state="published", payload=fixture["exam"]))
+
+
+def assert_runtime_resources(request, fixture):
+    """Exercise metadata-dependent endpoints in the actual built API container."""
+    guide, source, mapping = (fixture[key] for key in ("guide", "source", "mapping"))
+    curriculum = request("/curriculum?grade=5&subject=toan")
+    assert curriculum["unit_count"] == fixture["unit_count"]
+    assert curriculum["authored_count"] == 1
+    unit = next(
+        unit for unit in curriculum["units"] if unit["id"] == guide["curriculum_unit_id"]
+    )
+    assert unit["document_id"] == guide["id"]
+    lessons = request("/documents?grade=5&subject=toan&section=lessons")
+    assert [document["id"] for document in lessons] == [guide["id"]]
+    detail = request("/documents/" + guide["id"])
+    assert detail["sections"] == guide["sections"]
+    papers = request("/documents?grade=5&subject=toan&section=exams")
+    assert [paper["id"] for paper in papers] == [source["id"]]
+    assert papers[0]["practice_exam_id"] == mapping["exam_id"]
+    assert papers[0]["title"] == mapping["title"]
+    assert papers[0]["practice_notice"] == mapping["notice"]
+    mapped_detail = request("/documents/" + source["id"])
+    assert mapped_detail["reference_title"] == source["title"]
+    assert mapped_detail["practice_exam_id"] == mapping["exam_id"]
+    exam = request("/exams/" + mapping["exam_id"])
+    assert len(exam["questions"]) == mapping["question_count"]
+    assert [question["id"] for question in exam["questions"]] == fixture["exam"][
+        "question_ids"
+    ]
+    assert all("correct_answer" not in question for question in exam["questions"])
+    topic = fixture["topic"]
+    options = request(
+        f"/practice-options?grade={topic['grade']}&subject={topic['subject']}"
+    )
+    assert next(item for item in options["topics"] if item["id"] == topic["id"])[
+        "name"
+    ] == topic["name"]
 
 
 def main():
@@ -23,6 +170,7 @@ def main():
     project = "tuhoc-smoke-" + secrets.token_hex(4)
     domain = "study.test.edu.vn"
     password = secrets.token_urlsafe(24)
+    runtime_fixture = runtime_content_fixture()
     with tempfile.TemporaryDirectory(prefix="tuhoc-https-") as directory:
         staging = Path(directory)
         subprocess.run(
@@ -90,6 +238,8 @@ def main():
                     ),
                 )
             )
+            db.flush()
+            add_runtime_content(db, runtime_fixture)
             db.commit()
         engine.dispose()
         source.chmod(0o444)
@@ -238,6 +388,7 @@ def main():
                     if time.monotonic() > deadline:
                         raise
                     time.sleep(0.5)
+            assert_runtime_resources(request, runtime_fixture)
             request("/ai/status", status=404)
             for device in [0, 1]:
                 request(
@@ -406,7 +557,7 @@ def main():
                     assert info["HostConfig"]["ReadonlyRootfs"]
                     assert info["Config"]["User"] == "10001:10001"
             print(
-                "PASS: verified local HTTPS, restricted API role, SQLite transfer, two-device drafts/results, isolation, restart persistence, DB outage 503, verified encrypted PostgreSQL restore with revoked sessions and private DB/API ports."
+                "PASS: verified local HTTPS, curriculum/guide/source-exam/topic runtime metadata, restricted API role, SQLite transfer, two-device drafts/results, isolation, restart persistence, DB outage 503, verified encrypted PostgreSQL restore with revoked sessions and private DB/API ports."
             )
         finally:
             subprocess.run(

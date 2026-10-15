@@ -219,7 +219,7 @@ void main() {
         find.text('Không thể tải dữ liệu. Kiểm tra kết nối rồi thử lại.'),
         findsNothing,
       );
-      expect(find.text('Bản thử 2026.10.15.19'), findsOneWidget);
+      expect(find.text('Bản thử 2026.10.15.20'), findsOneWidget);
 
       // Exercise the real catalog selection for both ends of grades 1–12.
       await _chooseGrade(tester, 12);
