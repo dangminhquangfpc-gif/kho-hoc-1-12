@@ -400,3 +400,29 @@ def test_operations_cli_config_failure_is_reported_without_private_diagnostics(
     assert "private database diagnostic" not in capsys.readouterr().out
     assert ops.backup_status(directory) == "failed"
     assert archive.exists()
+
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "postgresql+psycopg://app@external-db.test.edu.vn/tuhoc",
+        "postgresql+psycopg://app@db:5555/tuhoc",
+        "postgresql+psycopg://app@db/tuhoc?host=external-db.test.edu.vn",
+        "postgresql+psycopg://app@db/tuhoc?dbname=another_database",
+    ],
+)
+def test_operations_auto_source_rejects_external_or_ambiguous_database(
+    tmp_path, monkeypatch, url
+):
+    from types import SimpleNamespace
+    import json
+
+    driver = ops.PostgresDocker(compose_file=tmp_path / "compose.yaml")
+    value = {"services": {"api": {"environment": {"KHOHOC_DATABASE_URL": url}}}}
+    monkeypatch.setattr(
+        ops.subprocess,
+        "run",
+        lambda *args, **kwargs: SimpleNamespace(stdout=json.dumps(value).encode()),
+    )
+    with pytest.raises(ValueError):
+        driver.configured_database()

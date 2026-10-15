@@ -203,11 +203,16 @@ class PostgresDocker:
         ]
         url = urlsplit(value)
         database = url.path.removeprefix("/")
-        if url.scheme != "postgresql+psycopg" or not re.fullmatch(
-            r"[a-z_][a-z0-9_]{0,62}", database
+        if (
+            url.scheme != "postgresql+psycopg"
+            or url.hostname != "db"
+            or url.port not in (None, 5432)
+            or not re.fullmatch(r"[a-z_][a-z0-9_]{0,62}", database)
         ):
             raise ValueError("Unsupported API database configuration")
-        if {"dbname", "database", "service"} & set(parse_qs(url.query)):
+        if {"dbname", "database", "service", "host", "hostaddr", "port"} & set(
+            parse_qs(url.query)
+        ):
             raise ValueError("Ambiguous API database configuration")
         return database
 

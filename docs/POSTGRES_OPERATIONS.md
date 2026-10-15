@@ -8,7 +8,9 @@ Internet của người dùng. Không cần bản ZIP Windows mới cho thay đ�
 
 Ví dụ đặt repo ở `/opt/tu-hoc-111`. Docker Compose stack shared phải được cấu hình
 và chạy theo hướng dẫn trước; không dùng database development cho học viên thật.
-Công cụ dùng Docker socket local, không dựa vào Docker context từ xa. Quyền truy
+Công cụ dùng Docker socket local, không dựa vào Docker context từ xa. Bản này
+chỉ hỗ trợ API dùng service PostgreSQL `db:5432` trong cùng Compose; URL trỏ
+sang nhà cung cấp bên ngoài bị từ chối, tránh sao lưu nhầm database local cũ. Quyền truy
 cập Docker tương đương quyền quản trị máy chủ; không cấp quyền này cho học viên.
 
 ```sh
@@ -79,10 +81,12 @@ mới bằng lệnh bảo trì (ví dụ):
 docker compose -f deploy/shared/compose.yaml run --rm -e KHOHOC_DATABASE_URL=postgresql+psycopg://tuhoc_owner@db:5432/recovery_20261015 maintenance python -m khohoc.server_admin grant-runtime --role tuhoc_app
 ```
 
-Đổi đường dẫn database trong URL của service API trong Compose sang tên mới;
+Tạm dừng timer backup trong lúc chuyển database, rồi đổi đường dẫn database
+trong URL của service API trong Compose sang tên mới;
 không đổi mật khẩu/role thành owner. Chạy lại `docker compose ... up -d api`, thử
 đăng nhập và đọc kết quả trên hai thiết bị. Job sao lưu mặc định đọc cấu hình API
-mới. Giữ database cũ để quay lại; không chạy `down -v` hoặc tự xóa database cũ.
+mới. Chỉ bật lại timer sau khi API đã chạy đúng database và backup thủ công đạt.
+Giữ database cũ để quay lại; không chạy `down -v` hoặc tự xóa database cũ.
 Thử khôi phục vào database cách ly hàng tháng và trước nâng cấp lớn.
 
 ## Kích hoạt lịch trên máy chủ của bạn
