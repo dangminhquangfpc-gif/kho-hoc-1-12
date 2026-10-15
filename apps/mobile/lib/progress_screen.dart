@@ -68,7 +68,8 @@ class _ProgressState extends ConsumerState<ProgressScreen> {
         .watch(preferencesProvider)
         .when(
           data: (p) {
-            final account = ref.watch(authUserProvider);
+            final offline = ref.watch(apiProvider).isOffline;
+            final account = offline ? null : ref.watch(authUserProvider);
             final server = account == null
                 ? null
                 : ref.watch(serverResultsProvider);
@@ -97,7 +98,9 @@ class _ProgressState extends ConsumerState<ProgressScreen> {
                   ),
                 const SizedBox(height: 12),
                 Text(
-                  account == null
+                  offline
+                      ? 'Điểm tự luyện chỉ lưu trên thiết bị, không tự đồng bộ hoặc gửi cho giáo viên. Mỗi câu tính lần làm mới nhất; câu cần kiểm tra thủ công chưa được tính điểm.'
+                      : account == null
                       ? 'Thống kê trên thiết bị. Mỗi câu tính lần làm mới nhất; câu chờ duyệt chưa được tính điểm.'
                       : 'Thống kê từ tối đa 500 bài gần nhất trên tài khoản. Mỗi câu tính lần làm mới nhất; đây không phải đánh giá năng lực chính thức.',
                 ),
@@ -112,11 +115,13 @@ class _ProgressState extends ConsumerState<ProgressScreen> {
                         : 'Kết quả trên tài khoản',
                   ),
                 ),
-                OutlinedButton.icon(
-                  onPressed: () => context.go('/create-practice'),
-                  icon: const Icon(Icons.shuffle),
-                  label: const Text('Tạo đề theo chủ đề'),
-                ),
+                if (!offline &&
+                    ['manager', 'teacher'].contains(account?['role']))
+                  OutlinedButton.icon(
+                    onPressed: () => context.go('/create-practice'),
+                    icon: const Icon(Icons.shuffle),
+                    label: const Text('Tạo đề theo chủ đề'),
+                  ),
                 if (error != null)
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 12),

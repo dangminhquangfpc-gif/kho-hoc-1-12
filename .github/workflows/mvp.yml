@@ -10,6 +10,8 @@ jobs:
           python-version: '3.12'
       - run: pip install -r services/api/requirements.lock.txt
       - run: ruff check services/api scripts data/pipelines
+      - run: python scripts/build_offline_bundle.py --check
+      - run: python scripts/build_offline_grading_cases.py --check
       - run: PYTHONPATH=services/api pytest services/api/tests
       - run: pytest scripts/test_demo_ai_launcher.py
       - run: python data/pipelines/import_cli.py data/seeds/questions.json

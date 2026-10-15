@@ -12,6 +12,7 @@ import 'assignments_screen.dart';
 import 'ocr_screen.dart';
 
 final serverResultsProvider = FutureProvider.autoDispose<List<Json>>((ref) {
+  if (ref.watch(apiProvider).isOffline) return Future.value(<Json>[]);
   final user = ref.watch(authUserProvider);
   return user == null
       ? Future.value(<Json>[])
@@ -19,6 +20,7 @@ final serverResultsProvider = FutureProvider.autoDispose<List<Json>>((ref) {
 });
 
 final pendingAttemptsProvider = FutureProvider.autoDispose<List<Json>>((ref) {
+  if (ref.watch(apiProvider).isOffline) return Future.value(<Json>[]);
   final user = ref.watch(authUserProvider);
   return user == null
       ? Future.value(<Json>[])
@@ -197,6 +199,48 @@ class _AccountState extends ConsumerState<AccountScreen> {
   );
   @override
   Widget build(BuildContext context) {
+    if (ref.watch(apiProvider).isOffline) {
+      return Shell(
+        title: 'Tài khoản và lớp học',
+        index: 4,
+        child: ListView(
+          padding: const EdgeInsets.all(24),
+          children: [
+            Text(
+              'Bạn đang học trên thiết bị',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              'Bạn có thể đọc tài liệu, làm đề và xem điểm tự luyện mà không cần đăng ký. Bài làm chỉ lưu trên thiết bị này; không tự đồng bộ hoặc gửi cho giáo viên.',
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              'Đăng nhập, đăng ký, nhóm học và kết quả giáo viên giám sát cần máy chủ HTTPS của lớp học. Tài khoản và kết quả máy chủ trước đây được giữ riêng khi bạn chuyển chế độ.',
+            ),
+            const SizedBox(height: 16),
+            FilledButton.icon(
+              onPressed: () => context.go('/settings'),
+              icon: const Icon(Icons.cloud_outlined),
+              label: const Text('Kết nối máy chủ lớp học'),
+            ),
+            OutlinedButton.icon(
+              onPressed: () => context.go('/exams'),
+              icon: const Icon(Icons.edit_note),
+              label: const Text('Tiếp tục tự luyện'),
+            ),
+            TextButton.icon(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const OcrScreen()),
+              ),
+              icon: const Icon(Icons.document_scanner_outlined),
+              label: const Text('Nhận chữ từ ảnh'),
+            ),
+          ],
+        ),
+      );
+    }
     final user = ref.watch(authUserProvider);
     return Shell(
       title: 'Tài khoản',

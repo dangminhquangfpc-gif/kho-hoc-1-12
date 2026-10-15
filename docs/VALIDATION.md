@@ -1,7 +1,62 @@
 # Kết quả xác minh
 
-Bản hiện hành **.18 / 0.2.0+18**; kết quả mới nhất ở cuối tài liệu. Các mốc
-bên dưới giữ nguyên để đối chiếu, không mô tả tính năng hiện hành.
+Bản mã nguồn hiện hành **.19 / 0.2.0+19**. Kết quả .19 ở ngay dưới;
+các mốc .18 trở về trước được giữ để đối chiếu lịch sử, không mô tả đầy đủ
+hành vi hiện hành. Build đạt không đồng nghĩa đã phát hành APK công khai
+hoặc được Google Play xét duyệt.
+
+## Bản .19 — học trên thiết bị khi chưa có backend
+
+### Đã hoàn tất kiểm tra local
+
+| Phạm vi | Kết quả |
+| --- | --- |
+| Flutter | **229 kiểm thử đạt**, analyzer **không có lỗi** |
+| Gói dữ liệu ngoại tuyến | **6 kiểm thử Python đạt** trong `services/api/tests/test_offline_bundle.py` |
+| Tái tạo dữ liệu | `scripts/build_offline_bundle.py --check` và `scripts/build_offline_grading_cases.py --check` đạt; asset/oracle khớp nguồn hiện tại |
+| Đối chiếu bộ chấm Dart/Python | Toàn bộ **7.886 câu** với đáp án đúng và câu trả lời rỗng khớp oracle backend; thêm **151 trường hợp biên** đạt |
+| Build web | Flutter release build đạt |
+| Build Android | APK debug build đạt; chưa coi là bản đã được Google Play duyệt |
+
+Bộ xuất đọc fixture được chỉ định, không đọc database tài khoản hoặc trạng
+thái người học. Có 7.886 câu đang dùng, 1.461 đề, 2.866 mục tài liệu/nguồn
+và 733 hướng dẫn Toán lớp 1–12. Kiểm thử đối chiếu với publication thật của
+preview, mã câu thay thế, ID đề đúng lớp/môn, quyền phân phối và giấy phép,
+phân loại bài học và tính tái tạo. Các mục nguồn ngoài chỉ có siêu dữ
+liệu/liên kết; gói không chứa toàn bộ PDF Internet.
+
+`apps/mobile/test/offline_grading_parity_test.dart` dùng oracle do Python
+backend tạo, độc lập với bộ chấm Dart. 151 ca biên gồm chuẩn hóa Unicode,
+số/đơn vị, đáp án chọn và trạng thái tự luận; tự luận vẫn **chờ đánh giá
+thủ công**, không tự cho điểm. Điểm ngoại tuyến là kết quả tự luyện, không
+tự gửi vào điểm lớp. Đáp án được đóng gói trong app; không dùng ngân hàng
+này như đề bí mật cho đánh giá có giám sát.
+
+Các kiểm thử repository/UI kiểm tra tạo/nộp/lấy lại/xóa kết quả tự luyện,
+lưu cục bộ, tách bài/lịch sử máy chủ và ngoại tuyến, không mở tài khoản hay
+nhóm trong chế độ ngoại tuyến và giữ điểm tài khoản phía máy chủ riêng.
+Kiểm thử mock/storage này không thay bằng chứng chạy SharedPreferences và
+vòng đời ứng dụng trên Android thật.
+
+### Đang kiểm tra hoặc chưa chạy ở .19
+
+- QA trình duyệt của build .19 đang thực hiện; chưa ghi nhận toàn bộ luồng
+  trình duyệt đạt ở mốc này.
+- AAB engineering .19 đang build/kiểm tra; chưa lấy kết quả AAB .18 làm kết
+  quả .19. Chưa có gói upload ký bằng khóa phát hành của chủ ứng dụng.
+- Workflow GitHub native offline integration, iOS engineering và MVP của
+  source .19 chưa chạy vì chưa đẩy source .19. Bài native ở
+  `apps/mobile/integration_test/native_offline_study_test.dart` đã được
+  chuẩn bị, chưa coi việc có mã kiểm thử là kết quả thực thi.
+- Chưa nghiệm thu cập nhật .18 → .19 trên điện thoại vật lý, hành vi chọn
+  ảnh/quyền hệ điều hành, bộ nhớ thấp, hệ điều hành trang nhớ 16 KB hoặc
+  Windows runtime thật. Chưa công bố kết quả CI/public-download .19 ở đây.
+- Chưa có backend production, tài khoản Play Console, khóa upload hoặc
+  nghiệm thu đầy đủ nội dung/quy trình trẻ em. Native ML Kit vẫn có công bố
+  dữ liệu chẩn đoán; học ngoại tuyến không chứng minh SDK không nối mạng.
+
+Hướng dẫn và giới hạn: [OFFLINE_STUDY.md](OFFLINE_STUDY.md),
+[PHONE_TEST.md](PHONE_TEST.md), [trạng thái cửa hàng](store/RELEASE_STATUS.md).
 
 ## Mốc ban đầu — 14/10/2026
 

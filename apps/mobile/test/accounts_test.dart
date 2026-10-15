@@ -96,12 +96,16 @@ void main() {
     () async {
       SharedPreferences.setMockInitialValues({});
       final p = await SharedPreferences.getInstance();
-      final store = LocalStore(p);
+      var store = LocalStore(p);
       await store.save({'id': 'guest', 'answers': {}});
       await p.setString('active_account_id', 'alice');
       expect(store.current, isNull);
+      store = LocalStore(p);
       await store.save({'id': 'a', 'account_id': 'alice', 'answers': {}});
-      await store.complete({'id': 'a', 'account_id': 'alice'}, {'score': 1});
+      await store.complete(
+        {'id': 'a', 'account_id': 'alice'},
+        {'attempt_id': 'a', 'score': 1},
+      );
       await p.setString('active_account_id', 'bob');
       expect(store.history, isEmpty);
       expect(store.current, isNull);

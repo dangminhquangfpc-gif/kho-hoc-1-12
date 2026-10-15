@@ -95,6 +95,7 @@ def build(artifacts: Path):
         "docs/EVENING_CHECKLIST.md",
         "docs/GROUP_ASSIGNMENTS.md",
         "docs/OCR.md",
+        "docs/OFFLINE_STUDY.md",
         "start-demo.bat",
         "start-demo.sh",
         "LICENSE",
@@ -131,7 +132,7 @@ def build(artifacts: Path):
     (staging / "runtime/provenance.json").write_text(
         json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    guide = """TỰ HỌC 111 — BẢN THỬ .18 — WINDOWS 64-BIT
+    guide = """TỰ HỌC 111 — BẢN THỬ .19 — WINDOWS 64-BIT
 
 CÁCH CHẠY
 1. Giải nén toàn bộ ZIP (Extract All), không chạy trực tiếp trong ZIP.
@@ -160,6 +161,13 @@ Có báo lỗi nội dung, tự xóa tài khoản bằng mật khẩu xác nhậ
 bài đang làm. Các bài khách vẫn gửi tới backend local để chấm điểm.
 Giám sát học viên/đồng bộ giữa nhiều máy cần cùng backend HTTPS; gói này
 chạy backend trên máy Windows, chưa triển khai máy chủ Internet dùng chung.
+
+HỌC NGOẠI TUYẾN
+Trang chủ/Cá nhân có Học trên thiết bị: đọc bài, luyện và lưu điểm từ dữ liệu
+đóng gói mà không gọi máy chủ. Lịch sử tự luyện được giữ riêng, không tự gửi
+cho giáo viên hoặc chuyển thành điểm giám sát. Tài khoản/nhóm vẫn cần máy chủ.
+Đáp án có trong gói phục vụ tự học; đề giám sát cần ngân hàng riêng nếu phải
+giữ bí mật đáp án. Xem docs/OFFLINE_STUDY.md.
 
 OCR MIỄN PHÍ
 Cá nhân > Nhận chữ từ ảnh: chọn ảnh chữ in tiếng Việt/Anh, kiểm tra và sửa,

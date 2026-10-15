@@ -1,22 +1,23 @@
 # Tự học 111 — chuẩn bị Google Play và App Store
 
-Bản mã nguồn 0.2.0+18 / demo .18; các mốc kỹ thuật cũ được giữ bên dưới.
+Bản mã nguồn 0.2.0+19 / demo .19; các mốc kỹ thuật cũ được giữ bên dưới.
 Chưa phát hành lên cửa hàng.
 Người dùng xác nhận chưa có Play Console, Apple Developer hoặc backend HTTPS dùng chung.
 Không tạo tài khoản, thanh toán hoặc đưa backend development chứa dữ liệu học viên ra Internet.
 
-## Bản hiện hành .18
+## Bản hiện hành .19
 
-Theo lựa chọn của chủ ứng dụng, đã gỡ trợ lý AI trả phí, endpoint gọi mô hình,
-công cụ cấu hình khóa và nút AI. Không yêu cầu khóa API; cấu hình AI cũ không
-được launcher/backend sử dụng. OCR miễn phí vẫn giữ nguyên, xem [OCR](../OCR.md).
-Các phần .16/.17 bên dưới là lịch sử, không mô tả bản hiện hành.
+Android/iOS chưa cấu hình backend HTTPS thật mặc định học trên thiết bị:
+dữ liệu tự luyện trong app, đọc/luyện/chấm/lưu lịch sử không cần máy chủ.
+Bài và điểm này lưu riêng, không tự chuyển thành kết quả giáo viên giám sát.
+Tài khoản, nhóm và đồng bộ online vẫn cần backend thật. Không đóng gói PDF
+bên thứ ba; không tăng phạm vi nội dung đã thẩm định. Xem [học ngoại tuyến](../OFFLINE_STUDY.md).
 
-Đã chuẩn bị bộ nhận diện Tự học 111, AAB unsigned engineering và hồ sơ
-Data Safety/reviewer. AAB .18 build đạt, 10 thư viện 64-bit và cấu hình
-đóng gói 16 KB đạt kiểm tra tĩnh; chưa nghiệm thu runtime thiết bị 16 KB. Kết quả xác minh cuối ghi ở [VALIDATION](../VALIDATION.md).
-Không có tài khoản Play Console, khóa upload hay backend HTTPS được triển khai
-trong bước này; không mở khóa production chỉ để vượt kiểm tra phát hành.
+Giữ OCR miễn phí và không có trợ lý AI trả phí. Có bộ nhận diện Tự học 111,
+preflight AAB16KB và hồ sơ Data Safety/reviewer. Kết quả xác minh từng bản
+ở [VALIDATION](../VALIDATION.md); các mốc .16–.18 bên dưới là lịch sử.
+Không có tài khoản Play Console, khóa upload hoặc backend production được
+triển khai trong bước này; không mở khóa production để vượt kiểm tra.
 
 ## Những phần đã chuẩn bị trong mã nguồn
 

@@ -3,11 +3,17 @@
 
 Monorepo MVP phát triển theo docs/PRODUCT_PLAN.md. Ứng dụng QuizApp Firebase cũ ở lib/ và android/ được giữ nguyên; ứng dụng mới ở apps/mobile/. Hướng dẫn cũ được giữ ở docs/LEGACY_QUIZAPP_README.md. Chưa hoàn thành tất cả tiêu chí MVP hoặc sẵn sàng Google Play.
 
-Bản thử hiện tại **2026.10.15.18**: đã tạm gỡ trợ lý AI trả phí, không cần
-khóa API. Giữ OCR miễn phí tiếng Việt/Anh trên web/Windows và Android/iOS;
-kiểm tra/sửa/xác nhận chữ trước khi đưa vào câu trả lời. Có bộ biểu tượng
-Tự học 111 và công cụ kiểm tra AAB engineering/điều kiện Google Play.
-Xem [OCR](docs/OCR.md) và [chuẩn bị Google Play](docs/PLAY_STORE_CHECKLIST.md).
+Bản thử **2026.10.15.19** bổ sung **Học trên thiết bị**: chọn lớp/môn,
+đọc hướng dẫn đã đóng gói, làm đề, nộp và xem kết quả mà không cần backend.
+Android chưa cấu hình máy chủ HTTPS tự chọn chế độ này khi mở lần đầu.
+Bài làm, lịch sử và điểm tự luyện được giữ riêng trên thiết bị, không tự gửi
+cho giáo viên hoặc nhập vào kết quả của tài khoản. Đăng nhập, nhóm học và
+đồng bộ vẫn cần máy chủ HTTPS. Xem [học ngoại tuyến](docs/OFFLINE_STUDY.md).
+
+Không có trợ lý AI trả phí, không cần khóa API. OCR miễn phí vẫn dùng để nhận
+chữ tiếng Việt/Anh, sửa và xác nhận trước khi chèn vào câu trả lời.
+Xem [OCR](docs/OCR.md), [thử Android](docs/PHONE_TEST.md) và
+[chuẩn bị Google Play](docs/PLAY_STORE_CHECKLIST.md).
 Các mục ghi phiên bản cũ bên dưới là lịch sử phát triển.
 
 Bản thử 2026.10.15.6: chọn nhiều chủ đề, bổ sung 731 câu Toán 5, tài khoản học viên và quản lý kết quả trên backend local. Hướng dẫn: [Tài khoản và quản lý học viên](docs/CLASSROOM_ACCOUNTS.md).
@@ -20,7 +26,7 @@ Bản thử 2026.10.15.9: thêm 391 hướng dẫn Toán 6–12 (230 bài đánh
 
 ## Thành phần
 
-- apps/mobile: Flutter, Riverpod, GoRouter, Dio; chọn lớp/môn/đề, làm bài, chấm qua API, đánh dấu câu, lưu bài/lịch sử; kho tài liệu, yêu thích/đọc gần đây và tiến độ cục bộ.
+- apps/mobile: Flutter, Riverpod, GoRouter, Dio; học trên thiết bị với dữ liệu đóng gói hoặc dùng API cho tài khoản/lớp học; chọn lớp/môn/đề, lưu bài/lịch sử, đọc hướng dẫn, nhận chữ từ ảnh và xem tiến độ.
 - services/api: FastAPI, SQLAlchemy, deterministic grader; public DTO không chứa đáp án, guest attempt token, admin import/duyệt/xuất bản.
 - apps/admin: Next.js/TypeScript, auth cục bộ server-side; JSON/CSV import, duyệt, sửa/khôi phục phiên bản và quản lý tài liệu.
 - supabase/migrations: schema đích/RLS; chưa nối Supabase Auth/Storage production.
@@ -73,7 +79,7 @@ cd apps/mobile
 flutter run -d web-server --web-hostname=127.0.0.1 --web-port=8080 --dart-define=API_BASE_URL=http://127.0.0.1:8000
 ```
 
-Android emulator dùng --dart-define=API_BASE_URL=http://10.0.2.2:8000; phải cung cấp đường kết nối từ emulator tới backend. API cloud mặc định bind loopback; emulator/điện thoại khác máy không tự kết nối được. Thiết bị thật cần backend HTTPS được triển khai an toàn sau khi hoàn thiện production auth; không bật public dev token.
+Android emulator dùng --dart-define=API_BASE_URL=http://10.0.2.2:8000; phải cung cấp đường kết nối từ emulator tới backend. API cloud mặc định bind loopback; emulator/điện thoại khác máy không tự kết nối được. Thiết bị thật dùng chế độ Học trên thiết bị mà không cần backend. Đăng nhập, nhóm và đồng bộ cần backend HTTPS được triển khai an toàn sau khi hoàn thiện production auth; không bật public dev token.
 
 ```bash
 flutter analyze
@@ -119,7 +125,7 @@ bash scripts/dev_demo.sh
 
 Mở http://localhost:8080 trong cùng môi trường hoặc qua chức năng xem trước/chuyển tiếp cổng 8080 của công cụ bạn dùng. `localhost` trên máy cá nhân không trỏ tới máy cloud này. Gateway chuyển tiếp API công khai và chặn đường dẫn quản trị; Flutter không gọi cổng 8000 trên máy của người xem. Token admin không được chuyển qua gateway.
 
-Có 5 mục điều hướng: Trang chủ, Tài liệu, Luyện đề, Tiến độ, Cá nhân. PDF mở bằng trình duyệt/ứng dụng PDF, không có renderer PDF tích hợp. Bản thử không cần tài khoản. Xem docs/ROADMAP.md cho phần Supabase/AI/production còn thiếu.
+Có 5 mục điều hướng: Trang chủ, Tài liệu, Luyện đề, Tiến độ, Cá nhân. PDF mở bằng trình duyệt/ứng dụng PDF, không có renderer PDF tích hợp. Bản thử không cần tài khoản. Xem docs/ROADMAP.md cho phần production và nghiệm thu còn thiếu.
 
 ## Windows: localhost phải chạy trên máy bạn
 
@@ -129,16 +135,29 @@ ZIP chứa CPython 3.12.10 64-bit chính thức từ NuGet của Python Software
 
 Nếu cổng bị chiếm, chạy `start-demo.bat --api-port 8011 --port 8091`. Không tự dừng chương trình khác. Bản giải nén đã kiểm tra backend/giao diện/PDF trên Linux với đường dẫn có tiếng Việt và khoảng trắng; Windows runtime/conditional dependencies đã kiểm tra tĩnh, chưa chạy máy Windows thực.
 
-## Demo chạy trên máy Windows của người xem
+## Tải bản thử
 
-Nếu mở localhost:8080 trên máy cá nhân thấy ERR_CONNECTION_REFUSED, máy đó chưa chạy demo; server trong cloud không tự nối tới localhost của người xem. Gói Windows đã đóng sẵn tại `/workspace/artifacts/kho-hoc-demo-windows.zip`. Giải nén toàn bộ và nhấp đúp `start-demo.bat`; trình duyệt chỉ mở sau khi API và giao diện đã sẵn sàng.
+Tải từ [trang Releases của dự án](https://github.com/dangminhquangfpc-gif/kho-hoc-1-12/releases)
+và đọc ghi chú của đúng phiên bản. Chỉ coi bản .19 đã phát hành khi thấy tệp
+đính kèm trong release tương ứng; thay đổi mã nguồn không tự xuất bản APK.
 
-Gói chứa Python Software Foundation 3.12.10 (Windows64-bit), web Flutter đã build, backend thật, dữ liệu/PDF tự biên soạn và44 wheels được xác minh SHA256. Không cần cài Flutter/Node/Supabase hoặc tải dependency khi khởi động trên Windows. Lần đầu tạo venv trong thư mục gói; dữ liệu ở `state/demo.sqlite`. Launcher chỉ nghe loopback, không mở admin, không dùng credential/database production. `uvloop` chỉ dùng ngoài Windows; colorama/tzdata được khóa riêng cho Windows.
+- Android: chọn APK Android ARM64 hoặc ZIP chứa APK, giải nén trước khi cài.
+  Bản .19 dùng cùng mã ứng dụng và chứng thư debug với .18 để cài đè;
+  không cần gỡ app/xóa dữ liệu. Xem [hướng dẫn điện thoại](docs/PHONE_TEST.md).
+- Windows: chọn `tu-hoc-111-demo-windows.zip`, giải nén toàn bộ, chạy
+  `start-demo.bat`. Khi nâng cấp, dừng bản cũ, sao lưu rồi chép nguyên `state`
+  sang bản mới; giữ cùng cổng localhost để trình duyệt thấy lịch sử cũ.
 
-Đóng gói lại: chuẩn bị runtime NuGet chính thức và wheelhouse/provenance tại artifact directory, rồi chạy `python scripts/build_windows_demo.py --artifacts /workspace/artifacts`. Builder kiểm tra hash, PE64, dependency closure và ZIP; không kèm .env, state, SDK hoặc checkout Git.
+Bản thử debug có thể bị Play Protect cảnh báo nhà phát triển mới. Không có
+cam kết loại bỏ cảnh báo bằng đổi tên hoặc đóng gói lại; không tắt bảo vệ
+Play Protect toàn cục để thử app. Bản này chưa được Google Play xét duyệt.
 
-Backend/giao diện và khởi động từ ZIP đã kiểm tra trên Linux, kể cả đường dẫn có dấu/khoảng trắng. Runtime và batch Windows chưa chạy trên máy Windows thực tế.
-
+Đóng gói Windows: chuẩn bị runtime NuGet chính thức và wheelhouse/provenance
+ở thư mục artifact riêng, rồi chạy
+`python scripts/build_windows_demo.py --artifacts <thu-muc-artifact>`. Builder kiểm tra hash, PE64, dependency
+closure và ZIP; không kèm `.env`, `state`, SDK hoặc checkout Git. Backend và
+giao diện đã được kiểm tra trên Linux; batch/runtime Windows cần kiểm tra
+trên máy Windows thực tế trước nghiệm thu.
 
 ## Dữ liệu mở rộng 15/10/2026
 

@@ -47,7 +47,7 @@ class FakeApi extends LearningApi {
       throw StateError('Wrong submitted payload');
     }
     return {
-      'attempt_id': 'attempt',
+      'attempt_id': session['id'] ?? 'attempt',
       'title': 'Đề kiểm thử',
       'score': 1,
       'max_score': 1,

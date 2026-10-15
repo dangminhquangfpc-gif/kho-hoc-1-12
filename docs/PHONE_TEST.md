@@ -1,25 +1,68 @@
-# Thử trên điện thoại Android
+# Thử Tự học 111 trên điện thoại Android
 
-Bản APK mới cho phép nhập URL tại **Cá nhân → Kết nối máy chủ → Kiểm tra và lưu**. Chỉ nhận URL HTTPS gốc; kiểm tra `/health` và danh mục trước khi lưu. Địa chỉ được nhớ khi mở lại app. Không đổi máy chủ khi còn bài đang làm hoặc lịch sử vì token kết quả thuộc máy chủ cũ.
+Bản .19 có **Học trên thiết bị**, dùng được khi chưa có backend. Lỗi Trang
+chủ không tải được dữ liệu trong APK .18 xuất phát từ việc chưa có máy chủ
+HTTPS dùng chung; chờ lâu hoặc bấm Thử lại không tạo ra máy chủ đó.
 
-## Backend dành riêng cho bản thử
+## Cài hoặc cập nhật
 
-`khohoc.phone_preview:create_preview` nạp 108 câu tự biên soạn, 12 đề Toán/Tiếng Việt/Ngữ văn/Tiếng Anh và 4 tài liệu Toán kèm PDF gốc. Tiếng Anh thí điểm lớp 3, 5, 9, 12; các môn còn lại lớp 1, 5, 9, 12. Chỉ mở đường dẫn luyện đề và tài liệu; chặn admin, Swagger và OpenAPI. Token quản trị dùng lúc nạp dữ liệu được hủy trước khi nhận kết nối. Giới hạn toàn bộ máy chủ 120 yêu cầu/phút (1 worker); bài làm vẫn yêu cầu token riêng. Log truy cập tắt.
+Tải APK/ZIP APK từ [Releases của dự án](https://github.com/dangminhquangfpc-gif/kho-hoc-1-12/releases).
+Nếu chọn ZIP, giải nén rồi mở APK bên trong. Chọn đúng release .19 khi tệp
+đã được công bố. Bản Android thử hiện dành cho ARM64, Android 7.0/API 24 trở
+lên; iPhone không cài được APK.
 
-Có `render.yaml` và `deploy/phone-preview.Dockerfile` để triển khai một dịch vụ Docker thử trên Render. Đây là cấu hình chuẩn bị, **chưa có dịch vụ hoặc URL thực tế được tạo**. Cần tài khoản hosting được người dùng kết nối và mã nguồn sẵn có trên hosting trước khi triển khai. TLS do hosting cấp. Không cần đưa token quản trị vào hosting.
+APK .19 giữ mã ứng dụng và chứng thư debug của .18 để **cài đè**, không cần
+gỡ bản cũ hay xóa dữ liệu. Nếu Android báo chữ ký không tương thích, giữ
+nguyên bản đang cài và kiểm tra đúng nguồn/phiên bản trước, không gỡ ngay.
+Chữ ký hợp lệ không thay thế việc kiểm tra bảo mật hoặc Google Play duyệt.
 
-Free tier dùng SQLite tạm: có thể ngủ khi không hoạt động, khởi động đầu chậm, dữ liệu bài làm mất khi dịch vụ tái tạo. Nếu lịch sử trên điện thoại trỏ tới dữ liệu đã mất, xóa bản ghi cục bộ và làm đề mới. Chỉ dùng cá nhân để thử bộ đề mẫu; không dùng cho lớp học thật hoặc dữ liệu cần lưu lâu dài. Không phải backend production/Supabase.
+Samsung Auto Blocker và Play Protect có thể chặn APK cài ngoài cửa hàng.
+Cảnh báo “chưa từng thấy ứng dụng nào của nhà phát triển này” thể hiện
+nguồn phát hành chưa được Google biết đến; không thể bảo đảm cảnh báo biến
+mất chỉ bằng build lại. Không tắt Play Protect toàn cục. Nếu máy báo ứng
+dụng có hại, dừng cài và gửi nguyên văn/ảnh cảnh báo để kiểm tra.
 
-Sau khi triển khai, phải kiểm tra URL HTTPS `/health`, tải đề, nộp bài, lấy/xóa kết quả và xác nhận `/admin/questions` trả 404 từ ngoài hosting. Chưa hoàn tất các kiểm tra này khi chưa có URL.
+## Thử khi chưa có máy chủ
 
-## Trình tự kiểm tra trên máy thật
+1. Mở app, kiểm tra Trang chủ có thẻ **Học trên thiết bị**. Nếu thấy **Học
+   với máy chủ**, chọn **Chuyển sang học trên thiết bị**.
+2. Chọn vài lớp từ 1–12 và môn có đề, mở đề và trả lời vài câu.
+3. Đóng/mở app, tiếp tục bài đã lưu, nộp và xem lời giải. Câu tự luận có
+   trạng thái cần đánh giá thủ công, không được tự chấm điểm.
+4. Vào Tài liệu, mở hướng dẫn Toán ở lớp đã chọn. Liên kết trang ngoài cần
+   mạng; các PDF bên ngoài không nằm sẵn trong gói ngoại tuyến.
+5. Tắt Wi-Fi/dữ liệu di động rồi thử mở đề, nộp và xem lại lịch sử. Bài
+   ngoại tuyến và điểm chỉ lưu trên thiết bị, không xuất hiện ở lớp học.
 
-1. Cài APK debug, nhập URL được cung cấp và kiểm tra kết nối.
-2. Chọn lớp 1/5/9/12, môn Toán, mở đề và trả lời vài câu.
-3. Thoát/mở lại app, tiếp tục bài, nộp và xem giải thích.
-4. Xem lịch sử, xóa kết quả, thử mất mạng rồi kết nối lại.
-5. Ghi lại lỗi kèm mẫu điện thoại/Android; không cần gửi thông tin cá nhân.
+Xem [phạm vi dữ liệu và lưu trữ](OFFLINE_STUDY.md). Không có trợ lý AI trả
+phí hoặc yêu cầu nhập khóa. OCR nhận chữ miễn phí còn hoạt động độc lập.
 
-APK hiện là bản phát triển, chưa ký phát hành và chưa kiểm tra trên điện thoại thật. iPhone không cài được APK.
+## Thử tài khoản, nhóm và đồng bộ
 
-Demo web tại localhost:8080 trong môi trường chạy dùng API cùng cổng qua `/api`. Dùng gateway `bash scripts/dev_demo.sh`; địa chỉ này không phải URL backend công khai cho điện thoại.
+Các chức năng này cần backend HTTPS thật do người quản lý cung cấp. Vào
+**Cá nhân → Kết nối máy chủ → Kiểm tra và lưu**. Chỉ nhận URL HTTPS gốc,
+có thể kết thúc bằng `/api`; kiểm tra `/health` và danh mục trước khi lưu.
+Không nhập `localhost` của máy cloud, IP nội bộ khác mạng hoặc địa chỉ
+`.invalid` như máy chủ hoạt động.
+
+Sau khi kết nối, đăng ký/đăng nhập, tham gia nhóm, làm đề rồi kiểm tra kết
+quả trên thiết bị thứ hai. Chế độ máy chủ chấm qua API, kể cả bài khách;
+điểm tự luyện ngoại tuyến không tự nhập vào kết quả giáo viên theo dõi.
+Bài/lịch sử của hai chế độ được giữ riêng khi chuyển chế độ.
+
+Hiện chưa có backend production công khai của dự án. `render.yaml` và
+`deploy/phone-preview.Dockerfile` chỉ là cấu hình bản xem thử. SQLite tạm
+trên hosting miễn phí có thể mất khi dịch vụ tái tạo; không dùng làm hồ sơ
+lớp học thật. Cấu hình dùng chung PostgreSQL/HTTPS vẫn cần triển khai và
+hoàn tất các điều kiện trong [SHARED_SERVER.md](SHARED_SERVER.md).
+
+## Nhận chữ và ghi nhận lỗi
+
+Vào **Cá nhân → Nhận chữ từ ảnh** hoặc nút **Nhập từ ảnh hoặc văn bản**
+ở câu có ô nhập. Chọn ảnh PNG/JPEG/WebP, sửa chữ nhận được, xác nhận đã kiểm
+tra rồi dùng văn bản. Nhập từ ảnh không tự nộp bài. Kiểm tra hủy chọn ảnh,
+quay lại app và chữ tiếng Việt trên máy thật.
+
+Khi báo lỗi, gửi ảnh màn hình, phiên bản app, mẫu máy/Android và đang ở chế
+độ nào; không gửi mật khẩu hay dữ liệu học sinh thật. Các bài kiểm thử tự
+động/native không thay toàn bộ nghiệm thu trên thiết bị người dùng.
