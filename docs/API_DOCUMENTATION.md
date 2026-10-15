@@ -13,3 +13,6 @@ Khả năng làm khách: token phải được giữ ở thiết bị, server ch
 Admin: Authorization: Bearer token từ cấu hình server. GET /admin/questions; POST /admin/import; POST /admin/questions/{id}/approve?rights_confirmed=true; POST /admin/questions/{id}/publish; POST /admin/exams; POST /admin/exams/{id}/publish. Batch import atomic, duplicate trả 409, schema lỗi trả 422, quyền thiếu trả 403. Chỉ dành development: production mode fail closed.
 
 Đúng/sai: mảng true/false theo thứ tự nhận định. Nhiều đáp án: exact set; đúng/sai chấm từng ý. Numeric chấp nhận phân số/thập phân và đơn vị cấu hình. Tự luận trả null score và needs_manual_review, không bịa điểm.
+
+
+Tạo đề và ôn theo chủ đề local: xem [LOCAL_STUDY_MODULE.md](LOCAL_STUDY_MODULE.md) cho `/practice-options` và `/practice-attempts`.

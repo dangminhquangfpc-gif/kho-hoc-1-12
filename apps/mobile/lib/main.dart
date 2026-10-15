@@ -8,6 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'repository.dart';
 import 'library_screen.dart';
+import 'create_practice_screen.dart';
+import 'progress_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
@@ -39,6 +41,10 @@ final routerProvider = Provider<GoRouter>(
     routes: [
       GoRoute(path: '/', builder: (_, _) => const HomeScreen()),
       GoRoute(path: '/practice', builder: (_, _) => const PracticeScreen()),
+      GoRoute(
+        path: '/create-practice',
+        builder: (_, _) => const CreatePracticeScreen(),
+      ),
       GoRoute(path: '/exams', builder: (_, _) => const HomeScreen(index: 2)),
       GoRoute(
         path: '/source-exams',
@@ -185,7 +191,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 8),
           const Text('Chọn lớp và môn để luyện tập. Không cần tài khoản.'),
-          const Text('Bản thử 2026.10.15.4'),
+          const Text('Bản thử 2026.10.15.5'),
           if (widget.index == 2)
             Card(
               child: ListTile(
@@ -202,6 +208,17 @@ class _HomeState extends ConsumerState<HomeScreen> {
                     queryParameters: {'grade': '$grade', 'subject': subject},
                   ).toString(),
                 ),
+              ),
+            ),
+          if (widget.index == 2)
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.shuffle),
+                title: const Text('Tạo đề theo chủ đề và độ khó'),
+                subtitle: const Text(
+                  'Tối đa 50 câu, chọn ngẫu nhiên từ ngân hàng hiện có',
+                ),
+                onTap: () => context.go('/create-practice'),
               ),
             ),
           const SizedBox(height: 20),
@@ -837,7 +854,7 @@ class ResultView extends StatelessWidget {
         ),
       ),
       FilledButton(
-        onPressed: () => context.go('/'),
+        onPressed: () => context.go('/exams'),
         child: const Text('Về trang luyện đề'),
       ),
     ],
@@ -1060,67 +1077,5 @@ class _BackendSettingsState extends ConsumerState<BackendSettings> {
         Padding(padding: const EdgeInsets.only(top: 12), child: Text(message!)),
       const SizedBox(height: 12),
     ],
-  );
-}
-
-class ProgressScreen extends ConsumerWidget {
-  const ProgressScreen({super.key});
-  @override
-  Widget build(BuildContext context, WidgetRef ref) => Shell(
-    title: 'Tiến độ học tập',
-    index: 3,
-    child: ref
-        .watch(preferencesProvider)
-        .when(
-          data: (p) {
-            final history = LocalStore(p).history;
-            return ListView(
-              padding: const EdgeInsets.all(24),
-              children: [
-                Text(
-                  'Đã hoàn thành ${history.length} bài luyện tập',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  'Thống kê từ bài làm lưu trên thiết bị. Khi xóa kết quả, bài đó được bỏ khỏi thống kê.',
-                ),
-                const SizedBox(height: 16),
-                FilledButton.icon(
-                  onPressed: () => context.go('/history'),
-                  icon: const Icon(Icons.history),
-                  label: const Text('Lịch sử bài làm'),
-                ),
-                if (history.isEmpty)
-                  const Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Text(
-                      'Chưa có kết quả. Hoàn thành một đề để theo dõi tiến độ.',
-                    ),
-                  ),
-                for (final row in history)
-                  Card(
-                    child: ListTile(
-                      title: Text(row['result']['title']),
-                      subtitle: Text(
-                        '${row['result']['score'] ?? 'Chờ duyệt'} / ${row['result']['max_score']}',
-                      ),
-                      trailing:
-                          (row['result']['score'] is num &&
-                              row['result']['max_score'] is num &&
-                              (row['result']['max_score'] as num) > 0)
-                          ? Text(
-                              '${(100 * (row['result']['score'] as num) / (row['result']['max_score'] as num)).round()}%',
-                            )
-                          : null,
-                    ),
-                  ),
-              ],
-            );
-          },
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, _) =>
-              Failure(retry: () => ref.invalidate(preferencesProvider)),
-        ),
   );
 }

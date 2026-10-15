@@ -1,7 +1,7 @@
 name: Publish Windows demo package
 on:
   push:
-    branches: [demo/practice-fix-2026-10-15]
+    branches: [demo/local-study-2026-10-15]
 permissions:
   contents: write
 jobs:
@@ -15,4 +15,4 @@ jobs:
         run: |
           cd demo-package
           sha256sum --check kho-hoc-demo-windows.zip.sha256
-          gh release upload demo-practice-fix-2026-10-15 kho-hoc-demo-windows.zip kho-hoc-demo-windows.zip.sha256 --repo "$GITHUB_REPOSITORY"
+          gh release upload demo-local-study-2026-10-15 kho-hoc-demo-windows.zip kho-hoc-demo-windows.zip.sha256 --repo "$GITHUB_REPOSITORY"

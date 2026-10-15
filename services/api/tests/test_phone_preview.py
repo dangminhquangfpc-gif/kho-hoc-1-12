@@ -53,6 +53,15 @@ def test_phone_preview_seed_private_routes_and_rate_limit(tmp_path, monkeypatch)
         assert partial["authored_count"] == 0 and all(
             u["content_status"] == "missing" for u in partial["units"]
         )
+        options = client.get(
+            "/practice-options", params={"grade": 5, "subject": "toan"}
+        )
+        assert options.status_code == 200 and options.json()["total"] > 400
+        custom = client.post(
+            "/practice-attempts",
+            json={"grade": 5, "subject": "toan", "topic": "add_decimal", "count": 3},
+        )
+        assert custom.status_code == 201 and len(custom.json()["questions"]) == 3
         coverage = client.get("/coverage", params={"grade": 2}).json()
         math = next(row for row in coverage if row["subject"] == "toan")
         assert math["question_count"] == 60 and math["exam_count"] == 7

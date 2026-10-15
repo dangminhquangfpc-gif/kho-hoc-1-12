@@ -79,6 +79,13 @@ class LearningApi {
       )).data!.cast<Json>();
   Future<Json> start(String id) async =>
       (await client.post<Json>('/exams/$id/attempts')).data!;
+  Future<Json> practiceOptions(int grade, String subject) async =>
+      (await client.get<Json>(
+        '/practice-options',
+        queryParameters: {'grade': grade, 'subject': subject},
+      )).data!;
+  Future<Json> createPractice(Json filter) async =>
+      (await client.post<Json>('/practice-attempts', data: filter)).data!;
   Future<Json> submit(Json session) async => (await client.post<Json>(
     '/attempts/${session['id']}/submit',
     data: {'answers': session['answers'] ?? {}},
@@ -88,10 +95,19 @@ class LearningApi {
   /// Open a new server attempt; keep answers only for identical public questions.
   Future<Json> recover(Json previous) async {
     final examId = previous['exam']?['id'];
-    if (examId is! String || examId.isEmpty) {
+    final customFilter = previous['practice_filter'];
+    if (customFilter is! Map && (examId is! String || examId.isEmpty)) {
       throw StateError('Bài cũ thiếu mã đề. Hãy chọn lại đề trong Luyện đề.');
     }
-    final next = await start(examId);
+    final next = customFilter is Map
+        ? await createPractice({
+            ...Map<String, dynamic>.from(customFilter),
+            'question_ids': [
+              for (final q in previous['questions'] as List) q['id'],
+            ],
+            'count': (previous['questions'] as List).length,
+          })
+        : await start(examId as String);
     final oldQuestions = {
       for (final q in (previous['questions'] as List).cast<Json>()) q['id']: q,
     };

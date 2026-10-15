@@ -23,3 +23,26 @@ Bản thử hiện có 1.566 câu, 219 đề và 199 tài liệu; có dữ liệ
 ### Thư viện Internet 15/10/2026
 
 Bổ sung 1.934 mục nguồn Internet, tổng 2.133 tài liệu/liên kết; gồm 1.444 trang đề giữa/cuối kỳ KNTT và 104 mục tốt nghiệp dùng chung. Đây là liên kết nguồn, không phải PDF/câu hỏi của bên thứ ba được sao chép vào app. Chi tiết, quyền sử dụng và phần còn thiếu: `docs/INTERNET_LIBRARY.md`.
+
+
+## Trạng thái hiện hành — bản thử 2026.10.15.5
+
+- Ngân hàng: 1.910 câu, 306 đề cố định; 75 bài Toán 5 đã gắn mục lục nguồn
+  thứ cấp; 1.934 liên kết nguồn Internet. Chưa phủ đủ SGK mọi môn/lớp và
+  chưa thẩm định chuyên môn độc lập.
+- Hoàn tất module local mới: tạo đề 1–50 câu theo lớp/môn/chủ đề/bộ sách/độ
+  khó; snapshot và chấm theo đáp án server; phân tích chủ đề từ lần làm mới
+  nhất; ôn lại câu chưa đúng, tính lại thống kê sau khi sửa/xóa kết quả.
+- Đã sửa khôi phục phiên cũ và cache giao diện ở bản .4. Đề kiểm tra ở Luyện
+  đề; Tài liệu giữ điều kiện gắn đúng bài SGK và đủ phần hướng dẫn/luyện tập.
+- Giai đoạn 1 còn: kiểm thử thiết bị Android thật, hoàn thiện quản trị bộ đề,
+  báo lỗi nội dung/xem xét lại bài, kiểm duyệt sư phạm, chính sách cuối cùng.
+- Giai đoạn 2 chưa hoàn tất: chưa có AI provider, nhận dạng ảnh/OCR, quota,
+  consent và chấm tự luận được tích hợp. Không tự sinh điểm AI giả.
+- Chức năng tạo đề/phân tích local là một phần nền tảng cho giai đoạn 3;
+  chưa có tài khoản giáo viên/phụ huynh, liên kết hoặc đồng bộ tiến độ.
+- Production còn: Supabase Auth/Storage, adapter dữ liệu, JWT/server roles,
+  hạ tầng backup/retention, kiểm thử tải, domain/backend thật, ký AAB và các
+  bước Google Play. Không yêu cầu secret trong chat hoặc tự mua dịch vụ.
+
+Chi tiết module: [LOCAL_STUDY_MODULE.md](LOCAL_STUDY_MODULE.md).

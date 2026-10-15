@@ -16,6 +16,7 @@ from .catalog import subjects_for_grade
 from .grading import grade, normalize
 from .models import Attempt, AuditEvent, Base, ContentQuestion, Exam
 from .schemas import ExamInput, ImportBatch, Question, Submission
+from .practice import create_practice_router, topic_name
 
 
 class Settings(BaseSettings):
@@ -43,6 +44,8 @@ def public_question(payload: dict) -> dict:
             "options",
             "max_score",
         )
+    } | {
+        "topic_name": topic_name(payload["grade"], payload["subject"], payload["topic"])
     }
 
 
@@ -305,28 +308,35 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             "questions": [public_question(q.payload) for q in questions]
         }
 
-    @app.post("/exams/{exam_id}/attempts", status_code=201)
-    def start(exam_id: str, session: Session = Depends(db)):
-        exam, questions = published_exam(session, exam_id)
+    def create_attempt(session, exam_payload, questions, practice_filter=None):
         token = secrets.token_urlsafe(32)
         attempt = Attempt(
             id=str(uuid.uuid4()),
             token_hash=hashlib.sha256(token.encode()).hexdigest(),
-            snapshot={
-                "exam": exam.payload,
-                "questions": [q.payload for q in questions],
-            },
+            snapshot={"exam": exam_payload, "questions": questions},
         )
+        if practice_filter is not None:
+            attempt.snapshot["practice_filter"] = practice_filter
         session.add(attempt)
         session.commit()
-        return {
+        response = {
             "id": attempt.id,
             "token": token,
-            "exam": {k: v for k, v in exam.payload.items() if k != "question_ids"},
-            "questions": [public_question(q.payload) for q in questions],
+            "exam": {k: v for k, v in exam_payload.items() if k != "question_ids"},
+            "questions": [public_question(q) for q in questions],
             "created_at": attempt.created_at.isoformat()
             + ("Z" if attempt.created_at.tzinfo is None else ""),
         }
+        if practice_filter is not None:
+            response["practice_filter"] = practice_filter
+        return response
+
+    app.include_router(create_practice_router(db=db, create_attempt=create_attempt))
+
+    @app.post("/exams/{exam_id}/attempts", status_code=201)
+    def start(exam_id: str, session: Session = Depends(db)):
+        exam, questions = published_exam(session, exam_id)
+        return create_attempt(session, exam.payload, [q.payload for q in questions])
 
     @app.post("/attempts/{attempt_id}/submit")
     def submit(

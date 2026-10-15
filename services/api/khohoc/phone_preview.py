@@ -15,7 +15,7 @@ from .library import DocumentInput
 from .schemas import ExamInput, Question
 
 PUBLIC = re.compile(
-    r"/(?:health|coverage|curriculum|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|"
+    r"/(?:health|coverage|curriculum|practice-options|practice-attempts|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|"
     r"exams/[^/]+/attempts|attempts/[^/]+/(?:submit|result)|attempts/[^/]+|documents|documents/[^/]+|documents/[^/]+/file)"
 )
 

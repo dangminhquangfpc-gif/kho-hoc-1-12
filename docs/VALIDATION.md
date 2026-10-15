@@ -92,3 +92,19 @@ phục phiên không còn trên máy chủ, giữ 8 đáp án và nộp được
 worker cũ và cache tài nguyên được loại bỏ khi mở bản mới; dữ liệu lưu vẫn
 còn. Mở đề Internet từ Luyện đề giữ lớp 5 đã chọn. Playwright chạy Chromium
 thực trên Linux; không thay thế kiểm tra Windows.
+
+Bản thử 2026.10.15.5: 70 kiểm thử backend và 17 kiểm thử Flutter đều qua;
+Flutter analyze sạch, web release build với PWA cache tắt thành công.
+Các kiểm thử mới xác nhận chọn câu theo bộ lọc, không lặp, loại bản nháp,
+không lộ đáp án, snapshot giữ đúng khóa khi nội dung sau đó đổi; ôn câu sai,
+loại lỗi cũ sau khi làm đúng, điểm từng phần, bỏ câu chờ duyệt và tính lại
+sau khi xóa lịch sử. Kiểm thử khôi phục đề tự tạo giữ đúng bộ mã câu cũ.
+
+QA bản .5 trên ZIP đã giải nén, dùng lại DB bản .4: tạo đề theo bộ lọc
+Toán 5/Số tự nhiên gồm 8 câu; nhập/lưu cả 8 đáp án; khôi phục phiên giả lập
+không còn trên server và giữ nguyên thứ tự bộ câu/đáp án; nộp đạt 6/8.
+Tiến độ hiển thị 75% và đề xuất đúng 2 câu chưa đúng. Ôn hai câu đạt 2/2,
+thống kê chủ đề thành 100% trên 8 câu khác nhau, không đếm thành 10 câu.
+Thử bằng Chromium với backend thực trên Linux, chưa chạy Windows/Android
+thiết bị thật. Toàn bộ luồng tạo đề, khôi phục, nộp, ôn lại và cập nhật
+tiến độ đã hoàn tất kiểm tra trên gói giải nén.

@@ -139,3 +139,8 @@ hết hạn/mất trên máy chủ; bỏ cache giao diện ZIP cũ nhưng giữ 
 Thêm 344 câu/87 bộ luyện Toán 5 tự biên soạn, tổng 1 910 câu/306 đề.
 Đề Internet nằm riêng trong Luyện đề; chưa sao chép nguyên PDF nguồn ngoài.
 Chi tiết và giới hạn: [cập nhật luyện đề](docs/PRACTICE_UPDATE.md).
+
+Bản thử 2026.10.15.5 thêm tạo đề theo chủ đề/độ khó/bộ sách (tối đa 50 câu),
+phân tích tiến độ từ lần làm mới nhất của mỗi câu và ôn lại câu chưa đúng.
+Chạy local, không gọi AI hoặc yêu cầu tài khoản. Xem
+[chi tiết module](docs/LOCAL_STUDY_MODULE.md) và [lộ trình còn lại](docs/ROADMAP.md).
