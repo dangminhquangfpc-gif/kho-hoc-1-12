@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,6 +31,8 @@ class SchoolApi extends FakeApi {
   }
 
   @override
+  Future<List<Json>> pendingAttempts() async => [];
+  @override
   Future<List<Json>> accountResults() async => [];
   @override
   Future<List<Json>> classroomStudents() async => [];
@@ -42,6 +45,48 @@ class SchoolApi extends FakeApi {
       for (final s in students)
         {...s, 'temporary_password': 'Synthetic-test-password'},
     ];
+  }
+}
+
+class CloudSchoolApi extends SchoolApi {
+  CloudSchoolApi() {
+    user = {
+      'id': 'cloud-student',
+      'username': 'learner',
+      'display_name': 'Học viên đồng bộ',
+      'role': 'student',
+      'must_change_password': false,
+    };
+  }
+  bool conflict = false;
+  Json? saved;
+  @override
+  Future<List<Json>> pendingAttempts() async => [
+    {'id': 'remote', 'title': 'Bài trên thiết bị khác'},
+  ];
+  @override
+  Future<Json> resumeAttempt(String id) async => {
+    ...await super.start('exam'),
+    'id': id,
+    'account_id': 'cloud-student',
+    'answers': {
+      'q1': ['B'],
+    },
+    'draft_revision': 4,
+  };
+  @override
+  Future<int> saveDraft(Json session) async {
+    if (conflict) {
+      throw DioException(
+        requestOptions: RequestOptions(path: '/draft'),
+        response: Response(
+          statusCode: 409,
+          requestOptions: RequestOptions(path: '/draft'),
+        ),
+      );
+    }
+    saved = session;
+    return (session['draft_revision'] as int) + 1;
   }
 }
 
@@ -150,6 +195,55 @@ void main() {
       expect(find.text('Tài khoản vừa cấp'), findsOneWidget);
       await tester.tap(find.text('Đã lưu'));
       await tester.pumpAndSettle();
+      await tester.pumpWidget(const SizedBox.shrink());
+    },
+  );
+  testWidgets(
+    'Resume cloud draft, sync answer, and preserve local answer on conflict',
+    (tester) async {
+      SharedPreferences.setMockInitialValues({});
+      final api = CloudSchoolApi();
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [apiProvider.overrideWithValue(api)],
+          child: const KhoHocApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Cá nhân').last);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Tài khoản: Học viên đồng bộ'));
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text('Bài trên thiết bị khác'));
+      await tester.tap(find.text('Bài trên thiết bị khác'));
+      await tester.pumpAndSettle();
+      expect(
+        tester
+            .widget<CheckboxListTile>(
+              find.widgetWithText(CheckboxListTile, '6'),
+            )
+            .value,
+        isTrue,
+      );
+      await tester.tap(find.widgetWithText(CheckboxListTile, '5'));
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 1));
+      await tester.pumpAndSettle();
+      expect(api.saved!['answers']['q1'], ['A']);
+      final prefs = await SharedPreferences.getInstance();
+      expect(LocalStore(prefs).current!['draft_revision'], 5);
+      expect(find.text('Đã đồng bộ bài làm lên máy chủ.'), findsOneWidget);
+      api.conflict = true;
+      await tester.tap(find.widgetWithText(CheckboxListTile, '6'));
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 1));
+      await tester.pumpAndSettle();
+      expect(
+        find.textContaining('Bài đã thay đổi hoặc đã nộp trên thiết bị khác'),
+        findsOneWidget,
+      );
+      expect(LocalStore(prefs).current!['answers']['q1'], ['B']);
+      expect(api.saved!['answers']['q1'], ['A']);
       await tester.pumpWidget(const SizedBox.shrink());
     },
   );

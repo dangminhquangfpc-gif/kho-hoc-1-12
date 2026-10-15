@@ -157,3 +157,11 @@ Chạy local, không gọi AI hoặc yêu cầu tài khoản. Xem
 Bản .10 bổ sung vai trò giáo viên/học sinh, nhóm học viên, giao đề cho nhóm, 5.246 câu và 164 đề tự biên soạn. Xem [vai trò và nhóm](docs/TEACHER_GROUPS.md). Các liên kết Internet chưa được chuyển nguyên bản hàng loạt thành đề.
 
 Bản .11 đổi tên Tự học 111, sửa mệnh đề thừa bằng phiên bản câu mới, thêm đề tự biên soạn từ thẻ tham khảo và chuẩn bị Android/iOS. [Trạng thái cửa hàng](docs/store/RELEASE_STATUS.md).
+
+### Máy chủ dùng chung (pilot .12)
+
+Có cấu hình PostgreSQL/Caddy HTTPS, migration offline, chuyển dữ liệu SQLite,
+phân quyền database và đồng bộ bản nháp/kết quả theo tài khoản giữa các thiết bị.
+Xem [hướng dẫn triển khai và kiểm thử](docs/SHARED_SERVER.md). Cấu hình này chưa
+được triển khai lên Internet; gói Windows vẫn chạy local nếu chưa đặt backend
+HTTPS dùng chung. Chế độ phát hành cửa hàng vẫn được khóa.

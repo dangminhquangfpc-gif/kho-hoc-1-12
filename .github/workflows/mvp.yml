@@ -13,6 +13,7 @@ jobs:
       - run: PYTHONPATH=services/api pytest services/api/tests
       - run: python data/pipelines/import_cli.py data/seeds/questions.json
       - run: PYTHONPATH=services/api python data/pipelines/validate_language_seeds.py
+      - run: python scripts/test_shared_postgres.py
       - run: bash scripts/test_rls.sh
   admin:
     runs-on: ubuntu-latest

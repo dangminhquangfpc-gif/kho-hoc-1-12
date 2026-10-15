@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -238,7 +239,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 8),
           const Text('Chọn lớp và môn để luyện tập. Không cần tài khoản.'),
-          const Text('Bản thử 2026.10.15.11'),
+          const Text('Bản thử 2026.10.15.12'),
           if (widget.index == 2 &&
               [
                 'manager',
@@ -451,7 +452,10 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
   bool busy = false;
   bool recoveryAvailable = false;
   String? error;
-  Timer? timer;
+  Timer? timer, syncTimer;
+  Future<void>? syncInFlight;
+  bool syncConflict = false;
+  String syncStatus = 'Bài làm được lưu trên thiết bị.';
   int remaining = 0;
   Future<void> pendingSave = Future.value();
   @override
@@ -503,6 +507,7 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
   @override
   void dispose() {
     timer?.cancel();
+    syncTimer?.cancel();
     super.dispose();
   }
 
@@ -513,6 +518,7 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
         q['id']: values,
       };
       error = null;
+      syncStatus = 'Đang chờ đồng bộ những thay đổi mới.';
     });
     saveCurrent();
   }
@@ -538,7 +544,16 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
     pendingSave = pendingSave
         .then((_) async {
           final p = await ref.read(preferencesProvider.future);
+          if (session?['id'] == snapshot['id']) {
+            snapshot['draft_revision'] = session?['draft_revision'] ?? 0;
+          }
           await LocalStore(p).save(snapshot);
+          if (snapshot['account_id'] != null) {
+            syncTimer?.cancel();
+            syncTimer = Timer(const Duration(milliseconds: 900), () {
+              syncDraft();
+            });
+          }
         })
         .catchError((Object e) {
           if (mounted) {
@@ -548,6 +563,67 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
             );
           }
         });
+  }
+
+  Future<void> syncDraft() async {
+    if (session?['account_id'] == null ||
+        !mounted ||
+        result != null ||
+        syncConflict) {
+      return;
+    }
+    if (syncInFlight != null) {
+      await syncInFlight;
+      return;
+    }
+    final work = _sendDraft();
+    syncInFlight = work;
+    try {
+      await work;
+    } finally {
+      if (identical(syncInFlight, work)) syncInFlight = null;
+    }
+  }
+
+  Future<void> _sendDraft() async {
+    final snapshot = Map<String, dynamic>.from(session!);
+    try {
+      final revision = await ref.read(apiProvider).saveDraft(snapshot);
+      if (!mounted) return;
+      session!['draft_revision'] = revision;
+      final prefs = await ref.read(preferencesProvider.future);
+      await LocalStore(prefs).save(session!);
+      if (mounted) {
+        final unchanged =
+            jsonEncode(snapshot['answers']) == jsonEncode(session!['answers']);
+        setState(
+          () => syncStatus = unchanged
+              ? 'Đã đồng bộ bài làm lên máy chủ.'
+              : 'Đang chờ đồng bộ những thay đổi mới.',
+        );
+        if (!unchanged) {
+          syncTimer?.cancel();
+          syncTimer = Timer(const Duration(milliseconds: 900), () {
+            syncDraft();
+          });
+        }
+      }
+    } on DioException catch (e) {
+      if (!mounted) return;
+      setState(() {
+        syncConflict = e.response?.statusCode == 409;
+        syncStatus = syncConflict
+            ? 'Bài đã thay đổi hoặc đã nộp trên thiết bị khác. Vào Tài khoản để tải lại bài hoặc xem kết quả.'
+            : 'Chưa đồng bộ được. Bài vẫn được giữ trên thiết bị; hãy kết nối lại và bấm Đồng bộ.';
+      });
+    } catch (_) {
+      if (mounted) {
+        setState(
+          () =>
+              syncStatus = 'Chưa đồng bộ được. Bài vẫn được giữ trên thiết bị.',
+        );
+      }
+    }
   }
 
   Future<void> recover() async {
@@ -625,6 +701,11 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
     });
     try {
       await pendingSave;
+      syncTimer?.cancel();
+      if (session?['account_id'] != null) {
+        await syncDraft();
+        if (syncConflict) return;
+      }
       final savedPreferences = await ref.read(preferencesProvider.future);
       await LocalStore(savedPreferences).save(session!);
       final r = await ref.read(apiProvider).submit(session!);
@@ -718,6 +799,19 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
+            if (session!['account_id'] != null) ...[
+              Text(syncStatus),
+              TextButton.icon(
+                onPressed: busy || syncConflict ? null : () => syncDraft(),
+                icon: const Icon(Icons.cloud_sync),
+                label: const Text('Đồng bộ'),
+              ),
+              if (syncConflict)
+                TextButton(
+                  onPressed: () => context.go('/account'),
+                  child: const Text('Mở bản máy chủ và kết quả'),
+                ),
+            ],
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

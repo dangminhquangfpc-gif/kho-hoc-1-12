@@ -121,3 +121,12 @@ __pycache__/
 *.p8
 *.mobileprovision
 **/ExportOptions.private.plist
+
+# Encrypted school backups and separate encryption keys
+*.tuhocbackup
+*.backup-key
+
+# Shared-server private configuration and migration staging
+/deploy/shared/secrets/
+/deploy/shared/private/
+/deploy/shared/.env

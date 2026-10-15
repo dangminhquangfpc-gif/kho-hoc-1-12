@@ -1,0 +1,90 @@
+name: tu-hoc-111
+services:
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: tuhoc
+      POSTGRES_USER: tuhoc_owner
+      POSTGRES_PASSWORD_FILE: /run/secrets/owner_password
+    secrets: [owner_password, app_password]
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/001-app.sql:ro
+    networks: [database]
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -h 127.0.0.1 -U tuhoc_owner -d tuhoc']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    security_opt: [no-new-privileges:true]
+  api:
+    image: tu-hoc-111-api:shared
+    build:
+      context: ../..
+      dockerfile: deploy/shared/api.Dockerfile
+    restart: unless-stopped
+    environment:
+      NO_PROXY: api,db,localhost,127.0.0.1
+      no_proxy: api,db,localhost,127.0.0.1
+      KHOHOC_MODE: shared
+      KHOHOC_DATABASE_URL: postgresql+psycopg://tuhoc_app@db:5432/tuhoc
+      KHOHOC_DATABASE_PASSWORD_FILE: /run/secrets/app_password
+      KHOHOC_PUBLIC_ORIGIN: https://${TUHOC_DOMAIN:?Set TUHOC_DOMAIN}
+      KHOHOC_CORS_ORIGINS: '["https://${TUHOC_DOMAIN}"]'
+    secrets: [app_password]
+    depends_on:
+      db: {condition: service_healthy}
+    networks:
+      database: {}
+      edge: {ipv4_address: 172.29.111.3}
+    read_only: true
+    tmpfs: ["/tmp:mode=1777,size=64m"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+  maintenance:
+    image: tu-hoc-111-api:shared
+    profiles: [maintenance]
+    environment:
+      KHOHOC_DATABASE_URL: postgresql+psycopg://tuhoc_owner@db:5432/tuhoc
+      KHOHOC_DATABASE_PASSWORD_FILE: /run/secrets/owner_password
+    secrets: [owner_password]
+    networks: [database]
+    volumes:
+      - ./private:/maintenance
+    command: [python, -m, khohoc.server_admin, migrate]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+  gateway:
+    image: caddy:2
+    restart: unless-stopped
+    ports: ['80:80', '443:443']
+    environment:
+      NO_PROXY: api,db,localhost,127.0.0.1
+      no_proxy: api,db,localhost,127.0.0.1
+      TUHOC_DOMAIN: ${TUHOC_DOMAIN:?Set TUHOC_DOMAIN}
+      TUHOC_ACME_EMAIL: ${TUHOC_ACME_EMAIL:?Set TUHOC_ACME_EMAIL}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ../../apps/mobile/build/web:/srv/web:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      edge: {ipv4_address: 172.29.111.2}
+    depends_on: [api]
+    security_opt: [no-new-privileges:true]
+secrets:
+  owner_password:
+    file: ./secrets/owner_password
+  app_password:
+    file: ./secrets/app_password
+volumes:
+  postgres_data:
+  caddy_data:
+  caddy_config:
+networks:
+  database:
+    internal: true
+  edge:
+    ipam:
+      config: [{subnet: 172.29.111.0/24}]

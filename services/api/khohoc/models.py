@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from sqlalchemy import JSON, DateTime, Integer, String, Text
+from sqlalchemy import JSON, DateTime, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
@@ -109,3 +109,22 @@ class TeacherExam(Base):
     exam_id: Mapped[str] = mapped_column(String(80), primary_key=True)
     owner_id: Mapped[str] = mapped_column(String(36), index=True)
     group_id: Mapped[str] = mapped_column(String(36), index=True)
+
+
+class RequestBudget(Base):
+    __tablename__ = "request_budgets"
+    key: Mapped[str] = mapped_column(String(64), primary_key=True)
+    count: Mapped[int] = mapped_column(Integer)
+    expires_at: Mapped[int] = mapped_column(Integer, index=True)
+
+
+class AttemptDraft(Base):
+    __tablename__ = "attempt_drafts"
+    attempt_id: Mapped[str] = mapped_column(
+        ForeignKey("local_attempts.id", ondelete="CASCADE"), primary_key=True
+    )
+    answers: Mapped[dict] = mapped_column(JSON)
+    revision: Mapped[int] = mapped_column(Integer, default=1)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+    )

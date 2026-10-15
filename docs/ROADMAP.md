@@ -65,3 +65,27 @@ Sửa đọc mục lục Toán 6–12, thêm 391 hướng dẫn gồm 230 bài �
 ## Bản thử 2026.10.15.10–11 — Tự học 111
 
 Đã có vai trò học sinh/giáo viên, nhóm, giao đề và báo cáo; thêm ngân hàng câu hỏi, sửa mệnh đề thừa bằng phiên bản mới. 991 thẻ nguồn mở đề tự biên soạn cùng lớp/môn; 525 nguồn còn thiếu câu và chưa nhập nguyên văn. Android engineering AAB, khung iOS, tự xóa tài khoản và bản nháp chính sách đã chuẩn bị. Còn tài khoản cửa hàng, backend HTTPS production, thẩm định nội dung/trẻ em, tài sản thương hiệu và kiểm thử thiết bị/ký để phát hành. Xem [trạng thái cửa hàng](store/RELEASE_STATUS.md).
+
+## Bước tiếp theo — phục hồi dữ liệu local
+
+Đã thêm công cụ sao lưu SQLite nhất quán và mã hóa AES-256-GCM, khôi phục vào
+đường dẫn mới, kiểm tra toàn vẹn và từ chối ghi đè. Có kiểm thử dữ liệu WAL,
+sai khóa/tệp bị sửa và đăng nhập học viên từ database khôi phục.
+Xem [hướng dẫn sao lưu](BACKUP_RECOVERY.md). Chưa triển khai backend HTTPS,
+PostgreSQL production, lịch sao lưu hay lưu trữ ngoài máy chủ; không thay đổi
+trạng thái sẵn sàng xuất bản cửa hàng.
+
+## Bản 2026.10.15.12 — pilot máy chủ dùng chung
+
+Đã có PostgreSQL 17, migration baseline offline, chuyển dữ liệu SQLite vào
+PostgreSQL trống (không chuyển session), tài khoản DB hạn chế quyền, cấu hình
+Docker/Caddy HTTPS và rate limit dùng database. Bổ sung danh sách bài đang làm,
+bản nháp theo tài khoản, tiếp tục trên thiết bị khác và kiểm tra revision khi
+lưu/nộp để tránh ghi đè. Mất mạng giữ câu trả lời local; yêu thích/đánh dấu câu
+chưa đồng bộ. Xem [hướng dẫn máy chủ dùng chung](SHARED_SERVER.md).
+
+Đã kiểm thử PostgreSQL thật và HTTPS nội bộ bằng CA được xác minh; chưa có máy
+chủ/tên miền Internet của người dùng được triển khai. `shared` là pilot có kiểm
+soát; chế độ phát hành `production` vẫn bị khóa. Còn sao lưu PostgreSQL tự động,
+giám sát/retention, thẩm định nội dung và quyền riêng tư, kiểm thử thiết bị thật
+và tài khoản/ký cửa hàng. Không coi volume database là bản sao lưu.

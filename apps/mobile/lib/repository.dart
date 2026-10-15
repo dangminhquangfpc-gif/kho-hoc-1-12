@@ -132,6 +132,21 @@ class LearningApi {
       (await client.get<Json>('/classroom/students/$id/results')).data!;
   Future<List<Json>> accountResults() async =>
       (await client.get<List<dynamic>>('/account/results')).data!.cast<Json>();
+  Future<List<Json>> pendingAttempts() async =>
+      (await client.get<List<dynamic>>('/account/attempts')).data!.cast<Json>();
+  Future<Json> resumeAttempt(String id) async =>
+      checkedAttempt((await client.get<Json>('/account/attempts/$id')).data!);
+  Future<int> saveDraft(Json session) async {
+    final response = await client.post<Json>(
+      '/account/attempts/${session['id']}/draft',
+      data: {
+        'revision': session['draft_revision'] ?? 0,
+        'answers': session['answers'] ?? {},
+      },
+    );
+    return response.data!['revision'] as int;
+  }
+
   Future<void> removeStudent(String id) async {
     await client.delete('/classroom/students/$id');
   }
@@ -204,7 +219,11 @@ class LearningApi {
   );
   Future<Json> submit(Json session) async => (await client.post<Json>(
     '/attempts/${session['id']}/submit',
-    data: {'answers': session['answers'] ?? {}},
+    data: {
+      'answers': session['answers'] ?? {},
+      if (session['account_id'] != null)
+        'draft_revision': session['draft_revision'] ?? 0,
+    },
     options: Options(headers: {'X-Attempt-Token': session['token']}),
   )).data!;
 
@@ -305,12 +324,14 @@ String validateBackendUrl(String value) {
       uri.userInfo.isNotEmpty ||
       uri.hasQuery ||
       uri.hasFragment ||
-      (uri.path.isNotEmpty && uri.path != '/')) {
+      !['', '/', '/api', '/api/'].contains(uri.path)) {
     throw const FormatException(
-      'Nhập địa chỉ HTTPS của máy chủ, không kèm đường dẫn hoặc mật khẩu.',
+      'Nhập địa chỉ HTTPS của máy chủ (có thể kết thúc bằng /api), không kèm mật khẩu.',
     );
   }
-  return uri.replace(path: '').toString();
+  return uri
+      .replace(path: uri.path.startsWith('/api') ? '/api' : '')
+      .toString();
 }
 
 final backendUrlProvider = StateProvider<String?>((ref) => null);

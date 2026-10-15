@@ -66,10 +66,14 @@ void main() {
   );
   test('HTTPS endpoint normalization and credential rejection', () {
     expect(validateBackendUrl(' https://example.org/ '), 'https://example.org');
+    expect(
+      validateBackendUrl('https://example.org/api/'),
+      'https://example.org/api',
+    );
     for (final value in [
       'http://example.org',
       'https://user:pass@example.org',
-      'https://example.org/api',
+      'https://example.org/other',
       'https://example.org/?token=secret',
       'invalid',
     ]) {

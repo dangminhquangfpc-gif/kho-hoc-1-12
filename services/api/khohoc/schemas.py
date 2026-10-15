@@ -86,6 +86,7 @@ class ImportBatch(BaseModel):
 
 
 class Submission(BaseModel):
+    draft_revision: int | None = Field(default=None, ge=0, le=2147483646)
     answers: dict[str, list[str]] = Field(max_length=100)
 
 

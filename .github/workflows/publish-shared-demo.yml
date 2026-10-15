@@ -1,0 +1,19 @@
+name: Publish shared pilot Windows demo
+on:
+  push:
+    branches: [feature/shared-postgres-sync-20261015]
+permissions:
+  contents: write
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify and upload Windows pilot
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd demo-package
+          sha256sum --check tu-hoc-111-demo-windows.zip.sha256
+          gh release view demo-tu-hoc-111-2026-10-15-v12 --repo "$GITHUB_REPOSITORY" || gh release create demo-tu-hoc-111-2026-10-15-v12 --draft --target "$GITHUB_SHA" --title 'Tự học 111 · v12 · PostgreSQL và đồng bộ (pilot)' --notes 'Bản thử Windows local. Chuẩn bị PostgreSQL/HTTPS và đồng bộ theo tài khoản; chưa triển khai backend Internet hoặc phát hành cửa hàng.' --repo "$GITHUB_REPOSITORY"
+          gh release upload demo-tu-hoc-111-2026-10-15-v12 tu-hoc-111-demo-windows.zip tu-hoc-111-demo-windows.zip.sha256 --clobber --repo "$GITHUB_REPOSITORY"
