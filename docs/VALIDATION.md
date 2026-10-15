@@ -5,6 +5,11 @@ các mốc .18 trở về trước được giữ để đối chiếu lịch s�
 hành vi hiện hành. Build đạt không đồng nghĩa đã phát hành APK công khai
 hoặc được Google Play xét duyệt.
 
+Các kết quả dưới đây là checkpoint khi tạo commit; kết quả chạy tiếp theo
+và kiểm tra tải xuống của bản .19 được cập nhật trong
+[PR #9](https://github.com/dangminhquangfpc-gif/kho-hoc-1-12/pull/9) và
+[ghi chú phát hành .19](https://github.com/dangminhquangfpc-gif/kho-hoc-1-12/releases/tag/demo-tu-hoc-111-2026-10-15-v19).
+
 ## Bản .19 — học trên thiết bị khi chưa có backend
 
 ### Đã hoàn tất kiểm tra local
@@ -59,14 +64,20 @@ vòng đời ứng dụng trên Android thật.
 - Native OCR thật đạt khi tắt Wi-Fi/dữ liệu. Kiểm thử học ngoại tuyến thật
   đã qua mở lần đầu, lớp 12, lưu/mở lại/nộp 1/13 và tiến độ; sau đó thất bại
   do finder chỉ khớp runtime type `FilledButton`, trong khi nút Lịch sử
-  dùng `FilledButton.icon`. Đã sửa finder trong kiểm thử và thêm chờ chuyển
-  màn hình; **đang chạy lại**, chưa coi lịch sử/hướng dẫn native là đã đạt.
+  dùng `FilledButton.icon`. Lượt sau gặp race khi danh sách kết quả tìm
+  kiếm thay thế widget giữa chờ và chạm. Đã sửa finder, nút Quay lại theo
+  ngôn ngữ và điều kiện chờ/kiểm tra lại widget sau thao tác bất đồng bộ;
+  **đang chạy lại**, chưa coi lịch sử/hướng dẫn native là đã đạt.
 
 ### Chưa nghiệm thu/phát hành production
 
 - Chưa nghiệm thu cập nhật .18 → .19 trên điện thoại vật lý, hành vi chọn
   ảnh/quyền hệ điều hành, bộ nhớ thấp, hệ điều hành trang nhớ 16 KB hoặc
-  Windows runtime thật. Tải xuống công khai .19 đang chờ kiểm tra cuối.
+  Windows runtime thật.
+- Đã phát hành thử .19: tải lại ZIP 64.543.641 byte và APK 116.811.795 byte
+  qua URL công khai, không gửi Authorization header; CRC/SHA256 khớp tệp
+  gốc. ZIP giải nén ra đúng APK đã ký. Đây là kiểm tra tải tệp, không phải
+  nghiệm thu cài đặt trên điện thoại.
 - Chưa có backend production, tài khoản Play Console, khóa upload hoặc
   nghiệm thu đầy đủ nội dung/quy trình trẻ em. Native ML Kit vẫn có công bố
   dữ liệu chẩn đoán; học ngoại tuyến không chứng minh SDK không nối mạng.
