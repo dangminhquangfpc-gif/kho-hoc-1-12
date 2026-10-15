@@ -71,7 +71,7 @@ Android emulator dùng --dart-define=API_BASE_URL=http://10.0.2.2:8000; phải c
 ```bash
 flutter analyze
 flutter test
-flutter build web --no-wasm-dry-run --no-web-resources-cdn --dart-define=API_BASE_URL=/api
+flutter build web --pwa-strategy=none --no-wasm-dry-run --no-web-resources-cdn --dart-define=API_BASE_URL=/api
 flutter build apk --debug
 ```
 
