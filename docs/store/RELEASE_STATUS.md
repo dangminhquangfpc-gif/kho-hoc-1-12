@@ -11,7 +11,8 @@ Không tạo tài khoản, thanh toán hoặc đưa backend development chứa d
 - Android compile/target API 36; cấu hình ký upload dùng android/key.properties ngoài Git, không dùng khóa debug cho release.
 - Khung iOS, Podfile, privacy manifest cho UserDefaults (CA92.1), không bật tracking.
 - Native OCR có chọn ảnh từ thư viện bằng image_picker 1.2.2 và Google ML Kit Latin
-  qua google_mlkit_text_recognition 0.15.0; iOS tối thiểu 15.5. Chưa có camera/cắt ảnh.
+  qua google_mlkit_text_recognition 0.15.0; ứng dụng yêu cầu Android 7.0/API 24
+  hoặc iOS 15.5 trở lên. Chưa có camera/cắt ảnh.
   SDK xử lý ảnh trên thiết bị nhưng có dữ liệu chẩn đoán/định danh cần khai cửa hàng.
 - Tài khoản tự đăng ký có thể xóa trong ứng dụng sau khi xác nhận mật khẩu.
   Xóa tài khoản giáo viên giữ tài khoản/kết quả học sinh cho quản lý hệ thống;

@@ -5,6 +5,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: native-ocr-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   android-ocr:
     runs-on: ubuntu-latest
@@ -24,6 +27,9 @@ jobs:
           channel: stable
           cache: true
       - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
       - name: Install the app compile SDK
         run: sdkmanager 'platforms;android-36' 'build-tools;35.0.0' 'platform-tools'
       - run: flutter pub get --enforce-lockfile

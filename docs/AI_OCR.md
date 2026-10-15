@@ -51,8 +51,9 @@ tạo tài sản từ tarball đã ghim nằm trong `apps/mobile/web/ocr/README.
 
 Ứng dụng chọn một ảnh từ thư viện bằng `image_picker` 1.2.2 rồi nhận chữ bằng
 `google_mlkit_text_recognition` 0.15.0, bộ Latin của Google ML Kit. Phần native
-dùng Text Recognition Android 16.0.1/iOS 7, iOS yêu cầu tối thiểu 15.5. Model
-được đưa vào ứng dụng; đây không phải luồng OCR chạy trong trình duyệt.
+dùng Text Recognition Android 16.0.1/iOS 7. Ứng dụng yêu cầu Android tối thiểu
+7.0 (API 24) theo Flutter 3.35.7 và iOS tối thiểu 15.5. Model được đưa vào
+ứng dụng; đây không phải luồng OCR chạy trong trình duyệt.
 Chưa có nút chụp camera hay yêu cầu quyền camera trong luồng OCR này.
 Ảnh HEIC/HEIF chưa được nhận trực tiếp; nếu bộ chọn ảnh không xuất thành JPEG,
 cần đổi ảnh sang JPEG hoặc PNG trước khi dùng.

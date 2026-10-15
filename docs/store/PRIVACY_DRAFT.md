@@ -38,6 +38,7 @@ theo quy tắc bài làm thông thường.
 
 Bản native Android/iOS .17 có chọn ảnh từ thư viện bằng image_picker và nhận
 chữ trên thiết bị bằng Google ML Kit, không có nút chụp camera trong luồng này.
+Ứng dụng yêu cầu Android 7.0/API 24 hoặc iOS 15.5 trở lên.
 Ứng dụng kiểm tra và vẽ lại ảnh để bỏ EXIF/GPS rồi dùng một bản PNG tạm riêng;
 bản tạm được dọn sau xử lý, ảnh gốc trong thư viện không bị xóa. Nếu hệ điều
 hành dừng ứng dụng đột ngột, bản cache có thể còn tới khi hệ điều hành dọn.

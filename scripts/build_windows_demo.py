@@ -87,6 +87,7 @@ def build(artifacts: Path):
         "services/api/requirements.lock.txt",
         "scripts/serve_demo.py",
         "scripts/run_local_demo.py",
+        "scripts/configure_ai.py",
         "scripts/backup_local.py",
         "docs/BACKUP_RECOVERY.md",
         "docs/SHARED_SERVER.md",
@@ -95,7 +96,9 @@ def build(artifacts: Path):
         "docs/EVENING_CHECKLIST.md",
         "docs/GROUP_ASSIGNMENTS.md",
         "docs/AI_OCR.md",
+        "docs/AI_ACTIVATION.md",
         "start-demo.bat",
+        "configure-ai.bat",
         "start-demo.sh",
         "LICENSE",
         "data/library/documents.json",
@@ -167,7 +170,7 @@ def build(artifacts: Path):
         "Có 108 câu/12 đề và 4 tài liệu",
         f"Có {question_count} bản ghi câu hỏi (gồm câu cũ đã rút/thay thế)/{exam_count} đề và {document_count} tài liệu/liên kết",
     )
-    guide += "\nBản thử 2026.10.15.16. Nếu bài lưu quá hạn hoặc thuộc máy chủ cũ, dùng Khôi phục bài đã lưu; app chỉ giữ đáp án cho câu không đổi. Đã tránh cache giao diện của bản ZIP cũ, không xóa bài làm trong trình duyệt.\n"
+    guide += "\nBản thử 2026.10.15.17. Nếu bài lưu quá hạn hoặc thuộc máy chủ cũ, dùng Khôi phục bài đã lưu; app chỉ giữ đáp án cho câu không đổi. Đã tránh cache giao diện của bản ZIP cũ, không xóa bài làm trong trình duyệt.\n"
     guide += "\nMới: Luyện đề > Tạo đề theo chủ đề và độ khó (1–50 câu tùy ngân hàng); Tiến độ > Ôn các câu chưa đúng. Thống kê chủ đề chỉ tính lần làm mới nhất của mỗi câu, không phải đánh giá năng lực chính thức. Có thể luyện khách hoặc đăng nhập để lưu kết quả tập trung; AI cần cấu hình dịch vụ thật như hướng dẫn AI_OCR.md.\n"
     guide += "\nTài liệu chỉ hiển thị bài gắn đúng mục lục SGK. Đề kiểm tra Internet ở Luyện đề > Đề giữa kỳ, cuối kỳ và tốt nghiệp từ Internet. 87 bộ luyện Toán 5 mới dùng 344 câu tự biên soạn; các bộ ôn tổng hợp dùng lại câu của bộ luyện theo bài. Chưa chuyển nguyên đề PDF của nguồn Internet vào app.\n"
     guide += "\nTài liệu Internet được liên kết tới trang nguồn, cần mạng để mở. Có bộ lọc giữa/cuối kỳ và năm đề tốt nghiệp; đề quốc gia dùng chung các bộ sách.\n"
@@ -184,8 +187,9 @@ def build(artifacts: Path):
     guide += "\nBản .14: Báo lỗi nội dung trong câu hỏi và tài liệu; theo dõi ở Cá nhân > Tài khoản > Phản hồi của tôi. Giáo viên/quản lý có Xử lý phản hồi nội dung; trả lời không sửa điểm cũ. Có CSV bảng điểm theo nhóm. Đọc docs/EVENING_CHECKLIST.md để kiểm tra toàn bộ và docs/CONTENT_REPORTS.md để xem quyền, cách nâng cấp schema.\n"
     guide += "\nBản .15: nhóm có Bài giao và tiến độ > Giao đề có sẵn; học sinh mở Bài được giao ở Tài khoản. Có trạng thái chưa nộp/đang làm/đã nộp và CSV từng đề; điểm lấy lần nộp gần nhất. Giữ bài chưa đồng bộ khi mở đề khác. Xem docs/GROUP_ASSIGNMENTS.md.\n"
     guide += "\nBản .16: Ảnh và trợ lý học tập có OCR tiếng Việt local, xem ảnh/sửa chữ/xác nhận trước khi dùng. Có nút nhập OCR ở câu trả lời dạng gõ. AI mặc định tắt vì chưa có dịch vụ; chỉ gửi văn bản sau xác nhận, không gửi ảnh. Xem docs/AI_OCR.md; OCR ảnh hiện chạy web/Windows, chưa native Android/iOS.\n"
+    guide += "\nBản .17: cấu hình AI thật bằng configure-ai.bat, nhập khóa ẩn và khởi động lại demo. Khóa phải do người vận hành cung cấp, gói không có khóa dùng chung; lưu cấu hình không tự xác minh kết nối hay thanh toán. Đọc docs/AI_ACTIVATION.md. Có tích hợp OCR native Android/iOS bằng ML Kit, chọn ảnh từ thư viện; OCR web/Windows tiếp tục dùng Tesseract. Gói Windows không phải APK/IPA. Native cần kiểm thử nền tảng và thiết bị như trạng thái phát hành; ML Kit có thể thu thập dữ liệu chẩn đoán SDK.\n"
     (staging / "HUONG-DAN.txt").write_text(guide, encoding="utf-8-sig")
-    for bat in [staging / "start-demo.bat"]:
+    for bat in [staging / "start-demo.bat", staging / "configure-ai.bat"]:
         content = (
             bat.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\n", "\r\n")
         )

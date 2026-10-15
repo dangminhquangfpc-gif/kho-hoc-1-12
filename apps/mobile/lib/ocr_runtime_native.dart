@@ -2,9 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math' as math;
+import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:flutter/services.dart';
+import 'package:flutter/services.dart' show PlatformException;
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -173,9 +174,19 @@ class NativeOcrPlatform {
     final size = await input.length();
     check();
     if (size < 1 || size > maxOcrImageBytes) {
-      throw const FormatException('Chọn ảnh có dung lượng từ 1 byte đến 8 MiB.');
+      throw const FormatException(
+        'Chọn ảnh có dung lượng từ 1 byte đến 8 MiB.',
+      );
     }
-    final bytes = await input.readAsBytes();
+    // Bound the stream as well as stat(): a changed picker file must never
+    // allocate beyond the input limit between the size check and the read.
+    final collected = await input
+        .openRead(0, maxOcrImageBytes + 1)
+        .fold(
+          BytesBuilder(copy: false),
+          (builder, chunk) => builder..add(chunk),
+        );
+    final bytes = collected.takeBytes();
     check();
     final header = validateOcrImage(bytes);
     final temporary = await temporaryDirectory();
