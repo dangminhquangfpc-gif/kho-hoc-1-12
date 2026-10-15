@@ -88,7 +88,7 @@ class _LibraryState extends ConsumerState<LibraryScreen> {
     final recent = prefs?.getStringList('recent_documents') ?? [];
     return Shell(
       title: widget.examMode
-          ? 'Đề kiểm tra từ nguồn Internet'
+          ? 'Liên kết đề tham khảo từ Internet'
           : 'Bài học và bài tập',
       index: widget.examMode ? 2 : 1,
       child: ListView(

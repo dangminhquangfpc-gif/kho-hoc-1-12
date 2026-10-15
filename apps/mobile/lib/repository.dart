@@ -48,6 +48,7 @@ class LearningApi {
     String password, {
     String? displayName,
     int? grade,
+    String role = 'student',
   }) async {
     if (kIsWeb) {
       final target = Uri.base.resolve(client.options.baseUrl);
@@ -65,6 +66,7 @@ class LearningApi {
         'password': password,
         'mobile': !kIsWeb,
         if (displayName != null) 'display_name': displayName.trim(),
+        if (displayName != null) 'role': role,
         if (grade != null) 'grade': grade,
       },
     )).data!;
@@ -84,6 +86,31 @@ class LearningApi {
         '/auth/password',
         data: {'current_password': current, 'new_password': next},
       )).data!;
+  Future<List<Json>> classroomGroups() async =>
+      (await client.get<List<dynamic>>('/classroom/groups')).data!.cast<Json>();
+  Future<void> createGroup(String name) async {
+    await client.post('/classroom/groups', data: {'name': name});
+  }
+
+  Future<void> joinGroup(String code) async {
+    await client.post('/classroom/groups/join', data: {'code': code.trim()});
+  }
+
+  Future<void> addGroupMember(String id, String username) async {
+    await client.post(
+      '/classroom/groups/$id/members',
+      data: {'username': username.trim()},
+    );
+  }
+
+  Future<void> removeGroupMember(String id, String userId) async {
+    await client.delete('/classroom/groups/$id/members/$userId');
+  }
+
+  Future<void> deleteGroup(String id) async {
+    await client.delete('/classroom/groups/$id');
+  }
+
   Future<List<Json>> classroomStudents() async =>
       (await client.get<List<dynamic>>(
         '/classroom/students',

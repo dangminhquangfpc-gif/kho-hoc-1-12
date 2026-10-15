@@ -15,7 +15,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from .catalog import subjects_for_grade
-from .models import ContentQuestion
+from .models import ContentQuestion, LearningRecord, Exam, TeacherExam, ClassroomGroup
 from .content_fixes import QUESTION_REPLACEMENTS
 
 MATH_TOPICS = {
@@ -66,6 +66,13 @@ MATH_TOPICS = {
 
 
 LOCALIZED_TOPICS = {
+    "toc_do": "Tốc độ",
+    "khoi_luong_rieng": "Khối lượng riêng",
+    "dinh_luat_ohm": "Định luật Ohm",
+    "dinh_luat_newton": "Định luật Newton",
+    "cong_dien": "Công của lực điện",
+    "dinh_luat_boyle": "Định luật Boyle",
+    "do_khoi_luong": "Đo và đổi đơn vị khối lượng",
     "am_van": "Âm và vần",
     "bai_toan": "Bài toán",
     "bien_phap_tu_tu": "Biện pháp tu từ",
@@ -150,6 +157,13 @@ MATH5_ALIASES = {
 
 
 def canonical_topic(grade, subject, topic):
+    if grade == 1 and subject == "toan":
+        topic = {
+            "cau_tao_so": "chuc_don_vi",
+            "phep_cong": "cong_trong_20",
+            "phep_tru": "tru_trong_20",
+            "so_tu_nhien": "dem_so",
+        }.get(topic, topic)
     if subject == "tieng_anh":
         topic = topic.replace(" ", "_").lower()
         if topic == "be_verb":
@@ -219,6 +233,7 @@ class PracticeInput(BaseModel):
         | None
     ) = None
     difficulty: Literal["easy", "medium", "hard"] | None = None
+    group_id: str | None = Field(default=None, min_length=1, max_length=36)
     question_ids: list[str] | None = Field(default=None, min_length=1, max_length=50)
 
     @model_validator(mode="after")
@@ -308,7 +323,36 @@ def create_practice_router(*, db, create_attempt, accounts):
 
     @router.post("/practice-attempts", status_code=201)
     def start(body: PracticeInput, request: Request, session: Session = Depends(db)):
-        user = accounts.optional_user(request, session)
+        user = accounts.required(request, session)
+        if user.role not in {"teacher", "manager"}:
+            if body.question_ids is None:
+                raise HTTPException(
+                    403, "Học sinh làm đề có sẵn; chỉ giáo viên được tạo đề."
+                )
+            # Explicit IDs are only a student's own previously missed questions.
+            # This must not become a way to bypass the teacher-only generator.
+            eligible = set()
+            for record in session.scalars(
+                select(LearningRecord).where(LearningRecord.user_id == user.id)
+            ):
+                for detail in record.payload.get("result", {}).get("details", []):
+                    if (
+                        detail.get("score") is not None
+                        and detail["score"] < detail["max_score"]
+                    ):
+                        eligible.add(detail["question_id"])
+            if not set(body.question_ids).issubset(eligible):
+                raise HTTPException(
+                    403, "Chỉ được ôn lại câu chưa đúng trong kết quả của chính bạn."
+                )
+        if body.group_id:
+            group = session.get(ClassroomGroup, body.group_id)
+            if (
+                user.role not in {"teacher", "manager"}
+                or not group
+                or group.owner_id != user.id
+            ):
+                raise HTTPException(404, "Không tìm thấy nhóm của bạn.")
         requested_topics = list(
             dict.fromkeys(
                 canonical_topic(body.grade, body.subject, t)
@@ -392,6 +436,15 @@ def create_practice_router(*, db, create_attempt, accounts):
             duration_minutes=min(120, max(10, body.count * 2)),
             question_ids=[q["id"] for q in selected],
         )
+        if body.group_id and body.question_ids is None:
+            exam["title"] = (
+                f"{subject_name} {body.grade} · Đề của {user.display_name} · {group.name}"
+            )
+            session.add(Exam(id=exam["id"], payload=exam, state="published"))
+            session.add(
+                TeacherExam(exam_id=exam["id"], owner_id=user.id, group_id=group.id)
+            )
+            # The following create_attempt commits the exam and attempt atomically.
         return create_attempt(
             session,
             exam,

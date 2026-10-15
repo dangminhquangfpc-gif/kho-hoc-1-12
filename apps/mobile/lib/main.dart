@@ -41,7 +41,12 @@ final routerProvider = Provider<GoRouter>(
   (ref) => GoRouter(
     redirect: (_, state) {
       final user = ref.read(authUserProvider);
-      if (state.uri.path == '/classroom' && user?['role'] != 'manager') {
+      if (state.uri.path == '/classroom' &&
+          !['manager', 'teacher'].contains(user?['role'])) {
+        return '/account';
+      }
+      if (state.uri.path == '/create-practice' &&
+          !['manager', 'teacher'].contains(user?['role'])) {
         return '/account';
       }
       if (user?['must_change_password'] == true &&
@@ -233,26 +238,12 @@ class _HomeState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 8),
           const Text('Chọn lớp và môn để luyện tập. Không cần tài khoản.'),
-          const Text('Bản thử 2026.10.15.9'),
-          if (widget.index == 2)
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.public),
-                title: const Text(
-                  'Đề giữa kỳ, cuối kỳ và tốt nghiệp từ Internet',
-                ),
-                subtitle: const Text(
-                  'Lọc theo lớp, môn, đợt kiểm tra và năm đề',
-                ),
-                onTap: () => context.go(
-                  Uri(
-                    path: '/source-exams',
-                    queryParameters: {'grade': '$grade', 'subject': subject},
-                  ).toString(),
-                ),
-              ),
-            ),
-          if (widget.index == 2)
+          const Text('Bản thử 2026.10.15.10'),
+          if (widget.index == 2 &&
+              [
+                'manager',
+                'teacher',
+              ].contains(ref.watch(authUserProvider)?['role']))
             Card(
               child: ListTile(
                 leading: const Icon(Icons.shuffle),
@@ -343,7 +334,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Text(
-                  '${row["question_count"]} câu · ${row["exam_count"]} đề làm trực tiếp · ${row["external_paper_count"] ?? 0} đề từ nguồn Internet',
+                  '${row["question_count"]} câu · ${row["exam_count"]} đề làm trực tiếp · ${row["external_paper_count"] ?? 0} liên kết tham khảo Internet',
                 ),
               );
             },
@@ -396,6 +387,22 @@ class _HomeState extends ConsumerState<HomeScreen> {
             error: (_, _) =>
                 Failure(retry: () => ref.invalidate(examsProvider(filter))),
           ),
+          if (widget.index == 2)
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.public),
+                title: const Text('Liên kết đề tham khảo trên Internet'),
+                subtitle: const Text(
+                  'Lọc theo lớp, môn, đợt kiểm tra và năm đề',
+                ),
+                onTap: () => context.go(
+                  Uri(
+                    path: '/source-exams',
+                    queryParameters: {'grade': '$grade', 'subject': subject},
+                  ).toString(),
+                ),
+              ),
+            ),
         ],
       ),
     );

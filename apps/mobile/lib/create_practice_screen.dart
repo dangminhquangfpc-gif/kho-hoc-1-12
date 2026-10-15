@@ -22,6 +22,10 @@ class _CreatePracticeState extends ConsumerState<CreatePracticeScreen> {
   String subject = 'toan', difficulty = '', textbook = 'ket_noi_tri_thuc';
   final topics = <String>{};
   bool busy = false;
+  String? groupId;
+  late final Future<List<Json>> groups = ref
+      .read(apiProvider)
+      .classroomGroups();
   String? error;
 
   Future<void> start(int count) async {
@@ -39,6 +43,7 @@ class _CreatePracticeState extends ConsumerState<CreatePracticeScreen> {
         'grade': grade,
         'subject': subject,
         'count': count,
+        if (groupId != null) 'group_id': groupId,
         if (topics.isNotEmpty) 'topics': topics.toList(),
         if (difficulty.isNotEmpty) 'difficulty': difficulty,
         if (textbook.isNotEmpty) 'textbook': textbook,
@@ -77,6 +82,40 @@ class _CreatePracticeState extends ConsumerState<CreatePracticeScreen> {
       child: ListView(
         padding: const EdgeInsets.all(24),
         children: [
+          FutureBuilder<List<Json>>(
+            future: groups,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return const Text(
+                  'Chưa tải được nhóm; bạn vẫn có thể tạo đề luyện riêng.',
+                );
+              }
+              final list = snapshot.data ?? <Json>[];
+              return DropdownButtonFormField<String>(
+                isExpanded: true,
+                initialValue: groupId ?? '',
+                decoration: const InputDecoration(labelText: 'Nơi lưu đề'),
+                items: [
+                  const DropdownMenuItem(
+                    value: '',
+                    child: Text('Luyện riêng — không giao cho nhóm'),
+                  ),
+                  for (final g in list)
+                    DropdownMenuItem(
+                      value: g['id'] as String,
+                      child: Text('Lưu đề cho nhóm: ${g['name']}'),
+                    ),
+                ],
+                onChanged: busy
+                    ? null
+                    : (v) => setState(() => groupId = v == '' ? null : v),
+              );
+            },
+          ),
+          const Text(
+            'Nếu chọn nhóm, học sinh trong nhóm sẽ thấy đề này ở Luyện đề sau khi bạn bấm bắt đầu.',
+          ),
+
           const Text(
             'Chọn số câu, chủ đề và độ khó. Mỗi câu chỉ xuất hiện một lần trong đề.',
           ),

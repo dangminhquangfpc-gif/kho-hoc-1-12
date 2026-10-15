@@ -8,10 +8,34 @@ import 'package:kho_hoc_mobile/repository.dart';
 import 'practice_test.dart' show FakeApi;
 
 class CustomApi extends FakeApi {
+  @override
+  Future<Json?> currentUser() async => {
+    'id': 'teacher-test',
+    'username': 'teacher',
+    'display_name': 'Giáo viên',
+    'role': 'teacher',
+    'must_change_password': false,
+  };
+  @override
+  Future<List<Json>> classroomGroups() async => [];
+  List<Json> serverRecords = [];
+  @override
+  Future<List<Json>> accountResults() async => serverRecords;
+  @override
+  Future<Json> submit(Json session) async {
+    final result = await super.submit(session);
+    serverRecords = [
+      {...session, 'result': result},
+      ...serverRecords,
+    ];
+    return result;
+  }
+
   Json? requested;
   @override
   Future<Json> start(String id) async {
     final value = await super.start(id);
+    value['account_id'] = 'teacher-test';
     value['questions'] = <Json>[
       {
         ...Map<String, dynamic>.from(value['questions'][0] as Map),
@@ -141,6 +165,7 @@ void main() {
       SharedPreferences.setMockInitialValues({});
       final api = CustomApi();
       final p = await SharedPreferences.getInstance();
+      await p.setString('active_account_id', 'teacher-test');
       final old = await api.start('exam');
       old['backend_url'] = api.baseUrl;
       old['answers'] = {
@@ -154,6 +179,7 @@ void main() {
           {'question_id': 'q1', 'score': 0, 'max_score': 1},
         ],
       });
+      api.serverRecords = LocalStore(p).history;
       await tester.pumpWidget(
         ProviderScope(
           overrides: [apiProvider.overrideWithValue(api)],

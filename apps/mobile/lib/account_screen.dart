@@ -44,6 +44,7 @@ class _AccountState extends ConsumerState<AccountScreen> {
       confirm = TextEditingController();
   bool register = false, busy = false;
   int grade = 5;
+  String role = 'student';
   String? error;
   @override
   void dispose() {
@@ -89,6 +90,7 @@ class _AccountState extends ConsumerState<AccountScreen> {
           password.text,
           displayName: register ? name.text : null,
           grade: register ? grade : null,
+          role: role,
         );
     container.invalidate(authBootstrapProvider);
   });
@@ -146,7 +148,7 @@ class _AccountState extends ConsumerState<AccountScreen> {
         children: [
           if (user == null) ...[
             Text(
-              register ? 'Đăng ký học viên' : 'Đăng nhập',
+              register ? 'Đăng ký tài khoản' : 'Đăng nhập',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const Text(
@@ -156,6 +158,22 @@ class _AccountState extends ConsumerState<AccountScreen> {
             field(password, 'Mật khẩu', secret: true),
             if (register) ...[
               field(name, 'Tên hiển thị'),
+              DropdownButtonFormField<String>(
+                isExpanded: true,
+                initialValue: role,
+                decoration: const InputDecoration(labelText: 'Vai trò'),
+                items: const [
+                  DropdownMenuItem(
+                    value: 'student',
+                    child: Text('Học sinh — làm đề có sẵn'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'teacher',
+                    child: Text('Giáo viên — tạo đề và quản lý nhóm'),
+                  ),
+                ],
+                onChanged: busy ? null : (v) => setState(() => role = v!),
+              ),
               DropdownButtonFormField<int>(
                 initialValue: grade,
                 decoration: const InputDecoration(labelText: 'Lớp học'),
@@ -187,7 +205,7 @@ class _AccountState extends ConsumerState<AccountScreen> {
               child: Text(
                 register
                     ? 'Đã có tài khoản? Đăng nhập'
-                    : 'Chưa có tài khoản? Đăng ký học viên',
+                    : 'Chưa có tài khoản? Đăng ký',
               ),
             ),
             const Text(
@@ -199,7 +217,11 @@ class _AccountState extends ConsumerState<AccountScreen> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             Text(
-              '${user['username']} · ${user['role'] == 'manager' ? 'Người quản lý' : 'Học viên'}',
+              '${user['username']} · ${user['role'] == 'manager'
+                  ? 'Người quản lý'
+                  : user['role'] == 'teacher'
+                  ? 'Giáo viên'
+                  : 'Học sinh'}',
             ),
             if (user['must_change_password'] == true) ...[
               const Text(
@@ -213,12 +235,13 @@ class _AccountState extends ConsumerState<AccountScreen> {
                 child: const Text('Đổi mật khẩu'),
               ),
             ] else ...[
-              if (user['role'] == 'manager')
+              if (['manager', 'teacher'].contains(user['role']))
                 FilledButton.icon(
                   onPressed: () => context.go('/classroom'),
                   icon: const Icon(Icons.groups),
                   label: const Text('Quản lý học viên và kết quả'),
                 ),
+              if (user['role'] == 'student') const GroupPanel(student: true),
               ...[
                 const Text(
                   'Kết quả được lưu theo tài khoản trên máy chủ (hiển thị tối đa 500 bài gần nhất). Người quản lý có thể theo dõi bài đã nộp và chủ đề cần ôn.',
@@ -485,6 +508,7 @@ class _ClassroomState extends ConsumerState<ClassroomScreen> {
         const Text(
           'Học viên tự đăng ký và tài khoản bạn cấp đều xuất hiện tại đây. Kết quả lấy từ máy chủ chấm bài, không nhận điểm do thiết bị tự gửi.',
         ),
+        const GroupPanel(),
         Wrap(
           spacing: 8,
           children: [
@@ -632,6 +656,240 @@ class _StudentReportState extends ConsumerState<StudentReportScreen> {
           ],
         );
       },
+    ),
+  );
+}
+
+class GroupPanel extends ConsumerStatefulWidget {
+  const GroupPanel({super.key, this.student = false});
+  final bool student;
+  @override
+  ConsumerState<GroupPanel> createState() => _GroupPanelState();
+}
+
+class _GroupPanelState extends ConsumerState<GroupPanel> {
+  late Future<List<Json>> groups;
+  String? error;
+  bool busy = false;
+  @override
+  void initState() {
+    super.initState();
+    groups = ref.read(apiProvider).classroomGroups();
+  }
+
+  Future<String?> ask(String title, String label) async {
+    final text = TextEditingController();
+    final result = await showDialog<String>(
+      context: context,
+      builder: (c) => AlertDialog(
+        title: Text(title),
+        content: TextField(
+          controller: text,
+          decoration: InputDecoration(labelText: label),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(c),
+            child: const Text('Hủy'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(c, text.text.trim()),
+            child: const Text('Lưu'),
+          ),
+        ],
+      ),
+    );
+    // Keep the controller alive until the closing dialog animation completes.
+    Future<void>.delayed(const Duration(seconds: 1), text.dispose);
+    return result;
+  }
+
+  Future<void> act(Future<void> Function() action) async {
+    setState(() {
+      busy = true;
+      error = null;
+    });
+    try {
+      await action();
+      if (mounted) {
+        setState(() => groups = ref.read(apiProvider).classroomGroups());
+      }
+    } catch (e) {
+      if (mounted) setState(() => error = accountError(e));
+    } finally {
+      if (mounted) setState(() => busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => Card(
+    child: Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.student ? 'Nhóm học của tôi' : 'Nhóm học viên',
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          Text(
+            widget.student
+                ? 'Nhập mã giáo viên cấp để tham gia. Giáo viên của nhóm sẽ xem được kết quả học tập của bạn.'
+                : 'Tạo nhóm, cấp mã cho học sinh tự tham gia hoặc thêm tài khoản bạn đã cấp. Mở nhóm để xem kết quả từng học viên.',
+          ),
+          FilledButton(
+            onPressed: busy
+                ? null
+                : () async {
+                    final value = await ask(
+                      widget.student ? 'Tham gia nhóm' : 'Tạo nhóm',
+                      widget.student ? 'Mã nhóm' : 'Tên nhóm',
+                    );
+                    if (value == null || value.isEmpty) return;
+                    await act(
+                      () => widget.student
+                          ? ref.read(apiProvider).joinGroup(value)
+                          : ref.read(apiProvider).createGroup(value),
+                    );
+                  },
+            child: Text(widget.student ? 'Nhập mã nhóm' : 'Tạo nhóm mới'),
+          ),
+          if (error != null) Text(error!),
+          FutureBuilder<List<Json>>(
+            future: groups,
+            builder: (context, s) {
+              if (s.hasError) return Text(accountError(s.error!));
+              if (!s.hasData) return const LinearProgressIndicator();
+              return Column(
+                children: [
+                  for (final group in s.data!)
+                    ExpansionTile(
+                      title: Text(group['name']),
+                      subtitle: widget.student
+                          ? null
+                          : SelectableText(
+                              'Mã tham gia: ${group['join_code']}',
+                            ),
+                      children: widget.student
+                          ? const []
+                          : [
+                              TextButton(
+                                onPressed: busy
+                                    ? null
+                                    : () async {
+                                        final value = await ask(
+                                          'Thêm học viên vào nhóm',
+                                          'Tên đăng nhập tài khoản bạn đã cấp',
+                                        );
+                                        if (value != null && value.isNotEmpty) {
+                                          await act(
+                                            () => ref
+                                                .read(apiProvider)
+                                                .addGroupMember(
+                                                  group['id'],
+                                                  value,
+                                                ),
+                                          );
+                                        }
+                                      },
+                                child: const Text('Thêm tài khoản học sinh'),
+                              ),
+                              FutureBuilder<List<Json>>(
+                                future: ref
+                                    .read(apiProvider)
+                                    .classroomStudents(),
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData) {
+                                    return const SizedBox.shrink();
+                                  }
+                                  final ids = (group['student_ids'] as List)
+                                      .cast<String>();
+                                  return Column(
+                                    children: [
+                                      for (final student
+                                          in snapshot.data!.where(
+                                            (s) => ids.contains(s['id']),
+                                          ))
+                                        ListTile(
+                                          title: Text(
+                                            '${student['display_name']} (${student['username']})',
+                                          ),
+                                          subtitle: Text(
+                                            '${student['completed']} bài · ${student['average_percent'] == null ? 'Chưa có điểm' : '${(student['average_percent'] as num).round()}%'}',
+                                          ),
+                                          onTap: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (_) =>
+                                                  StudentReportScreen(
+                                                    id: student['id'],
+                                                  ),
+                                            ),
+                                          ),
+                                          trailing: IconButton(
+                                            tooltip: 'Bỏ khỏi nhóm',
+                                            icon: const Icon(
+                                              Icons.person_remove,
+                                            ),
+                                            onPressed: busy
+                                                ? null
+                                                : () => act(
+                                                    () => ref
+                                                        .read(apiProvider)
+                                                        .removeGroupMember(
+                                                          group['id'],
+                                                          student['id'],
+                                                        ),
+                                                  ),
+                                          ),
+                                        ),
+                                    ],
+                                  );
+                                },
+                              ),
+                              TextButton(
+                                onPressed: busy
+                                    ? null
+                                    : () async {
+                                        final yes = await showDialog<bool>(
+                                          context: context,
+                                          builder: (c) => AlertDialog(
+                                            title: const Text('Xóa nhóm?'),
+                                            content: const Text(
+                                              'Tài khoản và kết quả học viên vẫn được giữ lại.',
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () =>
+                                                    Navigator.pop(c, false),
+                                                child: const Text('Hủy'),
+                                              ),
+                                              FilledButton(
+                                                onPressed: () =>
+                                                    Navigator.pop(c, true),
+                                                child: const Text('Xóa nhóm'),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                        if (yes == true) {
+                                          await act(
+                                            () => ref
+                                                .read(apiProvider)
+                                                .deleteGroup(group['id']),
+                                          );
+                                        }
+                                      },
+                                child: const Text('Xóa nhóm'),
+                              ),
+                            ],
+                    ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
     ),
   );
 }

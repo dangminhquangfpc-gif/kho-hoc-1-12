@@ -148,7 +148,7 @@ def build(artifacts: Path):
         "Có 108 câu/12 đề và 4 tài liệu",
         f"Có {question_count - 1} câu đang dùng/{exam_count} đề và {document_count} tài liệu/liên kết (1 câu cũ đã rút và thay thế)",
     )
-    guide += "\nBản thử 2026.10.15.9. Nếu bài lưu quá hạn hoặc thuộc máy chủ cũ, dùng Khôi phục bài đã lưu; app chỉ giữ đáp án cho câu không đổi. Đã tránh cache giao diện của bản ZIP cũ, không xóa bài làm trong trình duyệt.\n"
+    guide += "\nBản thử 2026.10.15.10. Nếu bài lưu quá hạn hoặc thuộc máy chủ cũ, dùng Khôi phục bài đã lưu; app chỉ giữ đáp án cho câu không đổi. Đã tránh cache giao diện của bản ZIP cũ, không xóa bài làm trong trình duyệt.\n"
     guide += "\nMới: Luyện đề > Tạo đề theo chủ đề và độ khó (1–50 câu tùy ngân hàng); Tiến độ > Ôn các câu chưa đúng. Thống kê chủ đề chỉ tính lần làm mới nhất của mỗi câu, không phải đánh giá năng lực chính thức. Có thể luyện khách hoặc đăng nhập để lưu kết quả tập trung; chưa tích hợp AI.\n"
     guide += "\nTài liệu chỉ hiển thị bài gắn đúng mục lục SGK. Đề kiểm tra Internet ở Luyện đề > Đề giữa kỳ, cuối kỳ và tốt nghiệp từ Internet. 87 bộ luyện Toán 5 mới dùng 344 câu tự biên soạn; các bộ ôn tổng hợp dùng lại câu của bộ luyện theo bài. Chưa chuyển nguyên đề PDF của nguồn Internet vào app.\n"
     guide += "\nTài liệu Internet được liên kết tới trang nguồn, cần mạng để mở. Có bộ lọc giữa/cuối kỳ và năm đề tốt nghiệp; đề quốc gia dùng chung các bộ sách.\n"
@@ -159,6 +159,7 @@ def build(artifacts: Path):
     guide += "\nBản .7: 75 tài liệu Toán 5 có kiến thức bằng lời, hướng dẫn từng bước, ví dụ và bài tập kèm Lời giải đầy đủ, phép tính có đơn vị, Đáp số ở cuối. Đặt tính cộng/trừ thập phân hiển thị thẳng cột. Đây là nội dung tự biên soạn theo mục lục nguồn thứ cấp, chưa xác minh nguyên mẫu mọi trang SGK. Bản mới nâng cấp đúng dữ liệu gốc cũ; nếu tài liệu đã sửa riêng, giữ bản sao state và liên hệ để xử lý, không xóa dữ liệu.\n"
     guide += "\nBản .8: thêm 267 bài hướng dẫn Toán 1–4 theo các mục đã ghi nhận từ nguồn mục lục, gồm 476 ví dụ và 952 bài luyện có lời giải, đáp số. Vào Tài liệu chọn lớp 1–4, môn Toán. Các bài chưa có nguồn hoặc các môn/lớp khác vẫn cần bổ sung, chưa tuyên bố đủ mọi SGK.\n"
     guide += "\nBản .9: thêm 391 hướng dẫn Toán 6–12, gồm 230 bài đánh số và các phần ôn tập/thực hành đã có nguồn. Mỗi lớp 6–12 có thể mở tài liệu trong app. Thêm 610 ví dụ và 1 220 bài luyện có lời giải; các phần ôn tập dùng lại kỹ năng. Nội dung cơ bản tự biên soạn, chưa xác nhận nguyên mẫu hoặc đủ mọi dạng bài SGK; các môn ngoài Toán vẫn còn thiếu.\n"
+    guide += "\nBản .10: thêm 5.246 câu và 164 đề tự biên soạn làm trực tiếp. Đăng ký có vai trò học sinh/giáo viên. Học sinh làm đề có sẵn, ôn câu đã sai; giáo viên và quản lý được tạo đề. Giáo viên tạo nhóm, thêm tài khoản đã cấp hoặc gửi mã nhóm cho học sinh tự tham gia; chỉ xem học viên trong phạm vi quản lý. Các liên kết Internet chưa nhập không được tính là đề làm trực tiếp. Nội dung bổ sung chưa được xác minh đầy đủ từng bài SGK. Nâng cấp: dừng bản cũ, sao lưu và chép toàn bộ thư mục state vào bản mới trước khi chạy.\n"
     (staging / "HUONG-DAN.txt").write_text(guide, encoding="utf-8-sig")
     for bat in [staging / "start-demo.bat"]:
         content = (

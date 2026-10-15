@@ -38,6 +38,8 @@ questions = canonical_fixture_map(
             "subject_questions.json",
             "practice_questions.json",
             "extended_practice_questions.json",
+            "multigrade_questions.json",
+            "subject_practice_questions.json",
         )
         for q in json.loads((root / "data/seeds" / name).read_text(encoding="utf-8"))[
             "questions"
@@ -54,6 +56,8 @@ exams = canonical_fixture_map(
             "curriculum_exams.json",
             "subject_exams.json",
             "practice_exams.json",
+            "multigrade_exams.json",
+            "subject_practice_exams.json",
         )
         for exam in json.loads((root / "data/seeds" / name).read_text(encoding="utf-8"))
     ],

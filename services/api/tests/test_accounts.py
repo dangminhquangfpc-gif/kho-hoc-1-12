@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 
 from khohoc.accounts import password_hash, password_valid, ensure_manager
 from khohoc.app import Settings, create_app
-from khohoc.models import ContentQuestion, LearningUser
+from khohoc.models import ContentQuestion, LearningUser, Exam
 from khohoc.schemas import Question
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -40,6 +40,22 @@ def school(tmp_path):
                     fingerprint="test-fingerprint",
                     state="published",
                     rights_confirmed=True,
+                )
+            )
+            db.add(
+                Exam(
+                    id="student-exam",
+                    state="published",
+                    payload=dict(
+                        id="student-exam",
+                        title="Đề có sẵn",
+                        grade=5,
+                        subject="toan",
+                        textbook="ket_noi_tri_thuc",
+                        topic=q["topic"],
+                        duration_minutes=10,
+                        question_ids=[q["id"]],
+                    ),
                 )
             )
             db.commit()
@@ -163,9 +179,8 @@ def test_server_results_and_cross_account_isolation(school):
     aid, a = tokens[0]
     bid, b = tokens[1]
     attempt = client.post(
-        "/practice-attempts",
+        "/exams/student-exam/attempts",
         headers=a,
-        json={"grade": 5, "subject": "toan", "count": 1},
     ).json()
     assert attempt["account_id"] == aid
     path = f"/attempts/{attempt['id']}"

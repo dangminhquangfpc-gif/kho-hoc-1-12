@@ -300,6 +300,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.get("/exams")
     def exams(
+        request: Request,
         grade: int = Query(ge=1, le=12),
         subject: str = "toan",
         search: str = Query(default="", max_length=100),
@@ -312,6 +313,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 and exam.payload["subject"] == subject
                 and search_key(search) in search_key(exam.payload["title"])
             ):
+                if not accounts.can_access_exam(request, session, exam.id):
+                    continue
                 try:
                     published_exam(session, exam.id)
                 except HTTPException:
@@ -323,7 +326,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return output
 
     @app.get("/exams/{exam_id}")
-    def exam_detail(exam_id: str, session: Session = Depends(db)):
+    def exam_detail(exam_id: str, request: Request, session: Session = Depends(db)):
+        if not accounts.can_access_exam(request, session, exam_id):
+            raise HTTPException(404, "Exam unavailable")
         exam, questions = published_exam(session, exam_id)
         return {k: v for k, v in exam.payload.items() if k != "question_ids"} | {
             "questions": [public_question(q.payload) for q in questions]
@@ -366,6 +371,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.post("/exams/{exam_id}/attempts", status_code=201)
     def start(exam_id: str, request: Request, session: Session = Depends(db)):
         user = accounts.optional_user(request, session)
+        if not accounts.can_access_exam(request, session, exam_id):
+            raise HTTPException(404, "Exam unavailable")
         exam, questions = published_exam(session, exam_id)
         return create_attempt(
             session,

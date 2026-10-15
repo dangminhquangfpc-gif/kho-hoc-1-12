@@ -19,7 +19,7 @@ from .document_upgrades import reviewed_transition, upgrade_documents
 from sqlalchemy.orm import Session
 
 PUBLIC = re.compile(
-    r"/(?:auth/(?:me|login|logout|register|password)|account/results|classroom/students|classroom/students/bulk|classroom/students/[^/]+|classroom/students/[^/]+/(?:results|reset-password)|health|coverage|curriculum|practice-options|practice-attempts|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|"
+    r"/(?:auth/(?:me|login|logout|register|password)|account/results|classroom/groups|classroom/groups/join|classroom/groups/[^/]+|classroom/groups/[^/]+/members|classroom/groups/[^/]+/members/[^/]+|classroom/students|classroom/students/bulk|classroom/students/[^/]+|classroom/students/[^/]+/(?:results|reset-password)|health|coverage|curriculum|practice-options|practice-attempts|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|"
     r"exams/[^/]+/attempts|attempts/[^/]+/(?:submit|result)|attempts/[^/]+|documents|documents/[^/]+|documents/[^/]+/file)"
 )
 
@@ -83,6 +83,8 @@ def create_preview():
                 "subject_questions.json",
                 "practice_questions.json",
                 "extended_practice_questions.json",
+                "multigrade_questions.json",
+                "subject_practice_questions.json",
             )
             for question in json.loads(
                 (root / "data/seeds" / name).read_text(encoding="utf-8")
@@ -99,6 +101,8 @@ def create_preview():
                 "curriculum_exams.json",
                 "subject_exams.json",
                 "practice_exams.json",
+                "multigrade_exams.json",
+                "subject_practice_exams.json",
             )
             for exam in json.loads(
                 (root / "data/seeds" / name).read_text(encoding="utf-8")

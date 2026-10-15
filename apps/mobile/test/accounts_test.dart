@@ -17,12 +17,13 @@ class SchoolApi extends FakeApi {
     String password, {
     String? displayName,
     int? grade,
+    String role = 'student',
   }) async {
     user = {
       'id': 'student-id',
       'username': username,
       'display_name': displayName ?? 'Học viên',
-      'role': 'student',
+      'role': role,
       'must_change_password': false,
     };
     return user!;
@@ -32,6 +33,8 @@ class SchoolApi extends FakeApi {
   Future<List<Json>> accountResults() async => [];
   @override
   Future<List<Json>> classroomStudents() async => [];
+  @override
+  Future<List<Json>> classroomGroups() async => [];
   @override
   Future<List<Json>> createStudents(List<Json> students) async {
     created = students;
@@ -83,7 +86,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('Đăng nhập hoặc đăng ký'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Chưa có tài khoản? Đăng ký học viên'));
+      await tester.tap(find.text('Chưa có tài khoản? Đăng ký'));
       await tester.pumpAndSettle();
       await tester.enterText(
         find.widgetWithText(TextField, 'Tên đăng nhập'),

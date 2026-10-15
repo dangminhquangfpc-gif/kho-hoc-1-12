@@ -152,3 +152,5 @@ Bản thử 2026.10.15.5 thêm tạo đề theo chủ đề/độ khó/bộ sác
 phân tích tiến độ từ lần làm mới nhất của mỗi câu và ôn lại câu chưa đúng.
 Chạy local, không gọi AI hoặc yêu cầu tài khoản. Xem
 [chi tiết module](docs/LOCAL_STUDY_MODULE.md) và [lộ trình còn lại](docs/ROADMAP.md).
+
+Bản .10 bổ sung vai trò giáo viên/học sinh, nhóm học viên, giao đề cho nhóm, 5.246 câu và 164 đề tự biên soạn. Xem [vai trò và nhóm](docs/TEACHER_GROUPS.md). Các liên kết Internet chưa được chuyển nguyên bản hàng loạt thành đề.

@@ -120,3 +120,9 @@ tiến độ đã hoàn tất kiểm tra trên gói giải nén.
 ## Bản 2026.10.15.9 — hướng dẫn Toán 6–12
 
 93 kiểm thử backend và 23 kiểm thử Flutter đạt; analyze, web release build và Ruff đạt. Kiểm tra 391 mục khớp nguồn mục lục, gồm 230 bài đánh số liên tục; 610 ví dụ và 1.220 bài tự luyện có lời giải/đáp số. Kiểm tra độc lập 22 đáp số bằng Sympy, cùng lãi kép và quy tắc hình thang. Gói giải nén nâng cấp giữ tài khoản, kết quả và phiên bản tài liệu cũ; API trả đủ hướng dẫn cho cả 7 lớp. Chromium mở được Nguyên hàm và Bayes cùng lời giải trên backend thực. Tìm kiếm ưu tiên tên bài đã có kiểm thử hồi quy. Chưa nghiệm thu Windows/Android thật, chưa thẩm định sư phạm độc lập hoặc xác nhận mọi dạng bài/trang SGK; các môn ngoài Toán còn thiếu.
+
+## Bản 2026.10.15.10 — vai trò, nhóm và ngân hàng câu hỏi
+
+98 kiểm thử backend đạt; sau khi sửa bộ lọc đường dẫn nhóm ở preview/gateway, kiểm thử preview được chạy lại và đạt. 23 kiểm thử Flutter, analyze và web release build đạt. Thêm 5.246 câu và 164 đề tự biên soạn; kiểm tra schema, câu/lựa chọn không trùng, mọi ID đề tồn tại đúng lớp/môn, chấm đáp án đúng, miền số lớp 1/xác suất, độc lập tính tốc độ và khối lượng riêng. Kiểm tra giáo viên khác không xem kết quả/đề nhóm, học sinh không tạo đề hoặc lách bằng ID tùy ý; học sinh vẫn ôn câu sai đã lưu của mình.
+
+Gói giải nén nâng cấp giữ nguyên tài khoản/kết quả cũ, có 7.886 câu hoạt động và 470 đề. Chromium trên gateway/backend thật: giáo viên tạo nhóm và đề hai chủ đề, học sinh chưa tham gia không xem đề được, tham gia nhóm rồi mở đề trong giao diện; API chấm 10/10 và giao diện báo cáo giáo viên hiện 100%. Đã đối chiếu toàn bộ payload gói cuối với tệp thực tế chạy QA. ZIP không chứa state. Chưa nghiệm thu Windows/Android thật hoặc thẩm định sư phạm độc lập; chưa nhập nguyên văn hàng loạt đề Internet.

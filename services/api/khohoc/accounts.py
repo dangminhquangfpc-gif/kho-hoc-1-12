@@ -9,6 +9,7 @@ import uuid
 from collections import defaultdict, deque
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from typing import Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel, ConfigDict, Field
@@ -17,6 +18,9 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from .models import (
+    ClassroomGroup,
+    TeacherExam,
+    GroupMember,
     AccountAttempt,
     AuditEvent,
     LearningRecord,
@@ -115,6 +119,7 @@ class LoginInput(BaseModel):
 
 
 class Registration(LoginInput):
+    role: Literal["student", "teacher"] = "student"
     display_name: str = Field(min_length=1, max_length=80)
     grade: int | None = Field(default=None, ge=1, le=12)
 
@@ -128,6 +133,19 @@ class StudentInput(BaseModel):
 
 class BulkInput(BaseModel):
     students: list[StudentInput] = Field(min_length=1, max_length=50)
+
+
+class GroupInput(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+    name: str = Field(min_length=1, max_length=100)
+
+
+class JoinGroupInput(BaseModel):
+    code: str = Field(min_length=8, max_length=30)
+
+
+class MemberInput(BaseModel):
+    username: str = Field(pattern=r"^[a-zA-Z0-9_.-]{3,40}$")
 
 
 class PasswordInput(BaseModel):
@@ -177,9 +195,23 @@ class AccountService:
 
     def manager(self, request, db):
         user = self.required(request, db)
-        if user.role != "manager":
-            raise HTTPException(403, "Chỉ người quản lý được dùng chức năng này.")
+        if user.role not in {"manager", "teacher"}:
+            raise HTTPException(
+                403, "Chỉ giáo viên hoặc người quản lý được dùng chức năng này."
+            )
         return user
+
+    def can_access_exam(self, request, db, exam_id):
+        scope = db.get(TeacherExam, exam_id)
+        if not scope:
+            return True
+        user = self.optional_user(request, db)
+        if not user:
+            return False
+        return (
+            user.id == scope.owner_id
+            or db.get(GroupMember, (scope.group_id, user.id)) is not None
+        )
 
     def authorize_attempt(self, request, db, attempt_id):
         owner = db.get(AccountAttempt, attempt_id)
@@ -224,7 +256,29 @@ class AccountService:
     def assigned(self, request, db, user_id):
         manager = self.manager(request, db)
         student = db.get(LearningUser, user_id)
-        if not student or student.role != "student" or student.manager_id != manager.id:
+        member = db.scalar(
+            select(GroupMember)
+            .join(ClassroomGroup, GroupMember.group_id == ClassroomGroup.id)
+            .where(
+                GroupMember.user_id == user_id, ClassroomGroup.owner_id == manager.id
+            )
+        )
+        provisioner = (
+            db.get(LearningUser, student.manager_id)
+            if student and student.manager_id
+            else None
+        )
+        overseen = (
+            manager.role == "manager"
+            and provisioner
+            and provisioner.manager_id == manager.id
+            and provisioner.role == "teacher"
+        )
+        if (
+            not student
+            or student.role != "student"
+            or (student.manager_id != manager.id and not member and not overseen)
+        ):
             raise HTTPException(404, "Không tìm thấy học viên.")
         return student
 
@@ -297,7 +351,7 @@ class AccountService:
                 username=body.username.lower(),
                 display_name=body.display_name,
                 grade=body.grade,
-                role="student",
+                role=body.role,
                 manager_id=managers[0].id,
                 password_hash=password_hash(body.password),
             )
@@ -364,8 +418,28 @@ class AccountService:
                 db.scalars(
                     select(LearningUser)
                     .where(
-                        LearningUser.manager_id == owner.id,
                         LearningUser.role == "student",
+                        (
+                            (
+                                LearningUser.manager_id.in_(
+                                    select(LearningUser.id).where(
+                                        LearningUser.manager_id == owner.id,
+                                        LearningUser.role == "teacher",
+                                    )
+                                )
+                            )
+                            if owner.role == "manager"
+                            else LearningUser.id.is_(None)
+                        )
+                        | (LearningUser.manager_id == owner.id)
+                        | LearningUser.id.in_(
+                            select(GroupMember.user_id)
+                            .join(
+                                ClassroomGroup,
+                                GroupMember.group_id == ClassroomGroup.id,
+                            )
+                            .where(ClassroomGroup.owner_id == owner.id)
+                        ),
                     )
                     .order_by(LearningUser.username)
                 )
@@ -447,6 +521,11 @@ class AccountService:
         @router.post("/classroom/students/{user_id}/reset-password")
         def reset(user_id: str, request: Request, db: Session = Depends(db_dependency)):
             student = self.assigned(request, db, user_id)
+            owner = self.manager(request, db)
+            if owner.role != "manager" and student.manager_id != owner.id:
+                raise HTTPException(
+                    403, "Chỉ người cấp tài khoản được đặt lại mật khẩu."
+                )
             password = secrets.token_urlsafe(12)
             student.password_hash = password_hash(password)
             student.must_change_password = True
@@ -468,6 +547,10 @@ class AccountService:
             user_id: str, request: Request, db: Session = Depends(db_dependency)
         ):
             student = self.assigned(request, db, user_id)
+            owner = self.manager(request, db)
+            if owner.role != "manager" and student.manager_id != owner.id:
+                raise HTTPException(403, "Chỉ người cấp tài khoản được xóa tài khoản.")
+            db.execute(delete(GroupMember).where(GroupMember.user_id == student.id))
             db.execute(
                 delete(Attempt).where(
                     Attempt.id.in_(
@@ -494,6 +577,137 @@ class AccountService:
                 )
             )
             db.delete(student)
+            db.commit()
+
+        def owned_group(group_id, request, db):
+            owner = self.manager(request, db)
+            group = db.get(ClassroomGroup, group_id)
+            if not group or group.owner_id != owner.id:
+                raise HTTPException(404, "Không tìm thấy nhóm.")
+            return group
+
+        @router.get("/classroom/groups")
+        def groups(request: Request, db: Session = Depends(db_dependency)):
+            owner = self.required(request, db)
+            query = select(ClassroomGroup)
+            if owner.role == "student":
+                query = query.where(
+                    ClassroomGroup.id.in_(
+                        select(GroupMember.group_id).where(
+                            GroupMember.user_id == owner.id
+                        )
+                    )
+                )
+            else:
+                query = query.where(ClassroomGroup.owner_id == owner.id)
+            return [
+                dict(
+                    id=g.id,
+                    name=g.name,
+                    **({"join_code": g.join_code} if owner.role != "student" else {}),
+                    student_ids=(
+                        []
+                        if owner.role == "student"
+                        else list(
+                            db.scalars(
+                                select(GroupMember.user_id).where(
+                                    GroupMember.group_id == g.id
+                                )
+                            )
+                        )
+                    ),
+                )
+                for g in db.scalars(query.order_by(ClassroomGroup.name))
+            ]
+
+        @router.post("/classroom/groups", status_code=201)
+        def create_group(
+            body: GroupInput, request: Request, db: Session = Depends(db_dependency)
+        ):
+            owner = self.manager(request, db)
+            group = ClassroomGroup(
+                id=str(uuid.uuid4()),
+                owner_id=owner.id,
+                name=body.name,
+                join_code=secrets.token_hex(8),
+            )
+            db.add(group)
+            db.commit()
+            return dict(
+                id=group.id, name=group.name, join_code=group.join_code, student_ids=[]
+            )
+
+        @router.post("/classroom/groups/join")
+        def join_group(
+            body: JoinGroupInput, request: Request, db: Session = Depends(db_dependency)
+        ):
+            user = self.required(request, db)
+            if user.role != "student":
+                raise HTTPException(403, "Chức năng dành cho học sinh.")
+            group = db.scalar(
+                select(ClassroomGroup).where(
+                    ClassroomGroup.join_code == body.code.strip()
+                )
+            )
+            if not group:
+                raise HTTPException(404, "Mã nhóm không đúng.")
+            if not db.get(GroupMember, (group.id, user.id)):
+                db.add(GroupMember(group_id=group.id, user_id=user.id))
+                db.commit()
+            return dict(id=group.id, name=group.name)
+
+        @router.post("/classroom/groups/{group_id}/members")
+        def add_member(
+            group_id: str,
+            body: MemberInput,
+            request: Request,
+            db: Session = Depends(db_dependency),
+        ):
+            group = owned_group(group_id, request, db)
+            student = db.scalar(
+                select(LearningUser).where(
+                    LearningUser.username == body.username.lower()
+                )
+            )
+            owner = self.manager(request, db)
+            if (
+                not student
+                or student.role != "student"
+                or (owner.role != "manager" and student.manager_id != owner.id)
+            ):
+                raise HTTPException(
+                    404,
+                    "Chỉ thêm tài khoản bạn đã cấp; học sinh tự đăng ký dùng mã nhóm để tham gia.",
+                )
+            if not db.get(GroupMember, (group.id, student.id)):
+                db.add(GroupMember(group_id=group.id, user_id=student.id))
+                db.commit()
+            return dict(user_id=student.id)
+
+        @router.delete(
+            "/classroom/groups/{group_id}/members/{user_id}", status_code=204
+        )
+        def remove_member(
+            group_id: str,
+            user_id: str,
+            request: Request,
+            db: Session = Depends(db_dependency),
+        ):
+            owned_group(group_id, request, db)
+            db.execute(
+                delete(GroupMember).where(
+                    GroupMember.group_id == group_id, GroupMember.user_id == user_id
+                )
+            )
+            db.commit()
+
+        @router.delete("/classroom/groups/{group_id}", status_code=204)
+        def delete_group(
+            group_id: str, request: Request, db: Session = Depends(db_dependency)
+        ):
+            group = owned_group(group_id, request, db)
+            db.execute(delete(GroupMember).where(GroupMember.group_id == group.id))
+            db.delete(group)
             db.commit()
 
         return router

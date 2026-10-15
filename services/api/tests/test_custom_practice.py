@@ -6,7 +6,8 @@ from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
 from khohoc.app import Settings, create_app
-from khohoc.models import ContentQuestion
+from khohoc.models import ContentQuestion, LearningUser
+from khohoc.accounts import password_hash
 
 ROOT = Path(__file__).resolve().parents[3]
 ADMIN = {"Authorization": "Bearer custom-practice-test"}
@@ -37,6 +38,10 @@ def seeded(tmp_path):
             client.post(
                 f"/admin/questions/{q['id']}/publish", headers=ADMIN
             ).raise_for_status()
+        with Session(app.state.engine) as db:
+            db.add(LearningUser(id="teacher", username="teacher", display_name="Giáo viên", role="teacher", password_hash=password_hash("Teacher-password-123")))
+            db.commit()
+        client.post("/auth/login", json={"username": "teacher", "password": "Teacher-password-123"}).raise_for_status()
         client.engine = app.state.engine
         yield client, qs
 

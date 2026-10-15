@@ -88,3 +88,24 @@ class LearningRecord(Base):
     submitted_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
     )
+
+
+class ClassroomGroup(Base):
+    __tablename__ = "classroom_groups"
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    owner_id: Mapped[str] = mapped_column(String(36), index=True)
+    name: Mapped[str] = mapped_column(String(100))
+    join_code: Mapped[str] = mapped_column(String(30), unique=True)
+
+
+class GroupMember(Base):
+    __tablename__ = "classroom_group_members"
+    group_id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    user_id: Mapped[str] = mapped_column(String(36), primary_key=True)
+
+
+class TeacherExam(Base):
+    __tablename__ = "teacher_exams"
+    exam_id: Mapped[str] = mapped_column(String(80), primary_key=True)
+    owner_id: Mapped[str] = mapped_column(String(36), index=True)
+    group_id: Mapped[str] = mapped_column(String(36), index=True)
