@@ -24,11 +24,12 @@ def test_bank_integrity_catalog_coverage_and_answer_keys():
             "language_questions.json",
             "curriculum_questions.json",
             "subject_questions.json",
+            "practice_questions.json",
         )
         for q in load("data/seeds/" + filename)["questions"]
     ]
     by_id = {q.id: q for q in questions}
-    assert len(by_id) == len(questions) == 1566
+    assert len(by_id) == len(questions) == 1910
     assert len({normalize(q.question) for q in questions}) == len(questions)
     catalog = load("data/seeds/catalog.json")
     pairs = {(g["id"], s["id"]) for g in catalog["grades"] for s in g["subjects"]}
@@ -40,10 +41,11 @@ def test_bank_integrity_catalog_coverage_and_answer_keys():
             "language_exams.json",
             "curriculum_exams.json",
             "subject_exams.json",
+            "practice_exams.json",
         )
         for e in load("data/seeds/" + filename)
     ]
-    assert len(exams) == len({e.id for e in exams}) == 219
+    assert len(exams) == len({e.id for e in exams}) == 306
     assert {(e.grade, e.subject) for e in exams} == pairs
     used = set()
     for exam in exams:
@@ -101,3 +103,26 @@ def test_independent_math_examples_and_fraction_equivalence():
         assert grade(q, [answer])["score"] == 1
     assert grade(by_id["kntt_math_5_cong_thap_phan_01"], ["3,75"])["score"] == 1
     assert grade(by_id["kntt_math_7_xac_suat_don_gian_01"], ["6/12"])["score"] == 1
+
+
+def test_new_math5_practice_independent_examples():
+    questions = {
+        q["id"]: Question.model_validate(q)
+        for q in load("data/seeds/practice_questions.json")["questions"]
+    }
+    examples = {
+        "natural_08": "700",
+        "add_decimal_01": "4.55",
+        "add_decimal_08": "12.25",
+        "unlike_fraction_01": "7/12",
+        "circle_08": "69.08",
+        "box_volume_08": "990",
+        "time_add_01": "500",
+        "frequency_08": "22",
+    }
+    for suffix, expected in examples.items():
+        q = questions["practice_math5_" + suffix]
+        assert grade(q, [expected])["score"] == 1
+        assert grade(q, ["-1000000"])["score"] == 0
+    for q in questions.values():
+        assert grade(q, q.correct_answer)["score"] == 1

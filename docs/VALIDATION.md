@@ -74,3 +74,21 @@ Bản cuối sau Việt hóa metadata và xử lý xóa lịch sử: 6 Flutter t
 ## Lesson organization — 15/10/2026
 
 64 backend tests passed, including separated lesson/exam lists, sequential Math5 lessons 1–75, source-index coverage and explicit missing units. Flutter analyze passed; previous 7 tests passed plus the new conceal/reveal solution regression passed. Release web build passed. The package upgraded a database from the prior Internet demo; HTTP verified 82 Math5 study documents (75 indexed lessons plus 7 prior notes) and exams confined to their collection. Live browser checked Math5 navigation and Luyện đề → external exams; expanded solutions were visually verified. Windows native execution remains unrun. Official publisher catalog lookup returned 401; public searches returned no records. Full textbook/edition completeness remains unverified.
+
+Bản thử 2026.10.15.4: đã thêm kiểm thử phục hồi phiên 404 và giữ đáp án,
+loại đáp án khi câu cùng mã thay đổi; kiểm thử tách lựa chọn PDF, thiếu đáp
+án/số câu trùng và không nhập phần lời giải như câu hỏi. Số liệu ngân hàng
+mới: 1 910 câu/306 đề, trong đó 344 câu Toán 5 mới.
+
+Kiểm tra local hoàn tất: 68 kiểm thử Python và 10 kiểm thử Flutter đều qua;
+Flutter analyze không còn cảnh báo; web release build thành công với PWA
+cache tắt. Thử công cụ PDF trên một PDF mẫu tự biên soạn thực tế: tách đúng
+2 câu và đáp án thành JSON hợp lệ, luôn giữ trạng thái chờ kiểm tra, không
+phát hành. Không phải thử chuyển nguyên đề Internet có bản quyền.
+
+QA trình duyệt trên ZIP đã giải nén, nâng cấp từ DB bản trước: Toán 5 có
+419 câu/95 đề; Tài liệu có đúng 75 bài và không chứa đề/link ngoài. Khôi
+phục phiên không còn trên máy chủ, giữ 8 đáp án và nộp được 8/8. Một service
+worker cũ và cache tài nguyên được loại bỏ khi mở bản mới; dữ liệu lưu vẫn
+còn. Mở đề Internet từ Luyện đề giữ lớp 5 đã chọn. Playwright chạy Chromium
+thực trên Linux; không thay thế kiểm tra Windows.

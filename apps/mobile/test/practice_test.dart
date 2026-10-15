@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,7 +25,7 @@ class FakeApi extends LearningApi {
     'id': 'attempt',
     'token': 'test-capability',
     'created_at': DateTime.now().toUtc().toIso8601String(),
-    'exam': {'title': 'Đề kiểm thử', 'duration_minutes': 30},
+    'exam': {'id': 'exam', 'title': 'Đề kiểm thử', 'duration_minutes': 30},
     'questions': [
       {
         'id': 'q1',
@@ -61,6 +62,29 @@ class FakeApi extends LearningApi {
   }
 }
 
+class MissingAttemptApi extends FakeApi {
+  @override
+  Future<Json> start(String id) async => {
+    ...await super.start(id),
+    'id': 'recovered',
+  };
+
+  @override
+  Future<Json> submit(Json session) async {
+    if (session['id'] == 'missing') {
+      throw DioException(
+        requestOptions: RequestOptions(path: '/attempts/missing/submit'),
+        response: Response(
+          statusCode: 404,
+          requestOptions: RequestOptions(path: '/attempts/missing/submit'),
+        ),
+        type: DioExceptionType.badResponse,
+      );
+    }
+    return super.submit(session);
+  }
+}
+
 void main() {
   testWidgets(
     'Choose grade/subject/exam, answer, submit, view stored history',
@@ -75,6 +99,9 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Lớp học'), findsOneWidget);
       expect(find.text('Môn học'), findsOneWidget);
+      await tester.ensureVisible(find.text('Đề kiểm thử'));
+      await tester.drag(find.byType(ListView).first, const Offset(0, -120));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Đề kiểm thử'));
       await tester.pumpAndSettle();
       expect(find.text('3 + 2 bằng bao nhiêu?'), findsOneWidget);
@@ -97,6 +124,75 @@ void main() {
       expect(LocalStore(prefs).history.length, 1);
       expect(LocalStore(prefs).current, isNull);
       await tester.pumpWidget(const SizedBox.shrink());
+    },
+  );
+
+  testWidgets('Missing saved attempt recovers answers and can be submitted', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final old = {
+      ...await FakeApi().start('exam'),
+      'id': 'missing',
+      'answers': {
+        'q1': ['A'],
+      },
+    };
+    await LocalStore(prefs).save(old);
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [apiProvider.overrideWithValue(MissingAttemptApi())],
+        child: const KhoHocApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Tiếp tục bài đang làm'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Nộp bài'));
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.descendant(
+        of: find.byType(AlertDialog),
+        matching: find.widgetWithText(FilledButton, 'Nộp bài'),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(LocalStore(prefs).current!['answers']['q1'], ['A']);
+    await tester.tap(find.text('Khôi phục bài đã lưu'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(FilledButton, 'Khôi phục'));
+    await tester.pumpAndSettle();
+    expect(LocalStore(prefs).current!['id'], 'recovered');
+    expect(LocalStore(prefs).current!['answers']['q1'], ['A']);
+    expect(find.textContaining('Đã khôi phục 1 câu trả lời'), findsOneWidget);
+    await tester.tap(find.text('Nộp bài'));
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.descendant(
+        of: find.byType(AlertDialog),
+        matching: find.widgetWithText(FilledButton, 'Nộp bài'),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('1 / 1'), findsOneWidget);
+    expect(LocalStore(prefs).current, isNull);
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
+
+  test(
+    'Recovery discards answers for changed questions despite matching ID',
+    () async {
+      final api = FakeApi();
+      final previous = await api.start('exam');
+      previous['answers'] = {
+        'q1': ['A'],
+      };
+      (previous['questions'][0] as Json)['question'] =
+          'Câu hỏi của phiên bản cũ';
+      final restored = await api.recover(previous);
+      expect(restored['answers'], isEmpty);
+      expect(previous['answers']['q1'], ['A']);
     },
   );
 

@@ -84,6 +84,53 @@ class LearningApi {
     data: {'answers': session['answers'] ?? {}},
     options: Options(headers: {'X-Attempt-Token': session['token']}),
   )).data!;
+
+  /// Open a new server attempt; keep answers only for identical public questions.
+  Future<Json> recover(Json previous) async {
+    final examId = previous['exam']?['id'];
+    if (examId is! String || examId.isEmpty) {
+      throw StateError('Bài cũ thiếu mã đề. Hãy chọn lại đề trong Luyện đề.');
+    }
+    final next = await start(examId);
+    final oldQuestions = {
+      for (final q in (previous['questions'] as List).cast<Json>()) q['id']: q,
+    };
+    final answers = <String, dynamic>{};
+    final unchanged = <String>{};
+    for (final q in (next['questions'] as List).cast<Json>()) {
+      final old = oldQuestions[q['id']];
+      if (old != null && _questionSignature(old) == _questionSignature(q)) {
+        unchanged.add(q['id'] as String);
+        final answer = (previous['answers'] as Map? ?? {})[q['id']];
+        if (answer != null) {
+          answers[q['id'] as String] = List<String>.from(answer);
+        }
+      }
+    }
+    return {
+      ...next,
+      'backend_url': baseUrl,
+      'answers': answers,
+      'flags': (previous['flags'] as List? ?? [])
+          .where(unchanged.contains)
+          .toList(),
+      'recovery_notice':
+          'Đã khôi phục ${answers.length} câu trả lời. '
+          'Câu đã thay đổi không được giữ đáp án cũ; hãy kiểm tra trước khi nộp.',
+    };
+  }
+
+  String _questionSignature(Json q) => jsonEncode([
+    q['question'],
+    q['type'],
+    q['max_score'],
+    q['unit'],
+    q['rubric'],
+    [
+      for (final o in (q['options'] as List? ?? [])) [o['id'], o['text']],
+    ],
+  ]);
+
   Future<void> delete(Json session) async {
     try {
       await client.delete(

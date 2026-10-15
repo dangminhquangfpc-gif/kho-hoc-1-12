@@ -171,7 +171,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         session: Session = Depends(db),
     ):
         import json
-        from .library import LibraryDocument
+        from .library import LibraryDocument, is_textbook_lesson
 
         path = Path(__file__).resolve().parents[3] / "data/seeds/textbook_units.json"
         books = json.loads(path.read_text(encoding="utf-8"))["books"]
@@ -200,7 +200,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             )
             if row.payload["grade"] == grade
             and row.payload["subject"] == subject
-            and row.payload.get("curriculum_unit_id")
+            and is_textbook_lesson(row.payload)
         }
         units = [
             unit

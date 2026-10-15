@@ -7,7 +7,8 @@ def test_phone_preview_seed_private_routes_and_rate_limit(tmp_path, monkeypatch)
     with TestClient(create_preview()) as client:
         assert client.get("/health").json()["status"] == "ok"
         assert all(
-            len(client.get("/exams", params={"grade": n}).json()) == 8
+            len(client.get("/exams", params={"grade": n}).json())
+            == (95 if n == 5 else 8)
             for n in [1, 5, 9, 12]
         )
         assert len(client.get("/documents", params={"limit": 100}).json()) == 100
@@ -19,11 +20,23 @@ def test_phone_preview_seed_private_routes_and_rate_limit(tmp_path, monkeypatch)
             "/documents",
             params={"grade": 5, "subject": "toan", "section": "lessons", "limit": 100},
         ).json()
-        assert len(lessons) == 82
+        assert len(lessons) == 75
         assert [d["lesson_order"] for d in lessons[:75]] == list(range(1, 76))
         assert all(
             d["kind"] != "exam" and d["source_type"] != "link_only" for d in lessons
         )
+        assert (
+            client.get(
+                "/documents",
+                params={"grade": 6, "subject": "toan", "section": "lessons"},
+            ).json()
+            == []
+        )
+        references = client.get(
+            "/documents",
+            params={"grade": 6, "subject": "toan", "section": "references"},
+        ).json()
+        assert any(d["source_type"] == "original" for d in references)
         exam_sources = client.get(
             "/documents",
             params={"grade": 6, "subject": "toan", "section": "exams", "limit": 100},

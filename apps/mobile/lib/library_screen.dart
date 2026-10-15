@@ -38,8 +38,15 @@ final curriculumProvider =
     );
 
 class LibraryScreen extends ConsumerStatefulWidget {
-  const LibraryScreen({super.key, this.examMode = false});
+  const LibraryScreen({
+    super.key,
+    this.examMode = false,
+    this.initialGrade = 1,
+    this.initialSubject = 'toan',
+  });
   final bool examMode;
+  final int initialGrade;
+  final String initialSubject;
   @override
   ConsumerState<LibraryScreen> createState() => _LibraryState();
 }
@@ -50,6 +57,13 @@ class _LibraryState extends ConsumerState<LibraryScreen> {
   String period = '';
   int year = 0;
   bool favoritesOnly = false, recentOnly = false;
+  @override
+  void initState() {
+    super.initState();
+    grade = widget.initialGrade;
+    subject = widget.initialSubject;
+  }
+
   @override
   Widget build(BuildContext context) {
     final filter = (
@@ -303,9 +317,13 @@ class _LibraryState extends ConsumerState<LibraryScreen> {
                 );
               }
               if (rows.isEmpty) {
-                return const Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Text('Chưa có tài liệu phù hợp. Hãy đổi bộ lọc.'),
+                return Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Text(
+                    widget.examMode
+                        ? 'Chưa có đề phù hợp với bộ lọc.'
+                        : 'Chưa có bài học gắn đúng mục lục SGK cho bộ lọc này. Xem các phần còn thiếu trong mục lục phía trên.',
+                  ),
                 );
               }
               return Column(

@@ -133,3 +133,9 @@ Bổ sung 1.934 mục nguồn Internet, tổng 2.133 tài liệu/liên kết; g�
 ### Bài học theo mục lục và phân tách Luyện đề
 
 Tài liệu chỉ hiện bài hướng dẫn/luyện tập đọc trong app; đề nguồn ngoài chuyển sang Luyện đề. Thêm 75 bài Toán 5 có 278 lượt bài tập và lời giải thu gọn. Mục lục tham khảo 101 sách/2.618 mục giúp theo dõi phần còn thiếu; chưa đủ mọi môn/ấn bản SGK. Xem `docs/TEXTBOOK_LESSONS.md`.
+
+Bản thử 2026.10.15.4 sửa đường khôi phục bài không nộp được khi phiên cũ
+hết hạn/mất trên máy chủ; bỏ cache giao diện ZIP cũ nhưng giữ bài làm.
+Thêm 344 câu/87 bộ luyện Toán 5 tự biên soạn, tổng 1 910 câu/306 đề.
+Đề Internet nằm riêng trong Luyện đề; chưa sao chép nguyên PDF nguồn ngoài.
+Chi tiết và giới hạn: [cập nhật luyện đề](docs/PRACTICE_UPDATE.md).

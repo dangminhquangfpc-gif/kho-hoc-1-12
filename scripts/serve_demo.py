@@ -29,6 +29,34 @@ PUBLIC = re.compile(
 )
 
 
+@app.middleware("http")
+async def fresh_demo_assets(request: Request, call_next):
+    response = await call_next(request)
+    # Never serve a previous ZIP's app shell after a local demo upgrade.
+    response.headers["Cache-Control"] = "no-store"
+    return response
+
+
+@app.get("/flutter_service_worker.js")
+async def retire_legacy_worker():
+    # Old Flutter bootstraps still request this URL. Retire their asset cache
+    # without clearing localStorage, saved answers, history, or IndexedDB.
+    return Response(
+        """self.addEventListener('install', () => self.skipWaiting());
+self.addEventListener('activate', event => event.waitUntil((async () => {
+  for (const name of ['flutter-app-cache', 'flutter-temp-cache', 'flutter-app-manifest']) {
+    await caches.delete(name);
+  }
+  await self.registration.unregister();
+  const windows = await self.clients.matchAll({type: 'window'});
+  await Promise.all(windows.map(client => client.navigate(client.url)));
+})()));
+""",
+        media_type="application/javascript",
+        headers={"Service-Worker-Allowed": "/"},
+    )
+
+
 @app.api_route("/api/{path:path}", methods=["GET", "POST", "DELETE", "OPTIONS"])
 async def api(path: str, request: Request):
     if not PUBLIC.fullmatch(path):

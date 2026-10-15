@@ -29,3 +29,26 @@ def test_math5_index_has_all_numbered_lessons_and_real_practice_sections():
         assert any("Bài tập tự luyện" in h for h in headings)
         assert any("Lời giải bài tập" in h for h in headings)
         assert d.source_type == "original" and d.license == "original_content"
+
+
+def test_lesson_mapping_rejects_wrong_class_subject_or_missing_instruction():
+    from copy import deepcopy
+    from khohoc.library import is_textbook_lesson
+
+    document = json.loads(
+        (ROOT / "data/library/curriculum_documents.json").read_text(encoding="utf-8")
+    )["documents"][0]
+    assert is_textbook_lesson(document)
+    for changes in (
+        {"grade": 6},
+        {"subject": "tieng_viet"},
+        {"curriculum_unit_id": "unit_" + "0" * 20},
+        {"textbook": "independent"},
+        {"kind": "exam"},
+        {"assessment_period": "final_1"},
+        {"sections": []},
+        {"sections": document["sections"][:3]},
+    ):
+        candidate = deepcopy(document)
+        candidate.update(changes)
+        assert not is_textbook_lesson(candidate)

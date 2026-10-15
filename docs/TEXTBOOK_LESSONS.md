@@ -23,3 +23,17 @@ Các mục chưa có bài hướng dẫn được hiển thị rõ là thiếu. 
 ## Tái tạo
 
 `data/pipelines/textbook_index.py` phân tích mục lục có cấu trúc. `data/pipelines/build_math5_lessons.py` dựng lại ghi chú Toán 5 từ bảng kĩ năng/cách làm/bài tập đã soạn và mục lục đã ghi nhận. Không tự tạo mục lục sách không có nguồn, không tạo ghi chú chung để đánh dấu giả rằng một bài đã hoàn tất. Cần đối chiếu mục lục gốc, soạn nội dung cho các mục thiếu và thẩm định trước khi công bố đủ chương trình.
+
+## Quy tắc chung cho mọi lớp và môn
+
+Danh sách `section=lessons` chỉ nhận bài Kết nối tri thức có mã bài tồn tại
+trong mục lục đúng lớp/môn và đủ bốn phần: kiến thức và cách làm, ví dụ từng
+bước, bài tập tự luyện, lời giải. Quy tắc này cũng áp dụng khi tính số bài
+đã biên soạn trong `/curriculum`. Mã bài giả hoặc thuộc lớp/môn khác không
+được tính. Ghi chú nền tảng chưa đối chiếu vẫn được giữ trong dữ liệu tham
+khảo, không hiển thị như bài học bám SGK. Đề kiểm tra thuộc phần luyện đề.
+
+Đây là kiểm tra cấu trúc và đối chiếu mục lục nguồn thứ cấp, chưa chứng minh
+nội dung chính xác về sư phạm hoặc phủ đủ các ấn bản. Hiện mới có 75 bài
+Toán 5 được biên soạn theo mục lục đã thu thập. Những môn/lớp khác chưa có
+bài phù hợp phải hiển thị thiếu, không dùng nội dung tổng quát thay thế.

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,13 @@ final routerProvider = Provider<GoRouter>(
       GoRoute(path: '/exams', builder: (_, _) => const HomeScreen(index: 2)),
       GoRoute(
         path: '/source-exams',
-        builder: (_, _) => const LibraryScreen(examMode: true),
+        builder: (_, state) => LibraryScreen(
+          examMode: true,
+          initialGrade:
+              (int.tryParse(state.uri.queryParameters['grade'] ?? '') ?? 1)
+                  .clamp(1, 12),
+          initialSubject: state.uri.queryParameters['subject'] ?? 'toan',
+        ),
       ),
       GoRoute(path: '/documents', builder: (_, _) => const LibraryScreen()),
       GoRoute(path: '/progress', builder: (_, _) => const ProgressScreen()),
@@ -167,7 +174,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
     final coverage = ref.watch(coverageProvider(grade));
     final prefs = ref.watch(preferencesProvider);
     return Shell(
-      title: 'Kho Học 1–12',
+      title: widget.index == 2 ? 'Luyện đề' : 'Kho Học 1–12',
       index: widget.index,
       child: ListView(
         padding: const EdgeInsets.all(20),
@@ -178,6 +185,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 8),
           const Text('Chọn lớp và môn để luyện tập. Không cần tài khoản.'),
+          const Text('Bản thử 2026.10.15.4'),
           if (widget.index == 2)
             Card(
               child: ListTile(
@@ -188,7 +196,12 @@ class _HomeState extends ConsumerState<HomeScreen> {
                 subtitle: const Text(
                   'Lọc theo lớp, môn, đợt kiểm tra và năm đề',
                 ),
-                onTap: () => context.go('/source-exams'),
+                onTap: () => context.go(
+                  Uri(
+                    path: '/source-exams',
+                    queryParameters: {'grade': '$grade', 'subject': subject},
+                  ).toString(),
+                ),
               ),
             ),
           const SizedBox(height: 20),
@@ -271,7 +284,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Text(
-                  '${row["question_count"]} câu · ${row["topic_count"]} chủ đề · ${row["exam_count"]} đề · ${row["document_count"]} tài liệu · ${row["external_document_count"] ?? 0} nguồn Internet',
+                  '${row["question_count"]} câu · ${row["exam_count"]} đề làm trực tiếp · ${row["external_paper_count"] ?? 0} đề từ nguồn Internet',
                 ),
               );
             },
@@ -370,6 +383,7 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
   Json? session, result;
   int index = 0;
   bool busy = false;
+  bool recoveryAvailable = false;
   String? error;
   Timer? timer;
   int remaining = 0;
@@ -385,7 +399,19 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
       final p = await ref.read(preferencesProvider.future);
       final s = LocalStore(p).current;
       if (!mounted) return;
-      setState(() => session = s);
+      setState(() {
+        session = s;
+        if (s != null &&
+            DateTime.now()
+                    .toUtc()
+                    .difference(DateTime.parse(s['created_at']))
+                    .inHours >=
+                24) {
+          recoveryAvailable = true;
+          error =
+              'Bài lưu đã quá 24 giờ. Khôi phục phiên làm bài để tiếp tục nộp; câu trả lời vẫn được giữ.';
+        }
+      });
       if (s != null) {
         void tick() {
           if (!mounted) return;
@@ -458,6 +484,54 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
         });
   }
 
+  Future<void> recover() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (c) => AlertDialog(
+        title: const Text('Khôi phục bài đã lưu?'),
+        content: const Text(
+          'Tạo phiên làm bài mới và giữ câu trả lời cho những câu hỏi không thay đổi. Những câu đã sửa cần làm lại. Bạn sẽ xem lại bài trước khi nộp.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(c, false),
+            child: const Text('Hủy'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(c, true),
+            child: const Text('Khôi phục'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
+    setState(() => busy = true);
+    try {
+      await pendingSave;
+      final next = await ref.read(apiProvider).recover(session!);
+      final p = await ref.read(preferencesProvider.future);
+      await LocalStore(p).save(next);
+      timer?.cancel();
+      if (!mounted) return;
+      setState(() {
+        session = next;
+        index = 0;
+        recoveryAvailable = false;
+        error = null;
+      });
+      await load();
+    } catch (_) {
+      if (mounted) {
+        setState(
+          () => error =
+              'Chưa khôi phục được. Kiểm tra kết nối và xem đề gốc còn có trong Luyện đề không. Bài cũ vẫn được giữ.',
+        );
+      }
+    } finally {
+      if (mounted) setState(() => busy = false);
+    }
+  }
+
   Future<void> submit() async {
     final confirmed = await showDialog<bool>(
       context: context,
@@ -492,11 +566,22 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
       await LocalStore(p).complete(session!, r);
       timer?.cancel();
       if (mounted) setState(() => result = r);
+    } on DioException catch (e) {
+      if (mounted) {
+        setState(() {
+          recoveryAvailable = [404, 410].contains(e.response?.statusCode);
+          error = recoveryAvailable
+              ? 'Phiên làm bài đã hết hạn hoặc không còn trên máy chủ của bản demo này. Nhấn Khôi phục bài đã lưu để giữ câu trả lời và nộp lại.'
+              : e.response?.statusCode == 409
+              ? 'Bài này đã nộp với câu trả lời khác. Hãy xem kết quả trong Tiến độ.'
+              : 'Chưa nộp được bài. Câu trả lời vẫn được giữ; kiểm tra kết nối rồi thử lại.';
+        });
+      }
     } catch (_) {
       if (mounted) {
         setState(
           () => error =
-              'Chưa nộp được bài. Câu trả lời vẫn được giữ trên thiết bị; kết nối lại rồi thử nộp.',
+              'Chưa nộp được bài. Câu trả lời vẫn được giữ; kiểm tra kết nối rồi thử lại.',
         );
       }
     } finally {
@@ -642,6 +727,17 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
               ),
             if (q['type'] == 'essay')
               const Text('Tự luận cần người duyệt; AI chưa được cấu hình.'),
+            if (session!['recovery_notice'] != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: Text(session!['recovery_notice']),
+              ),
+            if (recoveryAvailable)
+              FilledButton.icon(
+                onPressed: busy ? null : recover,
+                icon: const Icon(Icons.restore),
+                label: const Text('Khôi phục bài đã lưu'),
+              ),
             if (error != null)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),

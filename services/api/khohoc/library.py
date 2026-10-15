@@ -1,6 +1,8 @@
 """Local document library. Imports are metadata only; never fetch remote files."""
 
 import hashlib
+import json
+from functools import lru_cache
 import re
 import unicodedata
 from datetime import date, datetime, timezone
@@ -28,6 +30,45 @@ Textbook = Literal[
     "canh_dieu",
     "national_common",
 ]
+
+
+@lru_cache(maxsize=1)
+def textbook_unit_pairs() -> dict[str, tuple[int, str]]:
+    """Secondary-source mapping, not publisher or pedagogical approval."""
+    path = Path(__file__).resolve().parents[3] / "data/seeds/textbook_units.json"
+    books = json.loads(path.read_text(encoding="utf-8"))["books"]
+    return {
+        unit["id"]: (book["grade"], book["subject"])
+        for book in books
+        for unit in book.get("units", [])
+    }
+
+
+def is_textbook_lesson(item: dict) -> bool:
+    """Apply the same SGK mapping requirement to every grade and subject."""
+    if (
+        item.get("textbook") != "ket_noi_tri_thuc"
+        or item.get("source_type") == "link_only"
+        or item.get("kind") not in ("study_notes", "worksheet")
+        or item.get("assessment_period") not in (None, "review")
+        or textbook_unit_pairs().get(item.get("curriculum_unit_id"))
+        != (item.get("grade"), item.get("subject"))
+    ):
+        return False
+    headings = [
+        s.get("heading", "")
+        for s in item.get("sections", [])
+        if s.get("text", "").strip()
+    ]
+    return all(
+        any(required in heading for heading in headings)
+        for required in (
+            "Kiến thức và cách làm",
+            "Ví dụ từng bước",
+            "Bài tập tự luyện",
+            "Lời giải bài tập",
+        )
+    )
 
 
 def search_key(value: str) -> str:
@@ -304,11 +345,7 @@ def create_library_router(
                 "final_2",
                 "graduation",
             )
-            is_lesson = (
-                not is_exam
-                and item["source_type"] != "link_only"
-                and bool(item.get("sections"))
-            )
+            is_lesson = is_textbook_lesson(item)
             if section == "lessons" and not is_lesson:
                 continue
             if section == "exams" and not is_exam:
