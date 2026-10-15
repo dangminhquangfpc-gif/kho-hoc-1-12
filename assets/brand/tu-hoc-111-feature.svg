@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="500" viewBox="0 0 1024 500">
+  <title>Tự học 111 — đồ họa giới thiệu Google Play</title>
+  <desc>Học theo chủ đề. Luyện tập mỗi ngày.</desc>
+  <rect width="1024" height="500" fill="#263677"/>
+  <path d="M0 454Q365 328 1024 421V500H0Z" fill="#304583"/>
+  <circle cx="850" cy="88" r="136" fill="#304583"/>
+  <g transform="translate(25 87) scale(.31)" fill="#ffffff">
+    <path d="M272 315 332 267H386V481H330V338L306 356Z"/>
+    <path d="M447 315 507 267H561V481H505V338L481 356Z"/>
+    <path d="M622 315 682 267H736V481H680V338L656 356Z"/>
+    <path d="M250 533Q378 515 512 588Q646 515 774 533V741Q639 723 512 796Q385 723 250 741ZM298 576V690Q400 692 488 733V629Q394 577 298 576ZM536 629V733Q624 692 726 690V576Q630 577 536 629Z"/>
+    <path d="M362 639Q414 647 453 669M571 669Q610 647 662 639" fill="none" stroke="#51d9ca" stroke-width="22" stroke-linecap="round"/>
+  </g>
+  <g font-family="Noto Sans, sans-serif">
+    <text x="308" y="221" fill="#ffffff" font-size="72" font-weight="700">Tự học 111</text>
+    <text x="312" y="284" fill="#ffffff" font-size="28">Học theo chủ đề.</text>
+    <text x="312" y="328" fill="#ffffff" font-size="28">Luyện tập mỗi ngày.</text>
+  </g>
+  <rect x="312" y="365" width="64" height="6" rx="3" fill="#51d9ca"/>
+</svg>

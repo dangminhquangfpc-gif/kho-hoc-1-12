@@ -4,5 +4,8 @@
   "privacy_policy_url": "CHUA_CO_URL_CONG_KHAI",
   "account_deletion_url": "CHUA_CO_URL_CONG_KHAI",
   "content_review_complete": false,
-  "child_privacy_review_complete": false
+  "child_privacy_review_complete": false,
+  "data_safety_review_complete": false,
+  "device_testing_complete": false,
+  "store_account_verified": false
 }

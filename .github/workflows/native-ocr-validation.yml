@@ -1,7 +1,7 @@
 name: Native OCR validation
 on:
   push:
-    branches: [feature/native-ocr-ai-activation-20261015]
+    branches: [feature/native-ocr-ai-activation-20261015, feature/play-prep-without-paid-ai-20261015]
   workflow_dispatch:
 permissions:
   contents: read

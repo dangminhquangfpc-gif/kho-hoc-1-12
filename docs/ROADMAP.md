@@ -1,8 +1,8 @@
 # Tiến độ
 
-Trạng thái mới nhất: bản thử **.17 / 0.2.0+17**. Các mốc bên dưới ghi lại tiến
+Trạng thái mới nhất: bản thử **.18 / 0.2.0+18**. Các mốc bên dưới ghi lại tiến
 độ từng bản; không coi hạn chế của một mốc cũ là trạng thái hiện hành. Xem phần
-.17 cuối tài liệu và [AI_OCR.md](AI_OCR.md) cho phạm vi AI/OCR đang có.
+.18 cuối tài liệu và [OCR.md](OCR.md) cho phạm vi nhận chữ đang có.
 
 ## Giai đoạn 1
 - Đã có: kiến trúc, schema, 108 câu hỏi gốc/12 đề, catalog lớp/môn, FastAPI chấm điểm xác định, quyền admin cục bộ, capability cho guest, snapshot bài, nhập/duyệt/xuất bản, Flutter luyện đề/lưu bài/lịch sử, Next.js admin; thư viện 4 ghi chú/PDF gốc, tìm kiếm tiếng Việt không dấu, yêu thích/đọc gần đây; đánh dấu câu và tiến độ thiết bị; sửa câu hỏi/rollback revision, duyệt lại và giữ nguyên snapshot bài đang làm.
@@ -12,8 +12,8 @@ Trạng thái mới nhất: bản thử **.17 / 0.2.0+17**. Các mốc bên dư�
 ## Giai đoạn 2
 Đã có OCR chữ in tiếng Việt/Anh cục bộ ở web/Windows và tích hợp ML Kit native
 Android/iOS, xem trước/sửa/xác nhận văn bản, nhập văn bản vào câu tự luận và
-backend trợ giảng AI tùy chọn có consent/quota, công cụ cấu hình khóa riêng.
-Chưa có khóa nên chưa gọi hay đánh giá provider thật. Còn camera/cắt ảnh,
+trợ giảng AI trả phí ở .16/.17 đã được gỡ từ .18 theo yêu cầu chủ app.
+Giữ OCR miễn phí; còn camera/cắt ảnh,
 chấm tự luận theo rubric, báo lỗi/lưu phản hồi AI, đánh giá sư
 phạm và quản lý chi phí; chưa hoàn tất giai đoạn này.
 
@@ -193,3 +193,23 @@ synthetic, không gọi nhà cung cấp. Đã chuẩn bị yêu cầu bí mật 
 cloud; chưa được cung cấp khóa thật nên chưa bật/đánh giá AI thật. Xem
 [AI_ACTIVATION.md](AI_ACTIVATION.md). Còn camera/cắt ảnh, HEIC, chấm tự luận,
 đánh giá mô hình, backend HTTPS của chủ app, ký/kiểm thử/phát hành cửa hàng.
+
+## Bản .18 — giữ OCR miễn phí, chuẩn bị Google Play
+
+Theo yêu cầu chủ app, đã tạm gỡ trợ lý AI trả phí khỏi giao diện, API, proxy,
+launcher và công cụ cấu hình khóa. Cấu hình/khóa cũ không thể kích hoạt lại
+provider và được giữ nguyên trong thư mục riêng của người vận hành. OCR web/
+Windows/native tiếp tục hoạt động, không cần khóa; không thêm phí dịch vụ OCR.
+
+Thay biểu tượng Flutter mặc định bằng bộ nhận diện Tự học 111: Android adaptive/
+monochrome, iOS/web và icon512/feature1024×500 cho cửa hàng. Chuẩn bị Data Safety,
+chính sách và luồng reviewer đúng với dữ liệu tài khoản/bài khách/ML Kit.
+
+Preflight có nhánh AAB unsigned engineering không đọc khóa ký, kiểm thư viện
+64-bit và cấu hình căn16KB; nhánh phát hành kiểm HTTPS/health/ready/metadata/
+ký upload và các xác nhận đã duyệt. Không coi engineering AAB là gói upload.
+
+Còn adapter production/backend HTTPS thật, Play Console/khóa ký, quy trình trẻ
+em/xác minh giáo viên, thẩm định nội dung, thiết bị vật lý/screenshot native và
+kiểm thử kín. Không mua/triển khai/phát hành cửa hàng trong mốc này. Xem
+[Google Play checklist](PLAY_STORE_CHECKLIST.md) và [xác minh](VALIDATION.md).

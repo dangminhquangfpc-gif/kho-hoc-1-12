@@ -1,9 +1,22 @@
 # Tự học 111 — chuẩn bị Google Play và App Store
 
-Bản mã nguồn 0.2.0+17 / demo .17; các mốc kỹ thuật cũ được giữ bên dưới.
+Bản mã nguồn 0.2.0+18 / demo .18; các mốc kỹ thuật cũ được giữ bên dưới.
 Chưa phát hành lên cửa hàng.
 Người dùng xác nhận chưa có Play Console, Apple Developer hoặc backend HTTPS dùng chung.
 Không tạo tài khoản, thanh toán hoặc đưa backend development chứa dữ liệu học viên ra Internet.
+
+## Bản hiện hành .18
+
+Theo lựa chọn của chủ ứng dụng, đã gỡ trợ lý AI trả phí, endpoint gọi mô hình,
+công cụ cấu hình khóa và nút AI. Không yêu cầu khóa API; cấu hình AI cũ không
+được launcher/backend sử dụng. OCR miễn phí vẫn giữ nguyên, xem [OCR](../OCR.md).
+Các phần .16/.17 bên dưới là lịch sử, không mô tả bản hiện hành.
+
+Đã chuẩn bị bộ nhận diện Tự học 111, AAB unsigned engineering và hồ sơ
+Data Safety/reviewer. AAB .18 build đạt, 10 thư viện 64-bit và cấu hình
+đóng gói 16 KB đạt kiểm tra tĩnh; chưa nghiệm thu runtime thiết bị 16 KB. Kết quả xác minh cuối ghi ở [VALIDATION](../VALIDATION.md).
+Không có tài khoản Play Console, khóa upload hay backend HTTPS được triển khai
+trong bước này; không mở khóa production chỉ để vượt kiểm tra phát hành.
 
 ## Những phần đã chuẩn bị trong mã nguồn
 
@@ -33,12 +46,13 @@ Không tạo tài khoản, thanh toán hoặc đưa backend development chứa d
    525 thẻ chưa đủ ngân hàng vẫn là tham khảo. Không mô tả chúng như đề nguồn đã chuyển đổi.
 4. Duyệt dữ liệu trẻ em, cơ chế đồng ý của phụ huynh/người giám hộ, vai trò giáo viên hiện tự khai,
    chính sách chia sẻ kết quả và liên kết ngoài. Chưa khẳng định đáp ứng Families/Children's Privacy.
-5. Logo riêng, ảnh chụp điện thoại Android/iPhone/iPad thật, khả năng truy cập và kiểm thử thiết bị.
-   Tài sản icon trong khung iOS vẫn là template; chưa coi bộ hình ảnh cửa hàng là hoàn chỉnh.
+5. Bộ biểu tượng riêng và feature graphic đã có trong [BRAND_ASSETS](BRAND_ASSETS.md).
+   Còn ảnh chụp ứng dụng trên điện thoại Android/iPhone/iPad thật, khả năng truy cập
+   và kiểm thử thiết bị; ảnh web kiểm thử không được coi là screenshot native đã nghiệm thu.
 6. Khóa Android upload signing và Apple team/certificate/profile ở kho bí mật riêng, ngoài Git.
    Tăng version/build, kiểm tra AAB/IPA đã ký; kiểm thử nội bộ/kín/TestFlight theo loại tài khoản.
 7. Khai Data Safety/App Privacy, độ tuổi, content rating, SDK, quyền nội dung, tài khoản demo cho reviewer;
-   đối chiếu dữ liệu chẩn đoán/định danh ML Kit và dữ liệu văn bản gửi nhà cung cấp AI thực tế;
+   đối chiếu dữ liệu chẩn đoán/định danh ML Kit; bản .18 không gửi văn bản tới AI;
    kiểm tra lần cuối trước khi gửi bản cụ thể xét duyệt. Chưa gửi submission hay thanh toán phí.
 
 ## Yêu cầu chính thức đã truy cập ngày 15/10/2026

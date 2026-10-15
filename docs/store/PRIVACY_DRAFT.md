@@ -1,95 +1,135 @@
 # Bản nháp chính sách quyền riêng tư — Tự học 111
 
-CHƯA CÔNG BỐ. Cần tên đơn vị phát hành, email hỗ trợ, URL chính sách và địa chỉ yêu cầu xóa dữ liệu thật.
-Bản nháp này mô tả chức năng đang có, không thay thế việc xét duyệt pháp lý/chính sách cửa hàng.
+**Trạng thái: chưa công bố.** Phạm vi: bản 0.2.0+18, ngày 15/10/2026.
+Tài liệu mô tả mã nguồn hiện tại để đơn vị phát hành hoàn thiện chính sách.
+Không dùng tài liệu làm URL chính sách đã có hiệu lực khi các ô sau còn trống.
 
-Ứng dụng phục vụ học tập lớp 1–12 và quản lý nhóm học viên.
-Khi đăng ký, hệ thống lưu tên đăng nhập, tên hiển thị, vai trò và lớp học nếu được chọn.
-Mật khẩu được xử lý bằng scrypt với salt riêng; không lưu mật khẩu gốc.
-Khi đăng nhập, phiên có thời hạn 8 giờ. Trên web dùng cookie HttpOnly/SameSite;
-ứng dụng native hiện giữ token trong bộ nhớ. Chưa tích hợp SDK quảng cáo;
-bản native .17 có SDK nhận chữ Google ML Kit với dữ liệu chẩn đoán được mô tả bên dưới.
+| Thông tin cần công bố | Giá trị hiện tại |
+| --- | --- |
+| Tên và địa chỉ đơn vị chịu trách nhiệm | CHƯA CÓ |
+| Email hỗ trợ và yêu cầu về dữ liệu | CHƯA CÓ |
+| URL chính sách công khai, truy cập không cần đăng nhập | CHƯA CÓ |
+| URL yêu cầu xóa tài khoản ngoài ứng dụng | CHƯA CÓ |
+| Máy chủ, đơn vị lưu trữ và khu vực xử lý dữ liệu | CHƯA CÓ backend production |
+| Ngày chính sách có hiệu lực | CHƯA ẤN ĐỊNH |
 
-Hệ thống lưu câu trả lời, điểm do backend chấm, thời điểm nộp, đề và chủ đề để hiển thị tiến độ.
-Giáo viên xem kết quả học viên họ cấp tài khoản hoặc học viên tham gia nhóm bằng mã mời;
-quản lý hệ thống có phạm vi quản lý rộng hơn. Vai trò giáo viên tự đăng ký chưa được xác minh nghề nghiệp.
-Việc tham gia nhóm không cho giáo viên quyền đặt lại mật khẩu/xóa tài khoản tự đăng ký của học viên.
+## Dữ liệu tài khoản và học tập
 
-Khi báo lỗi nội dung, hệ thống lưu loại vấn đề, mô tả, mã nội dung, trích đoạn
-lúc báo và thời gian; người xử lý lưu giải thích và trạng thái. Giáo viên đang
-quản lý học viên/người quản lý hệ thống có thể xem theo phạm vi quyền. Không
-gửi phiếu tới dịch vụ AI hoặc bên ngoài. Không nhập thông tin riêng tư vào phiếu.
-Phiếu được giữ tới khi người gửi xóa tài khoản; khi người xử lý xóa tài khoản,
-phần trả lời và định danh người đó trên phiếu của học viên được thay bằng ghi
-chú hệ thống. Chưa có lịch tự xóa phản hồi theo thời gian.
+Tự học 111 phục vụ luyện tập lớp 1–12 và quản lý nhóm học viên. Khi đăng ký,
+ứng dụng gửi tên đăng nhập, tên hiển thị, mật khẩu, vai trò học sinh/giáo viên
+và lớp nếu người dùng chọn đến máy chủ được cấu hình. Luồng đăng ký hiện
+không yêu cầu email, số điện thoại, địa chỉ, ngày sinh hay vị trí thiết bị.
+Mật khẩu được băm bằng scrypt với salt riêng; cơ sở dữ liệu không lưu mật
+khẩu gốc. Máy chủ lưu mã tài khoản, quan hệ cấp tài khoản, nhóm và thành viên.
 
-Chế độ khách lưu bài làm/lịch sử trên thiết bị. Đăng nhập có dữ liệu trên backend đang cấu hình.
-Bản local lưu SQLite trong thư mục state của máy chạy; chưa có dịch vụ cloud production vận hành.
-Khi mở nguồn tham khảo ngoài, trình duyệt truy cập website bên thứ ba theo chính sách của họ;
-việc này cần được xét lại cho chế độ trẻ em trước khi phát hành.
+Khi làm bài, máy chủ lưu đề, câu trả lời, bản nháp khi đồng bộ, thời gian nộp
+và kết quả để chấm bài, tiếp tục bài trên thiết bị khác và hiển thị tiến độ.
+**Chế độ khách cũng dùng máy chủ để tạo và chấm bài.** Lịch sử và bài đang làm
+còn được lưu trên thiết bị; chế độ khách không đồng nghĩa mọi dữ liệu chỉ ở
+trên thiết bị. Phần luyện tập/tài liệu cần backend; riêng nhận chữ từ ảnh có
+thể mở không cần tài khoản hay backend.
 
-Trong bản web/demo Windows .17, nhận chữ ảnh bằng Tesseract chạy trong trình
-duyệt. Worker, WebAssembly và dữ liệu tiếng Việt/Anh nằm trong gói; ảnh không
-được gửi đến backend hoặc dịch vụ OCR bên ngoài. Ảnh được vẽ lại để bỏ metadata
-EXIF/GPS trước khi xử lý/xem trước; không ghi ảnh vào localStorage/IndexedDB.
-Ảnh và văn bản ở màn hình OCR chỉ giữ trong bộ nhớ, không tự lưu vào lịch sử.
-Nếu người dùng chủ động dùng văn bản cho ô trả lời, văn bản đó được lưu/nộp
-theo quy tắc bài làm thông thường.
+Phiên đăng nhập có thời hạn 8 giờ. Web dùng cookie HttpOnly/SameSite=Strict;
+bản native giữ token đăng nhập trong bộ nhớ. Ứng dụng lưu lựa chọn máy chủ,
+mã tài khoản đang dùng, tùy chọn, bài đang làm và lịch sử trên thiết bị. Đây
+không phải kho lưu trữ được ứng dụng mã hóa riêng. Bản local dùng SQLite
+trong thư mục `state`; cấu hình máy chủ dùng chung hỗ trợ PostgreSQL và HTTPS.
+Chưa có máy chủ production đang vận hành để công bố đơn vị lưu trữ thật.
 
-Bản native Android/iOS .17 có chọn ảnh từ thư viện bằng image_picker và nhận
-chữ trên thiết bị bằng Google ML Kit, không có nút chụp camera trong luồng này.
-Ứng dụng yêu cầu Android 7.0/API 24 hoặc iOS 15.5 trở lên.
-Ứng dụng kiểm tra và vẽ lại ảnh để bỏ EXIF/GPS rồi dùng một bản PNG tạm riêng;
-bản tạm được dọn sau xử lý, ảnh gốc trong thư viện không bị xóa. Nếu hệ điều
-hành dừng ứng dụng đột ngột, bản cache có thể còn tới khi hệ điều hành dọn.
-Ảnh không được tải lên backend hoặc gửi trong nội dung yêu cầu AI. Việc hủy
-chặn kết quả đến muộn hiển thị trên màn hình; không bảo đảm bộ native dừng xử
-lý ngay. Văn bản vẫn cần người dùng sửa và xác nhận trước khi dùng cho bài làm.
-Chưa có công cụ chụp/cắt ảnh trong ứng dụng.
+## Người có thể xem kết quả
 
-Google công bố ML Kit có thể thu thập/gửi thông tin thiết bị, ứng dụng, mã
-định danh theo lần cài đặt và thông tin chẩn đoán, hiệu năng, sử dụng API;
-tùy API có thông tin định dạng, độ phân giải hoặc kích thước đầu vào/đầu ra.
-Luồng OCR trên thiết bị không gửi nội dung ảnh để nhận dạng từ xa. Không vì
-vậy mà khẳng định bản native không có kết nối hoặc dữ liệu gửi tới Google.
-Chính sách, loại dữ liệu và cách khai SDK cần được đối chiếu lại với bản SDK
-và ứng dụng gửi xét duyệt:
+Giáo viên xem kết quả của học viên họ cấp tài khoản và học viên thuộc nhóm
+họ quản lý. Học viên tự đăng ký có thể tham gia bằng mã nhóm. Giáo viên không
+được đặt lại mật khẩu/xóa tài khoản tự đăng ký chỉ vì học viên tham gia nhóm;
+người cấp tài khoản và quản lý hệ thống có quyền quản lý tài khoản theo phạm
+vi được cấp. Vai trò giáo viên tự đăng ký hiện chưa được xác minh nghề nghiệp.
+
+Giáo viên có thể xuất bảng điểm nhóm: bản web tải CSV, bản native sao chép CSV
+vào bộ nhớ tạm khi giáo viên chọn. Bản xuất sau đó nằm ngoài khả năng thu hồi
+của ứng dụng. Không dùng mã nhóm hoặc chia sẻ CSV như cơ chế xác nhận đồng ý
+của phụ huynh; quy trình này chưa được xây dựng.
+
+## Phản hồi nội dung và nhật ký kỹ thuật
+
+Khi gửi phản hồi, máy chủ lưu loại vấn đề, nội dung mô tả, mã nội dung, trích
+đoạn và thời gian. Người xử lý lưu câu trả lời và trạng thái. Người gửi và
+người quản lý có quyền theo phạm vi tài khoản/nhóm có thể xem phiếu. Không
+nhập thông tin riêng tư không cần thiết vào phần mô tả.
+
+Máy chủ có nhật ký hoạt động quản trị/tài khoản và bộ đếm chống lạm dụng.
+Ở cấu hình dùng chung, thông tin kết nối được dùng để giới hạn yêu cầu; bộ
+đếm cơ sở dữ liệu dùng khóa băm theo cửa sổ thời gian. Hạ tầng lưu trữ/proxy
+thật có thể có nhật ký truy cập riêng. Chưa có lịch lưu giữ thống nhất cho
+nhật ký ứng dụng, proxy và bản sao lưu để công bố cho người dùng.
+
+## Nhận chữ từ ảnh
+
+Bản 0.2.0+18 không tích hợp trợ giảng AI trả phí hay gửi yêu cầu đến nhà cung
+cấp mô hình AI. Không cần khóa AI. Chức năng nhận chữ trên thiết bị được giữ
+lại; bản hiện tại không có quảng cáo hay thanh toán trong ứng dụng.
+
+Trong web/demo Windows, Tesseract xử lý ảnh trong trình duyệt. Worker,
+WebAssembly và dữ liệu tiếng Việt/Anh nằm trong gói. Ứng dụng không gửi ảnh
+đến backend/dịch vụ OCR từ xa và không ghi ảnh vào localStorage/IndexedDB.
+
+Trên Android/iOS, người dùng chủ động chọn ảnh qua `image_picker`; ứng dụng
+không có nút chụp camera trong luồng này. Google ML Kit nhận chữ trên thiết
+bị. Ứng dụng yêu cầu Android 7.0/API 24 hoặc iOS 15.5 trở lên. Ảnh được kiểm
+tra và vẽ lại để bỏ EXIF/GPS; bản PNG tạm riêng được dọn sau xử lý. Ảnh gốc
+trong thư viện không bị xóa. Nếu hệ điều hành dừng ứng dụng đột ngột, bản
+cache có thể còn tới khi hệ điều hành dọn. Chưa có công cụ chụp/cắt ảnh trong app.
+
+Ảnh/văn bản của màn hình nhận chữ chỉ giữ trong bộ nhớ và không tự lưu vào
+lịch sử. Người dùng cần sửa, kiểm tra và xác nhận văn bản trước khi dùng.
+Khi chọn sao chép, văn bản được đưa vào bộ nhớ tạm hệ điều hành. Khi dùng
+văn bản cho câu trả lời rồi lưu/nộp bài, văn bản đó được xử lý như câu trả
+lời thông thường, bao gồm gửi đến máy chủ. Hủy thao tác ngăn kết quả muộn
+hiển thị; không bảo đảm tác vụ nhận chữ native dừng ngay.
+
+Google công bố ML Kit có thể gửi dữ liệu thiết bị, ứng dụng, mã định danh
+theo lần cài đặt, chẩn đoán/hiệu năng và thông tin sử dụng API; tùy API có
+định dạng, độ phân giải hoặc kích thước đầu vào/đầu ra. Xử lý OCR cục bộ không
+đồng nghĩa SDK không có kết nối hay không thu thập dữ liệu chẩn đoán.
+Không tuyên bố Google nhận nội dung ảnh để nhận dạng từ xa trong luồng này.
+Đơn vị phát hành cần xác nhận phạm vi dữ liệu của đúng bản SDK gửi xét duyệt:
 
 - Android: https://developers.google.com/ml-kit/android-data-disclosure
 - iOS: https://developers.google.com/ml-kit/ios-data-disclosure
+- Phiên bản và đối chiếu khai báo: [DATA_SAFETY_WORKSHEET.md](DATA_SAFETY_WORKSHEET.md).
 
-Mã nhận dạng theo lần cài đặt cần được đánh giá cùng quy trình xóa dữ liệu và
-yêu cầu trẻ em; bản nháp này chưa xác nhận cơ sở xử lý hay đồng ý cần thiết
-để dùng SDK với học sinh thật.
+## Lưu giữ và xóa
 
-Trợ giảng AI mặc định tắt và hiện chưa có provider thật được cấu hình/đánh giá
-cho người dùng. Bản .17 thêm công cụ cấu hình khóa riêng trên máy vận hành;
-khóa không được đưa vào app native, web hoặc gói demo phát hành. Khi người
-vận hành bật dịch vụ, người đăng nhập phải kiểm tra văn
-bản và xác nhận gửi tới host nhà cung cấp được nêu trong mỗi yêu cầu. Hệ
-thống gửi lớp, môn và văn bản đã sửa qua backend; ảnh và cookie/token đăng
-nhập không nằm trong nội dung gửi AI. Với lựa chọn tham chiếu câu đã nộp, máy
-chủ còn gửi đề gốc, lựa chọn, đáp án và lời giải đã lưu của câu đó. Hộp thoại
-nêu rõ việc sửa ô văn bản không sửa tham chiếu; có thể tắt lựa chọn để chỉ gửi
-văn bản đã kiểm tra. Tên hoặc thông tin riêng tư nằm trong nội dung vẫn có
-thể bị gửi, vì vậy cần loại bỏ trước khi gửi và chọn chế độ phù hợp.
+Tài khoản học sinh/giáo viên có thể tự xóa tại **Cá nhân → Tài khoản → Xóa tài
+khoản**, nhập mật khẩu xác nhận rồi chọn **Xóa vĩnh viễn**. Máy chủ xóa tài
+khoản, phiên, bản nháp/bài làm/kết quả thuộc tài khoản và phiếu do người đó
+gửi. Khi người xử lý xóa tài khoản, phần phản hồi và định danh người đó trên
+phiếu của người khác được thay bằng ghi chú hệ thống.
 
-Phản hồi AI chỉ tham khảo, không thay đổi điểm hoặc đáp án. Ứng dụng không tự
-lưu nội dung yêu cầu/phản hồi AI hay ảnh vào nhật ký AI. Nhật ký kỹ thuật giữ
-ID tài khoản, thời điểm, model, trạng thái, số ký tự và số token của lượt thành
-công; quota giữ bộ đếm. Chưa có lịch tự xóa/ẩn danh nhật ký AI. Điều khoản lưu
-giữ, huấn luyện và bên xử lý dữ liệu của nhà cung cấp thật còn cần thẩm định;
-không khẳng định provider không lưu dữ liệu chỉ vì app không lưu văn bản.
-Xác nhận trên màn hình chưa thay thế quy trình người giám hộ cần thiết trước
-khi dùng với trẻ em. Chi tiết kỹ thuật: [AI_OCR.md](../AI_OCR.md).
+Xóa giáo viên không xóa tài khoản/kết quả của học viên. Nhóm và đề riêng của
+giáo viên bị xóa; bản đề đã gắn với bài làm của học viên khác có thể còn trong
+hồ sơ của học viên đó. Tài khoản quản lý hệ thống cần được bàn giao trước
+khi xóa. Thao tác xóa trên thiết bị hiện tại không điều khiển bản dữ liệu đã
+xuất, thiết bị khác hoặc bản sao lưu hạ tầng.
 
-Hiện dữ liệu học tập được giữ tới khi người dùng hoặc quản lý xóa; chưa có thời hạn tự động xóa.
-Người dùng tự đăng ký có thể xóa tài khoản và kết quả của mình trong Tài khoản bằng mật khẩu xác nhận.
-Tài khoản/kết quả học viên do giáo viên cấp không bị xóa khi giáo viên xóa tài khoản.
-Các bản đã chia sẻ trong kết quả học viên khác có thể được giữ như hồ sơ học tập của học viên đó.
-Tài khoản quản lý hệ thống cần bàn giao trước khi xóa. Yêu cầu xóa qua website và xử lý backup
-cần được thiết lập cùng đơn vị phát hành/backend thật; hiện chưa có kênh công khai đang vận hành.
+Xóa lịch sử trên thiết bị không xóa hồ sơ kết quả của lớp. Phiên/bài làm hết
+hạn truy cập không đồng nghĩa dữ liệu đã được tự động xóa. Chưa có thời hạn
+tự xóa chung cho hồ sơ học tập, nhật ký và backup; việc xử lý dữ liệu tồn dư
+trong nhật ký/backup và yêu cầu từ người giám hộ cần được chốt trước khi
+phát hành. Chưa có website/email công khai đang vận hành để yêu cầu xóa khi
+không cài app; phải bổ sung kênh này trước khi gửi Google Play.
 
-Trước khi dùng với học sinh thật, cần chính sách đồng ý của phụ huynh/người giám hộ,
-phạm vi chia sẻ, xác minh giáo viên và hướng dẫn quản lý tài khoản phù hợp tuổi.
-Chưa tuyên bố đáp ứng đầy đủ mọi yêu cầu về dữ liệu trẻ em hoặc cửa hàng.
+## Học sinh nhỏ tuổi và nguồn bên ngoài
+
+Ứng dụng hướng tới lớp 1–12 nên có người dùng trẻ em. Hiện chưa có quy trình
+đồng ý của người giám hộ, xác minh giáo viên hay cơ chế tuổi được thẩm định.
+Đơn vị phát hành phải quyết định đối tượng tuổi thật và hoàn tất quy trình
+phù hợp trước khi dùng với học sinh thật. Không tự khai ứng dụng chỉ dành
+cho người lớn để tránh khai báo nhóm tuổi đang phục vụ.
+
+Khi mở nguồn tham khảo ngoài, trình duyệt truy cập website bên thứ ba theo
+chính sách của họ; website đó có thể có quảng cáo, đăng nhập hoặc nội dung
+khác. Cần rà lại danh sách nguồn và luồng liên kết cho đối tượng trẻ em.
+
+Các mục chưa hoàn tất ở trên là yêu cầu chuẩn bị phát hành, chưa phải cam
+kết chính sách đã được triển khai. Hướng dẫn kiểm thử dành cho người duyệt:
+[REVIEWER_GUIDE.md](REVIEWER_GUIDE.md).

@@ -11,7 +11,7 @@ jobs:
       - run: pip install -r services/api/requirements.lock.txt
       - run: ruff check services/api scripts data/pipelines
       - run: PYTHONPATH=services/api pytest services/api/tests
-      - run: pytest scripts/test_configure_ai.py scripts/test_demo_ai_launcher.py
+      - run: pytest scripts/test_demo_ai_launcher.py
       - run: python data/pipelines/import_cli.py data/seeds/questions.json
       - run: PYTHONPATH=services/api python data/pipelines/validate_language_seeds.py
       - run: python scripts/test_shared_postgres.py

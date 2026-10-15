@@ -2,7 +2,6 @@ import importlib.util
 import json
 from pathlib import Path
 import pytest
-from khohoc.ai import AIGrade, AIUnavailable, UnconfiguredProvider
 
 ROOT = Path(__file__).resolve().parents[3]
 spec = importlib.util.spec_from_file_location(
@@ -35,23 +34,3 @@ def test_csv_round_trip(tmp_path):
             {k: json.dumps(v) if isinstance(v, list) else v for k, v in q.items()}
         )
     assert pipeline.validate(path).questions[0].id == q["id"]
-
-
-def test_ai_failure_and_provisional_bounds():
-    import asyncio
-
-    with pytest.raises(AIUnavailable):
-        asyncio.run(UnconfiguredProvider().grade_essay())
-    with pytest.raises(ValueError):
-        AIGrade(
-            score=11, max_score=10, feedback="x", confidence=0.8, model_version="test"
-        )
-    with pytest.raises(ValueError):
-        AIGrade(
-            score=5,
-            max_score=10,
-            feedback="x",
-            confidence=0.8,
-            model_version="test",
-            grading_status="official",
-        )

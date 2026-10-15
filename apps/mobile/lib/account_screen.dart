@@ -9,7 +9,7 @@ import 'repository.dart';
 import 'study_progress.dart';
 import 'report_export.dart';
 import 'assignments_screen.dart';
-import 'ai_ocr_screen.dart';
+import 'ocr_screen.dart';
 
 final serverResultsProvider = FutureProvider.autoDispose<List<Json>>((ref) {
   final user = ref.watch(authUserProvider);
@@ -207,10 +207,10 @@ class _AccountState extends ConsumerState<AccountScreen> {
           TextButton.icon(
             onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => const AiOcrScreen()),
+              MaterialPageRoute(builder: (_) => const OcrScreen()),
             ),
             icon: const Icon(Icons.document_scanner_outlined),
-            label: const Text('Ảnh và trợ lý học tập'),
+            label: const Text('Nhận chữ từ ảnh'),
           ),
           if (user == null) ...[
             Text(

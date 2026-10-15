@@ -3,12 +3,12 @@
 
 Monorepo MVP phát triển theo docs/PRODUCT_PLAN.md. Ứng dụng QuizApp Firebase cũ ở lib/ và android/ được giữ nguyên; ứng dụng mới ở apps/mobile/. Hướng dẫn cũ được giữ ở docs/LEGACY_QUIZAPP_README.md. Chưa hoàn thành tất cả tiêu chí MVP hoặc sẵn sàng Google Play.
 
-Bản thử hiện tại **2026.10.15.17**: OCR tiếng Việt chạy local trên web/Windows;
-đã tích hợp OCR Android/iOS với ML Kit và bộ chọn ảnh thư viện. Có xem ảnh, sửa
-và xác nhận văn bản trước khi dùng cho câu trả lời. Trợ lý AI có xác nhận gửi
-văn bản, phân quyền và hạn mức; cần khóa dịch vụ riêng để bật. Xem [cấu hình AI
-thật](docs/AI_ACTIVATION.md) và [phạm vi AI/OCR](docs/AI_OCR.md). Các con số và trạng thái trong
-những mục ghi phiên bản cũ bên dưới là lịch sử phát triển.
+Bản thử hiện tại **2026.10.15.18**: đã tạm gỡ trợ lý AI trả phí, không cần
+khóa API. Giữ OCR miễn phí tiếng Việt/Anh trên web/Windows và Android/iOS;
+kiểm tra/sửa/xác nhận chữ trước khi đưa vào câu trả lời. Có bộ biểu tượng
+Tự học 111 và công cụ kiểm tra AAB engineering/điều kiện Google Play.
+Xem [OCR](docs/OCR.md) và [chuẩn bị Google Play](docs/PLAY_STORE_CHECKLIST.md).
+Các mục ghi phiên bản cũ bên dưới là lịch sử phát triển.
 
 Bản thử 2026.10.15.6: chọn nhiều chủ đề, bổ sung 731 câu Toán 5, tài khoản học viên và quản lý kết quả trên backend local. Hướng dẫn: [Tài khoản và quản lý học viên](docs/CLASSROOM_ACCOUNTS.md).
 
@@ -99,9 +99,9 @@ npm run build --prefix apps/admin
 bash scripts/test_rls.sh
 ```
 
-Xem docs/VALIDATION.md, docs/AI_OCR.md để biết phạm vi kiểm tra và docs/ROADMAP.md
-cho phần chưa làm. Đã có tài khoản, nhóm giáo viên, kết quả, tài liệu và OCR web;
-AI cần dịch vụ được cấu hình và chưa được đánh giá với nhà cung cấp thật.
+Xem docs/VALIDATION.md, docs/OCR.md để biết phạm vi kiểm tra và docs/ROADMAP.md
+cho phần chưa làm. Đã có tài khoản, nhóm giáo viên, kết quả, tài liệu và OCR;
+trợ lý AI trả phí đã được gỡ ở bản .18.
 Chưa có liên kết phụ huynh hoặc thanh toán. Không tuyên bố quyền dùng
 tài liệu bên ngoài chỉ vì nguồn được mở công khai.
 

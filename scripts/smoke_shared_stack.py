@@ -238,24 +238,18 @@ def main():
                     if time.monotonic() > deadline:
                         raise
                     time.sleep(0.5)
-            request("/ai/status", status=401)
+            request("/ai/status", status=404)
             for device in [0, 1]:
                 request(
                     "/auth/login",
                     {"username": "student", "password": password},
                     device=device,
                 )
-            assert request("/ai/status")["configured"] is False
+            request("/ai/status", status=404)
             request(
                 "/ai/explain",
-                {
-                    "grade": question["grade"],
-                    "subject": question["subject"],
-                    "text": "Giải thích cách làm bài toán này.",
-                    "consent": True,
-                    "expected_provider_host": "api.openai.com",
-                },
-                status=503,
+                {"text": "Giải thích cách làm bài toán này."},
+                status=404,
             )
             # Assign a public source privately, then carry assignment progress through recovery.
             request(

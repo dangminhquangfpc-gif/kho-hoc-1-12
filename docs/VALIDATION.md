@@ -1,4 +1,9 @@
-# Kết quả xác minh — 14/10/2026
+# Kết quả xác minh
+
+Bản hiện hành **.18 / 0.2.0+18**; kết quả mới nhất ở cuối tài liệu. Các mốc
+bên dưới giữ nguyên để đối chiếu, không mô tả tính năng hiện hành.
+
+## Mốc ban đầu — 14/10/2026
 
 | Thành phần | Kết quả hiện tại |
 |---|---|
@@ -206,3 +211,42 @@ quả nhận chữ trên Android giả lập là kiểm tra picker hoặc thiế
 AI thật còn chờ khóa được nhập trong cài đặt môi trường bảo mật hoặc công cụ
 Windows. Chưa nghiệm thu chất lượng AI, ảnh viết tay/công thức/HEIC hoặc điện
 thoại thật; ML Kit telemetry được công bố riêng trong bản nháp quyền riêng tư.
+
+## Bản .18 — OCR miễn phí và chuẩn bị Google Play
+
+- Backend + launcher: **185 đạt, 19 bỏ qua** (PostgreSQL yêu cầu DB riêng);
+  toàn bộ Ruff đạt. Có hồi quy không còn endpoint AI, không tạo remote
+  client dù cấu hình cũ bật, không đọc/xóa khóa/cấu hình cũ trong state.
+- Flutter: **54 kiểm thử đạt**, analyzer không có lỗi. Sau sửa release R8,
+  8 kiểm thử native OCR đạt lại, thêm xác nhận MethodChannel luôn script0
+  Latin. Không dùng kết quả mô phỏng này để khẳng định máy thật.
+- Tesseract thật Chromium đạt với PNG/JPEG/WebP; kiểm tra giới hạn, hủy,
+  timeout và không request ngoài/không lưu ảnh đạt. Bộ 14 tệp OCR checksum đạt.
+- ZIP Windows .18 giải nén, khởi động backend/gateway và browser thật: OCR
+  picker tiếng Việt confidence95; sửa chữ bỏ xác nhận; nhập một ký tự5 không
+  tự nộp; tự nộp/xem điểm không có nút/request AI. Mất API auth vẫn mở OCR,
+  nhận ảnh thật, xác nhận/sao chép và giữ nguyên toàn bộ preference. Không
+  ảnh trong POST, request ngoài origin hay lỗi JavaScript.
+- Nâng cấp state thử .17: giữ nguyên từng dòng 32 tài khoản,17 liên kết
+  attempt,13 kết quả,10 nhóm, các quan hệ thành viên/đề giáo viên/phiếu phản
+  hồi. Đây là dữ liệu tổng hợp kiểm thử, không phải dữ liệu học viên thật.
+- AAB release unsigned **build đạt** với thu gọn R8. Sửa quy trình tạo lại
+  registrant theo release sau bước pub get --enforce-lockfile; 8 quy tắc
+  R8 chỉ cho các lớp model ngôn ngữ tùy chọn không đóng gói. Không tắt R8.
+  Gói 60.039.725 byte, SHA256
+  `90acf53dcff465c6dea73a513b5bfcec7a8a5dbf3b91b146c058548a4c568baf`.
+  Kiểm tra 10 ELF arm64/x86_64 có PT_LOAD>=16KB và BundleConfig yêu cầu
+  PAGE_ALIGNMENT_16K. Chưa chạy runtime hệ điều hành16KB; gói không ký,
+  không được coi là gói gửi Play. Lockfile không đổi sau build.
+- APK Android debug ARM64 build đạt, versionCode18/minAPI24/target36,
+  chữ ký AndroidDebug được apksigner xác minh và zipalign -P16 đạt.
+  APK thử chưa có backend mặc định được triển khai; chức năng máy chủ cần
+  URL HTTPS thật được cấu hình. OCR miễn phí hoạt động độc lập.
+- Bộ 40 tài sản nhận diện được tái tạo ngoại tuyến và so byte/checksum đạt;
+  đã xem icon48px và feature1024×500. Ảnh browser412×915 là ảnh web kiểm thử,
+  không phải screenshot native được nghiệm thu cho Play.
+
+Chưa có backend production/Play Console, khóa upload, quy trình trẻ em/giám
+hộ đã duyệt, thẩm định nội dung toàn bộ hay thiết bị vật lý. Không gọi dịch
+vụ AI thật trong bản này. Các quy trình CI được lưu cùng source .18; kết quả
+từng run cần xem ở PR/checks đúng commit.

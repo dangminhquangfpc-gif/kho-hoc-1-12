@@ -1,71 +1,62 @@
-"""The demo must select one AI credential source and keep production state out."""
+"""Upgrading must not reactivate a removed paid AI integration or delete secrets."""
 
-import os
+import json
 from pathlib import Path
 import subprocess
 import sys
 
 import pytest
 
-from configure_ai import configure
-from run_local_demo import DemoError, child_environment
+from run_local_demo import child_environment
 
 
-@pytest.fixture(autouse=True)
-def isolated_ai_environment(monkeypatch):
-    for name in tuple(os.environ):
-        if name.startswith("KHOHOC_AI_"):
-            monkeypatch.delenv(name)
+@pytest.mark.parametrize(
+    "config", ["invalid old config", json.dumps({"enabled": True})]
+)
+def test_legacy_private_files_are_ignored_and_preserved(tmp_path, config):
+    config_path = tmp_path / "ai-config.json"
+    key_path = tmp_path / "ai-secret.api-key"
+    config_path.write_text(config)
+    key_path.write_text("synthetic-private-test-key-only")
+    before = {path: path.read_bytes() for path in (config_path, key_path)}
 
-
-def test_saved_operator_config_uses_private_file_not_its_contents(
-    tmp_path, monkeypatch
-):
-    configure(tmp_path, api_key="synthetic-private-test-key-only")
-    monkeypatch.setenv("KHOHOC_DATABASE_URL", "postgresql://production.invalid/private")
-    monkeypatch.setenv("KHOHOC_ADMIN_TOKEN", "synthetic-production-admin-credential")
     actual = child_environment(tmp_path, 8011, 8091)
-    assert actual["KHOHOC_AI_ENABLED"] == "true"
-    assert actual["KHOHOC_AI_API_KEY_FILE"] == str(tmp_path / "ai-secret.api-key")
-    assert "KHOHOC_AI_API_KEY" not in actual
+
+    assert not any(name.startswith("KHOHOC_AI_") for name in actual)
+    assert {path: path.read_bytes() for path in before} == before
     assert "synthetic-private-test-key-only" not in repr(actual)
-    assert actual["KHOHOC_ADMIN_TOKEN"] == ""
-    assert actual["KHOHOC_DATABASE_URL"].startswith("sqlite:///")
 
 
-def test_explicit_secret_source_never_inherits_saved_provider_or_file(
+def test_inherited_paid_ai_and_production_settings_cannot_reactivate_service(
     tmp_path, monkeypatch
 ):
-    configure(tmp_path, api_key="synthetic-private-file-key-only")
-    monkeypatch.setenv("KHOHOC_AI_ENABLED", "true")
-    monkeypatch.setenv("KHOHOC_AI_BASE_URL", "https://api.example.com/v1")
-    monkeypatch.setenv("KHOHOC_AI_MODEL", "operator-model")
-    monkeypatch.setenv("KHOHOC_AI_API_KEY", "synthetic-env-key-for-test-only")
+    for name, value in {
+        "KHOHOC_AI_ENABLED": "true",
+        "KHOHOC_AI_BASE_URL": "https://api.example.com/v1",
+        "KHOHOC_AI_MODEL": "legacy-paid-model",
+        "KHOHOC_AI_API_KEY": "synthetic-environment-key-only",
+        "KHOHOC_AI_API_KEY_FILE": str(tmp_path / "missing-private-key"),
+        "KHOHOC_AI_DAILY_USER_LIMIT": "100",
+        "KHOHOC_AI_DAILY_SERVER_LIMIT": "1000",
+        "KHOHOC_AI_OUTPUT_TOKENS": "800",
+        "KHOHOC_DATABASE_URL": "postgresql://production.invalid/private",
+        "KHOHOC_ADMIN_TOKEN": "synthetic-production-admin-credential",
+    }.items():
+        monkeypatch.setenv(name, value)
+
     actual = child_environment(tmp_path, 8011, 8091)
-    assert "KHOHOC_AI_API_KEY_FILE" not in actual
-    assert actual["KHOHOC_AI_API_KEY"] == "synthetic-env-key-for-test-only"
-    assert actual["KHOHOC_AI_BASE_URL"] == "https://api.example.com/v1"
-    assert actual["KHOHOC_AI_MODEL"] == "operator-model"
+
+    assert not any(name.startswith("KHOHOC_AI_") for name in actual)
+    assert "synthetic-environment-key-only" not in repr(actual)
+    assert actual["KHOHOC_ADMIN_TOKEN"] == ""
+    assert (
+        actual["KHOHOC_DATABASE_URL"]
+        == "sqlite:///" + (tmp_path / "demo.sqlite").as_posix()
+    )
+    assert actual["KHOHOC_MODE"] == "development"
 
 
-def test_explicit_disable_ignores_even_an_invalid_saved_config(tmp_path, monkeypatch):
-    (tmp_path / "ai-config.json").write_text("not-json")
-    monkeypatch.setenv("KHOHOC_AI_ENABLED", "false")
-    actual = child_environment(tmp_path, 8011, 8091)
-    assert {k: v for k, v in actual.items() if k.startswith("KHOHOC_AI_")} == {
-        "KHOHOC_AI_ENABLED": "false"
-    }
-
-
-def test_invalid_file_fails_without_echoing_its_contents(tmp_path):
-    (tmp_path / "ai-config.json").write_text("synthetic-sensitive-invalid-value")
-    with pytest.raises(DemoError) as error:
-        child_environment(tmp_path, 8011, 8091)
-    assert "configure-ai.bat" in str(error.value)
-    assert "synthetic-sensitive-invalid-value" not in str(error.value)
-
-
-def test_packaged_script_can_import_configuration_helper():
+def test_packaged_launcher_works_without_removed_configuration_helper():
     script = Path(__file__).with_name("run_local_demo.py")
     result = subprocess.run(
         [sys.executable, str(script), "--help"], capture_output=True, check=True

@@ -210,6 +210,9 @@ void main() {
                 return null;
               }
               final args = Map<String, dynamic>.from(call.arguments as Map);
+              // Only the Latin model is bundled; other scripts are optional
+              // compileOnly branches in the Android plugin and must not run.
+              expect(args['script'], 0);
               final image = Map<String, dynamic>.from(args['imageData'] as Map);
               normalizedPath = image['path'] as String;
               expect(normalizedPath, startsWith(cache.path));
