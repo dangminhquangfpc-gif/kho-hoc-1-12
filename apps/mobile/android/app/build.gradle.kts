@@ -1,8 +1,17 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+}
+
+val uploadProperties = Properties()
+val uploadPropertiesFile = rootProject.file("key.properties")
+if (uploadPropertiesFile.exists()) {
+    FileInputStream(uploadPropertiesFile).use { uploadProperties.load(it) }
 }
 
 android {
@@ -30,9 +39,20 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        if (uploadPropertiesFile.exists()) {
+            create("upload") {
+                keyAlias = uploadProperties.getProperty("keyAlias")
+                keyPassword = uploadProperties.getProperty("keyPassword")
+                storeFile = file(uploadProperties.getProperty("storeFile"))
+                storePassword = uploadProperties.getProperty("storePassword")
+            }
+        }
+    }
     buildTypes {
         release {
-            // Production signing must be configured securely before release.
+            // An unsigned engineering AAB may be built without keys; store upload requires the preflight script.
+            if (uploadPropertiesFile.exists()) signingConfig = signingConfigs.getByName("upload")
         }
     }
 }

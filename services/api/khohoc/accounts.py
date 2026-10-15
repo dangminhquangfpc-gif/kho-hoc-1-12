@@ -20,6 +20,7 @@ from sqlalchemy.orm import Session
 from .models import (
     ClassroomGroup,
     TeacherExam,
+    Exam,
     GroupMember,
     AccountAttempt,
     AuditEvent,
@@ -146,6 +147,11 @@ class JoinGroupInput(BaseModel):
 
 class MemberInput(BaseModel):
     username: str = Field(pattern=r"^[a-zA-Z0-9_.-]{3,40}$")
+
+
+class DeleteAccountInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    password: str = Field(min_length=10, max_length=128)
 
 
 class PasswordInput(BaseModel):
@@ -406,6 +412,66 @@ class AccountService:
             )
             db.commit()
             return public_user(user)
+
+        @router.post("/account/delete", status_code=204)
+        def delete_self(
+            body: DeleteAccountInput,
+            request: Request,
+            response: Response,
+            db: Session = Depends(db_dependency),
+        ):
+            user = self.required(request, db, True)
+            if user.role == "manager":
+                raise HTTPException(
+                    403, "Tài khoản quản lý hệ thống cần được bàn giao trước khi xóa."
+                )
+            failures = self.login_rate(request, user.username, "delete")
+            if not password_valid(body.password, user.password_hash):
+                failures.append(time.monotonic())
+                raise HTTPException(400, "Mật khẩu xác nhận không đúng.")
+            # Deleting a teacher never deletes their pupils' accounts or immutable results.
+            for student in db.scalars(
+                select(LearningUser).where(LearningUser.manager_id == user.id)
+            ):
+                student.manager_id = user.manager_id
+            for scope in db.scalars(
+                select(TeacherExam).where(TeacherExam.owner_id == user.id)
+            ):
+                exam = db.get(Exam, scope.exam_id)
+                if exam:
+                    db.delete(exam)
+                db.delete(scope)
+            for group in db.scalars(
+                select(ClassroomGroup).where(ClassroomGroup.owner_id == user.id)
+            ):
+                db.execute(delete(GroupMember).where(GroupMember.group_id == group.id))
+                db.delete(group)
+            db.execute(delete(GroupMember).where(GroupMember.user_id == user.id))
+            db.execute(
+                delete(Attempt).where(
+                    Attempt.id.in_(
+                        select(AccountAttempt.attempt_id).where(
+                            AccountAttempt.user_id == user.id
+                        )
+                    )
+                )
+            )
+            db.execute(delete(AccountAttempt).where(AccountAttempt.user_id == user.id))
+            db.execute(delete(LearningRecord).where(LearningRecord.user_id == user.id))
+            db.execute(
+                delete(LearningSession).where(LearningSession.user_id == user.id)
+            )
+            db.delete(user)
+            # Keep no account name/password or deleted answers in the deletion event.
+            db.add(
+                AuditEvent(
+                    actor="deleted-account",
+                    action="account.self_deleted",
+                    target="account-and-learning-records",
+                )
+            )
+            db.commit()
+            response.delete_cookie(COOKIE, path="/")
 
         @router.get("/account/results")
         def my_results(request: Request, db: Session = Depends(db_dependency)):

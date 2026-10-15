@@ -1,0 +1,280 @@
+{
+  "questions": [
+    {
+      "id": "toan1_002_clean_v2",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "phep_tru",
+      "question": "Hãy xác định tính đúng/sai của nhận định về bài toán sau: 9 − 4 bằng bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Bớt 4 từ 9 còn 5.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 5."
+        }
+      ],
+      "correct_answer": [
+        "true"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho Tự học 111; phiên bản bỏ mệnh đề thừa, giữ nguyên phần kiến thức cần kiểm tra.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan1_007_clean_v2",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "so_sanh",
+      "question": "Hãy xác định tính đúng/sai của nhận định về bài toán sau: Số nào lớn hơn: 8 hay 5?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "8 đứng sau 5 trên dãy số.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 8."
+        }
+      ],
+      "correct_answer": [
+        "true"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho Tự học 111; phiên bản bỏ mệnh đề thừa, giữ nguyên phần kiến thức cần kiểm tra.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan1_012_clean_v2",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "so_sanh",
+      "question": "Hãy xác định tính đúng/sai của nhận định về bài toán sau: Số bé nhất trong các số 4, 1, 6 là số nào?",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "So sánh ba số, 1 là số nhỏ nhất.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 1."
+        }
+      ],
+      "correct_answer": [
+        "true"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho Tự học 111; phiên bản bỏ mệnh đề thừa, giữ nguyên phần kiến thức cần kiểm tra.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan5_002_clean_v2",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "dien_tich",
+      "question": "Hãy xác định tính đúng/sai của nhận định về bài toán sau: Đổi 0,25 km² ra ha.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "1 km² = 100 ha, nên 0,25 km² = 25 ha.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 25."
+        }
+      ],
+      "correct_answer": [
+        "true"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho Tự học 111; phiên bản bỏ mệnh đề thừa, giữ nguyên phần kiến thức cần kiểm tra.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan5_007_clean_v2",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "phan_so",
+      "question": "Hãy xác định tính đúng/sai của nhận định về bài toán sau: Tính 3/5 − 1/10.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "6/10 − 1/10 = 5/10 = 1/2.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 1/2."
+        }
+      ],
+      "correct_answer": [
+        "true"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho Tự học 111; phiên bản bỏ mệnh đề thừa, giữ nguyên phần kiến thức cần kiểm tra.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan5_012_clean_v2",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "thong_ke",
+      "question": "Hãy xác định tính đúng/sai của nhận định về bài toán sau: Trung bình cộng của 6, 8, 10 là bao nhiêu?",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "(6 + 8 + 10) : 3 = 8.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 8."
+        }
+      ],
+      "correct_answer": [
+        "true"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho Tự học 111; phiên bản bỏ mệnh đề thừa, giữ nguyên phần kiến thức cần kiểm tra.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan9_002_clean_v2",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "can_bac_hai",
+      "question": "Hãy xác định tính đúng/sai của nhận định về bài toán sau: Tính căn bậc hai số học của 81.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "9 không âm và 9² = 81.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 9."
+        }
+      ],
+      "correct_answer": [
+        "true"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho Tự học 111; phiên bản bỏ mệnh đề thừa, giữ nguyên phần kiến thức cần kiểm tra.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan9_007_clean_v2",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "he_phuong_trinh",
+      "question": "Hãy xác định tính đúng/sai của nhận định về bài toán sau: Hệ x + y = 7 và x − y = 1 có x bằng bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Cộng hai phương trình được 2x = 8.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 4."
+        }
+      ],
+      "correct_answer": [
+        "true"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho Tự học 111; phiên bản bỏ mệnh đề thừa, giữ nguyên phần kiến thức cần kiểm tra.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan9_012_clean_v2",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "thong_ke",
+      "question": "Hãy xác định tính đúng/sai của nhận định về bài toán sau: Tần số của giá trị 2 trong dãy 1, 2, 2, 3, 2 là bao nhiêu?",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "Giá trị 2 xuất hiện 3 lần.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 3."
+        }
+      ],
+      "correct_answer": [
+        "true"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho Tự học 111; phiên bản bỏ mệnh đề thừa, giữ nguyên phần kiến thức cần kiểm tra.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan12_002_clean_v2",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "tich_phan",
+      "question": "Hãy xác định tính đúng/sai của nhận định về bài toán sau: Tính tích phân từ 0 đến 1 của 2x dx.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Nguyên hàm x², thay cận được 1 − 0 = 1.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 1."
+        }
+      ],
+      "correct_answer": [
+        "true"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho Tự học 111; phiên bản bỏ mệnh đề thừa, giữ nguyên phần kiến thức cần kiểm tra.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan12_007_clean_v2",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "xac_suat",
+      "question": "Hãy xác định tính đúng/sai của nhận định về bài toán sau: Hộp có 3 bi đỏ và 2 bi xanh. Lấy ngẫu nhiên một bi, xác suất lấy bi đỏ là bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Có 3 bi đỏ trong tổng 5 bi.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 3/5."
+        }
+      ],
+      "correct_answer": [
+        "true"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho Tự học 111; phiên bản bỏ mệnh đề thừa, giữ nguyên phần kiến thức cần kiểm tra.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan12_012_clean_v2",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "mu_logarit",
+      "question": "Hãy xác định tính đúng/sai của nhận định về bài toán sau: Giải logarit cơ số 2 của x bằng 4.",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "x = 2⁴ = 16, thỏa x > 0.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 16."
+        }
+      ],
+      "correct_answer": [
+        "true"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho Tự học 111; phiên bản bỏ mệnh đề thừa, giữ nguyên phần kiến thức cần kiểm tra.",
+      "type": "true_false"
+    }
+  ]
+}

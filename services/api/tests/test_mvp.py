@@ -9,6 +9,7 @@ from khohoc.app import Settings, create_app
 from khohoc.grading import grade, number
 from khohoc.models import ContentQuestion
 from khohoc.schemas import Question
+from khohoc.content_fixes import QUESTION_REPLACEMENTS
 
 ROOT = Path(__file__).resolve().parents[3]
 TOKEN = "test-only-admin-token"
@@ -28,8 +29,14 @@ def client(tmp_path):
 @pytest.fixture
 def seeded(client):
     data = json.loads((ROOT / "data/seeds/questions.json").read_text())
+    data["questions"] += json.loads(
+        (ROOT / "data/seeds/clean_questions.json").read_text()
+    )["questions"]
     assert client.post("/admin/import", json=data, headers=ADMIN).status_code == 200
     exam = json.loads((ROOT / "data/seeds/exams.json").read_text())[0]
+    exam["question_ids"] = [
+        QUESTION_REPLACEMENTS.get(qid, qid) for qid in exam["question_ids"]
+    ]
     for qid in exam["question_ids"]:
         assert (
             client.post(

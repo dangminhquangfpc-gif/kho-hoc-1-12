@@ -120,6 +120,53 @@ class _AccountState extends ConsumerState<AccountScreen> {
     if (accountId != null) await p.remove('history.$accountId');
     container.invalidate(authBootstrapProvider);
   });
+  Future<void> deleteAccount() async {
+    final text = TextEditingController();
+    final password = await showDialog<String>(
+      context: context,
+      builder: (c) => AlertDialog(
+        title: const Text('Xóa tài khoản và kết quả học tập?'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Thao tác không thể hoàn tác. Tài khoản và kết quả của bạn trên máy chủ sẽ bị xóa. Nếu bạn là giáo viên, tài khoản học sinh được giữ lại cho người quản lý hệ thống.',
+            ),
+            TextField(
+              controller: text,
+              obscureText: true,
+              decoration: const InputDecoration(labelText: 'Mật khẩu xác nhận'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(c),
+            child: const Text('Hủy'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(c, text.text),
+            child: const Text('Xóa vĩnh viễn'),
+          ),
+        ],
+      ),
+    );
+    Future<void>.delayed(const Duration(seconds: 1), text.dispose);
+    if (password == null || !mounted) return;
+    await act(() async {
+      final container = ProviderScope.containerOf(context, listen: false);
+      final prefs = await ref.read(preferencesProvider.future);
+      final id = prefs.getString('active_account_id');
+      await ref.read(apiProvider).deleteAccount(password);
+      if (id != null) {
+        for (final key in ['history.$id', 'current_attempt.$id']) {
+          await prefs.remove(key);
+        }
+      }
+      container.invalidate(authBootstrapProvider);
+    });
+  }
+
   Widget field(
     TextEditingController controller,
     String label, {
@@ -292,6 +339,12 @@ class _AccountState extends ConsumerState<AccountScreen> {
                 ],
               ),
             ],
+            if (user['role'] != 'manager')
+              TextButton.icon(
+                onPressed: busy ? null : deleteAccount,
+                icon: const Icon(Icons.delete_forever),
+                label: const Text('Xóa tài khoản và dữ liệu học tập'),
+              ),
             TextButton(
               onPressed: busy ? null : logout,
               child: const Text('Đăng xuất'),

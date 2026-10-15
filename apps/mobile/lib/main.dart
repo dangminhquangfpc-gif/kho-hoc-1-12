@@ -114,7 +114,7 @@ class KhoHocApp extends ConsumerWidget {
       );
     }
     return MaterialApp.router(
-      title: 'Kho Học 1–12',
+      title: 'Tự học 111',
       debugShowCheckedModeBanner: false,
       locale: const Locale('vi'),
       supportedLocales: const [Locale('vi')],
@@ -227,7 +227,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
     final coverage = ref.watch(coverageProvider(grade));
     final prefs = ref.watch(preferencesProvider);
     return Shell(
-      title: widget.index == 2 ? 'Luyện đề' : 'Kho Học 1–12',
+      title: widget.index == 2 ? 'Luyện đề' : 'Tự học 111',
       index: widget.index,
       child: ListView(
         padding: const EdgeInsets.all(20),
@@ -238,7 +238,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 8),
           const Text('Chọn lớp và môn để luyện tập. Không cần tài khoản.'),
-          const Text('Bản thử 2026.10.15.10'),
+          const Text('Bản thử 2026.10.15.11'),
           if (widget.index == 2 &&
               [
                 'manager',
@@ -391,9 +391,9 @@ class _HomeState extends ConsumerState<HomeScreen> {
             Card(
               child: ListTile(
                 leading: const Icon(Icons.public),
-                title: const Text('Liên kết đề tham khảo trên Internet'),
+                title: const Text('Đề luyện và nguồn tham khảo'),
                 subtitle: const Text(
-                  'Lọc theo lớp, môn, đợt kiểm tra và năm đề',
+                  'Mở đề luyện trong app; lọc nguồn theo lớp, môn và đợt kiểm tra',
                 ),
                 onTap: () => context.go(
                   Uri(

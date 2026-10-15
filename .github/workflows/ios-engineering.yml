@@ -1,0 +1,32 @@
+name: iOS engineering build (unsigned)
+on:
+  push:
+    branches: [demo/tu-hoc-111-2026-10-15]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ios:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: apps/mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+          channel: stable
+          cache: true
+      - name: Require the current App Store SDK baseline
+        run: |
+          xcodebuild -version
+          sdk_version="$(xcrun --sdk iphoneos --show-sdk-version)"
+          SDK_VERSION="$sdk_version" python3 -c 'import os; assert int(os.environ["SDK_VERSION"].split(".")[0]) >= 26, "Xcode/iOS SDK 26+ required"'
+      - run: flutter pub get --enforce-lockfile
+      - run: flutter build ios --release --no-codesign
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tu-hoc-111-ios-unsigned-engineering
+          path: apps/mobile/build/ios/iphoneos/Runner.app
+          retention-days: 14

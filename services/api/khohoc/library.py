@@ -239,6 +239,14 @@ def read_pdf(root: Path, filename: str) -> bytes:
     return payload
 
 
+@lru_cache(maxsize=1)
+def source_practice_pairs():
+    path = Path(__file__).resolve().parents[3] / "data/seeds/source_practice_map.json"
+    return (
+        json.loads(path.read_text(encoding="utf-8"))["papers"] if path.exists() else {}
+    )
+
+
 def public_document(row: LibraryDocument, *, detail: bool = False) -> dict:
     body = row.payload
     metadata = {
@@ -288,6 +296,15 @@ def public_document(row: LibraryDocument, *, detail: bool = False) -> dict:
     )
     if detail:
         metadata["sections"] = body["sections"]
+    pair = source_practice_pairs().get(row.id)
+    if pair:
+        metadata.update(
+            reference_title=metadata["title"],
+            title=pair["title"],
+            practice_exam_id=pair["exam_id"],
+            practice_notice=pair["notice"],
+            summary=f"{pair['question_count']} câu · Làm và chấm trong app. {pair['notice']} Nguồn tham khảo: {body['title']}",
+        )
     return metadata
 
 

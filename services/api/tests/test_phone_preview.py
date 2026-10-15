@@ -1,3 +1,5 @@
+import json
+from pathlib import Path
 from fastapi.testclient import TestClient
 from khohoc.phone_preview import create_preview
 from khohoc.models import LearningUser
@@ -9,11 +11,24 @@ def test_phone_preview_seed_private_routes_and_rate_limit(tmp_path, monkeypatch)
     monkeypatch.setenv("KHOHOC_DATABASE_URL", f"sqlite:///{tmp_path}/preview.db")
     with TestClient(create_preview()) as client:
         assert client.get("/health").json()["status"] == "ok"
+        source_exams = json.loads(
+            (
+                Path(__file__).resolve().parents[3]
+                / "data/seeds/source_practice_exams.json"
+            ).read_text()
+        )
         assert all(
             len(client.get("/exams", params={"grade": n}).json())
             == (95 if n == 5 else 16)
+            + sum(e["grade"] == n and e["subject"] == "toan" for e in source_exams)
             for n in [1, 5, 9, 12]
         )
+        source = client.get("/documents/web_fbf54a18ff2df1a3547334a2").json()
+        assert source["practice_exam_id"] and "Tự biên soạn" in source["title"]
+        paired = client.post("/exams/" + source["practice_exam_id"] + "/attempts")
+        assert paired.status_code == 201 and len(paired.json()["questions"]) == 24
+        assert "Không thể giải bài này" not in paired.text
+
         assert len(client.get("/documents", params={"limit": 100}).json()) == 100
         assert (
             len(client.get("/documents", params={"limit": 100, "offset": 100}).json())
@@ -129,7 +144,9 @@ def test_phone_preview_seed_private_routes_and_rate_limit(tmp_path, monkeypatch)
         )
         coverage = client.get("/coverage", params={"grade": 2}).json()
         math = next(row for row in coverage if row["subject"] == "toan")
-        assert math["question_count"] == 420 and math["exam_count"] == 15
+        assert math["question_count"] == 420 and math["exam_count"] == 15 + sum(
+            e["grade"] == 2 and e["subject"] == "toan" for e in source_exams
+        )
         assert all(row["exam_count"] >= 1 for row in coverage)
         pdf = client.get("/documents/note_math_1_addition/file")
         assert pdf.status_code == 200 and pdf.content.startswith(b"%PDF-")

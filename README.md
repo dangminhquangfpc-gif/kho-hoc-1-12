@@ -1,4 +1,5 @@
-# Kho Học 1–12
+# Tự học 111
+
 
 Monorepo MVP phát triển theo docs/PRODUCT_PLAN.md. Ứng dụng QuizApp Firebase cũ ở lib/ và android/ được giữ nguyên; ứng dụng mới ở apps/mobile/. Hướng dẫn cũ được giữ ở docs/LEGACY_QUIZAPP_README.md. Chưa hoàn thành tất cả tiêu chí MVP hoặc sẵn sàng Google Play.
 
@@ -154,3 +155,5 @@ Chạy local, không gọi AI hoặc yêu cầu tài khoản. Xem
 [chi tiết module](docs/LOCAL_STUDY_MODULE.md) và [lộ trình còn lại](docs/ROADMAP.md).
 
 Bản .10 bổ sung vai trò giáo viên/học sinh, nhóm học viên, giao đề cho nhóm, 5.246 câu và 164 đề tự biên soạn. Xem [vai trò và nhóm](docs/TEACHER_GROUPS.md). Các liên kết Internet chưa được chuyển nguyên bản hàng loạt thành đề.
+
+Bản .11 đổi tên Tự học 111, sửa mệnh đề thừa bằng phiên bản câu mới, thêm đề tự biên soạn từ thẻ tham khảo và chuẩn bị Android/iOS. [Trạng thái cửa hàng](docs/store/RELEASE_STATUS.md).

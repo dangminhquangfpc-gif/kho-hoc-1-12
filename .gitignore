@@ -112,3 +112,12 @@ __pycache__/
 # Local desktop demo runtime state
 .demo-venv/
 /state/
+
+# Private store signing credentials
+**/key.properties
+*.jks
+*.keystore
+*.p12
+*.p8
+*.mobileprovision
+**/ExportOptions.private.plist

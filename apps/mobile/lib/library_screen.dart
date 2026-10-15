@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -52,6 +53,38 @@ class LibraryScreen extends ConsumerStatefulWidget {
 }
 
 class _LibraryState extends ConsumerState<LibraryScreen> {
+  bool startingExam = false;
+  Future<void> startLinkedExam(Json document) async {
+    if (startingExam) return;
+    setState(() => startingExam = true);
+    try {
+      final prefs = await ref.read(preferencesProvider.future);
+      if (LocalStore(prefs).current != null) {
+        if (mounted) context.go('/practice');
+        return;
+      }
+      final attempt = await ref
+          .read(apiProvider)
+          .start(document['practice_exam_id']);
+      await LocalStore(prefs).save({
+        ...attempt,
+        'backend_url': ref.read(apiProvider).baseUrl,
+        'answers': <String, List<String>>{},
+      });
+      if (mounted) context.go('/practice');
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Chưa mở được đề. Hãy kiểm tra kết nối rồi thử lại.'),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => startingExam = false);
+    }
+  }
+
   int grade = 1, semester = 0;
   String subject = 'toan', search = '', textbook = '', kind = '', topic = '';
   String period = '';
@@ -88,7 +121,7 @@ class _LibraryState extends ConsumerState<LibraryScreen> {
     final recent = prefs?.getStringList('recent_documents') ?? [];
     return Shell(
       title: widget.examMode
-          ? 'Liên kết đề tham khảo từ Internet'
+          ? 'Đề luyện và nguồn tham khảo'
           : 'Bài học và bài tập',
       index: widget.examMode ? 2 : 1,
       child: ListView(
@@ -96,7 +129,7 @@ class _LibraryState extends ConsumerState<LibraryScreen> {
         children: [
           Text(
             widget.examMode
-                ? 'Đề giữa kỳ, cuối kỳ và tốt nghiệp. Các đề nguồn ngoài mở ở trang gốc.'
+                ? 'Các thẻ có đề luyện cho phép làm và chấm trực tiếp. Đây là đề tự biên soạn cùng lớp/môn, khác với bản gốc trên trang tham khảo. Những nguồn chưa đủ câu hỏi vẫn được ghi rõ là liên kết.'
                 : 'Chọn phần học để đọc kiến thức, cách làm, ví dụ và bài tập có lời giải.',
           ),
           const SizedBox(height: 16),
@@ -334,6 +367,10 @@ class _LibraryState extends ConsumerState<LibraryScreen> {
                           title: Text(d['title']),
                           subtitle: Text(d['summary'] ?? ''),
                           onTap: () async {
+                            if (d['practice_exam_id'] != null) {
+                              await startLinkedExam(d);
+                              return;
+                            }
                             await Navigator.push(
                               context,
                               MaterialPageRoute(

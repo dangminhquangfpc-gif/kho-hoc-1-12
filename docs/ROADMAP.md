@@ -61,3 +61,7 @@ Bổ sung 267 bài hướng dẫn Toán 1–4 vào các mục nguồn đã ghi n
 ## Bản thử 2026.10.15.9
 
 Sửa đọc mục lục Toán 6–12, thêm 391 hướng dẫn gồm 230 bài đánh số, 610 ví dụ và 1.220 bài luyện có lời giải. Tổng Toán 1–12 là 733 mục có hướng dẫn theo dữ liệu nguồn. Không khẳng định đầy đủ mọi dạng bài/trang/ấn bản; các môn ngoài Toán còn thiếu. Xem [SECONDARY_MATH_GUIDES.md](SECONDARY_MATH_GUIDES.md).
+
+## Bản thử 2026.10.15.10–11 — Tự học 111
+
+Đã có vai trò học sinh/giáo viên, nhóm, giao đề và báo cáo; thêm ngân hàng câu hỏi, sửa mệnh đề thừa bằng phiên bản mới. 991 thẻ nguồn mở đề tự biên soạn cùng lớp/môn; 525 nguồn còn thiếu câu và chưa nhập nguyên văn. Android engineering AAB, khung iOS, tự xóa tài khoản và bản nháp chính sách đã chuẩn bị. Còn tài khoản cửa hàng, backend HTTPS production, thẩm định nội dung/trẻ em, tài sản thương hiệu và kiểm thử thiết bị/ký để phát hành. Xem [trạng thái cửa hàng](store/RELEASE_STATUS.md).

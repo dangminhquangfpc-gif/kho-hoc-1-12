@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="Kho Học 1–12"
+        android:label="Tự học 111"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

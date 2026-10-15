@@ -93,7 +93,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         yield
         engine.dispose()
 
-    app = FastAPI(title="Kho Học 1–12 — local MVP", lifespan=lifespan)
+    app = FastAPI(title="Tự học 111 — local MVP", lifespan=lifespan)
     app.state.engine = engine
     app.add_middleware(
         CORSMiddleware,

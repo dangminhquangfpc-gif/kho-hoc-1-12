@@ -50,10 +50,13 @@ class LearningApi {
     int? grade,
     String role = 'student',
   }) async {
-    if (kIsWeb) {
-      final target = Uri.base.resolve(client.options.baseUrl);
+    if (kIsWeb || kReleaseMode) {
+      final target = kIsWeb
+          ? Uri.base.resolve(client.options.baseUrl)
+          : Uri.parse(client.options.baseUrl);
       if (target.scheme != 'https' &&
-          !['localhost', '127.0.0.1', '::1'].contains(target.host)) {
+          !(kIsWeb &&
+              ['localhost', '127.0.0.1', '::1'].contains(target.host))) {
         throw StateError(
           'Đăng nhập từ máy khác cần backend HTTPS. Không gửi mật khẩu qua kết nối HTTP.',
         );
@@ -74,6 +77,11 @@ class LearningApi {
       client.options.headers['Authorization'] = 'Bearer ${response['token']}';
     }
     return response['user'] as Json;
+  }
+
+  Future<void> deleteAccount(String password) async {
+    await client.post('/account/delete', data: {'password': password});
+    client.options.headers.remove('Authorization');
   }
 
   Future<void> signOut() async {

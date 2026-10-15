@@ -59,7 +59,7 @@ def build(artifacts: Path):
             assert requirement.specifier.contains(
                 packages[canonicalize_name(requirement.name)], prereleases=True
             ), raw
-    staging = artifacts / "kho-hoc-demo-windows"
+    staging = artifacts / "tu-hoc-111-demo-windows"
     if staging.exists():
         raise RuntimeError(
             "Choose a clean artifact directory; existing staging is preserved"
@@ -112,7 +112,7 @@ def build(artifacts: Path):
     (staging / "runtime/provenance.json").write_text(
         json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    guide = """KHO HỌC 1–12 — DEMO LOCAL WINDOWS 64-BIT\n\n1. Giải nén toàn bộ ZIP (Extract All), không chạy trực tiếp trong ZIP.\n2. Mở thư mục vừa giải nén, nhấp đúp start-demo.bat.\n3. Giữ cửa sổ đó mở; đợi dòng DEMO READY. Trình duyệt sẽ tự mở http://localhost:8080.\n\nĐã kèm Python 3.12.10 chính thức của Python Software Foundation và thư viện Windows đã khóa phiên bản. Không cần cài Python, Flutter, Node hoặc Supabase. Lần đầu chuẩn bị môi trường có thể mất vài phút; các lần sau nhanh hơn. Không tải thư viện từ Internet khi khởi động trên Windows.\n\nThử: chọn lớp/môn, làm và nộp đề; vào Tài liệu đọc ghi chú/mở PDF; xem Tiến độ/Lịch sử. Có108 câu/12 đề và4 tài liệu tự biên soạn.\n\nĐể dừng, quay lại cửa sổ khởi động và nhấn Ctrl+C. Dữ liệu bài làm lưu trong state/demo.sqlite và trong trình duyệt trên máy này. Không chạy admin/Supabase/AI/OCR.\n\nNếu cổng đã được chương trình khác sử dụng, launcher sẽ thông báo. Có thể mở CMD trong thư mục gói và chạy: start-demo.bat --api-port8011 --port8091 (thêm khoảng trắng: --api-port 8011 --port 8091).\n\nNếu có lỗi, giữ nội dung lỗi trong cửa sổ; log ở state/api.log và state/demo.log. Không xóa dữ liệu state khi muốn giữ bài làm.\n\nGói Windows dùng runtime/wheel Windows64-bit; không dùng Python Windows trong gói này trên macOS/Linux. Backend và giao diện đã kiểm tra trên môi trường Linux; file.bat/runtime Windows chưa chạy trên máy Windows thực tế. Đây là bản thử, chưa phát hành Google Play hoặc nội dung được thẩm định chuyên môn.\n"""
+    guide = """TỰ HỌC 111 — DEMO LOCAL WINDOWS 64-BIT\n\n1. Giải nén toàn bộ ZIP (Extract All), không chạy trực tiếp trong ZIP.\n2. Mở thư mục vừa giải nén, nhấp đúp start-demo.bat.\n3. Giữ cửa sổ đó mở; đợi dòng DEMO READY. Trình duyệt sẽ tự mở http://localhost:8080.\n\nĐã kèm Python 3.12.10 chính thức của Python Software Foundation và thư viện Windows đã khóa phiên bản. Không cần cài Python, Flutter, Node hoặc Supabase. Lần đầu chuẩn bị môi trường có thể mất vài phút; các lần sau nhanh hơn. Không tải thư viện từ Internet khi khởi động trên Windows.\n\nThử: chọn lớp/môn, làm và nộp đề; vào Tài liệu đọc ghi chú/mở PDF; xem Tiến độ/Lịch sử. Có108 câu/12 đề và4 tài liệu tự biên soạn.\n\nĐể dừng, quay lại cửa sổ khởi động và nhấn Ctrl+C. Dữ liệu bài làm lưu trong state/demo.sqlite và trong trình duyệt trên máy này. Không chạy admin/Supabase/AI/OCR.\n\nNếu cổng đã được chương trình khác sử dụng, launcher sẽ thông báo. Có thể mở CMD trong thư mục gói và chạy: start-demo.bat --api-port8011 --port8091 (thêm khoảng trắng: --api-port 8011 --port 8091).\n\nNếu có lỗi, giữ nội dung lỗi trong cửa sổ; log ở state/api.log và state/demo.log. Không xóa dữ liệu state khi muốn giữ bài làm.\n\nGói Windows dùng runtime/wheel Windows64-bit; không dùng Python Windows trong gói này trên macOS/Linux. Backend và giao diện đã kiểm tra trên môi trường Linux; file.bat/runtime Windows chưa chạy trên máy Windows thực tế. Đây là bản thử, chưa phát hành Google Play hoặc nội dung được thẩm định chuyên môn.\n"""
     guide = (
         guide.replace("Có108 câu/12 đề và4", "Có 108 câu/12 đề và 4")
         .replace(
@@ -148,7 +148,7 @@ def build(artifacts: Path):
         "Có 108 câu/12 đề và 4 tài liệu",
         f"Có {question_count - 1} câu đang dùng/{exam_count} đề và {document_count} tài liệu/liên kết (1 câu cũ đã rút và thay thế)",
     )
-    guide += "\nBản thử 2026.10.15.10. Nếu bài lưu quá hạn hoặc thuộc máy chủ cũ, dùng Khôi phục bài đã lưu; app chỉ giữ đáp án cho câu không đổi. Đã tránh cache giao diện của bản ZIP cũ, không xóa bài làm trong trình duyệt.\n"
+    guide += "\nBản thử 2026.10.15.11. Nếu bài lưu quá hạn hoặc thuộc máy chủ cũ, dùng Khôi phục bài đã lưu; app chỉ giữ đáp án cho câu không đổi. Đã tránh cache giao diện của bản ZIP cũ, không xóa bài làm trong trình duyệt.\n"
     guide += "\nMới: Luyện đề > Tạo đề theo chủ đề và độ khó (1–50 câu tùy ngân hàng); Tiến độ > Ôn các câu chưa đúng. Thống kê chủ đề chỉ tính lần làm mới nhất của mỗi câu, không phải đánh giá năng lực chính thức. Có thể luyện khách hoặc đăng nhập để lưu kết quả tập trung; chưa tích hợp AI.\n"
     guide += "\nTài liệu chỉ hiển thị bài gắn đúng mục lục SGK. Đề kiểm tra Internet ở Luyện đề > Đề giữa kỳ, cuối kỳ và tốt nghiệp từ Internet. 87 bộ luyện Toán 5 mới dùng 344 câu tự biên soạn; các bộ ôn tổng hợp dùng lại câu của bộ luyện theo bài. Chưa chuyển nguyên đề PDF của nguồn Internet vào app.\n"
     guide += "\nTài liệu Internet được liên kết tới trang nguồn, cần mạng để mở. Có bộ lọc giữa/cuối kỳ và năm đề tốt nghiệp; đề quốc gia dùng chung các bộ sách.\n"
@@ -160,13 +160,14 @@ def build(artifacts: Path):
     guide += "\nBản .8: thêm 267 bài hướng dẫn Toán 1–4 theo các mục đã ghi nhận từ nguồn mục lục, gồm 476 ví dụ và 952 bài luyện có lời giải, đáp số. Vào Tài liệu chọn lớp 1–4, môn Toán. Các bài chưa có nguồn hoặc các môn/lớp khác vẫn cần bổ sung, chưa tuyên bố đủ mọi SGK.\n"
     guide += "\nBản .9: thêm 391 hướng dẫn Toán 6–12, gồm 230 bài đánh số và các phần ôn tập/thực hành đã có nguồn. Mỗi lớp 6–12 có thể mở tài liệu trong app. Thêm 610 ví dụ và 1 220 bài luyện có lời giải; các phần ôn tập dùng lại kỹ năng. Nội dung cơ bản tự biên soạn, chưa xác nhận nguyên mẫu hoặc đủ mọi dạng bài SGK; các môn ngoài Toán vẫn còn thiếu.\n"
     guide += "\nBản .10: thêm 5.246 câu và 164 đề tự biên soạn làm trực tiếp. Đăng ký có vai trò học sinh/giáo viên. Học sinh làm đề có sẵn, ôn câu đã sai; giáo viên và quản lý được tạo đề. Giáo viên tạo nhóm, thêm tài khoản đã cấp hoặc gửi mã nhóm cho học sinh tự tham gia; chỉ xem học viên trong phạm vi quản lý. Các liên kết Internet chưa nhập không được tính là đề làm trực tiếp. Nội dung bổ sung chưa được xác minh đầy đủ từng bài SGK. Nâng cấp: dừng bản cũ, sao lưu và chép toàn bộ thư mục state vào bản mới trước khi chạy.\n"
+    guide += "\nBản .11 — Tự học 111: bỏ mệnh đề thừa ở 12 câu bằng phiên bản mới; có 991 đề tự biên soạn gắn từ thẻ tham khảo, mỗi đề 20–24 câu, không phải bản sao đề nguồn. 525 thẻ chưa đủ câu vẫn là tham khảo. Tổng 1.461 đề làm trực tiếp và 7.886 câu đang hoạt động. Có xóa tài khoản trong app bằng mật khẩu xác nhận. Đã chuẩn bị khung iOS/cấu hình ký Android; chưa đưa lên cửa hàng vì chưa có tài khoản nhà phát hành/backend HTTPS production và các bước thẩm định.\n"
     (staging / "HUONG-DAN.txt").write_text(guide, encoding="utf-8-sig")
     for bat in [staging / "start-demo.bat"]:
         content = (
             bat.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\n", "\r\n")
         )
         bat.write_bytes(content.encode("utf-8"))
-    output = artifacts / "kho-hoc-demo-windows.zip"
+    output = artifacts / "tu-hoc-111-demo-windows.zip"
     with ZipFile(output, "w", compression=ZIP_DEFLATED, compresslevel=6) as z:
         for file in sorted(staging.rglob("*")):
             if file.is_file():
@@ -181,7 +182,7 @@ def build(artifacts: Path):
     with ZipFile(output) as z:
         assert z.testzip() is None
     digest = hashlib.sha256(output.read_bytes()).hexdigest()
-    (artifacts / "kho-hoc-demo-windows.zip.sha256").write_text(
+    (artifacts / "tu-hoc-111-demo-windows.zip.sha256").write_text(
         digest + "  " + output.name + "\n"
     )
     print(
