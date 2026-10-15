@@ -48,6 +48,7 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
   bool recognizing = false, acknowledged = false, aiBusy = false;
   bool statusBusy = false;
   bool useReference = true;
+  bool hasOcrResult = false;
   int generation = 0, grade = 5;
   String? subject, ocrError, aiError, statusError;
   double? confidence;
@@ -131,6 +132,7 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
         }
       }
       setState(() {
+        hasOcrResult = true;
         preview = image;
         confidence = result.confidence;
         warnings = result.warnings;
@@ -270,7 +272,14 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
             const Text(
               kIsWeb
                   ? 'Bộ nhận chữ chưa tải được. Hãy tải lại trang hoặc nhập, dán văn bản bên dưới.'
-                  : 'Nhận chữ từ ảnh hiện có trên bản web và demo Windows chạy trong trình duyệt. Trên bản điện thoại này, bạn có thể nhập hoặc dán văn bản bên dưới.',
+                  : 'Bản chạy trên thiết bị này chưa hỗ trợ nhận chữ từ ảnh. Bạn có thể nhập, dán văn bản bên dưới hoặc dùng bản web.',
+            ),
+          if (!kIsWeb &&
+              recognizer.available &&
+              (defaultTargetPlatform == TargetPlatform.android ||
+                  defaultTargetPlatform == TargetPlatform.iOS))
+            const Text(
+              'Google ML Kit có thể gửi thông tin thiết bị, ứng dụng và hiệu năng cho Google để chẩn đoán và thống kê sử dụng.',
             ),
           FilledButton.icon(
             onPressed: locked || !recognizer.available ? null : scan,
@@ -280,7 +289,9 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
           if (recognizing) ...[
             const LinearProgressIndicator(),
             const Text(
-              'Lần đầu có thể cần tải bộ nhận chữ. Bạn có thể hủy bất kỳ lúc nào.',
+              kIsWeb
+                  ? 'Lần đầu có thể cần tải bộ nhận chữ. Bạn có thể hủy bất kỳ lúc nào.'
+                  : 'Đang nhận chữ trên thiết bị. Bạn có thể hủy bất kỳ lúc nào.',
             ),
             TextButton(
               onPressed: cancelOcr,
@@ -295,7 +306,7 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
                 preview!,
                 height: 240,
                 fit: BoxFit.contain,
-                semanticLabel: 'Ảnh vừa chọn, chỉ lưu trong bộ nhớ trang',
+                semanticLabel: 'Ảnh vừa chọn để nhận chữ',
                 errorBuilder: (_, __, ___) =>
                     const Text('Không hiển thị được ảnh xem trước.'),
               ),
@@ -307,6 +318,10 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
           if (confidence != null && confidence! < 80)
             const Text(
               'Ảnh có độ tin cậy thấp. Hãy kiểm tra kỹ từng số, dấu tiếng Việt và phép tính.',
+            ),
+          if (hasOcrResult && confidence == null)
+            const Text(
+              'Bộ nhận chữ không cung cấp chỉ số độ tin cậy. Hãy kiểm tra kỹ từng số, dấu tiếng Việt và phép tính.',
             ),
           for (final warning in warnings) Text(warning),
           const SizedBox(height: 12),
@@ -393,7 +408,7 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
                   status?['configured'] != true &&
                   statusError == null)
                 const Text(
-                  'AI chưa được cấu hình trên máy chủ này. Bạn vẫn có thể nhận chữ, chỉnh sửa và dùng tài liệu, bài luyện có sẵn.',
+                  'AI chưa được cấu hình trên máy chủ này. Hãy liên hệ người quản lý để bật dịch vụ AI. Bạn vẫn có thể nhận chữ, chỉnh sửa và dùng tài liệu, bài luyện có sẵn.',
                 ),
               TextButton.icon(
                 onPressed: statusBusy || aiBusy ? null : loadStatus,
@@ -518,7 +533,7 @@ class _AiOcrState extends ConsumerState<AiOcrScreen> {
           ],
           const SizedBox(height: 24),
           const Text(
-            'Ảnh và văn bản ở màn hình này chỉ giữ trong bộ nhớ trong lúc mở trang, không tự lưu vào lịch sử hoặc bản nháp.',
+            'Ứng dụng chỉ dùng ảnh và văn bản ở màn hình này để xử lý yêu cầu hiện tại, không tự thêm vào lịch sử hoặc bản nháp.',
           ),
         ],
       ),

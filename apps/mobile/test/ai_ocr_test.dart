@@ -276,7 +276,7 @@ void main() {
       );
       await tester.tap(find.text('Mở nhận chữ'));
       await tester.pumpAndSettle();
-      expect(find.textContaining('Trên bản điện thoại này'), findsOneWidget);
+      expect(find.textContaining('Bản chạy trên thiết bị này'), findsOneWidget);
       expect(find.text('Trợ lý học tập AI'), findsNothing);
       expect(api.statusCalls, 0);
       final button = tester.widget<FilledButton>(
@@ -291,6 +291,119 @@ void main() {
   );
 
   testWidgets(
+    'Native OCR without a confidence score still needs edited-text confirmation',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(390, 844));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      final api = TutorApi();
+      final ocr = TestOcr(
+        () async => const OcrResult(
+          text: '5',
+          confidence: null,
+          warnings: ['Kiểm tra lại chữ nhận từ ảnh trước khi dùng.'],
+        ),
+      );
+      await tester.pumpWidget(
+        app(
+          api,
+          AiOcrScreen(
+            initialText: 'Câu trả lời cũ',
+            returnTextOnly: true,
+            recognizer: ocr,
+          ),
+          signedIn: false,
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Google ML Kit có thể gửi'), findsOneWidget);
+      expect(find.textContaining('không cung cấp chỉ số'), findsNothing);
+      await tapText(tester, 'Chọn ảnh để nhận chữ');
+      expect(find.textContaining('không cung cấp chỉ số'), findsOneWidget);
+      expect(find.textContaining('Độ tin cậy nhận chữ:'), findsNothing);
+      expect(find.textContaining('độ tin cậy thấp'), findsNothing);
+      expect(
+        tester
+            .widget<TextField>(find.byKey(const Key('ocr-edited-text')))
+            .controller!
+            .text,
+        '5',
+      );
+      await tester.scrollUntilVisible(
+        find.text('Dùng văn bản này cho câu trả lời'),
+        250,
+        scrollable: find.byType(Scrollable).first,
+      );
+      expect(
+        tester
+            .widget<FilledButton>(
+              find.widgetWithText(
+                FilledButton,
+                'Dùng văn bản này cho câu trả lời',
+              ),
+            )
+            .onPressed,
+        isNull,
+      );
+      await tapText(tester, 'Tôi đã kiểm tra văn bản');
+      expect(
+        tester
+            .widget<FilledButton>(
+              find.widgetWithText(
+                FilledButton,
+                'Dùng văn bản này cho câu trả lời',
+              ),
+            )
+            .onPressed,
+        isNotNull,
+      );
+      expect(api.requests, isEmpty);
+      expect(api.statusCalls, 0);
+      expect(tester.takeException(), isNull);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.android),
+  );
+
+  testWidgets('Closing the image picker preserves the existing answer', (
+    tester,
+  ) async {
+    await wide(tester);
+    final api = TutorApi();
+    final ocr = TestOcr(() async => null);
+    await tester.pumpWidget(
+      app(
+        api,
+        AiOcrScreen(
+          initialText: 'Đáp án đã kiểm tra',
+          returnTextOnly: true,
+          recognizer: ocr,
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tapText(tester, 'Tôi đã kiểm tra văn bản');
+    await tapText(tester, 'Chọn ảnh để nhận chữ');
+    expect(
+      tester
+          .widget<TextField>(find.byKey(const Key('ocr-edited-text')))
+          .controller!
+          .text,
+      'Đáp án đã kiểm tra',
+    );
+    expect(
+      tester
+          .widget<FilledButton>(
+            find.widgetWithText(
+              FilledButton,
+              'Dùng văn bản này cho câu trả lời',
+            ),
+          )
+          .onPressed,
+      isNotNull,
+    );
+    expect(api.requests, isEmpty);
+  });
+
+  testWidgets(
     'Unconfigured AI remains honest and status can be retried after failure',
     (tester) async {
       await wide(tester);
@@ -300,6 +413,7 @@ void main() {
       );
       await tester.pumpAndSettle();
       expect(find.textContaining('AI chưa được cấu hình'), findsOneWidget);
+      expect(find.textContaining('liên hệ người quản lý'), findsOneWidget);
       await tapText(tester, 'Tôi đã kiểm tra văn bản');
       await tester.scrollUntilVisible(
         find.text('Xin hướng dẫn từ AI'),

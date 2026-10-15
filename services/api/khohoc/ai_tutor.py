@@ -38,6 +38,8 @@ class AITutorConfig:
     base_url: str = "https://api.openai.com/v1"
     model: str = ""
     api_key_file: str | None = None
+    # Keep only the fixed variable name, never its secret value, in configuration.
+    api_key_env_name: str | None = None
     daily_user_limit: int = 10
     daily_server_limit: int = 100
     output_tokens: int = 800
@@ -55,6 +57,9 @@ class AITutorConfig:
                 base_url=os.getenv("KHOHOC_AI_BASE_URL", cls.base_url),
                 model=os.getenv("KHOHOC_AI_MODEL", ""),
                 api_key_file=os.getenv("KHOHOC_AI_API_KEY_FILE"),
+                api_key_env_name=(
+                    "KHOHOC_AI_API_KEY" if "KHOHOC_AI_API_KEY" in os.environ else None
+                ),
                 daily_user_limit=int(os.getenv("KHOHOC_AI_DAILY_USER_LIMIT", "10")),
                 daily_server_limit=int(
                     os.getenv("KHOHOC_AI_DAILY_SERVER_LIMIT", "100")
@@ -106,9 +111,16 @@ class AITutorConfig:
             or not 1 <= self.daily_user_limit <= 50
             or not 1 <= self.daily_server_limit <= 500
             or not 100 <= self.output_tokens <= 1200
-            or not self.api_key_file
+            or bool(self.api_key_file) == bool(self.api_key_env_name)
         ):
             return None
+        if self.api_key_env_name:
+            # Cloud operators may inject a secret through the session proxy. Do
+            # not accept arbitrary variable names or silently override a file.
+            if self.api_key_env_name != "KHOHOC_AI_API_KEY":
+                return None
+            key = os.getenv(self.api_key_env_name, "").strip()
+            return key if re.fullmatch(r"[!-~]{16,512}", key) else None
         try:
             path = Path(self.api_key_file)
             if path.is_symlink():
