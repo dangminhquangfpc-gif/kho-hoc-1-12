@@ -1,6 +1,8 @@
 """Local classroom accounts. Opaque sessions, server grading, no hosted auth claims."""
 
 import base64
+import csv
+import io
 import hashlib
 import hmac
 import secrets
@@ -670,6 +672,87 @@ class AccountService:
             if not group or group.owner_id != owner.id:
                 raise HTTPException(404, "Không tìm thấy nhóm.")
             return group
+
+        @router.get("/classroom/groups/{group_id}/results.csv")
+        def group_results_csv(
+            group_id: str, request: Request, db: Session = Depends(db_dependency)
+        ):
+            # Authorize before reading membership or results. A group code is not access.
+            group = owned_group(group_id, request, db)
+            score = LearningRecord.payload["result"]["score"].as_float()
+            maximum = LearningRecord.payload["result"]["max_score"].as_float()
+            statistics = (
+                select(
+                    LearningRecord.user_id.label("user_id"),
+                    func.count().label("completed"),
+                    func.avg(
+                        case((maximum > 0, 100 * score / maximum), else_=None)
+                    ).label("average"),
+                    func.max(LearningRecord.submitted_at).label("latest"),
+                )
+                .group_by(LearningRecord.user_id)
+                .subquery()
+            )
+            rows = db.execute(
+                select(
+                    LearningUser,
+                    statistics.c.completed,
+                    statistics.c.average,
+                    statistics.c.latest,
+                )
+                .join(GroupMember, GroupMember.user_id == LearningUser.id)
+                .outerjoin(statistics, statistics.c.user_id == LearningUser.id)
+                .where(GroupMember.group_id == group.id, LearningUser.role == "student")
+                .order_by(LearningUser.username)
+            )
+            output = io.StringIO(newline="")
+            writer = csv.writer(output)
+            writer.writerow(
+                [
+                    "Nhóm",
+                    "Tên đăng nhập",
+                    "Họ và tên",
+                    "Lớp",
+                    "Số bài đã nộp",
+                    "Điểm trung bình (%)",
+                    "Nộp gần nhất (UTC)",
+                ]
+            )
+
+            def cell(value):
+                value = str(value)
+                # Quoting CSV alone does not stop spreadsheet formula injection.
+                return (
+                    "'" + value
+                    if value.lstrip().startswith(("=", "+", "-", "@"))
+                    or value.startswith(("\t", "\r", "\n"))
+                    else value
+                )
+
+            for user, completed, average, latest in rows:
+                writer.writerow(
+                    [
+                        cell(group.name),
+                        cell(user.username),
+                        cell(user.display_name),
+                        user.grade or "",
+                        completed or 0,
+                        "" if average is None else round(average, 2),
+                        ""
+                        if latest is None
+                        else latest.isoformat()
+                        + ("Z" if latest.tzinfo is None else ""),
+                    ]
+                )
+            return Response(
+                content="\ufeff" + output.getvalue(),
+                media_type="text/csv; charset=utf-8",
+                headers={
+                    "Content-Disposition": 'attachment; filename="tu-hoc-111-bang-diem.csv"',
+                    "Cache-Control": "no-store",
+                    "X-Content-Type-Options": "nosniff",
+                },
+            )
 
         @router.get("/classroom/groups")
         def groups(request: Request, db: Session = Depends(db_dependency)):

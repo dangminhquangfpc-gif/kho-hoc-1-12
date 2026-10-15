@@ -76,3 +76,10 @@ ngăn nhầm bản pilot thành bản phát hành.
 unit lịch chạy kèm runbook. Chưa kích hoạt lịch/giám sát trên máy chủ Internet,
 chưa có offsite hoặc đối soát dữ liệu đã xóa sau phục hồi; không coi đây là hoàn
 tất vận hành production. Xem docs/POSTGRES_OPERATIONS.md.
+
+## Bản thử .13
+
+Thêm xuất CSV kết quả nhóm có phân quyền chủ nhóm, xử lý tiếng Việt và phòng
+công thức bảng tính. Web tải tệp; native sao chép CSV, chưa lưu tệp trực tiếp.
+Đây là báo cáo toàn bộ lịch sử học của thành viên hiện tại. Không thay đổi
+trạng thái pilot/production hoặc điều kiện ký, thử nghiệm thiết bị và cửa hàng.

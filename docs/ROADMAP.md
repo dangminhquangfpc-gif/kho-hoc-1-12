@@ -105,3 +105,17 @@ phục hồi dữ liệu, đăng nhập lại. [Runbook vận hành](POSTGRES_OP
 Chưa cài lịch trên máy chủ Internet, chưa cấu hình offsite/nhà cung cấp cảnh báo
 hoặc đối soát yêu cầu xóa sau snapshot. Không thay đổi trạng thái phát hành cửa
 hàng, không mở khóa production và không yêu cầu tải lại ZIP Windows cho phần này.
+
+## Bản thử .13 — báo cáo kết quả nhóm
+
+Giáo viên/quản lý xuất CSV nhóm mình sở hữu từ màn hình Nhóm học viên. Bảng dùng
+điểm đã chấm trên máy chủ, gồm cả thành viên chưa nộp bài, trung bình phần trăm
+mọi môn/mọi lần nộp và thời gian nộp gần nhất (UTC). Thành viên hiện tại được
+thống kê toàn bộ lịch sử được phép xem, không riêng đề giao cho nhóm. Không
+phải bảng theo dõi hoàn thành từng bài giao hoặc sổ điểm chính thức.
+
+Web tải tệp UTF-8 có BOM; app điện thoại sao chép CSV vào clipboard để lưu bằng
+ứng dụng bảng tính. Kiểm tra sở hữu ở backend, không đưa mã phiên vào liên kết;
+tệp không có mật khẩu, lời giải hay đáp án học viên. Xem CLASSROOM_REPORTS.md.
+Backend Internet, thiết bị thật, nội dung thẩm định và ký/phát hành cửa hàng
+vẫn chưa hoàn tất.
