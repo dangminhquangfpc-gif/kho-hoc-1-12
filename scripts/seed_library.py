@@ -34,7 +34,11 @@ def main():
     fixtures = canonical_fixture_map(
         [
             document
-            for name in ("documents.json", "external_documents.json")
+            for name in (
+                "documents.json",
+                "external_documents.json",
+                "curriculum_documents.json",
+            )
             for document in json.loads(
                 (ROOT / "data/library" / name).read_text(encoding="utf-8")
             )["documents"]

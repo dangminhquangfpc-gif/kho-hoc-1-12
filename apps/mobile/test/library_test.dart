@@ -34,7 +34,54 @@ class LibraryApi extends FakeApi {
   };
 }
 
+class PracticeLessonApi extends LibraryApi {
+  @override
+  Future<Json> curriculum(int grade, String subject) async => {
+    'unit_count': 1,
+    'authored_count': 1,
+    'units': [],
+  };
+  @override
+  Future<Json> document(String id) async => {
+    ...await super.document(id),
+    'sections': [
+      {'heading': 'Bài tập tự luyện', 'text': 'Tính 4 + 3.'},
+      {'heading': 'Lời giải bài tập', 'text': '4 + 3 = 7.'},
+    ],
+  };
+}
+
 void main() {
+  testWidgets('Practice solution is concealed until the learner expands it', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({});
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [apiProvider.overrideWithValue(PracticeLessonApi())],
+        child: const KhoHocApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Tài liệu'));
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.text('Ghi chú cộng số'),
+      150,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.drag(find.byType(Scrollable).first, const Offset(0, -150));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Ghi chú cộng số'));
+    await tester.pumpAndSettle();
+    expect(find.text('Tính 4 + 3.'), findsOneWidget);
+    expect(find.text('4 + 3 = 7.'), findsNothing);
+    await tester.tap(find.text('Lời giải bài tập'));
+    await tester.pumpAndSettle();
+    expect(find.text('4 + 3 = 7.'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
+
   testWidgets(
     'Library opens notes and retains favorites/recent after returning',
     (tester) async {

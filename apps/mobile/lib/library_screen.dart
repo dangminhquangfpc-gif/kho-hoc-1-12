@@ -15,12 +15,14 @@ typedef DocumentFilter = ({
   String topic,
   String period,
   int year,
+  String section,
 });
 final documentsProvider = FutureProvider.family<List<Json>, DocumentFilter>(
   (ref, f) => ref.watch(apiProvider).documents({
     'grade': f.grade,
     'subject': f.subject,
     'search': f.search,
+    'section': f.section,
     if (f.semester != 0) 'semester': f.semester,
     if (f.textbook.isNotEmpty) 'textbook': f.textbook,
     if (f.kind.isNotEmpty) 'kind': f.kind,
@@ -30,8 +32,14 @@ final documentsProvider = FutureProvider.family<List<Json>, DocumentFilter>(
   }),
 );
 
+final curriculumProvider =
+    FutureProvider.family<Json, ({int grade, String subject})>(
+      (ref, f) => ref.watch(apiProvider).curriculum(f.grade, f.subject),
+    );
+
 class LibraryScreen extends ConsumerStatefulWidget {
-  const LibraryScreen({super.key});
+  const LibraryScreen({super.key, this.examMode = false});
+  final bool examMode;
   @override
   ConsumerState<LibraryScreen> createState() => _LibraryState();
 }
@@ -54,20 +62,28 @@ class _LibraryState extends ConsumerState<LibraryScreen> {
       topic: topic,
       period: period,
       year: year,
+      section: widget.examMode ? 'exams' : 'lessons',
     );
     final documents = ref.watch(documentsProvider(filter));
+    final curriculum = widget.examMode
+        ? null
+        : ref.watch(curriculumProvider((grade: grade, subject: subject)));
     final subjects = ref.watch(subjectsProvider(grade));
     final prefs = ref.watch(preferencesProvider).asData?.value;
     final favorites = prefs?.getStringList('favorite_documents') ?? [];
     final recent = prefs?.getStringList('recent_documents') ?? [];
     return Shell(
-      title: 'Kho tài liệu',
-      index: 1,
+      title: widget.examMode
+          ? 'Đề kiểm tra từ nguồn Internet'
+          : 'Bài học và bài tập',
+      index: widget.examMode ? 2 : 1,
       child: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          const Text(
-            'Ghi chú đọc trong app và tài liệu Internet. Các mục nguồn ngoài mở tại trang gốc.',
+          Text(
+            widget.examMode
+                ? 'Đề giữa kỳ, cuối kỳ và tốt nghiệp. Các đề nguồn ngoài mở ở trang gốc.'
+                : 'Chọn phần học để đọc kiến thức, cách làm, ví dụ và bài tập có lời giải.',
           ),
           const SizedBox(height: 16),
           DropdownButtonFormField<int>(
@@ -143,64 +159,116 @@ class _LibraryState extends ConsumerState<LibraryScreen> {
             ],
             onChanged: (v) => setState(() => textbook = v!),
           ),
-          DropdownButtonFormField<String>(
-            initialValue: kind,
-            decoration: const InputDecoration(labelText: 'Loại tài liệu'),
-            items: const [
-              DropdownMenuItem(value: '', child: Text('Tất cả')),
-              DropdownMenuItem(
-                value: 'study_notes',
-                child: Text('Ghi chú học tập'),
-              ),
-              DropdownMenuItem(value: 'worksheet', child: Text('Bài tập')),
-              DropdownMenuItem(value: 'reference', child: Text('Tham khảo')),
-              DropdownMenuItem(value: 'exam', child: Text('Đề kiểm tra')),
-            ],
-            onChanged: (v) => setState(() => kind = v!),
-          ),
-          DropdownButtonFormField<String>(
-            initialValue: period,
-            decoration: const InputDecoration(
-              labelText: 'Đợt kiểm tra / ôn tập',
+          if (widget.examMode)
+            DropdownButtonFormField<String>(
+              initialValue: kind,
+              decoration: const InputDecoration(labelText: 'Loại tài liệu'),
+              items: const [
+                DropdownMenuItem(value: '', child: Text('Tất cả')),
+                DropdownMenuItem(
+                  value: 'study_notes',
+                  child: Text('Ghi chú học tập'),
+                ),
+                DropdownMenuItem(value: 'worksheet', child: Text('Bài tập')),
+                DropdownMenuItem(value: 'reference', child: Text('Tham khảo')),
+                DropdownMenuItem(value: 'exam', child: Text('Đề kiểm tra')),
+              ],
+              onChanged: (v) => setState(() => kind = v!),
             ),
-            items: const [
-              DropdownMenuItem(value: '', child: Text('Tất cả')),
-              DropdownMenuItem(
-                value: 'midterm_1',
-                child: Text('Giữa học kỳ 1'),
+          if (widget.examMode)
+            DropdownButtonFormField<String>(
+              initialValue: period,
+              decoration: const InputDecoration(
+                labelText: 'Đợt kiểm tra / ôn tập',
               ),
-              DropdownMenuItem(value: 'final_1', child: Text('Cuối học kỳ 1')),
-              DropdownMenuItem(
-                value: 'midterm_2',
-                child: Text('Giữa học kỳ 2'),
-              ),
-              DropdownMenuItem(value: 'final_2', child: Text('Cuối học kỳ 2')),
-              DropdownMenuItem(
-                value: 'graduation',
-                child: Text('Tốt nghiệp THPT'),
-              ),
-              DropdownMenuItem(
-                value: 'review',
-                child: Text('Ôn tập / củng cố'),
-              ),
-            ],
-            onChanged: (value) => setState(() => period = value!),
-          ),
-          TextField(
-            decoration: const InputDecoration(
-              labelText: 'Năm đề thi (để trống xem tất cả)',
+              items: const [
+                DropdownMenuItem(value: '', child: Text('Tất cả')),
+                DropdownMenuItem(
+                  value: 'midterm_1',
+                  child: Text('Giữa học kỳ 1'),
+                ),
+                DropdownMenuItem(
+                  value: 'final_1',
+                  child: Text('Cuối học kỳ 1'),
+                ),
+                DropdownMenuItem(
+                  value: 'midterm_2',
+                  child: Text('Giữa học kỳ 2'),
+                ),
+                DropdownMenuItem(
+                  value: 'final_2',
+                  child: Text('Cuối học kỳ 2'),
+                ),
+                DropdownMenuItem(
+                  value: 'graduation',
+                  child: Text('Tốt nghiệp THPT'),
+                ),
+                DropdownMenuItem(
+                  value: 'review',
+                  child: Text('Ôn tập / củng cố'),
+                ),
+              ],
+              onChanged: (value) => setState(() => period = value!),
             ),
-            keyboardType: TextInputType.number,
-            onChanged: (value) =>
-                setState(() => year = int.tryParse(value) ?? 0),
-          ),
-          const Text(
-            'Đề tốt nghiệp quốc gia dùng chung cho các bộ sách. Liên kết Internet cần mạng và có thể yêu cầu tài khoản ở trang nguồn.',
-          ),
+          if (widget.examMode)
+            TextField(
+              decoration: const InputDecoration(
+                labelText: 'Năm đề thi (để trống xem tất cả)',
+              ),
+              keyboardType: TextInputType.number,
+              onChanged: (value) =>
+                  setState(() => year = int.tryParse(value) ?? 0),
+            ),
+          if (widget.examMode)
+            const Text(
+              'Đề tốt nghiệp quốc gia dùng chung cho các bộ sách. Liên kết Internet cần mạng và có thể yêu cầu tài khoản ở trang nguồn.',
+            ),
           TextField(
             decoration: const InputDecoration(labelText: 'Chương/chủ đề'),
             onChanged: (v) => setState(() => topic = v),
           ),
+          if (!widget.examMode && curriculum != null)
+            curriculum.when(
+              data: (book) => Card(
+                child: ExpansionTile(
+                  title: Text(
+                    book['unit_count'] == null
+                        ? 'Chưa xác minh mục lục sách này'
+                        : 'Mục lục: ${book["authored_count"]}/${book["unit_count"]} phần có bài học',
+                  ),
+                  subtitle: const Text(
+                    'Mục lục nguồn tham khảo; đang đối chiếu nhà xuất bản và các ấn bản.',
+                  ),
+                  children: [
+                    for (final unit in (book['units'] as List? ?? []))
+                      ListTile(
+                        title: Text(unit['title']),
+                        subtitle: Text(
+                          unit['document_id'] == null
+                              ? 'Chưa có bài hướng dẫn và luyện tập trong app'
+                              : 'Có hướng dẫn và luyện tập; chờ thẩm định chuyên môn',
+                        ),
+                        trailing: Icon(
+                          unit['document_id'] == null
+                              ? Icons.pending_outlined
+                              : Icons.menu_book,
+                        ),
+                        onTap: unit['document_id'] == null
+                            ? null
+                            : () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      DocumentScreen(id: unit['document_id']),
+                                ),
+                              ),
+                      ),
+                  ],
+                ),
+              ),
+              loading: () => const LinearProgressIndicator(),
+              error: (_, _) => const Text('Chưa tải được mục lục.'),
+            ),
           const SizedBox(height: 12),
           Wrap(
             spacing: 8,
@@ -411,7 +479,7 @@ class _DocumentState extends ConsumerState<DocumentScreen> {
             Text('Tác giả: ${d['author']}'),
             Text('Nguồn: ${d['source_name']}'),
             Text('Quyền sử dụng: $licenseName'),
-            const Text('Trạng thái: Đã duyệt và xuất bản'),
+            const Text('Trạng thái: Đang hiển thị trong bản thử'),
             Text('Cập nhật: $updatedLabel'),
             if (d['exam_year'] != null) Text('Năm đề thi: ${d["exam_year"]}'),
             if (d['source_verified_on'] != null)
@@ -424,13 +492,26 @@ class _DocumentState extends ConsumerState<DocumentScreen> {
               ),
             const Divider(),
             for (final section in (d['sections'] as List? ?? [])) ...[
-              Text(
-                section['heading'],
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 8),
-              SelectableText(section['text']),
-              const SizedBox(height: 20),
+              if ((section['heading'] as String).contains('Lời giải bài tập') ||
+                  (section['heading'] as String).contains('Đáp án tự kiểm tra'))
+                ExpansionTile(
+                  title: Text(section['heading']),
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: SelectableText(section['text']),
+                    ),
+                  ],
+                )
+              else ...[
+                Text(
+                  section['heading'],
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 8),
+                SelectableText(section['text']),
+                const SizedBox(height: 20),
+              ],
             ],
             if (d['source_url'] != null)
               TextButton.icon(

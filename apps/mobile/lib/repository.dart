@@ -45,6 +45,12 @@ class LearningApi {
     throw StateError('Quá nhiều tài liệu. Hãy chọn thêm bộ lọc.');
   }
 
+  Future<Json> curriculum(int grade, String subject) async =>
+      (await client.get<Json>(
+        '/curriculum',
+        queryParameters: {'grade': grade, 'subject': subject},
+      )).data!;
+
   Future<Json> document(String id) async =>
       (await client.get<Json>('/documents/$id')).data!;
   Uri publicUrl(String path) {

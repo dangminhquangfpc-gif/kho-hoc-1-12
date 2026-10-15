@@ -81,6 +81,7 @@ def build(artifacts: Path):
         "LICENSE",
         "data/library/documents.json",
         "data/library/external_documents.json",
+        "data/library/curriculum_documents.json",
     ]:
         target = staging / name
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -132,7 +133,11 @@ def build(artifacts: Path):
                 "documents"
             ]
         )
-        for name in ("documents.json", "external_documents.json")
+        for name in (
+            "documents.json",
+            "external_documents.json",
+            "curriculum_documents.json",
+        )
     )
     guide = guide.replace(
         "Có 108 câu/12 đề và 4 tài liệu",

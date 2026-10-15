@@ -15,7 +15,7 @@ from .library import DocumentInput
 from .schemas import ExamInput, Question
 
 PUBLIC = re.compile(
-    r"/(?:health|coverage|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|"
+    r"/(?:health|coverage|curriculum|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|"
     r"exams/[^/]+/attempts|attempts/[^/]+/(?:submit|result)|attempts/[^/]+|documents|documents/[^/]+|documents/[^/]+/file)"
 )
 
@@ -94,7 +94,11 @@ def create_preview():
     notes = canonical_fixture_map(
         [
             document
-            for filename in ("documents.json", "external_documents.json")
+            for filename in (
+                "documents.json",
+                "external_documents.json",
+                "curriculum_documents.json",
+            )
             for document in json.loads(
                 (root / "data/library" / filename).read_text(encoding="utf-8")
             )["documents"]

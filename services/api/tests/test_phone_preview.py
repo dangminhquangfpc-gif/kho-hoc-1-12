@@ -15,6 +15,31 @@ def test_phone_preview_seed_private_routes_and_rate_limit(tmp_path, monkeypatch)
             len(client.get("/documents", params={"limit": 100, "offset": 100}).json())
             == 100
         )
+        lessons = client.get(
+            "/documents",
+            params={"grade": 5, "subject": "toan", "section": "lessons", "limit": 100},
+        ).json()
+        assert len(lessons) == 82
+        assert [d["lesson_order"] for d in lessons[:75]] == list(range(1, 76))
+        assert all(
+            d["kind"] != "exam" and d["source_type"] != "link_only" for d in lessons
+        )
+        exam_sources = client.get(
+            "/documents",
+            params={"grade": 6, "subject": "toan", "section": "exams", "limit": 100},
+        ).json()
+        assert exam_sources and all(d["kind"] == "exam" for d in exam_sources)
+        curriculum = client.get(
+            "/curriculum", params={"grade": 5, "subject": "toan"}
+        ).json()
+        assert curriculum["unit_count"] == curriculum["authored_count"] == 75
+        assert all(u["document_id"] is not None for u in curriculum["units"])
+        partial = client.get(
+            "/curriculum", params={"grade": 6, "subject": "toan"}
+        ).json()
+        assert partial["authored_count"] == 0 and all(
+            u["content_status"] == "missing" for u in partial["units"]
+        )
         coverage = client.get("/coverage", params={"grade": 2}).json()
         math = next(row for row in coverage if row["subject"] == "toan")
         assert math["question_count"] == 60 and math["exam_count"] == 7

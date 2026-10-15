@@ -57,6 +57,9 @@ class DocumentInput(BaseModel):
     subject: str = Field(min_length=1, max_length=60)
     semester: Literal[1, 2] | None = None
     topic: str = Field(min_length=1, max_length=100)
+    chapter: str | None = Field(default=None, max_length=300)
+    lesson_order: int | None = Field(default=None, ge=1, le=10000)
+    curriculum_unit_id: str | None = Field(default=None, pattern=r"^unit_[a-f0-9]{20}$")
     textbook: Textbook = "independent"
     kind: DocumentKind = "study_notes"
     summary: str = Field(min_length=1, max_length=2000)
@@ -222,6 +225,9 @@ def public_document(row: LibraryDocument, *, detail: bool = False) -> dict:
             key: body.get(key)
             for key in (
                 "assessment_period",
+                "chapter",
+                "lesson_order",
+                "curriculum_unit_id",
                 "exam_year",
                 "source_verified_on",
                 "resource_scope",
@@ -274,6 +280,7 @@ def create_library_router(
         topic: str = Query(default="", max_length=100),
         textbook: Textbook | None = None,
         kind: DocumentKind | None = None,
+        section: Literal["lessons", "exams", "references"] | None = None,
         assessment_period: AssessmentPeriod | None = None,
         exam_year: int | None = Query(default=None, ge=2000, le=2100),
         search: str = Query(default="", max_length=100),
@@ -290,6 +297,24 @@ def create_library_router(
             if not eligible(row):
                 continue
             item = row.payload
+            is_exam = item["kind"] == "exam" or item.get("assessment_period") in (
+                "midterm_1",
+                "final_1",
+                "midterm_2",
+                "final_2",
+                "graduation",
+            )
+            is_lesson = (
+                not is_exam
+                and item["source_type"] != "link_only"
+                and bool(item.get("sections"))
+            )
+            if section == "lessons" and not is_lesson:
+                continue
+            if section == "exams" and not is_exam:
+                continue
+            if section == "references" and (is_lesson or is_exam):
+                continue
             if any(
                 expected is not None and item.get(field) != expected
                 for field, expected in (
@@ -314,6 +339,14 @@ def create_library_router(
             if not all(term in haystack for term in search_key(search).split()):
                 continue
             found.append(public_document(row))
+        if section == "lessons":
+            found.sort(
+                key=lambda d: (
+                    d.get("lesson_order") is None,
+                    d.get("lesson_order") or 0,
+                    d["title"],
+                )
+            )
         return found[offset : offset + limit]
 
     @router.get("/documents/{document_id}")

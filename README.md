@@ -128,3 +128,8 @@ Bản thử hiện có 1.566 câu, 219 đề và 199 tài liệu; có dữ liệ
 ### Thư viện Internet 15/10/2026
 
 Bổ sung 1.934 mục nguồn Internet, tổng 2.133 tài liệu/liên kết; gồm 1.444 trang đề giữa/cuối kỳ KNTT và 104 mục tốt nghiệp dùng chung. Đây là liên kết nguồn, không phải PDF/câu hỏi của bên thứ ba được sao chép vào app. Chi tiết, quyền sử dụng và phần còn thiếu: `docs/INTERNET_LIBRARY.md`.
+
+
+### Bài học theo mục lục và phân tách Luyện đề
+
+Tài liệu chỉ hiện bài hướng dẫn/luyện tập đọc trong app; đề nguồn ngoài chuyển sang Luyện đề. Thêm 75 bài Toán 5 có 278 lượt bài tập và lời giải thu gọn. Mục lục tham khảo 101 sách/2.618 mục giúp theo dõi phần còn thiếu; chưa đủ mọi môn/ấn bản SGK. Xem `docs/TEXTBOOK_LESSONS.md`.

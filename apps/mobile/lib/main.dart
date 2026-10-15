@@ -39,6 +39,10 @@ final routerProvider = Provider<GoRouter>(
       GoRoute(path: '/', builder: (_, _) => const HomeScreen()),
       GoRoute(path: '/practice', builder: (_, _) => const PracticeScreen()),
       GoRoute(path: '/exams', builder: (_, _) => const HomeScreen(index: 2)),
+      GoRoute(
+        path: '/source-exams',
+        builder: (_, _) => const LibraryScreen(examMode: true),
+      ),
       GoRoute(path: '/documents', builder: (_, _) => const LibraryScreen()),
       GoRoute(path: '/progress', builder: (_, _) => const ProgressScreen()),
       GoRoute(path: '/history', builder: (_, _) => const HistoryScreen()),
@@ -174,6 +178,19 @@ class _HomeState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 8),
           const Text('Chọn lớp và môn để luyện tập. Không cần tài khoản.'),
+          if (widget.index == 2)
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.public),
+                title: const Text(
+                  'Đề giữa kỳ, cuối kỳ và tốt nghiệp từ Internet',
+                ),
+                subtitle: const Text(
+                  'Lọc theo lớp, môn, đợt kiểm tra và năm đề',
+                ),
+                onTap: () => context.go('/source-exams'),
+              ),
+            ),
           const SizedBox(height: 20),
           prefs.when(
             data: (p) => LocalStore(p).current == null

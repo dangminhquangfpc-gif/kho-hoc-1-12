@@ -25,7 +25,7 @@ if (
 BACKEND_URL = BACKEND_URL.rstrip("/")
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 PUBLIC = re.compile(
-    r"(?:health|coverage|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|exams/[^/]+/attempts|attempts/[^/]+|attempts/[^/]+/(?:submit|result)|documents|documents/[^/]+|documents/[^/]+/file)"
+    r"(?:health|coverage|curriculum|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|exams/[^/]+/attempts|attempts/[^/]+|attempts/[^/]+/(?:submit|result)|documents|documents/[^/]+|documents/[^/]+/file)"
 )
 
 

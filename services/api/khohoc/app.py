@@ -164,6 +164,63 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             raise HTTPException(404, "Grade not found")
         return subjects_for_grade(grade_id)
 
+    @app.get("/curriculum")
+    def curriculum(
+        grade: int = Query(ge=1, le=12),
+        subject: str = "toan",
+        session: Session = Depends(db),
+    ):
+        import json
+        from .library import LibraryDocument
+
+        path = Path(__file__).resolve().parents[3] / "data/seeds/textbook_units.json"
+        books = json.loads(path.read_text(encoding="utf-8"))["books"]
+        book = next(
+            (
+                book
+                for book in books
+                if book["grade"] == grade and book["subject"] == subject
+            ),
+            None,
+        )
+        if not book or not book.get("units"):
+            return {
+                "status": "index_not_verified",
+                "units": [],
+                "unit_count": None,
+                "authored_count": 0,
+            }
+        authored = {
+            row.payload.get("curriculum_unit_id"): row.id
+            for row in session.scalars(
+                select(LibraryDocument).where(
+                    LibraryDocument.state == "published",
+                    LibraryDocument.rights_confirmed.is_(True),
+                )
+            )
+            if row.payload["grade"] == grade
+            and row.payload["subject"] == subject
+            and row.payload.get("curriculum_unit_id")
+        }
+        units = [
+            unit
+            | {
+                "document_id": authored.get(unit["id"]),
+                "content_status": "authored_pending_review"
+                if unit["id"] in authored
+                else "missing",
+            }
+            for unit in book["units"]
+        ]
+        return {
+            "status": "secondary_index_pending_publisher_review",
+            "source_url": book["source_url"],
+            "edition": book["edition"],
+            "unit_count": len(units),
+            "authored_count": sum(unit["document_id"] is not None for unit in units),
+            "units": units,
+        }
+
     @app.get("/coverage")
     def coverage(grade: int = Query(ge=1, le=12), session: Session = Depends(db)):
         from .library import LibraryDocument

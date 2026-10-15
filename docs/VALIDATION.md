@@ -69,3 +69,8 @@ Bản cuối sau Việt hóa metadata và xử lý xóa lịch sử: 6 Flutter t
 ## Internet library — 15/10/2026
 
 63 backend tests passed, including source provenance, correct grade/period classification, namespace rules for national exams, and period/year filtering. Flutter analyze passed; 7 Flutter tests passed including paginated document retrieval; release web build passed. A package extracted into a Vietnamese path upgraded the previous demo database and exposed 2,133 documents/1,934 link-only sources. HTTP checks verified term/year filters, private evidence omission, denied local PDF copies and blocked admin. Source HTTP 200 records with book evidence and hashes are stored in data/library/source_checks.json. Windows native execution remains unrun.
+
+
+## Lesson organization — 15/10/2026
+
+64 backend tests passed, including separated lesson/exam lists, sequential Math5 lessons 1–75, source-index coverage and explicit missing units. Flutter analyze passed; previous 7 tests passed plus the new conceal/reveal solution regression passed. Release web build passed. The package upgraded a database from the prior Internet demo; HTTP verified 82 Math5 study documents (75 indexed lessons plus 7 prior notes) and exams confined to their collection. Live browser checked Math5 navigation and Luyện đề → external exams; expanded solutions were visually verified. Windows native execution remains unrun. Official publisher catalog lookup returned 401; public searches returned no records. Full textbook/edition completeness remains unverified.
