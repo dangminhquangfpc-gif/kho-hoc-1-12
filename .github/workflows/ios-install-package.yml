@@ -1,0 +1,104 @@
+name: iOS IPA for personal signing
+on:
+  push:
+    branches: [feature/ios-install-package-20261015]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: ios-install-package-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  package:
+    runs-on: macos-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+          channel: stable
+          cache: true
+      - name: Require iOS SDK 26 or newer
+        run: |
+          xcodebuild -version
+          SDK_VERSION="$(xcrun --sdk iphoneos --show-sdk-version)" python3 -c 'import os; assert int(os.environ["SDK_VERSION"].split(".")[0]) >= 26'
+      - run: flutter pub get --enforce-lockfile
+        working-directory: apps/mobile
+      - name: Build device application without signing credentials
+        run: flutter build ios --release --no-codesign --dart-define=API_BASE_URL=https://backend.invalid/api
+        working-directory: apps/mobile
+      - name: Verify and package the device IPA
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, plistlib, stat, struct, subprocess
+          from pathlib import Path
+          from zipfile import ZipFile
+
+          app = Path('apps/mobile/build/ios/iphoneos/Runner.app')
+          info = plistlib.loads((app / 'Info.plist').read_bytes())
+          assert info['CFBundleDisplayName'] == 'Tự học 111'
+          assert info['CFBundleIdentifier'] == 'vn.khohoc.khoHocMobile'
+          assert info['CFBundleVersion'] == '20'
+          assert info['CFBundleSupportedPlatforms'] == ['iPhoneOS']
+          assert int(info['DTSDKName'].removeprefix('iphoneos').split('.')[0]) >= 26
+          assert tuple(map(int, info['MinimumOSVersion'].split('.'))) >= (15, 5)
+          binary = app / info['CFBundleExecutable']
+          header = binary.read_bytes()[:12]
+          assert header[:4] == bytes.fromhex('cffaedfe')
+          assert struct.unpack('<I', header[4:8])[0] == 0x0100000c
+          assert os.access(binary, os.X_OK)
+          assert not (app / 'embedded.mobileprovision').exists()
+          assert not (app / '_CodeSignature/CodeResources').exists()
+          privacy = plistlib.loads((app / 'PrivacyInfo.xcprivacy').read_bytes())
+          assert privacy['NSPrivacyTracking'] is False
+          asset = app / 'Frameworks/App.framework/flutter_assets/assets/offline/content.json'
+          source = Path('apps/mobile/assets/offline/content.json')
+          assert hashlib.sha256(asset.read_bytes()).digest() == hashlib.sha256(source.read_bytes()).digest()
+          stage = Path('ios-package')
+          payload = stage / 'Payload/Runner.app'
+          payload.parent.mkdir(parents=True)
+          subprocess.run(['ditto', str(app), str(payload)], check=True)
+          output = Path('ios-output')
+          output.mkdir()
+          ipa = output / 'tu-hoc-111-ios-unsigned.ipa'
+          subprocess.run(['ditto', '-c', '-k', '--norsrc', '--keepParent', str(stage / 'Payload'), str(ipa)], check=True)
+          with ZipFile(ipa) as archive:
+              assert archive.testzip() is None
+              names = archive.namelist()
+              assert len(names) == len(set(names))
+              assert all(n.startswith('Payload/') and '..' not in Path(n).parts for n in names)
+              entry = archive.getinfo('Payload/Runner.app/' + info['CFBundleExecutable'])
+              assert stat.S_IMODE(entry.external_attr >> 16) & 0o111
+              assert archive.read(entry) == binary.read_bytes()
+              assert plistlib.loads(archive.read('Payload/Runner.app/Info.plist')) == info
+          with ipa.open('rb') as handle:
+              digest = hashlib.file_digest(handle, 'sha256').hexdigest()
+          (output / (ipa.name + '.sha256')).write_text(digest + '  ' + ipa.name + '\n')
+          report = dict(kind='tuhoc111.ios-personal-signing-package', source_commit=os.environ['GITHUB_SHA'],
+                        version='0.2.0+20', bundle_id=info['CFBundleIdentifier'], minimum_ios=info['MinimumOSVersion'],
+                        sdk=info['DTSDKName'], platform='iPhoneOS', architecture='arm64',
+                        signed_for_installation=False, requires_personal_signing=True,
+                        physical_iphone_verified=False, zip_crc='passed', executable_mode='passed',
+                        offline_asset_sha256=hashlib.sha256(source.read_bytes()).hexdigest(),
+                        sha256=digest, bytes=ipa.stat().st_size)
+          (output / 'ios-package-report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
+          subprocess.run(['cp', 'docs/IOS_INSTALL.md', str(output / 'HUONG-DAN-CAI-IOS.md')], check=True)
+          print(json.dumps(report, ensure_ascii=False, indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tu-hoc-111-ios-personal-signing
+          path: ios-output/
+          retention-days: 14
+      - name: Prepare draft iOS test release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: demo-tu-hoc-111-ios-2026-10-15-v20
+        run: |
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --json isDraft --jq .isDraft > "$RUNNER_TEMP/ios-release-draft"; then
+            test "$(cat "$RUNNER_TEMP/ios-release-draft")" = true || { echo 'Refusing to overwrite a published release.'; exit 1; }
+          else
+            gh release create "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --draft --prerelease --target "$GITHUB_SHA" --title 'Tự học 111 · iOS .20 · IPA để ký cá nhân' --notes 'IPA cho iPhone/iPad iOS 15.5+, chưa ký. Cần ký/cài bằng Apple ID của bạn trên máy tính; không mở trực tiếp như APK. Windows có thể dùng Sideloadly, Apple ID miễn phí cần refresh khoảng 7 ngày. Xem HUONG-DAN-CAI-IOS.md. Không cần gửi mật khẩu Apple vào chat; chưa có TestFlight/App Store hoặc nghiệm thu iPhone thật.'
+          fi
+          gh release upload "$RELEASE_TAG" ios-output/tu-hoc-111-ios-unsigned.ipa ios-output/tu-hoc-111-ios-unsigned.ipa.sha256 ios-output/ios-package-report.json ios-output/HUONG-DAN-CAI-IOS.md --repo "$GITHUB_REPOSITORY" --clobber
