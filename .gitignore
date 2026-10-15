@@ -130,3 +130,9 @@ __pycache__/
 /deploy/shared/secrets/
 /deploy/shared/private/
 /deploy/shared/.env
+
+# Private PostgreSQL operational backups
+*.tuhocpg
+*.pgdump
+/deploy/shared/backups/
+.server-venv/

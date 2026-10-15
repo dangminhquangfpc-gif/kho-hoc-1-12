@@ -1,0 +1,16 @@
+[Unit]
+Description=Tu hoc 111 HTTPS readiness and backup freshness
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/tu-hoc-111
+EnvironmentFile=/opt/tu-hoc-111/deploy/shared/.env
+ExecStart=/opt/tu-hoc-111/.server-venv/bin/python /opt/tu-hoc-111/scripts/monitor_shared.py --url https://${TUHOC_DOMAIN}/api/ready --backup-directory /var/backups/tu-hoc-111 --max-age-hours 26
+TimeoutStartSec=2min
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+UMask=0077

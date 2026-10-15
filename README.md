@@ -165,3 +165,5 @@ phân quyền database và đồng bộ bản nháp/kết quả theo tài khoả
 Xem [hướng dẫn triển khai và kiểm thử](docs/SHARED_SERVER.md). Cấu hình này chưa
 được triển khai lên Internet; gói Windows vẫn chạy local nếu chưa đặt backend
 HTTPS dùng chung. Chế độ phát hành cửa hàng vẫn được khóa.
+
+Công cụ vận hành tiếp theo: [sao lưu PostgreSQL, khôi phục và giám sát](docs/POSTGRES_OPERATIONS.md). Các lịch systemd là cấu hình để triển khai; chưa được kích hoạt trên máy chủ Internet.

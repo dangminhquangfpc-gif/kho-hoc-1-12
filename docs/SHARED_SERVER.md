@@ -124,9 +124,9 @@ CI cũng chạy script này. Kiểm tra `/api/health`, đăng nhập hai thiết
 làm, điểm, phân quyền và khả năng giữ dữ liệu sau restart trước khi mở pilot.
 
 Volume không phải bản sao lưu. Công cụ mã hóa SQLite không sao lưu PostgreSQL.
-Trước dữ liệu học sinh thật cần lịch `pg_dump` mã hóa, nơi lưu tách máy, thử
-khôi phục, chính sách retention/xóa, giám sát và cập nhật image định kỳ. Các phần
-này chưa được tự động triển khai. Quyền theo học viên hiện do ứng dụng kiểm tra,
+Đã có công cụ `pg_dump` mã hóa, khôi phục cách ly, kiểm tra readiness và unit
+lịch backup/monitor; xem [vận hành PostgreSQL](POSTGRES_OPERATIONS.md). Chưa cài
+lịch trên máy chủ Internet, cấu hình nơi lưu tách máy hoặc đối soát xóa sau phục hồi. Quyền theo học viên hiện do ứng dụng kiểm tra,
 không khẳng định database có RLS cho các bảng SQLAlchemy này. Còn cần kiểm duyệt
 nội dung, quy trình xác minh giáo viên, quyền riêng tư trẻ em và thử thiết bị thật
 trước phát hành rộng rãi/CH Play/App Store.

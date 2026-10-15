@@ -10,11 +10,11 @@ from pathlib import Path
 from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.trustedhost import TrustedHostMiddleware
-from .database import make_engine, verify_schema
+from .database import make_engine, verify_schema, SCHEMA_VERSION
 from .server_security import validate_shared, reserve
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from sqlalchemy import select, update, delete
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy import select, update, delete, text
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from .catalog import subjects_for_grade
@@ -147,21 +147,29 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 or request.headers.get("sec-fetch-site") == "cross-site"
             ):
                 return JSONResponse({"detail": "Cross-site request denied"}, 403)
-            peer = request.client.host if request.client else "unknown"
-            if not await run_in_threadpool(
-                partial(reserve, engine, "request:" + peer, 300, 60)
-            ):
-                return JSONResponse(
-                    {"detail": "Too many requests"}, 429, headers={"Retry-After": "60"}
-                )
-            if request.url.path in {"/auth/login", "/auth/register"}:
-                if not await run_in_threadpool(
-                    partial(reserve, engine, "auth-ip:" + peer, 60, 900)
-                ):
+            if request.url.path not in {"/health", "/ready"}:
+                try:
+                    peer = request.client.host if request.client else "unknown"
+                    if not await run_in_threadpool(
+                        partial(reserve, engine, "request:" + peer, 300, 60)
+                    ):
+                        return JSONResponse(
+                            {"detail": "Too many requests"},
+                            429,
+                            headers={"Retry-After": "60"},
+                        )
+                    if request.url.path in {"/auth/login", "/auth/register"}:
+                        if not await run_in_threadpool(
+                            partial(reserve, engine, "auth-ip:" + peer, 60, 900)
+                        ):
+                            return JSONResponse(
+                                {"detail": "Too many authentication requests"},
+                                429,
+                                headers={"Retry-After": "900"},
+                            )
+                except SQLAlchemyError:
                     return JSONResponse(
-                        {"detail": "Too many authentication requests"},
-                        429,
-                        headers={"Retry-After": "900"},
+                        {"detail": "Service temporarily unavailable"}, 503
                     )
         if request.method in ("POST", "PUT", "PATCH"):
             body = bytearray()
@@ -259,10 +267,33 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app.include_router(create_library_router(db, admin, audit))
 
+    def probe(session, ready=False):
+        from fastapi.responses import JSONResponse
+
+        try:
+            session.execute(select(1))
+            if ready and shared:
+                versions = (
+                    session.execute(text("SELECT version FROM app_schema_version"))
+                    .scalars()
+                    .all()
+                )
+                if versions != [SCHEMA_VERSION]:
+                    return JSONResponse(
+                        {"status": "unavailable", "mode": config.mode}, 503
+                    )
+        except SQLAlchemyError:
+            session.rollback()
+            return JSONResponse({"status": "unavailable", "mode": config.mode}, 503)
+        return {"status": "ok", "mode": config.mode}
+
     @app.get("/health")
     def health(session: Session = Depends(db)):
-        session.execute(select(1))
-        return {"status": "ok", "mode": config.mode}
+        return probe(session)
+
+    @app.get("/ready")
+    def ready(session: Session = Depends(db)):
+        return probe(session, ready=True)
 
     @app.get("/grades")
     def grades():

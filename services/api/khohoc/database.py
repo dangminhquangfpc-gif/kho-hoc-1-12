@@ -1,16 +1,26 @@
 """Explicit schema initialization for shared servers; no automatic production DDL."""
 
 from sqlalchemy import create_engine, inspect, text
+from sqlalchemy.engine import make_url
 from .models import Base
 
 SCHEMA_VERSION = 1
 
 
 def make_engine(url):
+    if url.startswith("sqlite"):
+        return create_engine(
+            url, pool_pre_ping=True, connect_args={"check_same_thread": False}
+        )
+    options = str(make_url(url).query.get("options", ""))
     return create_engine(
         url,
         pool_pre_ping=True,
-        connect_args={"check_same_thread": False} if url.startswith("sqlite") else {},
+        pool_timeout=5,
+        connect_args={
+            "connect_timeout": 5,
+            "options": options + " -cstatement_timeout=5000 -clock_timeout=3000",
+        },
     )
 
 

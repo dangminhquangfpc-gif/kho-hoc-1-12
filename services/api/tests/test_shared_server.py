@@ -420,3 +420,32 @@ def test_runtime_postgres_role_cannot_change_schema(school):
         with engine.begin() as connection:
             connection.execute(text(f"DROP OWNED BY {role}"))
             connection.execute(text(f"DROP ROLE {role}"))
+
+
+def test_shared_readiness_rejects_changed_schema_and_budget_failures_are_503(
+    school, monkeypatch
+):
+    one, two, engine, q, postgres = school
+    if not postgres:
+        pytest.skip("Shared schema readiness requires PostgreSQL")
+    import khohoc.app as app_module
+    from sqlalchemy.exc import SQLAlchemyError
+
+    assert one.get("/ready").status_code == 200
+    with engine.begin() as connection:
+        connection.execute(text("UPDATE app_schema_version SET version=99"))
+    response = one.get("/ready")
+    assert response.status_code == 503
+    assert response.json() == {"status": "unavailable", "mode": "shared"}
+    assert one.get("/health").status_code == 200
+    with engine.begin() as connection:
+        connection.execute(text("UPDATE app_schema_version SET version=1"))
+
+    def unavailable(*args):
+        raise SQLAlchemyError("private diagnostic must not reach clients")
+
+    monkeypatch.setattr(app_module, "reserve", unavailable)
+    response = one.get("/grades")
+    assert response.status_code == 503
+    assert "private diagnostic" not in response.text
+    assert one.get("/ready").status_code == 200
