@@ -1,14 +1,72 @@
 # Kết quả xác minh
 
-Bản mã nguồn hiện hành **.19 / 0.2.0+19**. Kết quả .19 ở ngay dưới;
-các mốc .18 trở về trước được giữ để đối chiếu lịch sử, không mô tả đầy đủ
+Bản mã nguồn hiện hành **.20 / 0.2.0+20**; đang kiểm thử/chuẩn bị tệp phát hành.
+Kết quả .19 đã phát hành nằm bên dưới; các mốc cũ được giữ để đối chiếu lịch sử, không mô tả đầy đủ
 hành vi hiện hành. Build đạt không đồng nghĩa đã phát hành APK công khai
 hoặc được Google Play xét duyệt.
 
 Các kết quả dưới đây là checkpoint khi tạo commit; kết quả chạy tiếp theo
-và kiểm tra tải xuống của bản .19 được cập nhật trong
+và kiểm tra tải xuống của bản .19 có trong
 [PR #9](https://github.com/dangminhquangfpc-gif/kho-hoc-1-12/pull/9) và
 [ghi chú phát hành .19](https://github.com/dangminhquangfpc-gif/kho-hoc-1-12/releases/tag/demo-tu-hoc-111-2026-10-15-v19).
+
+## Bản .20 — máy chủ thử miễn phí và phiên native
+
+### Phần đã triển khai, đang xác minh bản cụ thể
+
+- Blueprint Render Free Singapore và adapter ingress riêng dưới `/api`; dùng
+  PostgreSQL Neon Free tại AWS Singapore, xác minh TLS, không public dev/admin.
+  Chưa có tài khoản nhà cung cấp hoặc URL HTTPS thật để nghiệm thu Internet.
+- Bộ công cụ Windows tạo từ checkout và database fixture dùng một lần; gói
+  nội dung xuất được **7.886 câu, 1.461 đề, 2.866 mục tài liệu/nguồn**. Không lấy
+  tài khoản hoặc bài làm từ database của người dùng. `1-KIEM-TRA.bat` chỉ xem
+  kế hoạch; `2-KHOI-TAO.bat` khởi tạo rõ ràng đích mới. Kiểm tra gói/manifest,
+  dependency và Windows-native thực tế được ghi sau khi hoàn tất; chưa coi
+  chạy builder trên Linux là đã chạy `.bat` trên Windows.
+- Content-only transfer mặc định dry-run, kiểm manifest/PDF/tham chiếu, từ chối
+  xung đột và giữ riêng toàn bộ dữ liệu người học. `--apply` yêu cầu SHA256
+  chính xác của gói đã xem; checksum không phải chữ ký xác thực nguồn.
+- Công cụ owner khởi tạo schema, manager và role SQL runtime `tuhoc_app` trong
+  transaction; không đưa owner URL lên Render hoặc lưu trong tệp đầu ra. Role
+  runtime chỉ có quyền dữ liệu cần thiết, không tạo schema/bảng/role.
+- Lưu phiên Android/iOS bằng adapter secure storage có scope HTTPS; không lưu
+  mật khẩu, không đưa token vào SharedPreferences của ứng dụng. Các bài test
+  unit dùng token tổng hợp và adapter mạng giả; bài integration dùng plugin
+  native thật nhưng transport tổng hợp. Chưa coi đó là HTTPS hosted thành công.
+
+### Kiểm tra local và HTTPS Docker của .20
+
+| Phạm vi | Kết quả đã ghi nhận |
+| --- | --- |
+| Backend toàn bộ | **238 đạt / 27 bỏ qua**; được thu thập trước khi bổ sung ba ca PostgreSQL mới |
+| Công cụ chuẩn bị database | **28 kiểm thử đạt** |
+| Launcher | **4 kiểm thử đạt** |
+| PostgreSQL thật riêng | **49 đạt / 25 không chọn**, gồm ba ca PostgreSQL bổ sung |
+| Flutter | **247 kiểm thử đạt**, analyzer không có lỗi |
+| Gói công cụ máy chủ | Build từ database fixture dùng một lần; xuất đúng **7.886 câu / 1.461 đề / 2.866 tài liệu/nguồn** |
+| Nhập toàn bộ nội dung trên PostgreSQL 17.11 | Khởi tạo đủ **7.886 câu / 1.461 đề / 2.866 tài liệu**, 7.886 revision và manager bắt buộc đổi mật khẩu; runtime readiness/quyền hạn chế đạt. Nhập kiểm tra lại bỏ qua toàn bộ dữ liệu trùng, không sửa dữ liệu |
+| HTTPS Docker cô lập | Luồng curriculum/tài liệu/đề nguồn tự biên soạn 24 câu và tiếng Việt đạt; đồng bộ hai client, tách tài khoản, restart, DB outage 503 và khôi phục backup mã hóa đạt |
+
+Các bộ có phạm vi giao nhau, không cộng thành một tổng kiểm thử duy nhất. Các
+ca bỏ qua/không chọn không được tính là đã đạt. HTTPS Docker sử dụng hạ tầng
+kiểm thử riêng, không chứng minh đã có hostname Render hoặc database Neon thật.
+Kiểm tra API giữa hai client không thay nghiệm thu hai điện thoại vật lý.
+
+APK debug .20 và web release đã build đạt. APK version 20 giữ application ID
+và chứng thư debug của .19; chữ ký và ZIP alignment 16 KB đạt.
+AAB engineering .20 build/preflight đạt: 10 thư viện native 64-bit và
+BundleConfig đạt kiểm tra alignment 16 KB; AAB chưa ký, không dùng upload Play.
+CI/native của đúng source .20 còn chờ kết quả.
+Các con số .19 dưới đây chỉ thuộc bản .19. APK và kit dự kiến ở tag
+`demo-tu-hoc-111-2026-10-15-v20`; công bố hash/kích thước và kiểm tra tải công
+khai sau khi workflow phát hành hoàn tất.
+
+Còn nghiệm thu dùng chung qua Internet trên hai thiết bị, restart/cold start
+Render, kiểm tra quyền runtime trên Neon thật, backup/khôi phục và hoạt động
+Windows/macOS/iPhone thực tế. Không có nhà cung cấp AI được bật; production
+và điều kiện Google Play/App Store vẫn chưa hoàn tất. Hướng dẫn:
+[FREE_HOSTING.md](FREE_HOSTING.md), [CONTENT_TRANSFER.md](CONTENT_TRANSFER.md),
+[SECURE_SESSIONS.md](SECURE_SESSIONS.md).
 
 ## Bản .19 — học trên thiết bị khi chưa có backend
 
@@ -61,19 +119,21 @@ vòng đời ứng dụng trên Android thật.
   PostgreSQL riêng **38 đạt / 10 không chọn** và kiểm tra RLS đạt. Các ca
   bỏ qua không được tính là đã đạt. Android AAB và iOS unsigned CI cùng
   source đều đạt; iOS kiểm tra tên app, SDK 26+ và privacy manifest.
-- Native OCR thật đạt khi tắt Wi-Fi/dữ liệu. Kiểm thử học ngoại tuyến thật
-  đã qua mở lần đầu, lớp 12, lưu/mở lại/nộp 1/13 và tiến độ; sau đó thất bại
-  do finder chỉ khớp runtime type `FilledButton`, trong khi nút Lịch sử
-  dùng `FilledButton.icon`. Lượt sau gặp race khi danh sách kết quả tìm
-  kiếm thay thế widget giữa chờ và chạm. Đã sửa finder, nút Quay lại theo
-  ngôn ngữ và điều kiện chờ/kiểm tra lại widget sau thao tác bất đồng bộ;
-  **đang chạy lại**, chưa coi lịch sử/hướng dẫn native là đã đạt.
+- Source cuối .19 `a116609e4bfd0ed92d61cd516a5484e3c70fdc89`: MVP,
+  Android engineering AAB, iOS unsigned và native OCR/offline CI đều đạt.
+  Android giả lập tắt Wi-Fi/dữ liệu nhận chữ bằng ML Kit thật và hoàn thành
+  luồng học ngoại tuyến: mở lần đầu, lớp 12, lưu/mở lại, nộp 1/13, tiến độ,
+  lịch sử và tài liệu hình tròn có lời giải/đáp số. Chứng cứ CI native:
+  [run 38755544185](https://github.com/dangminhquangfpc-gif/kho-hoc-1-12/actions/runs/38755544185).
 
 ### Chưa nghiệm thu/phát hành production
 
 - Chưa nghiệm thu cập nhật .18 → .19 trên điện thoại vật lý, hành vi chọn
   ảnh/quyền hệ điều hành, bộ nhớ thấp, hệ điều hành trang nhớ 16 KB hoặc
   Windows runtime thật.
+- Chủ app sau đó xác nhận bản .19 hiện dữ liệu trên điện thoại và nộp bài có
+  kết quả lưu ở Tiến độ → Lịch sử bài làm. Đây là phản hồi dùng thử của chủ app;
+  chưa thay thế kiểm thử thiết bị/phiên bản hệ điều hành đầy đủ.
 - Đã phát hành thử .19: tải lại ZIP 64.543.641 byte và APK 116.811.795 byte
   qua URL công khai, không gửi Authorization header; CRC/SHA256 khớp tệp
   gốc. ZIP giải nén ra đúng APK đã ký. Đây là kiểm tra tải tệp, không phải

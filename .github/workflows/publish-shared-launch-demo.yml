@@ -1,0 +1,62 @@
+name: Publish shared HTTPS test setup
+on:
+  push:
+    branches: [feature/shared-server-launch-20261015]
+permissions:
+  contents: write
+concurrency:
+  group: publish-shared-launch-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Android APK and server setup archives
+        run: |
+          cd demo-package
+          sha256sum --check tu-hoc-111-android-debug.apk.zip.sha256
+          sha256sum --check tu-hoc-111-server-setup.zip.sha256
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import PurePosixPath
+          from zipfile import ZipFile
+
+          with ZipFile('tu-hoc-111-android-debug.apk.zip') as archive:
+              assert archive.namelist() == ['tu-hoc-111-android-debug.apk']
+              assert archive.testzip() is None
+              archive.extractall('.')
+          with ZipFile('tu-hoc-111-server-setup.zip') as archive:
+              names = archive.namelist()
+              assert len(names) == len(set(names))
+              assert archive.testzip() is None
+              assert all(
+                  not PurePosixPath(name).is_absolute()
+                  and '..' not in PurePosixPath(name).parts
+                  and '\\' not in name
+                  for name in names
+              )
+              manifest = json.loads(archive.read('MANIFEST.json'))
+              assert manifest['kind'] == 'tuhoc111.free-server-setup'
+              assert manifest['version'] == '2026.10.15.20'
+              assert manifest['contains_learner_data'] is False
+              assert set(names) == set(manifest['files']) | {'MANIFEST.json'}
+              for name, digest in manifest['files'].items():
+                  assert hashlib.sha256(archive.read(name)).hexdigest() == digest
+          print('APK ZIP, setup ZIP CRC and per-file setup manifest verified.')
+          PY
+          sha256sum --check tu-hoc-111-android-debug.apk.sha256
+      - name: Prepare the Android and server setup prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: demo-tu-hoc-111-2026-10-15-v20
+        run: |
+          cd demo-package
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --json isDraft --jq .isDraft > "$RUNNER_TEMP/shared-launch-release-draft"; then
+            test "$(cat "$RUNNER_TEMP/shared-launch-release-draft")" = true || { echo 'Refusing to replace assets of a published release.'; exit 1; }
+          else
+            gh release create "$RELEASE_TAG" --draft --prerelease --target "$GITHUB_SHA" --title 'Tự học 111 · v20 · Chuẩn bị máy chủ HTTPS dùng chung' --notes 'Bản thử Android: lưu phiên đăng nhập bằng kho bảo mật của thiết bị, tiếp tục học ngoại tuyến và giữ OCR miễn phí. Gói server setup dành cho Windows khởi tạo PostgreSQL mới trên Neon Free rồi kết nối API Render Free; chưa có máy chủ công khai tự động triển khai. Không chứa dữ liệu hoặc tài khoản học viên. Giữ nguyên chữ ký thử nghiệm để cài đè bản .19; không gỡ app/xóa dữ liệu. Đây là APK debug, chưa phát hành CH Play hoặc App Store.' --repo "$GITHUB_REPOSITORY"
+          fi
+          gh release upload "$RELEASE_TAG" tu-hoc-111-android-debug.apk tu-hoc-111-android-debug.apk.sha256 tu-hoc-111-android-debug.apk.zip tu-hoc-111-android-debug.apk.zip.sha256 tu-hoc-111-server-setup.zip tu-hoc-111-server-setup.zip.sha256 --clobber --repo "$GITHUB_REPOSITORY"

@@ -1,7 +1,7 @@
 name: kho_hoc_mobile
 description: Tự học 111 — MVP học tập và luyện đề
 publish_to: none
-version: 0.2.0+19
+version: 0.2.0+20
 environment:
   sdk: ^3.9.0
 dependencies:
@@ -14,6 +14,8 @@ dependencies:
   dio: 5.8.0+1
   unorm_dart: 0.3.1
   shared_preferences: 2.5.3
+  # 10.x needs AGP 8.13; preserve the pinned AGP 8.9.1 toolchain.
+  flutter_secure_storage: 9.2.4
   url_launcher: 6.3.2
   image_picker: 1.2.2
   # Keep native plugins compatible with the pinned AGP/Gradle toolchain.

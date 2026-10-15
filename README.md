@@ -3,12 +3,24 @@
 
 Monorepo MVP phát triển theo docs/PRODUCT_PLAN.md. Ứng dụng QuizApp Firebase cũ ở lib/ và android/ được giữ nguyên; ứng dụng mới ở apps/mobile/. Hướng dẫn cũ được giữ ở docs/LEGACY_QUIZAPP_README.md. Chưa hoàn thành tất cả tiêu chí MVP hoặc sẵn sàng Google Play.
 
-Bản thử **2026.10.15.19** bổ sung **Học trên thiết bị**: chọn lớp/môn,
-đọc hướng dẫn đã đóng gói, làm đề, nộp và xem kết quả mà không cần backend.
-Android chưa cấu hình máy chủ HTTPS tự chọn chế độ này khi mở lần đầu.
-Bài làm, lịch sử và điểm tự luyện được giữ riêng trên thiết bị, không tự gửi
-cho giáo viên hoặc nhập vào kết quả của tài khoản. Đăng nhập, nhóm học và
-đồng bộ vẫn cần máy chủ HTTPS. Xem [học ngoại tuyến](docs/OFFLINE_STUDY.md).
+Bản mã nguồn **2026.10.15.20** chuẩn bị máy chủ thử miễn phí với **Render Free
+Singapore + Neon Free PostgreSQL tại AWS Singapore**. Bộ công cụ Windows giúp
+kiểm tra database mới, khởi tạo schema/tài khoản quản lý, nhập nội dung công
+khai và tạo role API `tuhoc_app` có quyền hạn chế. Chủ app cần tự tạo tài khoản
+nhà cung cấp rồi chạy công cụ; hiện **chưa có backend HTTPS công khai hoạt động**.
+Xem [thử hosting miễn phí](docs/FREE_HOSTING.md).
+
+Phiên đăng nhập Android/iOS được lưu an toàn theo đúng backend để khôi phục sau
+khi mở lại app: Android KeyStore bảo vệ khóa mã hóa, iOS dùng Keychain. Web tiếp
+tục dùng cookie HttpOnly. Không lưu mật khẩu hoặc token thô trong SharedPreferences. Xem
+[giới hạn và vòng đời phiên](docs/SECURE_SESSIONS.md).
+
+Chế độ **Học trên thiết bị** từ .19 vẫn hoạt động khi chưa có backend:
+đọc hướng dẫn, làm/nộp đề và xem lịch sử với dữ liệu đóng gói. Điểm tự luyện
+lưu riêng trên thiết bị, không tự nhập thành kết quả tài khoản hoặc gửi cho
+giáo viên. Ngân hàng hiện có 7.886 câu, 1.461 đề, 2.866 mục tài liệu/nguồn và
+733 hướng dẫn Toán; chưa thẩm định hoặc phủ đầy đủ SGK mọi môn/lớp.
+Xem [học ngoại tuyến](docs/OFFLINE_STUDY.md).
 
 Không có trợ lý AI trả phí, không cần khóa API. OCR miễn phí vẫn dùng để nhận
 chữ tiếng Việt/Anh, sửa và xác nhận trước khi chèn vào câu trả lời.
@@ -30,7 +42,8 @@ Bản thử 2026.10.15.9: thêm 391 hướng dẫn Toán 6–12 (230 bài đánh
 - services/api: FastAPI, SQLAlchemy, deterministic grader; public DTO không chứa đáp án, guest attempt token, admin import/duyệt/xuất bản.
 - apps/admin: Next.js/TypeScript, auth cục bộ server-side; JSON/CSV import, duyệt, sửa/khôi phục phiên bản và quản lý tài liệu.
 - supabase/migrations: schema đích/RLS; chưa nối Supabase Auth/Storage production.
-- data/: 108 câu hỏi gốc, 12 đề Toán/Tiếng Việt/Ngữ văn/Tiếng Anh; 4 ghi chú tự biên soạn kèm PDF tiếng Việt.
+- data/: ngân hàng câu hỏi/đề/tài liệu tự biên soạn, mục lục và nguồn tham khảo;
+  số lượng hiện hành ở đầu README, kèm PDF mẫu tiếng Việt được phép phân phối.
 
 ## Cài đặt trong cloud workspace
 
@@ -79,7 +92,7 @@ cd apps/mobile
 flutter run -d web-server --web-hostname=127.0.0.1 --web-port=8080 --dart-define=API_BASE_URL=http://127.0.0.1:8000
 ```
 
-Android emulator dùng --dart-define=API_BASE_URL=http://10.0.2.2:8000; phải cung cấp đường kết nối từ emulator tới backend. API cloud mặc định bind loopback; emulator/điện thoại khác máy không tự kết nối được. Thiết bị thật dùng chế độ Học trên thiết bị mà không cần backend. Đăng nhập, nhóm và đồng bộ cần backend HTTPS được triển khai an toàn sau khi hoàn thiện production auth; không bật public dev token.
+Android emulator phát triển dùng --dart-define=API_BASE_URL=http://10.0.2.2:8000; phải cung cấp đường kết nối từ emulator tới backend. API cloud mặc định bind loopback; emulator/điện thoại khác máy không tự kết nối được. Thiết bị thật dùng chế độ Học trên thiết bị mà không cần backend. Đăng nhập, nhóm và đồng bộ qua Internet cần backend HTTPS dùng chung; dùng cấu hình pilot có kiểm soát trong [FREE_HOSTING.md](docs/FREE_HOSTING.md), không public backend development hoặc token quản trị.
 
 ```bash
 flutter analyze
@@ -92,7 +105,33 @@ APK cần Android SDK/JDK và license. Hướng dẫn AAB/signing trong docs/PLA
 
 ## Database
 
+API dùng chung hiện có schema PostgreSQL riêng với migration rõ ràng và role
+runtime hạn chế. Công cụ .20 khởi tạo database Neon mới; không tự migrate hoặc
+duyệt/nạp fixture khi web service khởi động. Chuyển nội dung công khai dùng
+[content-only transfer](docs/CONTENT_TRANSFER.md), không sao chép database chứa
+tài khoản/bài làm để đưa dữ liệu mẫu lên máy chủ.
+
 Supabase: áp dụng SQL trong supabase/migrations bằng CLI hoặc SQL editor có quyền thích hợp. Không chạy bootstrap_local.sql trên hosted Supabase. RLS kiểm thử qua scripts/test_rls.sh trên container PostgreSQL local riêng. API local dùng bảng local_*; adapter sang schema đích, Auth và Storage chưa triển khai (docs/DATABASE_SCHEMA.md).
+
+## Thử máy chủ miễn phí từ Windows
+
+Bộ công cụ .20 cần Python 3.12 trên Windows và kết nối Internet để cài dependency
+đã khóa; đây không phải bộ demo Windows tự chạy localhost. Giải nén bộ công cụ
+rồi mở **`1-KIEM-TRA.bat`** để xem kế hoạch chỉ đọc. Chuỗi kết nối **direct owner**
+của Neon được nhập ẩn trên máy bạn, không lưu vào gói, log, APK hoặc cấu hình
+Render. Sau khi kiểm tra, **`2-KHOI-TAO.bat`** áp dụng khởi tạo database mới.
+
+Công cụ tạo tài khoản quản lý và URL role runtime `tuhoc_app` trong thư mục riêng
+trên máy của chủ app. Chỉ nhập URL runtime vào biến bí mật của Render; không
+đưa owner URL lên web service. Gói nội dung gồm dữ liệu công khai đã có trong
+app, không có tài khoản, phiên hoặc bài làm học viên. Hướng dẫn chi tiết và
+giới hạn ngủ/quota: [FREE_HOSTING.md](docs/FREE_HOSTING.md).
+
+Sau khi Render triển khai thành công và `/api/ready` trả 200, nhập URL HTTPS
+thật kết thúc bằng `/api` trong app. Đăng nhập, tạo nhóm và thử cùng tài khoản
+học viên trên hai thiết bị. Chưa có tài khoản nhà cung cấp hoặc URL thật nên
+chưa nghiệm thu luồng này trên Internet. Hosting miễn phí vẫn cần sao lưu và
+theo dõi hạn mức; chế độ production/cửa hàng tiếp tục được khóa.
 
 ## Kiểm thử và phạm vi còn lại
 
@@ -138,12 +177,16 @@ Nếu cổng bị chiếm, chạy `start-demo.bat --api-port 8011 --port 8091`. 
 ## Tải bản thử
 
 Tải từ [trang Releases của dự án](https://github.com/dangminhquangfpc-gif/kho-hoc-1-12/releases)
-và đọc ghi chú của đúng phiên bản. Chỉ coi bản .19 đã phát hành khi thấy tệp
-đính kèm trong release tương ứng; thay đổi mã nguồn không tự xuất bản APK.
+và đọc ghi chú của đúng phiên bản. Bản .19 đã phát hành để học ngoại tuyến.
+Tệp APK và bộ công cụ máy chủ .20 đang được chuẩn bị cho tag
+`demo-tu-hoc-111-2026-10-15-v20`; chỉ coi đã phát hành khi có tệp đính kèm và
+ghi chú xác minh tương ứng, không coi thay đổi mã nguồn là đã xuất bản APK.
 
 - Android: chọn APK Android ARM64 hoặc ZIP chứa APK, giải nén trước khi cài.
-  Bản .19 dùng cùng mã ứng dụng và chứng thư debug với .18 để cài đè;
-  không cần gỡ app/xóa dữ liệu. Xem [hướng dẫn điện thoại](docs/PHONE_TEST.md).
+  Khi bản cập nhật đã xác minh dùng cùng mã ứng dụng/chứng thư, cài đè;
+  không gỡ app/xóa dữ liệu. Xem [hướng dẫn điện thoại](docs/PHONE_TEST.md).
+- Máy chủ Windows: chọn bộ công cụ thiết lập máy chủ .20, giải nén rồi làm
+  theo `DOC-TRUOC.txt` và hai bước kiểm tra/khởi tạo; xem hướng dẫn ở trên.
 - Windows: chọn `tu-hoc-111-demo-windows.zip`, giải nén toàn bộ, chạy
   `start-demo.bat`. Khi nâng cấp, dừng bản cũ, sao lưu rồi chép nguyên `state`
   sang bản mới; giữ cùng cổng localhost để trình duyệt thấy lịch sử cũ.
@@ -161,7 +204,7 @@ trên máy Windows thực tế trước nghiệm thu.
 
 ## Dữ liệu mở rộng 15/10/2026
 
-Bản thử hiện có 1.566 câu, 219 đề và 199 tài liệu; có dữ liệu cho mọi tổ hợp lớp–môn trong danh mục. Đây là dữ liệu tự biên soạn hướng tới Kết nối tri thức, chưa đối chiếu toàn bộ SGK hiện hành. Xem [phạm vi và mức độ bao phủ](docs/CURRICULUM_EXPANSION.md) để phân biệt biến thể Toán, bộ ôn nền và phần còn thiếu.
+Tại mốc mở rộng này có 1.566 câu, 219 đề và 199 tài liệu; có dữ liệu cho mọi tổ hợp lớp–môn trong danh mục. Đây là dữ liệu tự biên soạn hướng tới Kết nối tri thức, chưa đối chiếu toàn bộ SGK hiện hành. Số lượng hiện hành nằm ở đầu README; xem [phạm vi và mức độ bao phủ](docs/CURRICULUM_EXPANSION.md) để phân biệt biến thể Toán, bộ ôn nền và phần còn thiếu.
 
 
 ### Thư viện Internet 15/10/2026

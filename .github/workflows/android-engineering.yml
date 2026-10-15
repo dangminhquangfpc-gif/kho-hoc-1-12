@@ -1,7 +1,7 @@
 name: Android Play engineering checks
 on:
   push:
-    branches: [feature/play-prep-without-paid-ai-20261015, feature/native-offline-study-20261015]
+    branches: [feature/play-prep-without-paid-ai-20261015, feature/native-offline-study-20261015, feature/shared-server-launch-20261015]
   workflow_dispatch:
 permissions:
   contents: read
@@ -30,7 +30,7 @@ jobs:
         with:
           packages: platform-tools
           log-accepted-android-sdk-licenses: false
-      - run: sdkmanager 'platforms;android-36' 'build-tools;35.0.0' 'platform-tools'
+      - run: sdkmanager 'platforms;android-34' 'platforms;android-36' 'build-tools;35.0.0' 'platform-tools'
       - run: flutter pub get --enforce-lockfile
         working-directory: apps/mobile
       - name: Build unsigned AAB and inspect 16 KB compatibility
