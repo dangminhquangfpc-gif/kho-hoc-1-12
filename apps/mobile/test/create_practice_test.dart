@@ -46,7 +46,62 @@ class CustomApi extends FakeApi {
   }
 }
 
+class MultiTopicApi extends CustomApi {
+  @override
+  Future<Json> practiceOptions(int grade, String subject) async => {
+    'total': 40,
+    'topics': [
+      {'id': 'cong', 'name': 'Phép cộng', 'count': 20},
+      {'id': 'tru', 'name': 'Phép trừ', 'count': 20},
+    ],
+    'groups': [
+      for (final t in ['cong', 'tru'])
+        {
+          'topic': t,
+          'difficulty': 'easy',
+          'textbook': 'ket_noi_tri_thuc',
+          'count': 20,
+        },
+    ],
+  };
+}
+
 void main() {
+  testWidgets('Select two topics and send both in one practice request', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({});
+    final api = MultiTopicApi();
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [apiProvider.overrideWithValue(api)],
+        child: const KhoHocApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Luyện đề').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Tạo đề theo chủ đề và độ khó'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Chọn chủ đề'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Phép cộng (20 câu)'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Phép trừ (20 câu)'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Áp dụng'));
+    await tester.pumpAndSettle();
+    expect(find.text('Chủ đề (đã chọn 2)'), findsOneWidget);
+    await tester.ensureVisible(find.text('Bắt đầu đề 10 câu'));
+    await tester.drag(find.byType(ListView).first, const Offset(0, -140));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Bắt đầu đề 10 câu'));
+    await tester.pumpAndSettle();
+    expect(api.requested!['topics'], containsAll(['cong', 'tru']));
+    expect(api.requested!.containsKey('topic'), false);
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
+
   testWidgets(
     'Custom practice caps requested size to the actual matching bank',
     (tester) async {

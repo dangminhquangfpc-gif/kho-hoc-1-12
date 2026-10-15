@@ -10,6 +10,7 @@ import 'repository.dart';
 import 'library_screen.dart';
 import 'create_practice_screen.dart';
 import 'progress_screen.dart';
+import 'account_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
@@ -38,6 +39,17 @@ Future<void> main() async {
 final darkProvider = StateProvider<bool>((ref) => false);
 final routerProvider = Provider<GoRouter>(
   (ref) => GoRouter(
+    redirect: (_, state) {
+      final user = ref.read(authUserProvider);
+      if (state.uri.path == '/classroom' && user?['role'] != 'manager') {
+        return '/account';
+      }
+      if (user?['must_change_password'] == true &&
+          state.uri.path != '/account') {
+        return '/account';
+      }
+      return null;
+    },
     routes: [
       GoRoute(path: '/', builder: (_, _) => const HomeScreen()),
       GoRoute(path: '/practice', builder: (_, _) => const PracticeScreen()),
@@ -60,6 +72,8 @@ final routerProvider = Provider<GoRouter>(
       GoRoute(path: '/progress', builder: (_, _) => const ProgressScreen()),
       GoRoute(path: '/history', builder: (_, _) => const HistoryScreen()),
       GoRoute(path: '/settings', builder: (_, _) => const SettingsScreen()),
+      GoRoute(path: '/account', builder: (_, _) => const AccountScreen()),
+      GoRoute(path: '/classroom', builder: (_, _) => const ClassroomScreen()),
     ],
   ),
 );
@@ -67,28 +81,56 @@ final routerProvider = Provider<GoRouter>(
 class KhoHocApp extends ConsumerWidget {
   const KhoHocApp({super.key});
   @override
-  Widget build(BuildContext context, WidgetRef ref) => MaterialApp.router(
-    title: 'Kho Học 1–12',
-    debugShowCheckedModeBanner: false,
-    locale: const Locale('vi'),
-    supportedLocales: const [Locale('vi')],
-    localizationsDelegates: GlobalMaterialLocalizations.delegates,
-    theme: ThemeData(
-      fontFamily: 'NotoSans',
-      colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff2563c7)),
-      useMaterial3: true,
-    ),
-    darkTheme: ThemeData(
-      fontFamily: 'NotoSans',
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xff2563c7),
-        brightness: Brightness.dark,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final auth = ref.watch(authBootstrapProvider);
+    if (auth.isLoading) {
+      return const MaterialApp(
+        home: Scaffold(body: Center(child: CircularProgressIndicator())),
+      );
+    }
+    if (auth.hasError) {
+      return MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Chưa xác thực được tài khoản. Kiểm tra máy chủ rồi thử lại.',
+                ),
+                FilledButton(
+                  onPressed: () => ref.invalidate(authBootstrapProvider),
+                  child: const Text('Thử lại'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    return MaterialApp.router(
+      title: 'Kho Học 1–12',
+      debugShowCheckedModeBanner: false,
+      locale: const Locale('vi'),
+      supportedLocales: const [Locale('vi')],
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      theme: ThemeData(
+        fontFamily: 'NotoSans',
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff2563c7)),
+        useMaterial3: true,
       ),
-      useMaterial3: true,
-    ),
-    themeMode: ref.watch(darkProvider) ? ThemeMode.dark : ThemeMode.light,
-    routerConfig: ref.watch(routerProvider),
-  );
+      darkTheme: ThemeData(
+        fontFamily: 'NotoSans',
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xff2563c7),
+          brightness: Brightness.dark,
+        ),
+        useMaterial3: true,
+      ),
+      themeMode: ref.watch(darkProvider) ? ThemeMode.dark : ThemeMode.light,
+      routerConfig: ref.watch(routerProvider),
+    );
+  }
 }
 
 class Shell extends StatelessWidget {
@@ -191,7 +233,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 8),
           const Text('Chọn lớp và môn để luyện tập. Không cần tài khoản.'),
-          const Text('Bản thử 2026.10.15.5'),
+          const Text('Bản thử 2026.10.15.6'),
           if (widget.index == 2)
             Card(
               child: ListTile(
@@ -584,6 +626,39 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
       timer?.cancel();
       if (mounted) setState(() => result = r);
     } on DioException catch (e) {
+      if (e.response?.statusCode == 409) {
+        try {
+          final saved = await ref.read(apiProvider).attemptResult(session!);
+          final prefs = await ref.read(preferencesProvider.future);
+          final submitted = <String, dynamic>{
+            for (final d in saved['details'] as List)
+              if (d['submitted_answer'] != null)
+                d['question_id'] as String: d['submitted_answer'],
+          };
+          await LocalStore(
+            prefs,
+          ).complete({...session!, 'answers': submitted}, saved);
+          timer?.cancel();
+          if (mounted) {
+            setState(
+              () => result = {
+                ...saved,
+                'notice':
+                    'Đã khôi phục kết quả nộp trước đó. Các chỉnh sửa sau khi nộp không thay đổi điểm.',
+              },
+            );
+          }
+          return;
+        } catch (_) {
+          if (mounted) {
+            setState(
+              () => error =
+                  'Chưa lấy được kết quả đã nộp. Bài vẫn được giữ; hãy kết nối lại rồi thử.',
+            );
+          }
+          return;
+        }
+      }
       if (mounted) {
         setState(() {
           recoveryAvailable = [404, 410].contains(e.response?.statusCode);
@@ -831,6 +906,7 @@ class ResultView extends StatelessWidget {
       const Text(
         'Điểm luyện tập theo đáp án đã duyệt, không phải điểm chính thức của giáo viên.',
       ),
+      if (result['notice'] != null) Text(result['notice']),
       const SizedBox(height: 24),
       ...(result['details'] as List).map(
         (d) => Card(
@@ -844,6 +920,10 @@ class ResultView extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 if (d['question'] != null) Text(d['question']),
+                if (d['submitted_answer_display'] != null)
+                  Text(
+                    'Bài làm: ${(d['submitted_answer_display'] as List).join(', ')}',
+                  ),
                 Text(
                   "Đáp án: ${((d['answer_display'] ?? d['correct_answer']) as List).join(', ')}",
                 ),
@@ -966,6 +1046,18 @@ class SettingsScreen extends ConsumerWidget {
     child: ListView(
       padding: const EdgeInsets.all(24),
       children: [
+        Card(
+          child: ListTile(
+            leading: const Icon(Icons.account_circle),
+            title: Text(
+              ref.watch(authUserProvider) == null
+                  ? 'Đăng nhập hoặc đăng ký'
+                  : 'Tài khoản: ${ref.watch(authUserProvider)!["display_name"]}',
+            ),
+            subtitle: const Text('Tài khoản học viên và quản lý kết quả'),
+            onTap: () => context.go('/account'),
+          ),
+        ),
         SwitchListTile(
           title: const Text('Giao diện tối'),
           value: ref.watch(darkProvider),
@@ -975,7 +1067,7 @@ class SettingsScreen extends ConsumerWidget {
         const BackendSettings(),
         const Divider(),
         const Text(
-          'Bạn đang dùng ở chế độ khách. Không yêu cầu tên, số điện thoại, trường học hoặc vị trí. Bài làm được gửi tới backend bạn cấu hình để chấm theo đáp án; lịch sử lưu trên thiết bị. AI, OCR và đồng bộ tài khoản chưa triển khai. Không gửi dữ liệu bài làm đến AI provider.',
+          'Chế độ khách lưu lịch sử trên thiết bị. Khi đăng nhập, kết quả được máy chủ lưu theo tài khoản và người quản lý của bạn có thể xem. Xóa lịch sử trên thiết bị không xóa hồ sơ kết quả của lớp. AI và OCR chưa hoạt động; không gửi bài đến nhà cung cấp AI.',
         ),
         const SizedBox(height: 16),
         const Text(
@@ -1017,6 +1109,10 @@ class _BackendSettingsState extends ConsumerState<BackendSettings> {
       final url = validateBackendUrl(controller.text);
       final prefs = await SharedPreferences.getInstance();
       final store = LocalStore(prefs);
+      if (ref.read(authUserProvider) != null &&
+          url != ref.read(apiProvider).baseUrl) {
+        throw StateError('Hãy đăng xuất trước khi đổi máy chủ.');
+      }
       if (url != ref.read(apiProvider).baseUrl &&
           (store.current != null || store.history.isNotEmpty)) {
         throw StateError(

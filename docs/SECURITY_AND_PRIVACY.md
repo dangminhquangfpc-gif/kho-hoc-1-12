@@ -7,3 +7,7 @@ Token admin phát triển nằm ngoài checkout (/workspace/state/khohoc.env); c
 API chỉ bind loopback; mode production từ chối khởi động vì chưa có JWT/Supabase adapter. Cần HTTPS/gateway rate limits, consent phù hợp trẻ em, retention worker, backup, key rotation, auditing và account deletion khi thêm tài khoản. Không coi tài liệu này là Privacy Policy pháp lý đã duyệt.
 
 Migration RLS không cho client ghi điểm/role hoặc đọc versions/snapshots; chỉ owner đọc kết quả đã nộp. Parent/teacher role chưa cấp quyền truy cập. SQL auth shim chỉ phục vụ kiểm thử local.
+
+## Tài khoản local bản .6
+
+Học viên tự đăng ký được gắn với người quản lý của máy chủ. Người quản lý xem kết quả học viên thuộc mình; giao diện đăng ký thông báo việc này. Mật khẩu scrypt, cookie HttpOnly 8 giờ, quyền và điểm được kiểm tra trên backend. Hướng dẫn vận hành và giới hạn: [CLASSROOM_ACCOUNTS.md](CLASSROOM_ACCOUNTS.md).

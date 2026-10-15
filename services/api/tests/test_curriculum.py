@@ -25,11 +25,12 @@ def test_bank_integrity_catalog_coverage_and_answer_keys():
             "curriculum_questions.json",
             "subject_questions.json",
             "practice_questions.json",
+            "extended_practice_questions.json",
         )
         for q in load("data/seeds/" + filename)["questions"]
     ]
     by_id = {q.id: q for q in questions}
-    assert len(by_id) == len(questions) == 1910
+    assert len(by_id) == len(questions) == 2641
     assert len({normalize(q.question) for q in questions}) == len(questions)
     catalog = load("data/seeds/catalog.json")
     pairs = {(g["id"], s["id"]) for g in catalog["grades"] for s in g["subjects"]}
@@ -126,3 +127,38 @@ def test_new_math5_practice_independent_examples():
         assert grade(q, ["-1000000"])["score"] == 0
     for q in questions.values():
         assert grade(q, q.correct_answer)["score"] == 1
+
+
+def test_extended_math5_bank_has_localized_topics_and_independent_answers():
+    from khohoc.practice import canonical_topic, topic_name
+    from khohoc.content_fixes import QUESTION_REPLACEMENTS
+
+    counts = Counter()
+    for filename in (
+        "questions.json",
+        "curriculum_questions.json",
+        "practice_questions.json",
+        "extended_practice_questions.json",
+    ):
+        for q in load("data/seeds/" + filename)["questions"]:
+            if (
+                q["grade"] == 5
+                and q["subject"] == "toan"
+                and q["id"] not in QUESTION_REPLACEMENTS
+            ):
+                counts[canonical_topic(5, "toan", q["topic"])] += 1
+    assert len(counts) == 43 and min(counts.values()) >= 24
+    assert topic_name(5, "toan", "chuyen_dong") == topic_name(5, "toan", "speed")
+    assert topic_name(9, "ngu_van", "bien_phap_tu_tu") == "Biện pháp tu từ"
+    qs = {
+        q["id"]: Question.model_validate(q)
+        for q in load("data/seeds/extended_practice_questions.json")["questions"]
+    }
+    for suffix, expected in {
+        "natural_09": "200",
+        "natural_25": "400",
+        "pie_25": "58",
+        "box_volume_25": "19656",
+        "frequency_25": "56",
+    }.items():
+        assert grade(qs["extended_math5_" + suffix], [expected])["score"] == 1

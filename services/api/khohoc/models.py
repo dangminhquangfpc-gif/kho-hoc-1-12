@@ -50,3 +50,41 @@ class AuditEvent(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
     )
+
+
+class LearningUser(Base):
+    __tablename__ = "learning_users"
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    username: Mapped[str] = mapped_column(String(40), unique=True)
+    display_name: Mapped[str] = mapped_column(String(80))
+    password_hash: Mapped[str] = mapped_column(String(300))
+    role: Mapped[str] = mapped_column(String(20))
+    manager_id: Mapped[str | None] = mapped_column(
+        String(36), nullable=True, index=True
+    )
+    grade: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    active: Mapped[bool] = mapped_column(default=True)
+    must_change_password: Mapped[bool] = mapped_column(default=False)
+
+
+class LearningSession(Base):
+    __tablename__ = "learning_sessions"
+    token_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
+    user_id: Mapped[str] = mapped_column(String(36), index=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+
+class AccountAttempt(Base):
+    __tablename__ = "account_attempts"
+    attempt_id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    user_id: Mapped[str] = mapped_column(String(36), index=True)
+
+
+class LearningRecord(Base):
+    __tablename__ = "learning_records"
+    attempt_id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    user_id: Mapped[str] = mapped_column(String(36), index=True)
+    payload: Mapped[dict] = mapped_column(JSON)
+    submitted_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+    )

@@ -25,7 +25,7 @@ if (
 BACKEND_URL = BACKEND_URL.rstrip("/")
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 PUBLIC = re.compile(
-    r"(?:health|coverage|curriculum|practice-options|practice-attempts|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|exams/[^/]+/attempts|attempts/[^/]+|attempts/[^/]+/(?:submit|result)|documents|documents/[^/]+|documents/[^/]+/file)"
+    r"(?:auth/(?:me|login|logout|register|password)|account/results|classroom/students|classroom/students/bulk|classroom/students/[^/]+|classroom/students/[^/]+/(?:results|reset-password)|health|coverage|curriculum|practice-options|practice-attempts|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|exams/[^/]+/attempts|attempts/[^/]+|attempts/[^/]+/(?:submit|result)|documents|documents/[^/]+|documents/[^/]+/file)"
 )
 
 
@@ -71,6 +71,18 @@ async def api(path: str, request: Request):
         for k, v in request.headers.items()
         if k.lower() in ("content-type", "x-attempt-token")
     }
+    headers["x-forwarded-proto"] = request.url.scheme
+    cookie = request.cookies.get("khohoc_session")
+    if cookie:
+        headers["cookie"] = "khohoc_session=" + cookie
+    authorization = request.headers.get("authorization", "")
+    if authorization.startswith("Bearer khs_"):
+        headers["authorization"] = authorization
+    if (
+        request.method in ("POST", "DELETE")
+        and request.headers.get("sec-fetch-site") == "cross-site"
+    ):
+        return JSONResponse({"detail": "Cross-site request denied"}, 403)
     try:
         async with httpx.AsyncClient(timeout=30, trust_env=False) as client:
             result = await client.request(
@@ -89,6 +101,7 @@ async def api(path: str, request: Request):
                 if k.lower()
                 in (
                     "content-type",
+                    "set-cookie",
                     "content-disposition",
                     "cache-control",
                     "x-content-type-options",

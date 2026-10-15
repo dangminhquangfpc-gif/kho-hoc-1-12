@@ -46,9 +46,9 @@ def test_custom_practice_filters_deduplicates_and_never_exposes_keys(seeded):
     options = client.get(
         "/practice-options", params={"grade": 5, "subject": "toan"}
     ).json()
-    assert options["total"] == 11
+    assert options["total"] == 10
     assert any(
-        t["name"] == "Số tự nhiên" and t["count"] == 8 for t in options["topics"]
+        t["name"] == "Số tự nhiên" and t["count"] == 7 for t in options["topics"]
     )
     response = client.post(
         "/practice-attempts",
@@ -58,12 +58,12 @@ def test_custom_practice_filters_deduplicates_and_never_exposes_keys(seeded):
             "topic": "natural",
             "difficulty": "medium",
             "textbook": "ket_noi_tri_thuc",
-            "count": 8,
+            "count": 7,
         },
     )
     assert response.status_code == 201, response.text
     attempt = response.json()
-    assert len({q["id"] for q in attempt["questions"]}) == 8
+    assert len({q["id"] for q in attempt["questions"]}) == 7
     assert "correct_answer" not in response.text and "explanation" not in response.text
     assert attempt["practice_filter"]["topic"] == "natural"
     assert (
@@ -118,3 +118,43 @@ def test_targeted_review_uses_only_published_questions_and_snapshot(seeded):
         == 422
     )
     assert client.get(f"/attempts/{attempt['id']}/result").status_code == 404
+
+
+def test_multiple_topics_are_balanced_and_all_selected_topics_appear(seeded):
+    client, _ = seeded
+    result = client.post(
+        "/practice-attempts",
+        json={
+            "grade": 5,
+            "subject": "toan",
+            "topics": ["natural", "add_decimal"],
+            "count": 6,
+        },
+    )
+    assert result.status_code == 201
+    topics = [q["topic"] for q in result.json()["questions"]]
+    assert topics.count("natural") == topics.count("add_decimal") == 3
+    assert (
+        client.post(
+            "/practice-attempts",
+            json={
+                "grade": 5,
+                "subject": "toan",
+                "topics": ["natural", "add_decimal"],
+                "count": 1,
+            },
+        ).status_code
+        == 422
+    )
+    assert (
+        client.post(
+            "/practice-attempts",
+            json={
+                "grade": 5,
+                "subject": "toan",
+                "topics": ["natural", "not_available"],
+                "count": 2,
+            },
+        ).status_code
+        == 422
+    )

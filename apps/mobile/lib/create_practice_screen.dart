@@ -19,10 +19,8 @@ class CreatePracticeScreen extends ConsumerStatefulWidget {
 
 class _CreatePracticeState extends ConsumerState<CreatePracticeScreen> {
   int grade = 1, desiredCount = 10;
-  String subject = 'toan',
-      topic = '',
-      difficulty = '',
-      textbook = 'ket_noi_tri_thuc';
+  String subject = 'toan', difficulty = '', textbook = 'ket_noi_tri_thuc';
+  final topics = <String>{};
   bool busy = false;
   String? error;
 
@@ -41,7 +39,7 @@ class _CreatePracticeState extends ConsumerState<CreatePracticeScreen> {
         'grade': grade,
         'subject': subject,
         'count': count,
-        if (topic.isNotEmpty) 'topic': topic,
+        if (topics.isNotEmpty) 'topics': topics.toList(),
         if (difficulty.isNotEmpty) 'difficulty': difficulty,
         if (textbook.isNotEmpty) 'textbook': textbook,
       });
@@ -98,7 +96,7 @@ class _CreatePracticeState extends ConsumerState<CreatePracticeScreen> {
                 : (n) => setState(() {
                     grade = n!;
                     subject = 'toan';
-                    topic = '';
+                    topics.clear();
                     error = null;
                   }),
           ),
@@ -120,7 +118,7 @@ class _CreatePracticeState extends ConsumerState<CreatePracticeScreen> {
                       ? null
                       : (s) => setState(() {
                           subject = s!;
-                          topic = '';
+                          topics.clear();
                           error = null;
                         }),
                 ),
@@ -137,46 +135,162 @@ class _CreatePracticeState extends ConsumerState<CreatePracticeScreen> {
                   final available = groups
                       .where(
                         (g) =>
-                            (topic.isEmpty || g['topic'] == topic) &&
+                            (topics.isEmpty || topics.contains(g['topic'])) &&
                             (difficulty.isEmpty ||
                                 g['difficulty'] == difficulty) &&
                             (textbook.isEmpty || g['textbook'] == textbook),
                       )
                       .fold<int>(0, (sum, g) => sum + (g['count'] as int));
+                  final missingSelection = topics.any(
+                    (t) => !groups.any(
+                      (g) =>
+                          g['topic'] == t &&
+                          (difficulty.isEmpty ||
+                              g['difficulty'] == difficulty) &&
+                          (textbook.isEmpty || g['textbook'] == textbook) &&
+                          (g['count'] as int) > 0,
+                    ),
+                  );
                   final count = math.min(desiredCount, math.min(50, available));
-                  final counts = {
-                    1,
-                    5,
-                    10,
-                    20,
-                    30,
-                    50,
-                    if (count > 0) count,
-                  }.where((n) => n <= available).toList()..sort();
+                  final counts =
+                      {1, 5, 10, 20, 30, 50, if (count > 0) count}
+                          .where(
+                            (n) =>
+                                n <= available &&
+                                n >= math.max(1, topics.length),
+                          )
+                          .toList()
+                        ..sort();
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const SizedBox(height: 12),
-                      DropdownButtonFormField<String>(
-                        key: ValueKey('$grade/$subject'),
-                        initialValue: topic,
-                        decoration: const InputDecoration(labelText: 'Chủ đề'),
-                        items: [
-                          const DropdownMenuItem(
-                            value: '',
-                            child: Text('Tất cả chủ đề'),
-                          ),
-                          for (final t in data['topics'] as List)
-                            DropdownMenuItem(
-                              value: t['id'] as String,
-                              child: Text('${t['name']} (${t['count']} câu)'),
-                            ),
-                        ],
-                        isExpanded: true,
-                        onChanged: busy
-                            ? null
-                            : (v) => setState(() => topic = v!),
+                      Text(
+                        'Chủ đề (${topics.isEmpty ? "tất cả" : "đã chọn ${topics.length}"})',
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
+                      OutlinedButton.icon(
+                        onPressed: busy
+                            ? null
+                            : () async {
+                                final chosen = await showDialog<Set<String>>(
+                                  context: context,
+                                  builder: (c) {
+                                    final selected = {...topics};
+                                    String query = '';
+                                    return StatefulBuilder(
+                                      builder: (c, update) => AlertDialog(
+                                        title: const Text('Chọn nhiều chủ đề'),
+                                        content: SizedBox(
+                                          width: 560,
+                                          height: 420,
+                                          child: Column(
+                                            children: [
+                                              TextField(
+                                                decoration:
+                                                    const InputDecoration(
+                                                      labelText: 'Tìm chủ đề',
+                                                    ),
+                                                onChanged: (s) => update(
+                                                  () => query =
+                                                      vietnameseSearchKey(s),
+                                                ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () =>
+                                                    update(selected.clear),
+                                                child: const Text(
+                                                  'Bỏ chọn — dùng tất cả chủ đề',
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: ListView(
+                                                  children: [
+                                                    for (final t
+                                                        in data['topics']
+                                                            as List)
+                                                      if (vietnameseSearchKey(
+                                                        t['name'] as String,
+                                                      ).contains(query))
+                                                        CheckboxListTile(
+                                                          title: Text(
+                                                            '${t['name']} (${t['count']} câu)',
+                                                          ),
+                                                          value: selected
+                                                              .contains(
+                                                                t['id'],
+                                                              ),
+                                                          onChanged: (v) =>
+                                                              update(() {
+                                                                if (v == true &&
+                                                                    selected.length <
+                                                                        20) {
+                                                                  selected.add(
+                                                                    t['id'],
+                                                                  );
+                                                                } else {
+                                                                  selected
+                                                                      .remove(
+                                                                        t['id'],
+                                                                      );
+                                                                }
+                                                              }),
+                                                        ),
+                                                  ],
+                                                ),
+                                              ),
+                                              const Text(
+                                                'Tối đa 20 chủ đề. Để trống nếu muốn dùng tất cả.',
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(c),
+                                            child: const Text('Hủy'),
+                                          ),
+                                          FilledButton(
+                                            onPressed: () =>
+                                                Navigator.pop(c, selected),
+                                            child: const Text('Áp dụng'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                                if (chosen != null && mounted) {
+                                  setState(() {
+                                    topics
+                                      ..clear()
+                                      ..addAll(chosen);
+                                    desiredCount = math.max(
+                                      desiredCount,
+                                      topics.length,
+                                    );
+                                  });
+                                }
+                              },
+                        icon: const Icon(Icons.checklist),
+                        label: const Text('Chọn chủ đề'),
+                      ),
+                      if (topics.isNotEmpty)
+                        Wrap(
+                          spacing: 6,
+                          children: [
+                            for (final t in data['topics'] as List)
+                              if (topics.contains(t['id']))
+                                InputChip(
+                                  label: Text(t['name']),
+                                  onDeleted: busy
+                                      ? null
+                                      : () => setState(
+                                          () => topics.remove(t['id']),
+                                        ),
+                                ),
+                          ],
+                        ),
                       DropdownButtonFormField<String>(
                         initialValue: difficulty,
                         decoration: const InputDecoration(labelText: 'Độ khó'),
@@ -251,7 +365,11 @@ class _CreatePracticeState extends ConsumerState<CreatePracticeScreen> {
                         ),
                       const SizedBox(height: 20),
                       FilledButton.icon(
-                        onPressed: busy || count == 0
+                        onPressed:
+                            busy ||
+                                count == 0 ||
+                                count < topics.length ||
+                                missingSelection
                             ? null
                             : () => start(count),
                         icon: const Icon(Icons.shuffle),
@@ -259,6 +377,10 @@ class _CreatePracticeState extends ConsumerState<CreatePracticeScreen> {
                           busy ? 'Đang tạo đề…' : 'Bắt đầu đề $count câu',
                         ),
                       ),
+                      if (missingSelection)
+                        const Text(
+                          'Một số chủ đề đã chọn không có câu phù hợp. Hãy đổi độ khó, bộ sách hoặc bỏ chọn các chủ đề đó.',
+                        ),
                       if (available == 0)
                         const Text(
                           'Chưa có câu phù hợp. Hãy đổi chủ đề, độ khó hoặc bộ sách.',

@@ -195,6 +195,7 @@ def child_environment(state: Path, api_port: int, web_port: int) -> dict[str, st
             "KHOHOC_MODE": "development",
             "KHOHOC_DATABASE_URL": "sqlite:///" + (state / "demo.sqlite").as_posix(),
             "KHOHOC_ADMIN_TOKEN": "",
+            "KHOHOC_MANAGER_CREDENTIALS_FILE": str(state / "TAI-KHOAN-QUAN-LY.txt"),
             "KHOHOC_CORS_ORIGINS": json.dumps(
                 [f"http://localhost:{web_port}", f"http://127.0.0.1:{web_port}"]
             ),
@@ -323,6 +324,10 @@ def run(api_port: int, web_port: int, no_browser: bool) -> None:
                 raise DemoError(f"A demo service exited. See {api_log} and {web_log}.")
             url = f"http://localhost:{web_port}"
             print(f"DEMO READY: {url}", flush=True)
+            print(
+                "Tai khoan quan ly: mo tep state/TAI-KHOAN-QUAN-LY.txt tren may nay; doi mat khau khi dang nhap lan dau.",
+                flush=True,
+            )
             print(
                 "Keep this window open. Press Ctrl+C here to stop the demo.", flush=True
             )

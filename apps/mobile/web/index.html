@@ -36,6 +36,11 @@
   <script>
     // A new local ZIP must not reuse a previous demo's Flutter asset cache.
     // Saved answers/history live in localStorage and are deliberately preserved.
+    window.addEventListener('storage', event => {
+      if (event.key === 'flutter.active_account_id' && event.oldValue !== event.newValue) {
+        window.location.reload();
+      }
+    });
     (async () => {
       if ('serviceWorker' in navigator) {
         const registrations = await navigator.serviceWorker.getRegistrations();

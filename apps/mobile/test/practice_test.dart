@@ -8,6 +8,8 @@ import 'package:kho_hoc_mobile/repository.dart';
 
 class FakeApi extends LearningApi {
   @override
+  Future<Json?> currentUser() async => null;
+  @override
   Future<List<Json>> subjects(int grade) async => [
     {'id': 'toan', 'name': 'Toán'},
   ];
@@ -85,7 +87,64 @@ class MissingAttemptApi extends FakeApi {
   }
 }
 
+class SubmittedApi extends FakeApi {
+  @override
+  Future<Json> submit(Json session) async => throw DioException(
+    requestOptions: RequestOptions(path: '/submit'),
+    response: Response(
+      statusCode: 409,
+      requestOptions: RequestOptions(path: '/submit'),
+    ),
+    type: DioExceptionType.badResponse,
+  );
+  @override
+  Future<Json> attemptResult(Json session) async {
+    final result = await super.submit({
+      'answers': {
+        'q1': ['A'],
+      },
+    });
+    result['details'][0]['submitted_answer'] = ['A'];
+    return result;
+  }
+}
+
 void main() {
+  testWidgets(
+    'Previously submitted result clears stale draft without changing server score',
+    (tester) async {
+      SharedPreferences.setMockInitialValues({});
+      final p = await SharedPreferences.getInstance();
+      final old = await FakeApi().start('exam');
+      old['answers'] = {
+        'q1': ['B'],
+      };
+      await LocalStore(p).save(old);
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [apiProvider.overrideWithValue(SubmittedApi())],
+          child: const KhoHocApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Tiếp tục bài đang làm'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Nộp bài'));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.descendant(
+          of: find.byType(AlertDialog),
+          matching: find.widgetWithText(FilledButton, 'Nộp bài'),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('1 / 1'), findsOneWidget);
+      expect(LocalStore(p).current, isNull);
+      expect(LocalStore(p).history.single['answers']['q1'], ['A']);
+      await tester.pumpWidget(const SizedBox.shrink());
+    },
+  );
+
   testWidgets(
     'Choose grade/subject/exam, answer, submit, view stored history',
     (tester) async {

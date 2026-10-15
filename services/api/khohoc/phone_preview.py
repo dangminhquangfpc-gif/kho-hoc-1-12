@@ -1,4 +1,4 @@
-"""Disposable phone preview. No accounts, admin API, or production data."""
+"""Local classroom preview. Dataset admin API is private; no production data."""
 
 import json
 import re
@@ -13,9 +13,12 @@ from fastapi.testclient import TestClient
 from .app import Settings, create_app
 from .library import DocumentInput
 from .schemas import ExamInput, Question
+from .content_fixes import QUESTION_REPLACEMENTS
+from .models import ContentQuestion
+from sqlalchemy.orm import Session
 
 PUBLIC = re.compile(
-    r"/(?:health|coverage|curriculum|practice-options|practice-attempts|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|"
+    r"/(?:auth/(?:me|login|logout|register|password)|account/results|classroom/students|classroom/students/bulk|classroom/students/[^/]+|classroom/students/[^/]+/(?:results|reset-password)|health|coverage|curriculum|practice-options|practice-attempts|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|"
     r"exams/[^/]+/attempts|attempts/[^/]+/(?:submit|result)|attempts/[^/]+|documents|documents/[^/]+|documents/[^/]+/file)"
 )
 
@@ -70,6 +73,7 @@ def create_preview():
                 "curriculum_questions.json",
                 "subject_questions.json",
                 "practice_questions.json",
+                "extended_practice_questions.json",
             )
             for question in json.loads(
                 (root / "data/seeds" / name).read_text(encoding="utf-8")
@@ -144,6 +148,14 @@ def create_preview():
             "question",
         )
         for qid, row in rows.items():
+            if qid in QUESTION_REPLACEMENTS:
+                # Preflight above verified the fixture content before withdrawal.
+                with Session(app.state.engine) as database:
+                    withdrawn = database.get(ContentQuestion, qid)
+                    withdrawn.state = "draft"
+                    withdrawn.rights_confirmed = False
+                    database.commit()
+                continue
             if qid not in questions:
                 continue
             if row["state"] == "published":

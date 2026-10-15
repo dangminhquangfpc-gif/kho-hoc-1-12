@@ -14,9 +14,19 @@ from sqlalchemy.orm import Session
 
 from .catalog import subjects_for_grade
 from .grading import grade, normalize
-from .models import Attempt, AuditEvent, Base, ContentQuestion, Exam
+from .models import (
+    Attempt,
+    AuditEvent,
+    Base,
+    ContentQuestion,
+    Exam,
+    AccountAttempt,
+    LearningRecord,
+)
+from .accounts import AccountService, ensure_manager
+from .content_fixes import QUESTION_REPLACEMENTS
 from .schemas import ExamInput, ImportBatch, Question, Submission
-from .practice import create_practice_router, topic_name
+from .practice import create_practice_router, topic_name, canonical_topic
 
 
 class Settings(BaseSettings):
@@ -24,6 +34,7 @@ class Settings(BaseSettings):
     database_url: str = "sqlite:////workspace/state/khohoc.db"
     admin_token: str = ""
     mode: str = "development"
+    manager_credentials_file: str | None = None
     cors_origins: list[str] = [
         "http://localhost:3000",
         "http://localhost:8080",
@@ -45,7 +56,12 @@ def public_question(payload: dict) -> dict:
             "max_score",
         )
     } | {
-        "topic_name": topic_name(payload["grade"], payload["subject"], payload["topic"])
+        "topic": canonical_topic(
+            payload["grade"], payload["subject"], payload["topic"]
+        ),
+        "topic_name": topic_name(
+            payload["grade"], payload["subject"], payload["topic"]
+        ),
     }
 
 
@@ -73,6 +89,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @asynccontextmanager
     async def lifespan(app):
         Base.metadata.create_all(engine)
+        ensure_manager(engine, config.manager_credentials_file)
         yield
         engine.dispose()
 
@@ -108,6 +125,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         with Session(engine) as session:
             yield session
 
+    accounts = AccountService(db)
+    app.include_router(accounts.router)
+
     def admin(authorization: str = Header(default="")):
         if not config.admin_token or not secrets.compare_digest(
             authorization, "Bearer " + config.admin_token
@@ -131,7 +151,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         if not exam or exam.state != "published":
             raise HTTPException(404, "Exam not found")
         questions = [
-            session.get(ContentQuestion, qid) for qid in exam.payload["question_ids"]
+            session.get(ContentQuestion, QUESTION_REPLACEMENTS.get(qid, qid))
+            for qid in exam.payload["question_ids"]
         ]
         if any(
             q is None or q.state != "published" or not q.rights_confirmed
@@ -308,7 +329,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             "questions": [public_question(q.payload) for q in questions]
         }
 
-    def create_attempt(session, exam_payload, questions, practice_filter=None):
+    def create_attempt(
+        session, exam_payload, questions, practice_filter=None, user_id=None
+    ):
+        exam_payload = {**exam_payload, "question_ids": [q["id"] for q in questions]}
         token = secrets.token_urlsafe(32)
         attempt = Attempt(
             id=str(uuid.uuid4()),
@@ -318,6 +342,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         if practice_filter is not None:
             attempt.snapshot["practice_filter"] = practice_filter
         session.add(attempt)
+        if user_id:
+            session.add(AccountAttempt(attempt_id=attempt.id, user_id=user_id))
         session.commit()
         response = {
             "id": attempt.id,
@@ -329,23 +355,35 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         }
         if practice_filter is not None:
             response["practice_filter"] = practice_filter
+        if user_id:
+            response["account_id"] = user_id
         return response
 
-    app.include_router(create_practice_router(db=db, create_attempt=create_attempt))
+    app.include_router(
+        create_practice_router(db=db, create_attempt=create_attempt, accounts=accounts)
+    )
 
     @app.post("/exams/{exam_id}/attempts", status_code=201)
-    def start(exam_id: str, session: Session = Depends(db)):
+    def start(exam_id: str, request: Request, session: Session = Depends(db)):
+        user = accounts.optional_user(request, session)
         exam, questions = published_exam(session, exam_id)
-        return create_attempt(session, exam.payload, [q.payload for q in questions])
+        return create_attempt(
+            session,
+            exam.payload,
+            [q.payload for q in questions],
+            user_id=user.id if user else None,
+        )
 
     @app.post("/attempts/{attempt_id}/submit")
     def submit(
         attempt_id: str,
         body: Submission,
+        request: Request,
         x_attempt_token: str = Header(default=""),
         session: Session = Depends(db),
     ):
         attempt = owned_attempt(session, attempt_id, x_attempt_token)
+        accounts.authorize_attempt(request, session, attempt_id)
         if attempt.result is not None:
             if attempt.answers != body.answers:
                 raise HTTPException(409, "Already submitted with different answers")
@@ -365,7 +403,20 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             raise HTTPException(
                 410, "Practice attempt expired; answers remain on device"
             )
-        details = [grade(q, body.answers.get(q.id, [])) for q in questions]
+        details = []
+        for q in questions:
+            submitted = body.answers.get(q.id, [])
+            choices = {option.id: option.text for option in q.options}
+            displayed = [
+                ("Đúng" if value == "true" else "Sai" if value == "false" else value)
+                if q.type == "true_false"
+                else choices.get(value, value)
+                for value in submitted
+            ]
+            details.append(
+                grade(q, submitted)
+                | {"submitted_answer": submitted, "submitted_answer_display": displayed}
+            )
         needs_review = any(d["score"] is None for d in details)
         result = {
             "attempt_id": attempt.id,
@@ -382,6 +433,25 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             .where(Attempt.id == attempt.id, Attempt.result.is_(None))
             .values(answers=body.answers, result=result)
         ).rowcount
+        owner = session.get(AccountAttempt, attempt_id)
+        if changed and owner:
+            session.add(
+                LearningRecord(
+                    attempt_id=attempt_id,
+                    user_id=owner.user_id,
+                    payload={
+                        "exam": {
+                            k: v
+                            for k, v in attempt.snapshot["exam"].items()
+                            if k != "question_ids"
+                        },
+                        "result": result,
+                        "questions": [
+                            public_question(q) for q in attempt.snapshot["questions"]
+                        ],
+                    },
+                )
+            )
         session.commit()
         if not changed:
             session.expire_all()
@@ -394,10 +464,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get("/attempts/{attempt_id}/result")
     def result(
         attempt_id: str,
+        request: Request,
         x_attempt_token: str = Header(default=""),
         session: Session = Depends(db),
     ):
         attempt = owned_attempt(session, attempt_id, x_attempt_token)
+        accounts.authorize_attempt(request, session, attempt_id)
         if attempt.result is None:
             raise HTTPException(409, "Not submitted")
         return attempt.result
@@ -405,10 +477,16 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.delete("/attempts/{attempt_id}", status_code=204)
     def delete_attempt(
         attempt_id: str,
+        request: Request,
         x_attempt_token: str = Header(default=""),
         session: Session = Depends(db),
     ):
-        session.delete(owned_attempt(session, attempt_id, x_attempt_token))
+        attempt = owned_attempt(session, attempt_id, x_attempt_token)
+        accounts.authorize_attempt(request, session, attempt_id)
+        session.delete(attempt)
+        owner = session.get(AccountAttempt, attempt_id)
+        if owner:
+            session.delete(owner)
         session.commit()
 
     @app.get("/admin/questions", dependencies=[Depends(admin)])
@@ -553,7 +631,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         if not exam:
             raise HTTPException(404, "Exam not found")
         for qid in exam.payload["question_ids"]:
-            q = session.get(ContentQuestion, qid)
+            q = session.get(ContentQuestion, QUESTION_REPLACEMENTS.get(qid, qid))
             if not q or q.state != "published" or not q.rights_confirmed:
                 raise HTTPException(409, "All questions must be published")
         exam.state = "published"

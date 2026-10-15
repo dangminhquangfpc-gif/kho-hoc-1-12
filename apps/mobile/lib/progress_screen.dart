@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'main.dart' show Shell, Failure;
 import 'repository.dart';
 import 'study_progress.dart';
+import 'account_screen.dart' show serverResultsProvider;
 
 class ProgressScreen extends ConsumerStatefulWidget {
   const ProgressScreen({super.key});
@@ -67,7 +68,21 @@ class _ProgressState extends ConsumerState<ProgressScreen> {
         .watch(preferencesProvider)
         .when(
           data: (p) {
-            final history = LocalStore(p).history;
+            final account = ref.watch(authUserProvider);
+            final server = account == null
+                ? null
+                : ref.watch(serverResultsProvider);
+            if (server?.isLoading == true) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (server?.hasError == true) {
+              return Failure(
+                retry: () => ref.invalidate(serverResultsProvider),
+              );
+            }
+            final history = account == null
+                ? LocalStore(p).history
+                : server!.value!;
             final progress = StudyProgress.fromHistory(history);
             return ListView(
               padding: const EdgeInsets.all(24),
@@ -81,14 +96,21 @@ class _ProgressState extends ConsumerState<ProgressScreen> {
                     'Điểm trung bình: ${progress.averagePercent!.round()}% · ${progress.graded} bài đã chấm đủ',
                   ),
                 const SizedBox(height: 12),
-                const Text(
-                  'Thống kê trên thiết bị, không phải đánh giá năng lực chính thức. Mỗi câu chỉ tính lần làm mới nhất khi phân tích chủ đề. Câu chờ duyệt chưa được tính điểm.',
+                Text(
+                  account == null
+                      ? 'Thống kê trên thiết bị. Mỗi câu tính lần làm mới nhất; câu chờ duyệt chưa được tính điểm.'
+                      : 'Thống kê từ tối đa 500 bài gần nhất trên tài khoản. Mỗi câu tính lần làm mới nhất; đây không phải đánh giá năng lực chính thức.',
                 ),
                 const SizedBox(height: 16),
                 FilledButton.icon(
-                  onPressed: () => context.go('/history'),
+                  onPressed: () =>
+                      context.go(account == null ? '/history' : '/account'),
                   icon: const Icon(Icons.history),
-                  label: const Text('Lịch sử bài làm'),
+                  label: Text(
+                    account == null
+                        ? 'Lịch sử bài làm'
+                        : 'Kết quả trên tài khoản',
+                  ),
                 ),
                 OutlinedButton.icon(
                   onPressed: () => context.go('/create-practice'),
@@ -141,7 +163,7 @@ class _ProgressState extends ConsumerState<ProgressScreen> {
                       ),
                     ),
                   ),
-                if (history.isNotEmpty)
+                if (history.isNotEmpty && account == null)
                   const Padding(
                     padding: EdgeInsets.only(top: 16),
                     child: Text(

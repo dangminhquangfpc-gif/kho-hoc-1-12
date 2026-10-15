@@ -3,18 +3,20 @@
 import json
 import secrets
 import uuid
+import unicodedata
 from collections import Counter
 from functools import lru_cache
 from pathlib import Path
 from typing import Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from .catalog import subjects_for_grade
 from .models import ContentQuestion
+from .content_fixes import QUESTION_REPLACEMENTS
 
 MATH_TOPICS = {
     "natural": "Số tự nhiên",
@@ -63,6 +65,100 @@ MATH_TOPICS = {
 }
 
 
+LOCALIZED_TOPICS = {
+    "am_van": "Âm và vần",
+    "bai_toan": "Bài toán",
+    "bien_phap_tu_tu": "Biện pháp tu từ",
+    "cau_tao_so": "Cấu tạo số",
+    "dai_so": "Đại số",
+    "danh_gia_bang_chung": "Đánh giá bằng chứng",
+    "dau_cau": "Dấu câu",
+    "day_so": "Dãy số",
+    "doc_hieu": "Đọc hiểu",
+    "doc_tieng": "Đọc tiếng",
+    "lap_luan": "Lập luận",
+    "lien_ket_lap_luan": "Liên kết lập luận",
+    "loi_dan": "Lời dẫn",
+    "luan_cu": "Luận cứ",
+    "luan_de": "Luận đề",
+    "mu_logarit": "Mũ và logarit",
+    "ngoi_ke": "Ngôi kể",
+    "nguyen_ham": "Nguyên hàm",
+    "phan_biet_y_kien_su_kien": "Phân biệt ý kiến và sự kiện",
+    "phep_cong": "Phép cộng",
+    "phep_lien_ket": "Phép liên kết",
+    "phep_tru": "Phép trừ",
+    "quan_he_tu": "Quan hệ từ",
+    "so_tu_nhien": "Số tự nhiên",
+    "suy_luan": "Suy luận",
+    "thanh_phan_cau": "Thành phần câu",
+    "thoi_gian": "Thời gian",
+    "thong_ke": "Thống kê",
+    "toa_do": "Tọa độ",
+    "tu_trai_nghia": "Từ trái nghĩa",
+    "ATP": "ATP",
+    "DNA": "DNA",
+    "pH": "pH",
+    "academic_reading": "Đọc hiểu học thuật",
+    "reading": "Đọc hiểu tiếng Anh",
+    "reading_evidence": "Đọc hiểu: dẫn chứng",
+    "reading_inference": "Đọc hiểu: suy luận",
+    "reading_main_idea": "Đọc hiểu: ý chính",
+    "reading_scope": "Đọc hiểu: phạm vi",
+    "vocabulary": "Từ vựng",
+    "be": "Động từ to be",
+    "be_verb": "Động từ to be",
+    "greetings": "Chào hỏi",
+    "numbers": "Số đếm",
+    "past_simple": "Thì quá khứ đơn",
+    "present_simple": "Thì hiện tại đơn",
+    "present_perfect": "Thì hiện tại hoàn thành",
+    "past_perfect": "Thì quá khứ hoàn thành",
+    "plural_nouns": "Danh từ số nhiều",
+    "possessive_adjectives": "Tính từ sở hữu",
+    "prepositions": "Giới từ",
+    "comparatives": "So sánh hơn",
+    "conditionals": "Câu điều kiện",
+    "first_conditional": "Câu điều kiện loại 1",
+    "second_conditional": "Câu điều kiện loại 2",
+    "third_conditional": "Câu điều kiện loại 3",
+    "passive_voice": "Câu bị động",
+    "relative_clauses": "Mệnh đề quan hệ",
+    "reported_speech": "Câu tường thuật",
+    "modals": "Động từ khuyết thiếu",
+    "concession": "Mệnh đề nhượng bộ",
+    "cohesion": "Liên kết văn bản",
+}
+
+
+MATH5_ALIASES = {
+    "chuyen_dong": "speed",
+    "van_toc": "speed",
+    "cong_thap_phan": "add_decimal",
+    "nhan_thap_phan": "multiply_decimal",
+    "ti_so_phan_tram": "ratio",
+    "phan_tram": "ratio",
+    "dien_tich_tam_giac": "triangle",
+    "the_tich_hop": "box_volume",
+    "phan_so": "fraction_ops",
+    "dien_tich": "plane",
+    "hinh_hoc": "plane",
+    "so_thap_phan": "decimal",
+    "do_dai": "measure_decimal",
+    "thong_ke": "data",
+}
+
+
+def canonical_topic(grade, subject, topic):
+    if subject == "tieng_anh":
+        topic = topic.replace(" ", "_").lower()
+        if topic == "be_verb":
+            topic = "be"
+    return (
+        MATH5_ALIASES.get(topic, topic) if grade == 5 and subject == "toan" else topic
+    )
+
+
 @lru_cache(maxsize=1)
 def topic_names():
     root = Path(__file__).resolve().parents[3] / "data/seeds"
@@ -86,8 +182,26 @@ def topic_names():
 
 
 def topic_name(grade, subject, topic):
+    topic = canonical_topic(grade, subject, topic)
+    if topic in LOCALIZED_TOPICS:
+        return LOCALIZED_TOPICS[topic]
     if subject == "toan" and topic in MATH_TOPICS:
         return MATH_TOPICS[topic]
+    legacy = {
+        "chuyen_dong": "Chuyển động",
+        "hinh_hoc": "Hình học",
+        "so_hoc": "Số học",
+        "phan_so": "Phân số",
+        "ham_so": "Hàm số",
+        "dao_ham": "Đạo hàm",
+        "tich_phan": "Tích phân",
+        "phuong_trinh": "Phương trình",
+        "xac_suat": "Xác suất",
+        "tong_hop": "Ôn tổng hợp",
+        "kien_thuc_nen": "Kiến thức nền",
+    }
+    if topic in legacy:
+        return legacy[topic]
     return topic_names().get(
         (grade, subject, topic), topic.replace("_", " ").capitalize()
     )
@@ -99,6 +213,7 @@ class PracticeInput(BaseModel):
     subject: str = Field(min_length=1, max_length=60)
     count: int = Field(default=10, ge=1, le=50)
     topic: str | None = Field(default=None, min_length=1, max_length=100)
+    topics: list[str] = Field(default_factory=list, max_length=20)
     textbook: (
         Literal["independent", "ket_noi_tri_thuc", "chan_troi_sang_tao", "canh_dieu"]
         | None
@@ -110,6 +225,12 @@ class PracticeInput(BaseModel):
     def validate_selection(self):
         if self.subject not in {s["id"] for s in subjects_for_grade(self.grade)}:
             raise ValueError("Subject does not belong to grade")
+        if self.topic is not None and self.topics:
+            raise ValueError("Use topic or topics, not both")
+        if len(set(self.topics)) != len(self.topics) or any(
+            not 1 <= len(t) <= 100 for t in self.topics
+        ):
+            raise ValueError("Topics must be unique and valid")
         if self.question_ids is not None:
             if (
                 len(set(self.question_ids)) != len(self.question_ids)
@@ -134,10 +255,11 @@ def available_questions(session, grade, subject):
         and row.payload["subject"] == subject
         and row.payload["type"] != "essay"
         and row.payload.get("source_type") != "link_only"
+        and row.id not in QUESTION_REPLACEMENTS
     ]
 
 
-def create_practice_router(*, db, create_attempt):
+def create_practice_router(*, db, create_attempt, accounts):
     router = APIRouter()
 
     @router.get("/practice-options")
@@ -149,9 +271,13 @@ def create_practice_router(*, db, create_attempt):
         if subject not in {s["id"] for s in subjects_for_grade(grade)}:
             raise HTTPException(422, "Subject does not belong to grade")
         questions = available_questions(session, grade, subject)
-        topics = Counter(q["topic"] for q in questions)
+        topics = Counter(canonical_topic(grade, subject, q["topic"]) for q in questions)
         groups = Counter(
-            (q["topic"], q["difficulty"], q.get("textbook", "independent"))
+            (
+                canonical_topic(grade, subject, q["topic"]),
+                q["difficulty"],
+                q.get("textbook", "independent"),
+            )
             for q in questions
         )
         return dict(
@@ -160,7 +286,19 @@ def create_practice_router(*, db, create_attempt):
             total=len(questions),
             topics=[
                 dict(id=key, name=topic_name(grade, subject, key), count=count)
-                for key, count in sorted(topics.items())
+                for key, count in sorted(
+                    topics.items(),
+                    key=lambda pair: "".join(
+                        c
+                        for c in unicodedata.normalize(
+                            "NFD",
+                            topic_name(grade, subject, pair[0])
+                            .lower()
+                            .replace("đ", "d"),
+                        )
+                        if not unicodedata.combining(c)
+                    ),
+                )
             ],
             groups=[
                 dict(topic=t, difficulty=d, textbook=b, count=count)
@@ -169,11 +307,22 @@ def create_practice_router(*, db, create_attempt):
         )
 
     @router.post("/practice-attempts", status_code=201)
-    def start(body: PracticeInput, session: Session = Depends(db)):
+    def start(body: PracticeInput, request: Request, session: Session = Depends(db)):
+        user = accounts.optional_user(request, session)
+        requested_topics = list(
+            dict.fromkeys(
+                canonical_topic(body.grade, body.subject, t)
+                for t in (body.topics or ([body.topic] if body.topic else []))
+            )
+        )
         candidates = [
             q
             for q in available_questions(session, body.grade, body.subject)
-            if (body.topic is None or q["topic"] == body.topic)
+            if (
+                not requested_topics
+                or canonical_topic(body.grade, body.subject, q["topic"])
+                in requested_topics
+            )
             and (
                 body.textbook is None
                 or q.get("textbook", "independent") == body.textbook
@@ -193,13 +342,41 @@ def create_practice_router(*, db, create_attempt):
                 raise HTTPException(
                     422, f"Only {len(candidates)} matching questions are available"
                 )
-            selected = secrets.SystemRandom().sample(candidates, body.count)
+            rng = secrets.SystemRandom()
+            if requested_topics and body.count < len(requested_topics):
+                raise HTTPException(
+                    422, "Choose at least one question per selected topic"
+                )
+            pools = {
+                t: [
+                    q
+                    for q in candidates
+                    if canonical_topic(body.grade, body.subject, q["topic"]) == t
+                ]
+                for t in requested_topics
+            }
+            if any(not pool for pool in pools.values()):
+                raise HTTPException(422, "A selected topic has no matching questions")
+            selected = []
+            for pool in pools.values():
+                rng.shuffle(pool)
+            # Round-robin keeps every chosen topic represented when possible.
+            if pools:
+                while len(selected) < body.count:
+                    for pool in pools.values():
+                        if pool and len(selected) < body.count:
+                            selected.append(pool.pop())
+                rng.shuffle(selected)
+            else:
+                selected = rng.sample(candidates, body.count)
         subject_name = next(
             s["name"] for s in subjects_for_grade(body.grade) if s["id"] == body.subject
         )
         label = "Ôn câu chưa đúng" if body.question_ids is not None else "Đề tự tạo"
         title = f"{subject_name} {body.grade} · {label}"
-        if body.topic:
+        if body.topics:
+            title += f" · {len(body.topics)} chủ đề"
+        elif body.topic:
             title += " · " + topic_name(body.grade, body.subject, body.topic)
         selected_books = {q.get("textbook", "independent") for q in selected}
         book = body.textbook or (
@@ -215,6 +392,12 @@ def create_practice_router(*, db, create_attempt):
             duration_minutes=min(120, max(10, body.count * 2)),
             question_ids=[q["id"] for q in selected],
         )
-        return create_attempt(session, exam, selected, body.model_dump(mode="json"))
+        return create_attempt(
+            session,
+            exam,
+            selected,
+            body.model_dump(mode="json"),
+            user_id=user.id if user else None,
+        )
 
     return router

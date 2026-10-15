@@ -2,6 +2,8 @@
 
 Monorepo MVP phát triển theo docs/PRODUCT_PLAN.md. Ứng dụng QuizApp Firebase cũ ở lib/ và android/ được giữ nguyên; ứng dụng mới ở apps/mobile/. Hướng dẫn cũ được giữ ở docs/LEGACY_QUIZAPP_README.md. Chưa hoàn thành tất cả tiêu chí MVP hoặc sẵn sàng Google Play.
 
+Bản thử 2026.10.15.6: chọn nhiều chủ đề, bổ sung 731 câu Toán 5, tài khoản học viên và quản lý kết quả trên backend local. Hướng dẫn: [Tài khoản và quản lý học viên](docs/CLASSROOM_ACCOUNTS.md).
+
 ## Thành phần
 
 - apps/mobile: Flutter, Riverpod, GoRouter, Dio; chọn lớp/môn/đề, làm bài, chấm qua API, đánh dấu câu, lưu bài/lịch sử; kho tài liệu, yêu thích/đọc gần đây và tiến độ cục bộ.
