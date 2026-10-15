@@ -1,0 +1,26 @@
+const {chromium}=require('playwright');
+(async()=>{
+ const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
+ const context=await browser.newContext({viewport:{width:430,height:932}});
+ const page=await context.newPage();page.setDefaultTimeout(90000);
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('http://127.0.0.1:8080/');
+ const placeholder=page.locator('flt-semantics-placeholder');await placeholder.waitFor({state:'attached'});
+ await placeholder.evaluate(el=>el.dispatchEvent(new MouseEvent('click',{bubbles:true})));
+ await page.getByRole('tab',{name:'Tài liệu',exact:true}).click();
+ await page.getByRole('textbox',{name:'Tìm tài liệu',exact:true}).fill('nap chai sach');
+ await page.mouse.move(200,650);await page.mouse.wheel(0,850);
+ await page.getByRole('button',{name:'Lưu tài liệu yêu thích',exact:true}).click();
+ await page.getByRole('button',{name:'Bỏ yêu thích',exact:true}).waitFor();
+ await page.getByRole('button',{name:/Cộng và trừ trong phạm vi 10/}).click();
+ await page.getByText('Phép cộng là thêm vào',{exact:true}).waitFor();
+ await page.screenshot({path:'/workspace/qa/demo-document.png'});
+ await page.mouse.move(200,700);await page.mouse.wheel(0,2000);
+ const response=await page.request.get('http://127.0.0.1:8080/api/documents/note_math_1_addition/file');
+ if(response.status()!==200 || !(await response.body()).subarray(0,5).equals(Buffer.from('%PDF-')))throw Error('PDF delivery failed');
+ const popupEvent=page.waitForEvent('popup');await page.getByRole('button',{name:'Mở PDF',exact:true}).click();
+ const popup=await popupEvent;await popup.waitForURL(/\/api\/documents\/note_math_1_addition\/file/);
+ if(errors.length)throw Error(errors.join('\n'));
+ console.log('PASS: library search without accents → favorite → note → same-origin PDF');
+ await browser.close();
+})().catch(e=>{console.error(e.message);process.exit(1)});

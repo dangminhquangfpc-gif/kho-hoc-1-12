@@ -1,0 +1,28 @@
+{
+  "properties": {
+    "description": {
+      "minLength": 1,
+      "title": "Description",
+      "type": "string"
+    },
+    "points": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 100.0,
+          "type": "number"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "title": "Points"
+    }
+  },
+  "required": [
+    "description",
+    "points"
+  ],
+  "title": "RubricCriterion",
+  "type": "object"
+}

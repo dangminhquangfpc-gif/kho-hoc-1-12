@@ -1,0 +1,989 @@
+{
+  "status": "starter_not_complete_curriculum",
+  "coverage": [
+    {
+      "grade": 1,
+      "subject": "tieng_viet",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 1,
+      "subject": "dao_duc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 1,
+      "subject": "the_chat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 1,
+      "subject": "nghe_thuat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 1,
+      "subject": "trai_nghiem",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 1,
+      "subject": "tu_nhien_xa_hoi",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 2,
+      "subject": "tieng_viet",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 2,
+      "subject": "dao_duc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 2,
+      "subject": "the_chat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 2,
+      "subject": "nghe_thuat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 2,
+      "subject": "trai_nghiem",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 2,
+      "subject": "tu_nhien_xa_hoi",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 3,
+      "subject": "tieng_viet",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 3,
+      "subject": "dao_duc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 3,
+      "subject": "the_chat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 3,
+      "subject": "nghe_thuat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 3,
+      "subject": "trai_nghiem",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 3,
+      "subject": "tu_nhien_xa_hoi",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 3,
+      "subject": "tieng_anh",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 3,
+      "subject": "tin_hoc_cong_nghe",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 4,
+      "subject": "tieng_viet",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 4,
+      "subject": "dao_duc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 4,
+      "subject": "the_chat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 4,
+      "subject": "nghe_thuat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 4,
+      "subject": "trai_nghiem",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 4,
+      "subject": "khoa_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 4,
+      "subject": "lich_su_dia_li",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 4,
+      "subject": "tieng_anh",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 4,
+      "subject": "tin_hoc_cong_nghe",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 5,
+      "subject": "tieng_viet",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 5,
+      "subject": "dao_duc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 5,
+      "subject": "the_chat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 5,
+      "subject": "nghe_thuat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 5,
+      "subject": "trai_nghiem",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 5,
+      "subject": "khoa_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 5,
+      "subject": "lich_su_dia_li",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 5,
+      "subject": "tieng_anh",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 5,
+      "subject": "tin_hoc_cong_nghe",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 6,
+      "subject": "ngu_van",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 6,
+      "subject": "tieng_anh",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 6,
+      "subject": "lich_su_dia_li",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 6,
+      "subject": "khoa_hoc_tu_nhien",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 6,
+      "subject": "tin_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 6,
+      "subject": "cong_nghe",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 6,
+      "subject": "gdcd",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 6,
+      "subject": "the_chat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 6,
+      "subject": "nghe_thuat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 6,
+      "subject": "huong_nghiep",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 7,
+      "subject": "ngu_van",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 7,
+      "subject": "tieng_anh",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 7,
+      "subject": "lich_su_dia_li",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 7,
+      "subject": "khoa_hoc_tu_nhien",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 7,
+      "subject": "tin_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 7,
+      "subject": "cong_nghe",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 7,
+      "subject": "gdcd",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 7,
+      "subject": "the_chat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 7,
+      "subject": "nghe_thuat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 7,
+      "subject": "huong_nghiep",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 8,
+      "subject": "ngu_van",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 8,
+      "subject": "tieng_anh",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 8,
+      "subject": "lich_su_dia_li",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 8,
+      "subject": "khoa_hoc_tu_nhien",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 8,
+      "subject": "tin_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 8,
+      "subject": "cong_nghe",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 8,
+      "subject": "gdcd",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 8,
+      "subject": "the_chat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 8,
+      "subject": "nghe_thuat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 8,
+      "subject": "huong_nghiep",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 9,
+      "subject": "ngu_van",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 9,
+      "subject": "tieng_anh",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 9,
+      "subject": "lich_su_dia_li",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 9,
+      "subject": "khoa_hoc_tu_nhien",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 9,
+      "subject": "tin_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 9,
+      "subject": "cong_nghe",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 9,
+      "subject": "gdcd",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 9,
+      "subject": "the_chat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 9,
+      "subject": "nghe_thuat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 9,
+      "subject": "huong_nghiep",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 10,
+      "subject": "ngu_van",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 10,
+      "subject": "tieng_anh",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 10,
+      "subject": "lich_su",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 10,
+      "subject": "the_chat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 10,
+      "subject": "quoc_phong",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 10,
+      "subject": "huong_nghiep",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 10,
+      "subject": "dia_li",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 10,
+      "subject": "vat_li",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": false
+    },
+    {
+      "grade": 10,
+      "subject": "hoa_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": false
+    },
+    {
+      "grade": 10,
+      "subject": "sinh_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": false
+    },
+    {
+      "grade": 10,
+      "subject": "tin_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 10,
+      "subject": "cong_nghe",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 10,
+      "subject": "kinh_te_phap_luat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 10,
+      "subject": "am_nhac",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 10,
+      "subject": "mi_thuat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 11,
+      "subject": "ngu_van",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 11,
+      "subject": "tieng_anh",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 11,
+      "subject": "lich_su",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 11,
+      "subject": "the_chat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 11,
+      "subject": "quoc_phong",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 11,
+      "subject": "huong_nghiep",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 11,
+      "subject": "dia_li",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 11,
+      "subject": "vat_li",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": false
+    },
+    {
+      "grade": 11,
+      "subject": "hoa_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": false
+    },
+    {
+      "grade": 11,
+      "subject": "sinh_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": false
+    },
+    {
+      "grade": 11,
+      "subject": "tin_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 11,
+      "subject": "cong_nghe",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 11,
+      "subject": "kinh_te_phap_luat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 11,
+      "subject": "am_nhac",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 11,
+      "subject": "mi_thuat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 12,
+      "subject": "ngu_van",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 12,
+      "subject": "tieng_anh",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 12,
+      "subject": "lich_su",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 12,
+      "subject": "the_chat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 12,
+      "subject": "quoc_phong",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 12,
+      "subject": "huong_nghiep",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 12,
+      "subject": "dia_li",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 12,
+      "subject": "vat_li",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": false
+    },
+    {
+      "grade": 12,
+      "subject": "hoa_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": false
+    },
+    {
+      "grade": 12,
+      "subject": "sinh_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": false
+    },
+    {
+      "grade": 12,
+      "subject": "tin_hoc",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 12,
+      "subject": "cong_nghe",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 12,
+      "subject": "kinh_te_phap_luat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 12,
+      "subject": "am_nhac",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    },
+    {
+      "grade": 12,
+      "subject": "mi_thuat",
+      "question_count": 6,
+      "depth": "starter_foundations",
+      "alignment_status": "pending_grade_and_edition_review",
+      "shared_foundations": true
+    }
+  ]
+}

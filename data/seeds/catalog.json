@@ -1,0 +1,740 @@
+{
+  "education_program": "gdpt-2018",
+  "grades": [
+    {
+      "id": 1,
+      "subjects": [
+        {
+          "id": "toan",
+          "name": "Toán",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_viet",
+          "name": "Tiếng Việt",
+          "requirement": "required"
+        },
+        {
+          "id": "dao_duc",
+          "name": "Đạo đức",
+          "requirement": "required"
+        },
+        {
+          "id": "the_chat",
+          "name": "Giáo dục thể chất",
+          "requirement": "required"
+        },
+        {
+          "id": "nghe_thuat",
+          "name": "Nghệ thuật",
+          "requirement": "required"
+        },
+        {
+          "id": "trai_nghiem",
+          "name": "Hoạt động trải nghiệm",
+          "requirement": "required"
+        },
+        {
+          "id": "tu_nhien_xa_hoi",
+          "name": "Tự nhiên và Xã hội",
+          "requirement": "required"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "subjects": [
+        {
+          "id": "toan",
+          "name": "Toán",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_viet",
+          "name": "Tiếng Việt",
+          "requirement": "required"
+        },
+        {
+          "id": "dao_duc",
+          "name": "Đạo đức",
+          "requirement": "required"
+        },
+        {
+          "id": "the_chat",
+          "name": "Giáo dục thể chất",
+          "requirement": "required"
+        },
+        {
+          "id": "nghe_thuat",
+          "name": "Nghệ thuật",
+          "requirement": "required"
+        },
+        {
+          "id": "trai_nghiem",
+          "name": "Hoạt động trải nghiệm",
+          "requirement": "required"
+        },
+        {
+          "id": "tu_nhien_xa_hoi",
+          "name": "Tự nhiên và Xã hội",
+          "requirement": "required"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "subjects": [
+        {
+          "id": "toan",
+          "name": "Toán",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_viet",
+          "name": "Tiếng Việt",
+          "requirement": "required"
+        },
+        {
+          "id": "dao_duc",
+          "name": "Đạo đức",
+          "requirement": "required"
+        },
+        {
+          "id": "the_chat",
+          "name": "Giáo dục thể chất",
+          "requirement": "required"
+        },
+        {
+          "id": "nghe_thuat",
+          "name": "Nghệ thuật",
+          "requirement": "required"
+        },
+        {
+          "id": "trai_nghiem",
+          "name": "Hoạt động trải nghiệm",
+          "requirement": "required"
+        },
+        {
+          "id": "tu_nhien_xa_hoi",
+          "name": "Tự nhiên và Xã hội",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_anh",
+          "name": "Tiếng Anh",
+          "requirement": "required"
+        },
+        {
+          "id": "tin_hoc_cong_nghe",
+          "name": "Tin học và Công nghệ",
+          "requirement": "required"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "subjects": [
+        {
+          "id": "toan",
+          "name": "Toán",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_viet",
+          "name": "Tiếng Việt",
+          "requirement": "required"
+        },
+        {
+          "id": "dao_duc",
+          "name": "Đạo đức",
+          "requirement": "required"
+        },
+        {
+          "id": "the_chat",
+          "name": "Giáo dục thể chất",
+          "requirement": "required"
+        },
+        {
+          "id": "nghe_thuat",
+          "name": "Nghệ thuật",
+          "requirement": "required"
+        },
+        {
+          "id": "trai_nghiem",
+          "name": "Hoạt động trải nghiệm",
+          "requirement": "required"
+        },
+        {
+          "id": "khoa_hoc",
+          "name": "Khoa học",
+          "requirement": "required"
+        },
+        {
+          "id": "lich_su_dia_li",
+          "name": "Lịch sử và Địa lí",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_anh",
+          "name": "Tiếng Anh",
+          "requirement": "required"
+        },
+        {
+          "id": "tin_hoc_cong_nghe",
+          "name": "Tin học và Công nghệ",
+          "requirement": "required"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "subjects": [
+        {
+          "id": "toan",
+          "name": "Toán",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_viet",
+          "name": "Tiếng Việt",
+          "requirement": "required"
+        },
+        {
+          "id": "dao_duc",
+          "name": "Đạo đức",
+          "requirement": "required"
+        },
+        {
+          "id": "the_chat",
+          "name": "Giáo dục thể chất",
+          "requirement": "required"
+        },
+        {
+          "id": "nghe_thuat",
+          "name": "Nghệ thuật",
+          "requirement": "required"
+        },
+        {
+          "id": "trai_nghiem",
+          "name": "Hoạt động trải nghiệm",
+          "requirement": "required"
+        },
+        {
+          "id": "khoa_hoc",
+          "name": "Khoa học",
+          "requirement": "required"
+        },
+        {
+          "id": "lich_su_dia_li",
+          "name": "Lịch sử và Địa lí",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_anh",
+          "name": "Tiếng Anh",
+          "requirement": "required"
+        },
+        {
+          "id": "tin_hoc_cong_nghe",
+          "name": "Tin học và Công nghệ",
+          "requirement": "required"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "subjects": [
+        {
+          "id": "toan",
+          "name": "Toán",
+          "requirement": "required"
+        },
+        {
+          "id": "ngu_van",
+          "name": "Ngữ văn",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_anh",
+          "name": "Tiếng Anh",
+          "requirement": "required"
+        },
+        {
+          "id": "lich_su_dia_li",
+          "name": "Lịch sử và Địa lí",
+          "requirement": "required"
+        },
+        {
+          "id": "khoa_hoc_tu_nhien",
+          "name": "Khoa học tự nhiên",
+          "requirement": "required"
+        },
+        {
+          "id": "tin_hoc",
+          "name": "Tin học",
+          "requirement": "required"
+        },
+        {
+          "id": "cong_nghe",
+          "name": "Công nghệ",
+          "requirement": "required"
+        },
+        {
+          "id": "gdcd",
+          "name": "Giáo dục công dân",
+          "requirement": "required"
+        },
+        {
+          "id": "the_chat",
+          "name": "Giáo dục thể chất",
+          "requirement": "required"
+        },
+        {
+          "id": "nghe_thuat",
+          "name": "Nghệ thuật",
+          "requirement": "required"
+        },
+        {
+          "id": "huong_nghiep",
+          "name": "Hoạt động trải nghiệm, hướng nghiệp",
+          "requirement": "required"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "subjects": [
+        {
+          "id": "toan",
+          "name": "Toán",
+          "requirement": "required"
+        },
+        {
+          "id": "ngu_van",
+          "name": "Ngữ văn",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_anh",
+          "name": "Tiếng Anh",
+          "requirement": "required"
+        },
+        {
+          "id": "lich_su_dia_li",
+          "name": "Lịch sử và Địa lí",
+          "requirement": "required"
+        },
+        {
+          "id": "khoa_hoc_tu_nhien",
+          "name": "Khoa học tự nhiên",
+          "requirement": "required"
+        },
+        {
+          "id": "tin_hoc",
+          "name": "Tin học",
+          "requirement": "required"
+        },
+        {
+          "id": "cong_nghe",
+          "name": "Công nghệ",
+          "requirement": "required"
+        },
+        {
+          "id": "gdcd",
+          "name": "Giáo dục công dân",
+          "requirement": "required"
+        },
+        {
+          "id": "the_chat",
+          "name": "Giáo dục thể chất",
+          "requirement": "required"
+        },
+        {
+          "id": "nghe_thuat",
+          "name": "Nghệ thuật",
+          "requirement": "required"
+        },
+        {
+          "id": "huong_nghiep",
+          "name": "Hoạt động trải nghiệm, hướng nghiệp",
+          "requirement": "required"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "subjects": [
+        {
+          "id": "toan",
+          "name": "Toán",
+          "requirement": "required"
+        },
+        {
+          "id": "ngu_van",
+          "name": "Ngữ văn",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_anh",
+          "name": "Tiếng Anh",
+          "requirement": "required"
+        },
+        {
+          "id": "lich_su_dia_li",
+          "name": "Lịch sử và Địa lí",
+          "requirement": "required"
+        },
+        {
+          "id": "khoa_hoc_tu_nhien",
+          "name": "Khoa học tự nhiên",
+          "requirement": "required"
+        },
+        {
+          "id": "tin_hoc",
+          "name": "Tin học",
+          "requirement": "required"
+        },
+        {
+          "id": "cong_nghe",
+          "name": "Công nghệ",
+          "requirement": "required"
+        },
+        {
+          "id": "gdcd",
+          "name": "Giáo dục công dân",
+          "requirement": "required"
+        },
+        {
+          "id": "the_chat",
+          "name": "Giáo dục thể chất",
+          "requirement": "required"
+        },
+        {
+          "id": "nghe_thuat",
+          "name": "Nghệ thuật",
+          "requirement": "required"
+        },
+        {
+          "id": "huong_nghiep",
+          "name": "Hoạt động trải nghiệm, hướng nghiệp",
+          "requirement": "required"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "subjects": [
+        {
+          "id": "toan",
+          "name": "Toán",
+          "requirement": "required"
+        },
+        {
+          "id": "ngu_van",
+          "name": "Ngữ văn",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_anh",
+          "name": "Tiếng Anh",
+          "requirement": "required"
+        },
+        {
+          "id": "lich_su_dia_li",
+          "name": "Lịch sử và Địa lí",
+          "requirement": "required"
+        },
+        {
+          "id": "khoa_hoc_tu_nhien",
+          "name": "Khoa học tự nhiên",
+          "requirement": "required"
+        },
+        {
+          "id": "tin_hoc",
+          "name": "Tin học",
+          "requirement": "required"
+        },
+        {
+          "id": "cong_nghe",
+          "name": "Công nghệ",
+          "requirement": "required"
+        },
+        {
+          "id": "gdcd",
+          "name": "Giáo dục công dân",
+          "requirement": "required"
+        },
+        {
+          "id": "the_chat",
+          "name": "Giáo dục thể chất",
+          "requirement": "required"
+        },
+        {
+          "id": "nghe_thuat",
+          "name": "Nghệ thuật",
+          "requirement": "required"
+        },
+        {
+          "id": "huong_nghiep",
+          "name": "Hoạt động trải nghiệm, hướng nghiệp",
+          "requirement": "required"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "subjects": [
+        {
+          "id": "toan",
+          "name": "Toán",
+          "requirement": "required"
+        },
+        {
+          "id": "ngu_van",
+          "name": "Ngữ văn",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_anh",
+          "name": "Tiếng Anh",
+          "requirement": "required"
+        },
+        {
+          "id": "lich_su",
+          "name": "Lịch sử",
+          "requirement": "required"
+        },
+        {
+          "id": "the_chat",
+          "name": "Giáo dục thể chất",
+          "requirement": "required"
+        },
+        {
+          "id": "quoc_phong",
+          "name": "Giáo dục quốc phòng và an ninh",
+          "requirement": "required"
+        },
+        {
+          "id": "huong_nghiep",
+          "name": "Hoạt động trải nghiệm, hướng nghiệp",
+          "requirement": "required"
+        },
+        {
+          "id": "dia_li",
+          "name": "Địa lí",
+          "requirement": "elective"
+        },
+        {
+          "id": "vat_li",
+          "name": "Vật lí",
+          "requirement": "elective"
+        },
+        {
+          "id": "hoa_hoc",
+          "name": "Hóa học",
+          "requirement": "elective"
+        },
+        {
+          "id": "sinh_hoc",
+          "name": "Sinh học",
+          "requirement": "elective"
+        },
+        {
+          "id": "tin_hoc",
+          "name": "Tin học",
+          "requirement": "elective"
+        },
+        {
+          "id": "cong_nghe",
+          "name": "Công nghệ",
+          "requirement": "elective"
+        },
+        {
+          "id": "kinh_te_phap_luat",
+          "name": "Giáo dục kinh tế và pháp luật",
+          "requirement": "elective"
+        },
+        {
+          "id": "am_nhac",
+          "name": "Âm nhạc",
+          "requirement": "elective"
+        },
+        {
+          "id": "mi_thuat",
+          "name": "Mĩ thuật",
+          "requirement": "elective"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "subjects": [
+        {
+          "id": "toan",
+          "name": "Toán",
+          "requirement": "required"
+        },
+        {
+          "id": "ngu_van",
+          "name": "Ngữ văn",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_anh",
+          "name": "Tiếng Anh",
+          "requirement": "required"
+        },
+        {
+          "id": "lich_su",
+          "name": "Lịch sử",
+          "requirement": "required"
+        },
+        {
+          "id": "the_chat",
+          "name": "Giáo dục thể chất",
+          "requirement": "required"
+        },
+        {
+          "id": "quoc_phong",
+          "name": "Giáo dục quốc phòng và an ninh",
+          "requirement": "required"
+        },
+        {
+          "id": "huong_nghiep",
+          "name": "Hoạt động trải nghiệm, hướng nghiệp",
+          "requirement": "required"
+        },
+        {
+          "id": "dia_li",
+          "name": "Địa lí",
+          "requirement": "elective"
+        },
+        {
+          "id": "vat_li",
+          "name": "Vật lí",
+          "requirement": "elective"
+        },
+        {
+          "id": "hoa_hoc",
+          "name": "Hóa học",
+          "requirement": "elective"
+        },
+        {
+          "id": "sinh_hoc",
+          "name": "Sinh học",
+          "requirement": "elective"
+        },
+        {
+          "id": "tin_hoc",
+          "name": "Tin học",
+          "requirement": "elective"
+        },
+        {
+          "id": "cong_nghe",
+          "name": "Công nghệ",
+          "requirement": "elective"
+        },
+        {
+          "id": "kinh_te_phap_luat",
+          "name": "Giáo dục kinh tế và pháp luật",
+          "requirement": "elective"
+        },
+        {
+          "id": "am_nhac",
+          "name": "Âm nhạc",
+          "requirement": "elective"
+        },
+        {
+          "id": "mi_thuat",
+          "name": "Mĩ thuật",
+          "requirement": "elective"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "subjects": [
+        {
+          "id": "toan",
+          "name": "Toán",
+          "requirement": "required"
+        },
+        {
+          "id": "ngu_van",
+          "name": "Ngữ văn",
+          "requirement": "required"
+        },
+        {
+          "id": "tieng_anh",
+          "name": "Tiếng Anh",
+          "requirement": "required"
+        },
+        {
+          "id": "lich_su",
+          "name": "Lịch sử",
+          "requirement": "required"
+        },
+        {
+          "id": "the_chat",
+          "name": "Giáo dục thể chất",
+          "requirement": "required"
+        },
+        {
+          "id": "quoc_phong",
+          "name": "Giáo dục quốc phòng và an ninh",
+          "requirement": "required"
+        },
+        {
+          "id": "huong_nghiep",
+          "name": "Hoạt động trải nghiệm, hướng nghiệp",
+          "requirement": "required"
+        },
+        {
+          "id": "dia_li",
+          "name": "Địa lí",
+          "requirement": "elective"
+        },
+        {
+          "id": "vat_li",
+          "name": "Vật lí",
+          "requirement": "elective"
+        },
+        {
+          "id": "hoa_hoc",
+          "name": "Hóa học",
+          "requirement": "elective"
+        },
+        {
+          "id": "sinh_hoc",
+          "name": "Sinh học",
+          "requirement": "elective"
+        },
+        {
+          "id": "tin_hoc",
+          "name": "Tin học",
+          "requirement": "elective"
+        },
+        {
+          "id": "cong_nghe",
+          "name": "Công nghệ",
+          "requirement": "elective"
+        },
+        {
+          "id": "kinh_te_phap_luat",
+          "name": "Giáo dục kinh tế và pháp luật",
+          "requirement": "elective"
+        },
+        {
+          "id": "am_nhac",
+          "name": "Âm nhạc",
+          "requirement": "elective"
+        },
+        {
+          "id": "mi_thuat",
+          "name": "Mĩ thuật",
+          "requirement": "elective"
+        }
+      ]
+    }
+  ]
+}

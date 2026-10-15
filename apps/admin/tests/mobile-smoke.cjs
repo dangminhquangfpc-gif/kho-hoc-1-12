@@ -1,0 +1,37 @@
+const {chromium}=require('playwright');
+(async()=>{
+ const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
+ const page=await browser.newPage({viewport:{width:412,height:915}});
+ page.setDefaultTimeout(60000);
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('http://127.0.0.1:8080/',{waitUntil:'domcontentloaded'});
+ const placeholder=page.locator('flt-semantics-placeholder');
+ await placeholder.waitFor({state:'attached'});
+ await placeholder.evaluate(el=>el.dispatchEvent(new MouseEvent('click',{bubbles:true})));
+ await page.getByRole('button',{name:/Toán lớp 1/}).click();
+ await page.getByText('3 + 2 bằng bao nhiêu?',{exact:true}).waitFor();
+ await page.getByRole('checkbox',{name:'5',exact:true}).click();
+ await page.getByRole('button',{name:/Đánh dấu xem lại/}).click();
+ await page.getByRole('button',{name:/Bỏ đánh dấu/}).waitFor();
+ await page.waitForTimeout(500);
+ await page.goto('http://127.0.0.1:8080/',{waitUntil:'domcontentloaded'});
+ const resumePlaceholder=page.locator('flt-semantics-placeholder');
+ await resumePlaceholder.waitFor({state:'attached'});
+ await resumePlaceholder.evaluate(el=>el.dispatchEvent(new MouseEvent('click',{bubbles:true})));
+ await page.getByRole('button',{name:/Tiếp tục bài đang làm/}).click();
+ await page.getByText('3 + 2 bằng bao nhiêu?',{exact:true}).waitFor();
+ await page.getByRole('button',{name:/Bỏ đánh dấu/}).waitFor();
+ await page.getByRole('button',{name:'Nộp bài',exact:true}).click();
+ await page.getByText('Nộp bài?',{exact:true}).waitFor();
+ await page.getByRole('button',{name:'Nộp bài',exact:true}).last().click();
+ await page.getByText(/^1(?:\.0)? \/ 13(?:\.0)?$/).waitFor();
+ 
+ await page.mouse.move(200,600); await page.mouse.wheel(0,20000);
+ await page.getByRole('button',{name:'Về trang luyện đề'}).click();
+ await page.getByRole('tab',{name:'Tiến độ',exact:true}).click();
+ await page.getByRole('button',{name:'Lịch sử bài làm',exact:true}).click();
+ await page.getByRole('button',{name:/Toán lớp 1/}).waitFor();
+ if(errors.length)throw Error(errors.join('\n'));
+ console.log('PASS: live Flutter web → answer → reload/resume → submit → score → history');
+ await browser.close();
+})().catch(e=>{console.error(e.message);process.exit(1)});

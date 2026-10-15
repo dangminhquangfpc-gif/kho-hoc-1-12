@@ -93,3 +93,22 @@ yarn-error.log*
 *.temp
 *~
 *.txt
+# Kho Hoc monorepo
+!docs/
+!docs/**/*.md
+!.env.example
+node_modules/
+.next/
+*.tsbuildinfo
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.db
+.venv/
+!apps/mobile/README.md
+!**/requirements*.txt
+!apps/mobile/assets/fonts/*.txt
+
+# Local desktop demo runtime state
+.demo-venv/
+/state/

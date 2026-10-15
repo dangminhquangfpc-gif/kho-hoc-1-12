@@ -1,0 +1,217 @@
+{
+  "$defs": {
+    "Option": {
+      "properties": {
+        "id": {
+          "maxLength": 20,
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "text"
+      ],
+      "title": "Option",
+      "type": "object"
+    },
+    "RubricCriterion": {
+      "properties": {
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "points": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0.0,
+              "maximum": 100.0,
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Points"
+        }
+      },
+      "required": [
+        "description",
+        "points"
+      ],
+      "title": "RubricCriterion",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "id": {
+      "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+      "title": "Id",
+      "type": "string"
+    },
+    "grade": {
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Grade",
+      "type": "integer"
+    },
+    "subject": {
+      "maxLength": 60,
+      "minLength": 1,
+      "title": "Subject",
+      "type": "string"
+    },
+    "topic": {
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Topic",
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "single_choice",
+        "multiple_choice",
+        "true_false",
+        "short_answer",
+        "numeric",
+        "essay"
+      ],
+      "title": "Type",
+      "type": "string"
+    },
+    "difficulty": {
+      "default": "easy",
+      "enum": [
+        "easy",
+        "medium",
+        "hard"
+      ],
+      "title": "Difficulty",
+      "type": "string"
+    },
+    "question": {
+      "maxLength": 10000,
+      "minLength": 1,
+      "title": "Question",
+      "type": "string"
+    },
+    "options": {
+      "items": {
+        "$ref": "#/$defs/Option"
+      },
+      "maxItems": 20,
+      "title": "Options",
+      "type": "array"
+    },
+    "correct_answer": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Correct Answer",
+      "type": "array"
+    },
+    "max_score": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0.0,
+          "maximum": 100.0,
+          "type": "number"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "title": "Max Score"
+    },
+    "explanation": {
+      "maxLength": 10000,
+      "minLength": 1,
+      "title": "Explanation",
+      "type": "string"
+    },
+    "tolerance": {
+      "anyOf": [
+        {
+          "maximum": 100.0,
+          "minimum": 0.0,
+          "type": "number"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "default": "0",
+      "title": "Tolerance"
+    },
+    "unit": {
+      "anyOf": [
+        {
+          "enum": [
+            "m",
+            "cm",
+            "km",
+            "m2",
+            "ha",
+            "km2"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unit"
+    },
+    "rubric": {
+      "items": {
+        "$ref": "#/$defs/RubricCriterion"
+      },
+      "title": "Rubric",
+      "type": "array"
+    },
+    "source_type": {
+      "default": "original",
+      "enum": [
+        "original",
+        "licensed",
+        "link_only"
+      ],
+      "title": "Source Type",
+      "type": "string"
+    },
+    "license": {
+      "minLength": 1,
+      "title": "License",
+      "type": "string"
+    },
+    "rights_evidence": {
+      "minLength": 1,
+      "title": "Rights Evidence",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "grade",
+    "subject",
+    "topic",
+    "type",
+    "question",
+    "max_score",
+    "explanation",
+    "license",
+    "rights_evidence"
+  ],
+  "title": "Question",
+  "type": "object"
+}

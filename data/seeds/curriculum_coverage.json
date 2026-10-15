@@ -1,0 +1,659 @@
+{
+  "textbook": "ket_noi_tri_thuc",
+  "edition": null,
+  "status": "provisional_topic_mapping",
+  "publisher_reference": "https://hanhtrangso.nxbgd.vn/",
+  "reference_note": "Cổng nhà xuất bản đã kiểm tra truy cập; chưa xác minh mục lục của từng ấn bản. Nội dung tự biên soạn, không trích nội dung sách.",
+  "exercise_families": 72,
+  "variant_count": 720,
+  "topics": [
+    {
+      "grade": 1,
+      "subject": "toan",
+      "topic": "dem_so",
+      "title": "Đếm và số liền sau",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 1,
+      "subject": "toan",
+      "topic": "cong_trong_20",
+      "title": "Cộng trong phạm vi 20",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 1,
+      "subject": "toan",
+      "topic": "tru_trong_20",
+      "title": "Trừ trong phạm vi 20",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 1,
+      "subject": "toan",
+      "topic": "so_sanh",
+      "title": "So sánh hai số",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 1,
+      "subject": "toan",
+      "topic": "chuc_don_vi",
+      "title": "Chục và đơn vị",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 1,
+      "subject": "toan",
+      "topic": "bai_toan_them",
+      "title": "Bài toán thêm đồ vật",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 2,
+      "subject": "toan",
+      "topic": "cong_co_nho",
+      "title": "Cộng có nhớ",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 2,
+      "subject": "toan",
+      "topic": "tru_co_nho",
+      "title": "Trừ có nhớ",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 2,
+      "subject": "toan",
+      "topic": "nhan_2",
+      "title": "Phép nhân và bảng nhân 2",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 2,
+      "subject": "toan",
+      "topic": "chia_2",
+      "title": "Chia đều cho 2",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 2,
+      "subject": "toan",
+      "topic": "do_dai",
+      "title": "Cộng độ dài",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 2,
+      "subject": "toan",
+      "topic": "gio_phut",
+      "title": "Giờ và phút",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 3,
+      "subject": "toan",
+      "topic": "nhan_chia",
+      "title": "Nhân số với số có một chữ số",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 3,
+      "subject": "toan",
+      "topic": "chia_het",
+      "title": "Chia hết",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 3,
+      "subject": "toan",
+      "topic": "chu_vi_hcn",
+      "title": "Chu vi hình chữ nhật",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 3,
+      "subject": "toan",
+      "topic": "dien_tich_hcn",
+      "title": "Diện tích hình chữ nhật",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 3,
+      "subject": "toan",
+      "topic": "gia_tri_chu_so",
+      "title": "Giá trị chữ số theo hàng",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 3,
+      "subject": "toan",
+      "topic": "doi_thoi_gian",
+      "title": "Đổi giờ sang phút",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 4,
+      "subject": "toan",
+      "topic": "cong_phan_so",
+      "title": "Cộng phân số cùng mẫu",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 4,
+      "subject": "toan",
+      "topic": "tru_phan_so",
+      "title": "Trừ phân số cùng mẫu",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 4,
+      "subject": "toan",
+      "topic": "nhan_phan_so",
+      "title": "Nhân phân số",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 4,
+      "subject": "toan",
+      "topic": "trung_binh",
+      "title": "Số trung bình cộng",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 4,
+      "subject": "toan",
+      "topic": "doi_dien_tich",
+      "title": "Đơn vị diện tích",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 4,
+      "subject": "toan",
+      "topic": "tim_so",
+      "title": "Tìm hai số khi biết tổng và hiệu",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 5,
+      "subject": "toan",
+      "topic": "cong_thap_phan",
+      "title": "Cộng số thập phân",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 5,
+      "subject": "toan",
+      "topic": "nhan_thap_phan",
+      "title": "Nhân số thập phân",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 5,
+      "subject": "toan",
+      "topic": "ti_so_phan_tram",
+      "title": "Tỉ số phần trăm",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 5,
+      "subject": "toan",
+      "topic": "dien_tich_tam_giac",
+      "title": "Diện tích tam giác",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 5,
+      "subject": "toan",
+      "topic": "the_tich_hop",
+      "title": "Thể tích hình hộp chữ nhật",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 5,
+      "subject": "toan",
+      "topic": "van_toc",
+      "title": "Quãng đường và vận tốc",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 6,
+      "subject": "toan",
+      "topic": "so_nguyen",
+      "title": "Cộng và trừ số nguyên",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 6,
+      "subject": "toan",
+      "topic": "chia_het",
+      "title": "Dấu hiệu chia hết",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 6,
+      "subject": "toan",
+      "topic": "ucln",
+      "title": "Ước chung lớn nhất",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 6,
+      "subject": "toan",
+      "topic": "bcnn",
+      "title": "Bội chung nhỏ nhất",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 6,
+      "subject": "toan",
+      "topic": "phan_so_khac_mau",
+      "title": "Cộng phân số khác mẫu",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 6,
+      "subject": "toan",
+      "topic": "dien_tich_hinh_thang",
+      "title": "Diện tích hình thang",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 7,
+      "subject": "toan",
+      "topic": "so_huu_ti",
+      "title": "Số hữu tỉ",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 7,
+      "subject": "toan",
+      "topic": "luy_thua",
+      "title": "Lũy thừa",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 7,
+      "subject": "toan",
+      "topic": "ti_le_thuan",
+      "title": "Đại lượng tỉ lệ thuận",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 7,
+      "subject": "toan",
+      "topic": "ti_le_nghich",
+      "title": "Đại lượng tỉ lệ nghịch",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 7,
+      "subject": "toan",
+      "topic": "goc_tam_giac",
+      "title": "Tổng ba góc của tam giác",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 7,
+      "subject": "toan",
+      "topic": "xac_suat_don_gian",
+      "title": "Xác suất của biến cố đơn giản",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 8,
+      "subject": "toan",
+      "topic": "da_thuc",
+      "title": "Giá trị của đa thức",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 8,
+      "subject": "toan",
+      "topic": "hang_dang_thuc",
+      "title": "Hằng đẳng thức",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 8,
+      "subject": "toan",
+      "topic": "phuong_trinh_bac_nhat",
+      "title": "Phương trình bậc nhất",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 8,
+      "subject": "toan",
+      "topic": "ham_so_bac_nhat",
+      "title": "Hàm số bậc nhất",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 8,
+      "subject": "toan",
+      "topic": "pytago",
+      "title": "Định lí Pythagore",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 8,
+      "subject": "toan",
+      "topic": "thales",
+      "title": "Tỉ số trong tam giác",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 9,
+      "subject": "toan",
+      "topic": "can_bac_hai",
+      "title": "Căn bậc hai số học",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 9,
+      "subject": "toan",
+      "topic": "he_phuong_trinh",
+      "title": "Hệ hai phương trình bậc nhất",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 9,
+      "subject": "toan",
+      "topic": "phuong_trinh_bac_hai",
+      "title": "Phương trình bậc hai",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 9,
+      "subject": "toan",
+      "topic": "duong_tron",
+      "title": "Chu vi đường tròn",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 9,
+      "subject": "toan",
+      "topic": "ti_so_luong_giac",
+      "title": "Tỉ số lượng giác trong tam giác vuông",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 9,
+      "subject": "toan",
+      "topic": "xac_suat",
+      "title": "Xác suất trong mô hình đồng khả năng",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 10,
+      "subject": "toan",
+      "topic": "tap_hop",
+      "title": "Tập hợp và giao hai tập hợp",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 10,
+      "subject": "toan",
+      "topic": "dinh_parabol",
+      "title": "Hàm số bậc hai",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 10,
+      "subject": "toan",
+      "topic": "tich_vo_huong",
+      "title": "Tích vô hướng của vectơ",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 10,
+      "subject": "toan",
+      "topic": "khoang_cach",
+      "title": "Khoảng cách trong mặt phẳng",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 10,
+      "subject": "toan",
+      "topic": "to_hop",
+      "title": "Tổ hợp",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 10,
+      "subject": "toan",
+      "topic": "trung_binh",
+      "title": "Số trung bình của mẫu số liệu",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 11,
+      "subject": "toan",
+      "topic": "cap_so_cong",
+      "title": "Cấp số cộng",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 11,
+      "subject": "toan",
+      "topic": "cap_so_nhan",
+      "title": "Cấp số nhân",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 11,
+      "subject": "toan",
+      "topic": "dao_ham",
+      "title": "Đạo hàm của đa thức",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 11,
+      "subject": "toan",
+      "topic": "logarit",
+      "title": "Logarit",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 11,
+      "subject": "toan",
+      "topic": "ham_mu",
+      "title": "Phương trình mũ",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 11,
+      "subject": "toan",
+      "topic": "bien_co_doc_lap",
+      "title": "Xác suất của biến cố độc lập",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 12,
+      "subject": "toan",
+      "topic": "cuc_tri",
+      "title": "Giá trị nhỏ nhất của hàm số",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 12,
+      "subject": "toan",
+      "topic": "tich_phan",
+      "title": "Tích phân của đa thức",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 12,
+      "subject": "toan",
+      "topic": "toa_do_khong_gian",
+      "title": "Khoảng cách trong không gian",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 12,
+      "subject": "toan",
+      "topic": "vecto_khong_gian",
+      "title": "Tích vô hướng trong không gian",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 12,
+      "subject": "toan",
+      "topic": "xac_suat_co_dieu_kien",
+      "title": "Xác suất có điều kiện",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    },
+    {
+      "grade": 12,
+      "subject": "toan",
+      "topic": "mau_ghep_nhom",
+      "title": "Số trung bình của mẫu ghép nhóm",
+      "question_count": 10,
+      "exercise_families": 1,
+      "alignment_status": "topic_level_pending_edition_review"
+    }
+  ]
+}

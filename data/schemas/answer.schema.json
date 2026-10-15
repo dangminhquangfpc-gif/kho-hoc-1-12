@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://khohoc.local/schemas/answer-key",
+  "title": "Versioned answer key",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "question_id",
+    "version",
+    "answers",
+    "max_score",
+    "review_status"
+  ],
+  "properties": {
+    "question_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "answers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "max_score": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "review_status": {
+      "enum": [
+        "draft",
+        "approved"
+      ]
+    },
+    "approved_by": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

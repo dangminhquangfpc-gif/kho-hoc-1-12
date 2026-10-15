@@ -1,0 +1,14 @@
+**
+!services/
+!services/api/
+!services/api/requirements.lock.txt
+!services/api/khohoc/
+!services/api/khohoc/**
+!data/
+!data/seeds/
+!data/seeds/**
+
+!data/library/
+!data/library/documents.json
+!data/library/files/
+!data/library/files/**

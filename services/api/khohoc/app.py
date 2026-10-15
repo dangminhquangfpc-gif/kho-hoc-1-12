@@ -1,0 +1,487 @@
+import hashlib
+import secrets
+import uuid
+from contextlib import asynccontextmanager
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+
+from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from sqlalchemy import create_engine, select, update
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session
+
+from .catalog import subjects_for_grade
+from .grading import grade, normalize
+from .models import Attempt, AuditEvent, Base, ContentQuestion, Exam
+from .schemas import ExamInput, ImportBatch, Question, Submission
+
+
+class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_prefix="KHOHOC_")
+    database_url: str = "sqlite:////workspace/state/khohoc.db"
+    admin_token: str = ""
+    mode: str = "development"
+    cors_origins: list[str] = [
+        "http://localhost:3000",
+        "http://localhost:8080",
+        "http://127.0.0.1:8080",
+    ]
+
+
+def public_question(payload: dict) -> dict:
+    return {
+        k: payload[k]
+        for k in (
+            "id",
+            "grade",
+            "subject",
+            "topic",
+            "type",
+            "question",
+            "options",
+            "max_score",
+        )
+    }
+
+
+def fingerprint(question: Question) -> str:
+    return hashlib.sha256(normalize(question.question).encode()).hexdigest()
+
+
+def create_app(settings: Settings | None = None) -> FastAPI:
+    config = settings or Settings()
+    if config.mode != "development":
+        raise RuntimeError(
+            "Production adapter/JWT authentication are not implemented; refusing to start"
+        )
+    if config.database_url.startswith("sqlite:////"):
+        Path(config.database_url.removeprefix("sqlite:///")).parent.mkdir(
+            parents=True, exist_ok=True
+        )
+    engine = create_engine(
+        config.database_url,
+        connect_args={"check_same_thread": False}
+        if config.database_url.startswith("sqlite")
+        else {},
+    )
+
+    @asynccontextmanager
+    async def lifespan(app):
+        Base.metadata.create_all(engine)
+        yield
+        engine.dispose()
+
+    app = FastAPI(title="Kho Học 1–12 — local MVP", lifespan=lifespan)
+    app.state.engine = engine
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=config.cors_origins,
+        allow_methods=["GET", "POST", "DELETE"],
+        allow_headers=["Content-Type", "Authorization", "X-Attempt-Token"],
+    )
+
+    # Reject oversized bodies before JSON parsing. Public deployment also needs gateway rate limiting.
+    @app.middleware("http")
+    async def limits(request: Request, call_next):
+        from fastapi.responses import JSONResponse
+
+        if request.method in ("POST", "PUT", "PATCH"):
+            body = bytearray()
+            async for chunk in request.stream():
+                body.extend(chunk)
+                if len(body) > 2_000_000:
+                    return JSONResponse(
+                        {"detail": "Request too large"}, status_code=413
+                    )
+            request._body = bytes(body)
+        response = await call_next(request)
+        response.headers["Cache-Control"] = "no-store"
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        return response
+
+    def db():
+        with Session(engine) as session:
+            yield session
+
+    def admin(authorization: str = Header(default="")):
+        if not config.admin_token or not secrets.compare_digest(
+            authorization, "Bearer " + config.admin_token
+        ):
+            raise HTTPException(403, "Admin authorization required")
+        return "local-admin"
+
+    def audit(session, action, target):
+        session.add(AuditEvent(actor="local-admin", action=action, target=target))
+
+    def owned_attempt(session, attempt_id, token):
+        attempt = session.get(Attempt, attempt_id)
+        if not attempt or not secrets.compare_digest(
+            attempt.token_hash, hashlib.sha256(token.encode()).hexdigest()
+        ):
+            raise HTTPException(404, "Attempt not found")
+        return attempt
+
+    def published_exam(session, exam_id):
+        exam = session.get(Exam, exam_id)
+        if not exam or exam.state != "published":
+            raise HTTPException(404, "Exam not found")
+        questions = [
+            session.get(ContentQuestion, qid) for qid in exam.payload["question_ids"]
+        ]
+        if any(
+            q is None or q.state != "published" or not q.rights_confirmed
+            for q in questions
+        ):
+            raise HTTPException(404, "Exam unavailable")
+        return exam, questions
+
+    from .question_versions import create_question_versions_router
+
+    app.include_router(
+        create_question_versions_router(
+            db=db, admin=admin, audit=audit, fingerprint=fingerprint
+        )
+    )
+
+    from .library import create_library_router, search_key
+
+    app.include_router(create_library_router(db, admin, audit))
+
+    @app.get("/health")
+    def health(session: Session = Depends(db)):
+        session.execute(select(1))
+        return {"status": "ok", "mode": config.mode}
+
+    @app.get("/grades")
+    def grades():
+        return [{"id": n, "name": f"Lớp {n}"} for n in range(1, 13)]
+
+    @app.get("/grades/{grade_id}/subjects")
+    def subjects(grade_id: int):
+        if not 1 <= grade_id <= 12:
+            raise HTTPException(404, "Grade not found")
+        return subjects_for_grade(grade_id)
+
+    @app.get("/coverage")
+    def coverage(grade: int = Query(ge=1, le=12), session: Session = Depends(db)):
+        from .library import LibraryDocument
+
+        questions = [
+            row.payload
+            for row in session.scalars(
+                select(ContentQuestion).where(
+                    ContentQuestion.state == "published",
+                    ContentQuestion.rights_confirmed.is_(True),
+                )
+            )
+            if row.payload["grade"] == grade
+        ]
+        exams = [
+            row.payload
+            for row in session.scalars(select(Exam).where(Exam.state == "published"))
+            if row.payload["grade"] == grade
+        ]
+        documents = [
+            row.payload
+            for row in session.scalars(
+                select(LibraryDocument).where(
+                    LibraryDocument.state == "published",
+                    LibraryDocument.rights_confirmed.is_(True),
+                )
+            )
+            if row.payload["grade"] == grade
+        ]
+        return [
+            {
+                "subject": subject["id"],
+                "name": subject["name"],
+                "question_count": sum(q["subject"] == subject["id"] for q in questions),
+                "exam_count": sum(e["subject"] == subject["id"] for e in exams),
+                "document_count": sum(d["subject"] == subject["id"] for d in documents),
+                "topic_count": len(
+                    {q["topic"] for q in questions if q["subject"] == subject["id"]}
+                ),
+            }
+            for subject in subjects_for_grade(grade)
+        ]
+
+    @app.get("/exams")
+    def exams(
+        grade: int = Query(ge=1, le=12),
+        subject: str = "toan",
+        search: str = Query(default="", max_length=100),
+        session: Session = Depends(db),
+    ):
+        output = []
+        for exam in session.scalars(select(Exam).where(Exam.state == "published")):
+            if (
+                exam.payload["grade"] == grade
+                and exam.payload["subject"] == subject
+                and search_key(search) in search_key(exam.payload["title"])
+            ):
+                try:
+                    published_exam(session, exam.id)
+                except HTTPException:
+                    continue
+                output.append(
+                    {k: v for k, v in exam.payload.items() if k != "question_ids"}
+                    | {"question_count": len(exam.payload["question_ids"])}
+                )
+        return output
+
+    @app.get("/exams/{exam_id}")
+    def exam_detail(exam_id: str, session: Session = Depends(db)):
+        exam, questions = published_exam(session, exam_id)
+        return {k: v for k, v in exam.payload.items() if k != "question_ids"} | {
+            "questions": [public_question(q.payload) for q in questions]
+        }
+
+    @app.post("/exams/{exam_id}/attempts", status_code=201)
+    def start(exam_id: str, session: Session = Depends(db)):
+        exam, questions = published_exam(session, exam_id)
+        token = secrets.token_urlsafe(32)
+        attempt = Attempt(
+            id=str(uuid.uuid4()),
+            token_hash=hashlib.sha256(token.encode()).hexdigest(),
+            snapshot={
+                "exam": exam.payload,
+                "questions": [q.payload for q in questions],
+            },
+        )
+        session.add(attempt)
+        session.commit()
+        return {
+            "id": attempt.id,
+            "token": token,
+            "exam": {k: v for k, v in exam.payload.items() if k != "question_ids"},
+            "questions": [public_question(q.payload) for q in questions],
+            "created_at": attempt.created_at.isoformat()
+            + ("Z" if attempt.created_at.tzinfo is None else ""),
+        }
+
+    @app.post("/attempts/{attempt_id}/submit")
+    def submit(
+        attempt_id: str,
+        body: Submission,
+        x_attempt_token: str = Header(default=""),
+        session: Session = Depends(db),
+    ):
+        attempt = owned_attempt(session, attempt_id, x_attempt_token)
+        if attempt.result is not None:
+            if attempt.answers != body.answers:
+                raise HTTPException(409, "Already submitted with different answers")
+            return attempt.result
+        questions = [Question.model_validate(q) for q in attempt.snapshot["questions"]]
+        if not set(body.answers) <= {q.id for q in questions} or any(
+            len(a) > 20 or any(len(v) > 10000 for v in a) for a in body.answers.values()
+        ):
+            raise HTTPException(422, "Invalid answers")
+        created = (
+            attempt.created_at.replace(tzinfo=timezone.utc)
+            if attempt.created_at.tzinfo is None
+            else attempt.created_at
+        )
+        # 24h transport grace allows offline submission; these are practice scores, not supervised exams.
+        if datetime.now(timezone.utc) > created + timedelta(hours=24):
+            raise HTTPException(
+                410, "Practice attempt expired; answers remain on device"
+            )
+        details = [grade(q, body.answers.get(q.id, [])) for q in questions]
+        needs_review = any(d["score"] is None for d in details)
+        result = {
+            "attempt_id": attempt.id,
+            "title": attempt.snapshot["exam"]["title"],
+            "score": None if needs_review else sum(d["score"] for d in details),
+            "graded_score": sum(d["score"] or 0 for d in details),
+            "max_score": sum(d["max_score"] for d in details),
+            "status": "needs_manual_review" if needs_review else "graded",
+            "details": details,
+        }
+        # Compare-and-set makes concurrent retries idempotent on SQLite and PostgreSQL.
+        changed = session.execute(
+            update(Attempt)
+            .where(Attempt.id == attempt.id, Attempt.result.is_(None))
+            .values(answers=body.answers, result=result)
+        ).rowcount
+        session.commit()
+        if not changed:
+            session.expire_all()
+            saved = session.get(Attempt, attempt_id)
+            if saved.answers != body.answers:
+                raise HTTPException(409, "Already submitted")
+            return saved.result
+        return result
+
+    @app.get("/attempts/{attempt_id}/result")
+    def result(
+        attempt_id: str,
+        x_attempt_token: str = Header(default=""),
+        session: Session = Depends(db),
+    ):
+        attempt = owned_attempt(session, attempt_id, x_attempt_token)
+        if attempt.result is None:
+            raise HTTPException(409, "Not submitted")
+        return attempt.result
+
+    @app.delete("/attempts/{attempt_id}", status_code=204)
+    def delete_attempt(
+        attempt_id: str,
+        x_attempt_token: str = Header(default=""),
+        session: Session = Depends(db),
+    ):
+        session.delete(owned_attempt(session, attempt_id, x_attempt_token))
+        session.commit()
+
+    @app.get("/admin/questions", dependencies=[Depends(admin)])
+    def admin_questions(session: Session = Depends(db)):
+        return [
+            {
+                "question": q.payload,
+                "state": q.state,
+                "rights_confirmed": q.rights_confirmed,
+                "version": q.version,
+            }
+            for q in session.scalars(
+                select(ContentQuestion).order_by(ContentQuestion.id)
+            )
+        ]
+
+    @app.post("/admin/import", dependencies=[Depends(admin)])
+    def import_questions(batch: ImportBatch, session: Session = Depends(db)):
+        if len({q.id for q in batch.questions}) != len(batch.questions) or len(
+            {fingerprint(q) for q in batch.questions}
+        ) != len(batch.questions):
+            raise HTTPException(409, "Duplicate in batch; nothing imported")
+        for q in batch.questions:
+            if q.subject not in {s["id"] for s in subjects_for_grade(q.grade)}:
+                raise HTTPException(422, "Subject not available for grade")
+            if session.get(ContentQuestion, q.id) or session.scalar(
+                select(ContentQuestion).where(
+                    ContentQuestion.fingerprint == fingerprint(q)
+                )
+            ):
+                raise HTTPException(
+                    409, "Duplicate existing question; nothing imported"
+                )
+        for q in batch.questions:
+            session.add(
+                ContentQuestion(
+                    id=q.id,
+                    payload=q.model_dump(mode="json"),
+                    fingerprint=fingerprint(q),
+                    state="draft",
+                    rights_confirmed=False,
+                )
+            )
+        audit(session, "import", str(len(batch.questions)))
+        try:
+            session.commit()
+        except IntegrityError:
+            session.rollback()
+            raise HTTPException(409, "Concurrent duplicate import") from None
+        return {"imported": len(batch.questions), "state": "draft"}
+
+    @app.post("/admin/questions/{question_id}/approve", dependencies=[Depends(admin)])
+    def approve(
+        question_id: str,
+        rights_confirmed: bool = Query(),
+        expected_version: int | None = Query(default=None, ge=1),
+        session: Session = Depends(db),
+    ):
+        question = session.get(ContentQuestion, question_id)
+        if not question:
+            raise HTTPException(404, "Question not found")
+        if expected_version is not None and question.version != expected_version:
+            raise HTTPException(409, "Question version changed; review again")
+        if not rights_confirmed or question.payload["source_type"] == "link_only":
+            raise HTTPException(422, "Redistribution rights must be confirmed")
+        changed = session.execute(
+            update(ContentQuestion)
+            .where(
+                ContentQuestion.id == question_id,
+                ContentQuestion.version == question.version,
+            )
+            .values(state="approved", rights_confirmed=True)
+        ).rowcount
+        if changed != 1:
+            session.rollback()
+            raise HTTPException(409, "Question version changed; review again")
+        audit(session, "approve", question_id)
+        session.commit()
+        return {"state": question.state}
+
+    @app.post("/admin/questions/{question_id}/publish", dependencies=[Depends(admin)])
+    def publish_question(
+        question_id: str,
+        expected_version: int | None = Query(default=None, ge=1),
+        session: Session = Depends(db),
+    ):
+        question = session.get(ContentQuestion, question_id)
+        if (
+            not question
+            or question.state != "approved"
+            or not question.rights_confirmed
+        ):
+            raise HTTPException(409, "Requires approved content and rights")
+        if expected_version is not None and question.version != expected_version:
+            raise HTTPException(409, "Question version changed; review again")
+        changed = session.execute(
+            update(ContentQuestion)
+            .where(
+                ContentQuestion.id == question_id,
+                ContentQuestion.version == question.version,
+                ContentQuestion.state == "approved",
+                ContentQuestion.rights_confirmed.is_(True),
+            )
+            .values(state="published")
+        ).rowcount
+        if changed != 1:
+            session.rollback()
+            raise HTTPException(409, "Question changed; review again")
+        audit(session, "publish-question", question_id)
+        session.commit()
+        return {"state": "published"}
+
+    @app.get("/admin/exams", dependencies=[Depends(admin)])
+    def list_admin_exams(session: Session = Depends(db)):
+        return [
+            {"exam": row.payload, "state": row.state}
+            for row in session.scalars(select(Exam))
+        ]
+
+    @app.post("/admin/exams", dependencies=[Depends(admin)], status_code=201)
+    def create_exam(body: ExamInput, session: Session = Depends(db)):
+        if session.get(Exam, body.id):
+            raise HTTPException(409, "Exam already exists")
+        for qid in body.question_ids:
+            question = session.get(ContentQuestion, qid)
+            if (
+                not question
+                or question.payload["grade"] != body.grade
+                or question.payload["subject"] != body.subject
+            ):
+                raise HTTPException(422, "Question grade/subject mismatch")
+        session.add(
+            Exam(id=body.id, payload=body.model_dump(mode="json"), state="draft")
+        )
+        audit(session, "create-exam", body.id)
+        session.commit()
+        return {"id": body.id, "state": "draft"}
+
+    @app.post("/admin/exams/{exam_id}/publish", dependencies=[Depends(admin)])
+    def publish_exam(exam_id: str, session: Session = Depends(db)):
+        exam = session.get(Exam, exam_id)
+        if not exam:
+            raise HTTPException(404, "Exam not found")
+        for qid in exam.payload["question_ids"]:
+            q = session.get(ContentQuestion, qid)
+            if not q or q.state != "published" or not q.rights_confirmed:
+                raise HTTPException(409, "All questions must be published")
+        exam.state = "published"
+        audit(session, "publish-exam", exam_id)
+        session.commit()
+        return {"state": "published"}
+
+    return app

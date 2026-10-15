@@ -1,0 +1,90 @@
+[
+  {
+    "id": "toan1_practice",
+    "grade": 1,
+    "subject": "toan",
+    "title": "Toán lớp 1 — bài luyện tập gốc",
+    "duration_minutes": 30,
+    "question_ids": [
+      "toan1_001",
+      "toan1_002",
+      "toan1_003",
+      "toan1_004",
+      "toan1_005",
+      "toan1_006",
+      "toan1_007",
+      "toan1_008",
+      "toan1_009",
+      "toan1_010",
+      "toan1_011",
+      "toan1_012",
+      "toan1_013"
+    ]
+  },
+  {
+    "id": "toan5_practice",
+    "grade": 5,
+    "subject": "toan",
+    "title": "Toán lớp 5 — bài luyện tập gốc",
+    "duration_minutes": 30,
+    "question_ids": [
+      "toan5_001",
+      "toan5_002",
+      "toan5_003",
+      "toan5_004",
+      "toan5_005",
+      "toan5_006",
+      "toan5_007",
+      "toan5_008",
+      "toan5_009",
+      "toan5_010",
+      "toan5_011",
+      "toan5_012",
+      "toan5_013"
+    ]
+  },
+  {
+    "id": "toan9_practice",
+    "grade": 9,
+    "subject": "toan",
+    "title": "Toán lớp 9 — bài luyện tập gốc",
+    "duration_minutes": 30,
+    "question_ids": [
+      "toan9_001",
+      "toan9_002",
+      "toan9_003",
+      "toan9_004",
+      "toan9_005",
+      "toan9_006",
+      "toan9_007",
+      "toan9_008",
+      "toan9_009",
+      "toan9_010",
+      "toan9_011",
+      "toan9_012",
+      "toan9_013"
+    ]
+  },
+  {
+    "id": "toan12_practice",
+    "grade": 12,
+    "subject": "toan",
+    "title": "Toán lớp 12 — bài luyện tập gốc",
+    "duration_minutes": 30,
+    "question_ids": [
+      "toan12_001",
+      "toan12_002",
+      "toan12_003",
+      "toan12_004",
+      "toan12_005",
+      "toan12_006",
+      "toan12_007",
+      "toan12_008",
+      "toan12_009",
+      "toan12_010",
+      "toan12_011",
+      "toan12_012",
+      "toan12_013"
+    ]
+  }
+]

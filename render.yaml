@@ -1,0 +1,10 @@
+# Disposable personal testing only. No persistent user data on the free tier.
+services:
+  - type: web
+    name: khohoc-phone-preview
+    runtime: docker
+    plan: free
+    dockerfilePath: ./deploy/phone-preview.Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeploy: false

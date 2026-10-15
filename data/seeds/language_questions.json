@@ -1,0 +1,1505 @@
+{
+  "questions": [
+    {
+      "id": "tieng_viet1_001",
+      "grade": 1,
+      "subject": "tieng_viet",
+      "topic": "doc_hieu",
+      "question": "Đọc đoạn: “Bé Na có một chú mèo. Mèo nằm trên tấm thảm. Na đặt bát nước bên cạnh mèo.”\nBé Na có con vật nào?",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "Một chú chó"
+        },
+        {
+          "id": "B",
+          "text": "Một chú mèo"
+        },
+        {
+          "id": "C",
+          "text": "Một con cá"
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "Câu đầu ghi rõ: “Bé Na có một chú mèo.”",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_viet1_002",
+      "grade": 1,
+      "subject": "tieng_viet",
+      "topic": "doc_hieu",
+      "question": "Đọc đoạn: “Bé Na có một chú mèo. Mèo nằm trên tấm thảm. Na đặt bát nước bên cạnh mèo.”\nMèo nằm ở đâu?",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "Trên tấm thảm"
+        },
+        {
+          "id": "B",
+          "text": "Dưới bàn"
+        },
+        {
+          "id": "C",
+          "text": "Trong bát nước"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "max_score": 1,
+      "explanation": "Câu thứ hai cho biết mèo nằm trên tấm thảm.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_viet1_003",
+      "grade": 1,
+      "subject": "tieng_viet",
+      "topic": "doc_hieu",
+      "question": "Đọc đoạn: “Bé Na có một chú mèo. Mèo nằm trên tấm thảm. Na đặt bát nước bên cạnh mèo.”\nNa đặt vật gì bên cạnh mèo?",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "Quyển vở"
+        },
+        {
+          "id": "B",
+          "text": "Chiếc mũ"
+        },
+        {
+          "id": "C",
+          "text": "Bát nước"
+        }
+      ],
+      "correct_answer": [
+        "C"
+      ],
+      "max_score": 1,
+      "explanation": "Câu cuối cho biết Na đặt bát nước bên cạnh mèo.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_viet1_004",
+      "grade": 1,
+      "subject": "tieng_viet",
+      "topic": "am_van",
+      "question": "Tiếng nào sau đây bắt đầu bằng chữ “m”?",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "cá"
+        },
+        {
+          "id": "B",
+          "text": "mẹ"
+        },
+        {
+          "id": "C",
+          "text": "bé"
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "Tiếng “mẹ” bắt đầu bằng chữ m; “cá” bắt đầu bằng c, “bé” bắt đầu bằng b.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_viet1_005",
+      "grade": 1,
+      "subject": "tieng_viet",
+      "topic": "dau_cau",
+      "question": "Chọn dấu kết thúc phù hợp cho câu hỏi: “Mẹ đi đâu…”",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dấu chấm (.)"
+        },
+        {
+          "id": "B",
+          "text": "Dấu phẩy (,)"
+        },
+        {
+          "id": "C",
+          "text": "Dấu hỏi chấm (?)"
+        }
+      ],
+      "correct_answer": [
+        "C"
+      ],
+      "max_score": 1,
+      "explanation": "“Mẹ đi đâu” là câu hỏi nên kết thúc bằng dấu hỏi chấm.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_viet1_006",
+      "grade": 1,
+      "subject": "tieng_viet",
+      "topic": "doc_tieng",
+      "question": "Trong câu “Bé đi học.”, chép lại tiếng chỉ hoạt động di chuyển. Chỉ viết một tiếng.",
+      "type": "short_answer",
+      "difficulty": "easy",
+      "options": [],
+      "correct_answer": [
+        "đi"
+      ],
+      "max_score": 1,
+      "explanation": "Tiếng “đi” chỉ hoạt động di chuyển. “Bé” gọi người, “học” chỉ hoạt động học tập.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_viet5_001",
+      "grade": 5,
+      "subject": "tieng_viet",
+      "topic": "doc_hieu",
+      "question": "Đọc đoạn tự biên soạn: “Chiều thứ sáu, Bình thấy nhiều sách trong lớp bị xếp lộn xộn. Bạn đề nghị chia sách theo chủ đề và viết nhãn cho từng ngăn. Cả nhóm cùng làm. Sáng thứ hai, các bạn tìm sách nhanh hơn và đặt sách về đúng ngăn sau khi đọc.”\nVấn đề Bình nhận thấy là gì?",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lớp không có sách"
+        },
+        {
+          "id": "B",
+          "text": "Nhiều sách bị xếp lộn xộn"
+        },
+        {
+          "id": "C",
+          "text": "Các ngăn sách bị khóa"
+        },
+        {
+          "id": "D",
+          "text": "Sách đều bị rách"
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "Đoạn đầu nói sách có sẵn nhưng bị xếp lộn xộn; không nói sách thiếu, bị khóa hay bị rách.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_viet5_002",
+      "grade": 5,
+      "subject": "tieng_viet",
+      "topic": "doc_hieu",
+      "question": "Đọc đoạn tự biên soạn: “Chiều thứ sáu, Bình thấy nhiều sách trong lớp bị xếp lộn xộn. Bạn đề nghị chia sách theo chủ đề và viết nhãn cho từng ngăn. Cả nhóm cùng làm. Sáng thứ hai, các bạn tìm sách nhanh hơn và đặt sách về đúng ngăn sau khi đọc.”\nChọn tất cả việc nhóm đã làm để sắp xếp sách.",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chia sách theo chủ đề"
+        },
+        {
+          "id": "B",
+          "text": "Bán những cuốn sách cũ"
+        },
+        {
+          "id": "C",
+          "text": "Viết nhãn cho từng ngăn"
+        },
+        {
+          "id": "D",
+          "text": "Giấu sách trong cặp"
+        }
+      ],
+      "correct_answer": [
+        "A",
+        "C"
+      ],
+      "max_score": 1,
+      "explanation": "Bình đề nghị chia sách theo chủ đề và viết nhãn; cả nhóm cùng thực hiện. Đoạn không có việc bán hoặc giấu sách.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_viet5_003",
+      "grade": 5,
+      "subject": "tieng_viet",
+      "topic": "doc_hieu",
+      "question": "Đọc đoạn tự biên soạn: “Chiều thứ sáu, Bình thấy nhiều sách trong lớp bị xếp lộn xộn. Bạn đề nghị chia sách theo chủ đề và viết nhãn cho từng ngăn. Cả nhóm cùng làm. Sáng thứ hai, các bạn tìm sách nhanh hơn và đặt sách về đúng ngăn sau khi đọc.”\nNhận định từng câu là đúng hay sai theo đoạn đọc.",
+      "type": "true_false",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "Sau khi sắp xếp, các bạn tìm sách nhanh hơn."
+        },
+        {
+          "id": "B",
+          "text": "Đoạn đọc cho biết chỉ một mình Bình làm mọi việc."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "max_score": 1,
+      "explanation": "Câu cuối nêu việc tìm sách nhanh hơn. “Cả nhóm cùng làm” cho thấy Bình không làm một mình.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_viet5_004",
+      "grade": 5,
+      "subject": "tieng_viet",
+      "topic": "thanh_phan_cau",
+      "question": "Trong câu “Những chú chim sẻ chuyền từ cành này sang cành khác.”, bộ phận nào là chủ ngữ?",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "chuyền"
+        },
+        {
+          "id": "B",
+          "text": "Những chú chim sẻ"
+        },
+        {
+          "id": "C",
+          "text": "từ cành này"
+        },
+        {
+          "id": "D",
+          "text": "sang cành khác"
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "“Những chú chim sẻ” nêu đối tượng thực hiện hoạt động; phần còn lại nói hoạt động của chúng.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_viet5_005",
+      "grade": 5,
+      "subject": "tieng_viet",
+      "topic": "quan_he_tu",
+      "question": "Chọn từ thích hợp điền vào câu: “Vì trời mưa to … chúng em mang áo mưa.”",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "nhưng"
+        },
+        {
+          "id": "B",
+          "text": "hoặc"
+        },
+        {
+          "id": "C",
+          "text": "nên"
+        },
+        {
+          "id": "D",
+          "text": "mà"
+        }
+      ],
+      "correct_answer": [
+        "C"
+      ],
+      "max_score": 1,
+      "explanation": "Cặp “vì … nên …” nối nguyên nhân trời mưa to với kết quả mang áo mưa.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_viet5_006",
+      "grade": 5,
+      "subject": "tieng_viet",
+      "topic": "tu_trai_nghia",
+      "question": "Viết một từ trái nghĩa trực tiếp với “cao” trong cặp miêu tả chiều cao “cao — …”. Chỉ viết một từ.",
+      "type": "short_answer",
+      "difficulty": "easy",
+      "options": [],
+      "correct_answer": [
+        "thấp"
+      ],
+      "max_score": 1,
+      "explanation": "“Cao — thấp” là cặp từ trái nghĩa khi nói về chiều cao.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "ngu_van9_001",
+      "grade": 9,
+      "subject": "ngu_van",
+      "topic": "ngoi_ke",
+      "question": "Đọc đoạn tự biên soạn: “Trận mưa tối qua làm nước tràn vào phòng đọc. Sáng nay, tôi cùng Mai kê lại kệ và hong những tờ ghi chú. Khi nhìn thấy cuốn sổ của một bạn nhỏ vẫn khô, Mai mỉm cười: “May quá, bạn ấy còn chỗ để viết tiếp.” Ngoài cửa sổ, nắng khẽ gõ lên mái hiên.”\nĐoạn được kể theo ngôi nào?",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ngôi thứ ba vì có tên Mai"
+        },
+        {
+          "id": "B",
+          "text": "Ngôi thứ nhất qua người xưng “tôi”"
+        },
+        {
+          "id": "C",
+          "text": "Ngôi thứ hai qua người xưng “bạn”"
+        },
+        {
+          "id": "D",
+          "text": "Không có người kể chuyện"
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "Người kể xưng “tôi” và tham gia sự việc, nên đây là ngôi thứ nhất. Tên nhân vật Mai không làm thay đổi ngôi kể.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "ngu_van9_002",
+      "grade": 9,
+      "subject": "ngu_van",
+      "topic": "doc_hieu",
+      "question": "Đọc đoạn tự biên soạn: “Trận mưa tối qua làm nước tràn vào phòng đọc. Sáng nay, tôi cùng Mai kê lại kệ và hong những tờ ghi chú. Khi nhìn thấy cuốn sổ của một bạn nhỏ vẫn khô, Mai mỉm cười: “May quá, bạn ấy còn chỗ để viết tiếp.” Ngoài cửa sổ, nắng khẽ gõ lên mái hiên.”\nChi tiết nào trực tiếp cho thấy Mai quan tâm đến cơ hội viết tiếp của bạn nhỏ?",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nước tràn vào phòng đọc"
+        },
+        {
+          "id": "B",
+          "text": "Người kể kê lại kệ"
+        },
+        {
+          "id": "C",
+          "text": "Mai nói: “bạn ấy còn chỗ để viết tiếp”"
+        },
+        {
+          "id": "D",
+          "text": "Trận mưa xảy ra tối qua"
+        }
+      ],
+      "correct_answer": [
+        "C"
+      ],
+      "max_score": 1,
+      "explanation": "Lời của Mai trực tiếp nhắc đến việc bạn nhỏ còn chỗ viết tiếp; những chi tiết khác chỉ nêu bối cảnh hoặc việc làm.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "ngu_van9_003",
+      "grade": 9,
+      "subject": "ngu_van",
+      "topic": "bien_phap_tu_tu",
+      "question": "Trong câu tự biên soạn “Nắng khẽ gõ lên mái hiên.”, việc gán hành động “gõ” cho nắng thể hiện biện pháp tu từ nào?",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhân hóa"
+        },
+        {
+          "id": "B",
+          "text": "Liệt kê"
+        },
+        {
+          "id": "C",
+          "text": "Nói quá"
+        },
+        {
+          "id": "D",
+          "text": "Điệp từ"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "max_score": 1,
+      "explanation": "Nắng được gán hành động “gõ” như con người. Câu không liệt kê, không lặp từ và không phóng đại quy mô.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "ngu_van9_004",
+      "grade": 9,
+      "subject": "ngu_van",
+      "topic": "loi_dan",
+      "question": "Trong câu “Mai nói: “Chúng ta cùng xếp lại sách nhé.””, phần nằm trong dấu ngoặc kép là lời dẫn trực tiếp hay gián tiếp? Chỉ viết “trực tiếp” hoặc “gián tiếp”.",
+      "type": "short_answer",
+      "difficulty": "medium",
+      "options": [],
+      "correct_answer": [
+        "trực tiếp"
+      ],
+      "max_score": 1,
+      "explanation": "Lời của Mai được nhắc nguyên dạng và đặt trong dấu ngoặc kép, nên là lời dẫn trực tiếp.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "ngu_van9_005",
+      "grade": 9,
+      "subject": "ngu_van",
+      "topic": "luan_cu",
+      "question": "Một bài viết nêu ý kiến: “Thư viện nên mở thêm giờ vào chiều thứ bảy.” Chọn bằng chứng liên quan trực tiếp nhất để hỗ trợ ý kiến này.",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "Màu sơn tường thư viện là màu xanh"
+        },
+        {
+          "id": "B",
+          "text": "Một khảo sát có ghi số người tham gia cho thấy nhiều học sinh chỉ rảnh đọc sách vào chiều thứ bảy"
+        },
+        {
+          "id": "C",
+          "text": "Sân trường có ba cây lớn"
+        },
+        {
+          "id": "D",
+          "text": "Người viết rất thích màu xanh"
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "Nhu cầu đọc sách vào chiều thứ bảy liên quan trực tiếp đến giờ mở cửa. Màu sơn, cây ở sân và sở thích màu sắc không chứng minh nhu cầu đó.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "ngu_van9_006",
+      "grade": 9,
+      "subject": "ngu_van",
+      "topic": "phep_lien_ket",
+      "question": "Đọc hai câu: “Mai đặt cuốn sổ lên bàn. Bạn ấy mở trang đầu để kiểm tra.” Cụm “bạn ấy” thay thế cho từ nào ở câu trước? Chỉ viết tên nhân vật.",
+      "type": "short_answer",
+      "difficulty": "medium",
+      "options": [],
+      "correct_answer": [
+        "Mai"
+      ],
+      "max_score": 1,
+      "explanation": "“Bạn ấy” chỉ Mai đã xuất hiện ở câu trước; đây là liên kết bằng phép thế.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "ngu_van12_001",
+      "grade": 12,
+      "subject": "ngu_van",
+      "topic": "luan_de",
+      "question": "Đọc đoạn nghị luận tự biên soạn: “Một nhóm học sinh đề nghị dành mười phút đầu giờ sinh hoạt để kiểm chứng thông tin trên mạng. Theo nhóm, biết dừng lại kiểm tra nguồn giúp người đọc tránh chia sẻ vội. Trong khảo sát tự nguyện với 80 học sinh của một trường, 54 em nói từng đọc cả bài trước khi chia sẻ sau một buổi hướng dẫn. Nhóm thừa nhận khảo sát chỉ ghi nhận lời tự báo cáo, chưa chứng minh buổi hướng dẫn là nguyên nhân của thay đổi. Vì vậy, nhóm đề xuất thử hoạt động trong bốn tuần rồi thu thập thêm phản hồi.”\nĐề xuất trung tâm của nhóm học sinh là gì?",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ngừng dùng mạng trong cả năm học"
+        },
+        {
+          "id": "B",
+          "text": "Dành mười phút đầu giờ sinh hoạt để kiểm chứng thông tin"
+        },
+        {
+          "id": "C",
+          "text": "Chỉ đọc tiêu đề của mỗi bài viết"
+        },
+        {
+          "id": "D",
+          "text": "Dùng khảo sát thay thế tất cả tiết học"
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "Câu đầu nêu rõ đề xuất dành mười phút đầu giờ sinh hoạt cho việc kiểm chứng thông tin; các phương án khác không phải đề xuất trong đoạn.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "ngu_van12_002",
+      "grade": 12,
+      "subject": "ngu_van",
+      "topic": "danh_gia_bang_chung",
+      "question": "Đọc đoạn nghị luận tự biên soạn: “Một nhóm học sinh đề nghị dành mười phút đầu giờ sinh hoạt để kiểm chứng thông tin trên mạng. Theo nhóm, biết dừng lại kiểm tra nguồn giúp người đọc tránh chia sẻ vội. Trong khảo sát tự nguyện với 80 học sinh của một trường, 54 em nói từng đọc cả bài trước khi chia sẻ sau một buổi hướng dẫn. Nhóm thừa nhận khảo sát chỉ ghi nhận lời tự báo cáo, chưa chứng minh buổi hướng dẫn là nguyên nhân của thay đổi. Vì vậy, nhóm đề xuất thử hoạt động trong bốn tuần rồi thu thập thêm phản hồi.”\nVì sao chưa thể khẳng định buổi hướng dẫn gây ra thay đổi?",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vì 80 luôn là số mẫu không hợp lệ"
+        },
+        {
+          "id": "B",
+          "text": "Vì mọi khảo sát đều không cung cấp thông tin"
+        },
+        {
+          "id": "C",
+          "text": "Vì khảo sát chỉ ghi nhận lời tự báo cáo, chưa đủ chứng minh quan hệ nhân quả"
+        },
+        {
+          "id": "D",
+          "text": "Vì 54 học sinh chắc chắn trả lời sai"
+        }
+      ],
+      "correct_answer": [
+        "C"
+      ],
+      "max_score": 1,
+      "explanation": "Đoạn thừa nhận giới hạn của lời tự báo cáo và chưa chứng minh quan hệ nhân quả. Không có căn cứ phủ nhận mọi khảo sát hoặc cho rằng 54 em trả lời sai.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "ngu_van12_003",
+      "grade": 12,
+      "subject": "ngu_van",
+      "topic": "suy_luan",
+      "question": "Đọc đoạn nghị luận tự biên soạn: “Một nhóm học sinh đề nghị dành mười phút đầu giờ sinh hoạt để kiểm chứng thông tin trên mạng. Theo nhóm, biết dừng lại kiểm tra nguồn giúp người đọc tránh chia sẻ vội. Trong khảo sát tự nguyện với 80 học sinh của một trường, 54 em nói từng đọc cả bài trước khi chia sẻ sau một buổi hướng dẫn. Nhóm thừa nhận khảo sát chỉ ghi nhận lời tự báo cáo, chưa chứng minh buổi hướng dẫn là nguyên nhân của thay đổi. Vì vậy, nhóm đề xuất thử hoạt động trong bốn tuần rồi thu thập thêm phản hồi.”\nĐánh giá từng nhận định theo phạm vi dữ liệu được nêu.",
+      "type": "true_false",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "Khảo sát ghi nhận câu trả lời của 80 học sinh tự nguyện tại một trường."
+        },
+        {
+          "id": "B",
+          "text": "Kết quả này chứng minh mọi học sinh trên cả nước đều đọc cả bài trước khi chia sẻ."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "max_score": 1,
+      "explanation": "Đối tượng khảo sát được giới hạn ở 80 học sinh tự nguyện của một trường. Không thể suy rộng thành mọi học sinh trên cả nước.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "ngu_van12_004",
+      "grade": 12,
+      "subject": "ngu_van",
+      "topic": "phan_biet_y_kien_su_kien",
+      "question": "Trong hai phát biểu tự biên soạn sau, chọn phát biểu thể hiện ý kiến đánh giá: (1) “Buổi đọc sách bắt đầu lúc 15 giờ theo lịch đã công bố.” (2) “Buổi đọc sách này là hoạt động bổ ích nhất của tháng.”",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chỉ (1)"
+        },
+        {
+          "id": "B",
+          "text": "Chỉ (2)"
+        },
+        {
+          "id": "C",
+          "text": "Cả hai đều chỉ là thời gian"
+        },
+        {
+          "id": "D",
+          "text": "Không phát biểu nào"
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "“Bổ ích nhất” là đánh giá, cần tiêu chí để bảo vệ. Phát biểu (1) mô tả giờ theo một lịch có thể kiểm tra.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "ngu_van12_005",
+      "grade": 12,
+      "subject": "ngu_van",
+      "topic": "lien_ket_lap_luan",
+      "question": "Đọc hai câu: “Nhóm chưa đủ dữ liệu để kết luận. Tuy nhiên, kết quả ban đầu gợi ý một hướng nghiên cứu tiếp.” Cụm “tuy nhiên” báo hiệu quan hệ nào giữa hai câu?",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bổ sung bằng cách liệt kê địa điểm"
+        },
+        {
+          "id": "B",
+          "text": "Đối lập giữa giới hạn kết luận và giá trị gợi ý"
+        },
+        {
+          "id": "C",
+          "text": "Nguyên nhân duy nhất đã được chứng minh"
+        },
+        {
+          "id": "D",
+          "text": "Hai sự việc hoàn toàn không liên quan"
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "“Tuy nhiên” chuyển từ việc chưa đủ dữ liệu sang giá trị gợi ý vẫn còn, tạo quan hệ đối lập trong lập luận.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "ngu_van12_006",
+      "grade": 12,
+      "subject": "ngu_van",
+      "topic": "lap_luan",
+      "question": "Một người kết luận: “Tôi thích học bằng video, vì thế mọi học sinh chắc chắn học tốt hơn bằng video.” Điểm yếu rõ nhất của lập luận là gì?",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "Từ một sở thích cá nhân suy ra kết luận tuyệt đối về mọi học sinh"
+        },
+        {
+          "id": "B",
+          "text": "Có dùng từ “video”"
+        },
+        {
+          "id": "C",
+          "text": "Không kể tên ứng dụng xem video"
+        },
+        {
+          "id": "D",
+          "text": "Câu chứa hai vế"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "max_score": 1,
+      "explanation": "Sở thích của một người không đủ chứng minh hiệu quả với mọi học sinh. Cần dữ liệu phù hợp và tránh kết luận tuyệt đối vượt quá chứng cứ.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh3_001",
+      "grade": 3,
+      "subject": "tieng_anh",
+      "topic": "reading",
+      "question": "Read: “My name is Linh. I have a red bag and two blue pens. My cat is under the chair.”\nWhat colour is Linh’s bag?",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "Blue"
+        },
+        {
+          "id": "B",
+          "text": "Green"
+        },
+        {
+          "id": "C",
+          "text": "Red"
+        }
+      ],
+      "correct_answer": [
+        "C"
+      ],
+      "max_score": 1,
+      "explanation": "Đoạn đọc có cụm “a red bag”: chiếc cặp màu đỏ.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh3_002",
+      "grade": 3,
+      "subject": "tieng_anh",
+      "topic": "reading",
+      "question": "Read: “My name is Linh. I have a red bag and two blue pens. My cat is under the chair.”\nWhere is the cat?",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "Under the chair"
+        },
+        {
+          "id": "B",
+          "text": "On the bag"
+        },
+        {
+          "id": "C",
+          "text": "In the pen"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "max_score": 1,
+      "explanation": "Câu cuối ghi “My cat is under the chair”: mèo ở dưới ghế.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh3_003",
+      "grade": 3,
+      "subject": "tieng_anh",
+      "topic": "numbers",
+      "question": "Read: “My name is Linh. I have a red bag and two blue pens. My cat is under the chair.”\nHow many blue pens does Linh have? Write one English word.",
+      "type": "short_answer",
+      "difficulty": "easy",
+      "options": [],
+      "correct_answer": [
+        "two"
+      ],
+      "max_score": 1,
+      "explanation": "Cụm “two blue pens” cho biết có hai chiếc bút xanh; từ cần viết là “two”.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh3_004",
+      "grade": 3,
+      "subject": "tieng_anh",
+      "topic": "greetings",
+      "question": "Choose a greeting you can say when you meet a friend in the morning.",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "Good night."
+        },
+        {
+          "id": "B",
+          "text": "Good morning."
+        },
+        {
+          "id": "C",
+          "text": "Goodbye."
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "“Good morning” là lời chào vào buổi sáng. “Good night” dùng khi chúc ngủ ngon; “Goodbye” là lời tạm biệt.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh3_005",
+      "grade": 3,
+      "subject": "tieng_anh",
+      "topic": "be",
+      "question": "Choose the correct word: “I … nine years old.”",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "is"
+        },
+        {
+          "id": "B",
+          "text": "are"
+        },
+        {
+          "id": "C",
+          "text": "am"
+        }
+      ],
+      "correct_answer": [
+        "C"
+      ],
+      "max_score": 1,
+      "explanation": "Động từ be đi với chủ ngữ “I” ở hiện tại là “am”.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh3_006",
+      "grade": 3,
+      "subject": "tieng_anh",
+      "topic": "vocabulary",
+      "question": "Which English word means “quyển sách”?",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "book"
+        },
+        {
+          "id": "B",
+          "text": "chair"
+        },
+        {
+          "id": "C",
+          "text": "door"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "max_score": 1,
+      "explanation": "“Book” nghĩa là quyển sách; “chair” là ghế, “door” là cửa.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh5_001",
+      "grade": 5,
+      "subject": "tieng_anh",
+      "topic": "reading",
+      "question": "Read: “Every Saturday, Anna helps in a small garden. She waters the flowers at eight o’clock. Last Saturday, it rained, so she stayed inside and made labels for the plants.”\nWhat does Anna usually do at eight o’clock on Saturdays?",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "She makes a cake."
+        },
+        {
+          "id": "B",
+          "text": "She waters the flowers."
+        },
+        {
+          "id": "C",
+          "text": "She goes swimming."
+        },
+        {
+          "id": "D",
+          "text": "She buys a clock."
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "Câu thứ hai nêu “She waters the flowers at eight o’clock”; đây là hoạt động thường lệ của Anna.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh5_002",
+      "grade": 5,
+      "subject": "tieng_anh",
+      "topic": "reading",
+      "question": "Read: “Every Saturday, Anna helps in a small garden. She waters the flowers at eight o’clock. Last Saturday, it rained, so she stayed inside and made labels for the plants.”\nWhy did Anna stay inside last Saturday?",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "Because she lost the labels."
+        },
+        {
+          "id": "B",
+          "text": "Because the garden had no plants."
+        },
+        {
+          "id": "C",
+          "text": "Because it rained."
+        },
+        {
+          "id": "D",
+          "text": "Because the clock stopped."
+        }
+      ],
+      "correct_answer": [
+        "C"
+      ],
+      "max_score": 1,
+      "explanation": "Câu cuối nói “it rained, so she stayed inside”: Anna ở trong nhà vì trời mưa.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh5_003",
+      "grade": 5,
+      "subject": "tieng_anh",
+      "topic": "present_simple",
+      "question": "Choose the correct word: “My brother … to school by bus every day.”",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "go"
+        },
+        {
+          "id": "B",
+          "text": "goes"
+        },
+        {
+          "id": "C",
+          "text": "going"
+        },
+        {
+          "id": "D",
+          "text": "went"
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "“Every day” diễn tả thói quen. Chủ ngữ số ít ngôi thứ ba “my brother” dùng động từ “goes”.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh5_004",
+      "grade": 5,
+      "subject": "tieng_anh",
+      "topic": "past_simple",
+      "question": "Choose the correct word: “Yesterday, we … a picture of our garden.”",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "draw"
+        },
+        {
+          "id": "B",
+          "text": "draws"
+        },
+        {
+          "id": "C",
+          "text": "drew"
+        },
+        {
+          "id": "D",
+          "text": "drawing"
+        }
+      ],
+      "correct_answer": [
+        "C"
+      ],
+      "max_score": 1,
+      "explanation": "“Yesterday” chỉ quá khứ. Quá khứ của “draw” là “drew”.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh5_005",
+      "grade": 5,
+      "subject": "tieng_anh",
+      "topic": "prepositions",
+      "question": "Choose the correct word: “The lesson starts … Monday morning.”",
+      "type": "single_choice",
+      "difficulty": "easy",
+      "options": [
+        {
+          "id": "A",
+          "text": "at"
+        },
+        {
+          "id": "B",
+          "text": "in"
+        },
+        {
+          "id": "C",
+          "text": "on"
+        },
+        {
+          "id": "D",
+          "text": "to"
+        }
+      ],
+      "correct_answer": [
+        "C"
+      ],
+      "max_score": 1,
+      "explanation": "Dùng “on” với ngày cụ thể hoặc một buổi gắn với ngày: “on Monday morning”.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh5_006",
+      "grade": 5,
+      "subject": "tieng_anh",
+      "topic": "plural_nouns",
+      "question": "Write the plural form of “child” to complete: “There are three … in the room.” Write only the missing word.",
+      "type": "short_answer",
+      "difficulty": "easy",
+      "options": [],
+      "correct_answer": [
+        "children"
+      ],
+      "max_score": 1,
+      "explanation": "Danh từ “child” có dạng số nhiều bất quy tắc là “children”; “three” cần danh từ số nhiều.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh9_001",
+      "grade": 9,
+      "subject": "tieng_anh",
+      "topic": "reading",
+      "question": "Read: “A school club repaired old bicycles and lent them to students who lived far away. The club kept a record of each loan. After a month, members found that several students used the bicycles daily, but they had not yet measured changes in travel time.”\nWho could borrow the repaired bicycles?",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "Only the teachers"
+        },
+        {
+          "id": "B",
+          "text": "Students who lived far away"
+        },
+        {
+          "id": "C",
+          "text": "Only club members with cars"
+        },
+        {
+          "id": "D",
+          "text": "Visitors from another town"
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "Đoạn nói xe được cho học sinh sống xa mượn: “students who lived far away”.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh9_002",
+      "grade": 9,
+      "subject": "tieng_anh",
+      "topic": "reading_inference",
+      "question": "Read: “A school club repaired old bicycles and lent them to students who lived far away. The club kept a record of each loan. After a month, members found that several students used the bicycles daily, but they had not yet measured changes in travel time.”\nWhich conclusion is supported by the passage?",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "Every student saved exactly ten minutes."
+        },
+        {
+          "id": "B",
+          "text": "The bicycles were never used."
+        },
+        {
+          "id": "C",
+          "text": "Some students used the bicycles daily, but travel-time changes were not yet measured."
+        },
+        {
+          "id": "D",
+          "text": "All students stopped walking to school."
+        }
+      ],
+      "correct_answer": [
+        "C"
+      ],
+      "max_score": 1,
+      "explanation": "Câu cuối xác nhận một số học sinh dùng xe hằng ngày và chưa đo thay đổi thời gian di chuyển. Không có dữ liệu cho các kết luận tuyệt đối khác.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh9_003",
+      "grade": 9,
+      "subject": "tieng_anh",
+      "topic": "passive_voice",
+      "question": "Choose the correct form: “The classroom … by the students yesterday.”",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "cleans"
+        },
+        {
+          "id": "B",
+          "text": "was cleaned"
+        },
+        {
+          "id": "C",
+          "text": "is cleaning"
+        },
+        {
+          "id": "D",
+          "text": "has clean"
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "Chủ ngữ “the classroom” nhận hành động dọn. “Yesterday” yêu cầu bị động quá khứ: was + cleaned.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh9_004",
+      "grade": 9,
+      "subject": "tieng_anh",
+      "topic": "relative_clauses",
+      "question": "Choose the relative pronoun: “The girl … won the reading prize is my friend.”",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "which"
+        },
+        {
+          "id": "B",
+          "text": "where"
+        },
+        {
+          "id": "C",
+          "text": "when"
+        },
+        {
+          "id": "D",
+          "text": "who"
+        }
+      ],
+      "correct_answer": [
+        "D"
+      ],
+      "max_score": 1,
+      "explanation": "“The girl” chỉ người và đại từ làm chủ ngữ của “won”, nên dùng “who”.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh9_005",
+      "grade": 9,
+      "subject": "tieng_anh",
+      "topic": "first_conditional",
+      "question": "Choose the correct form: “If it rains tomorrow, we … indoors.”",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "will stay"
+        },
+        {
+          "id": "B",
+          "text": "stayed"
+        },
+        {
+          "id": "C",
+          "text": "would stayed"
+        },
+        {
+          "id": "D",
+          "text": "stays"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "max_score": 1,
+      "explanation": "Điều kiện có thể xảy ra ở tương lai dùng If + hiện tại đơn, mệnh đề chính will + động từ nguyên mẫu.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh9_006",
+      "grade": 9,
+      "subject": "tieng_anh",
+      "topic": "reported_speech",
+      "question": "On Monday, Minh said, “I am tired.” On Tuesday, report his words using the usual tense backshift: “Minh said that he … tired.” Write one word.",
+      "type": "short_answer",
+      "difficulty": "medium",
+      "options": [],
+      "correct_answer": [
+        "was"
+      ],
+      "max_score": 1,
+      "explanation": "Theo yêu cầu lùi thì thông thường với động từ tường thuật quá khứ, “am” chuyển thành “was”, “I” chuyển thành “he”.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh12_001",
+      "grade": 12,
+      "subject": "tieng_anh",
+      "topic": "reading_main_idea",
+      "question": "Read: “A city library tested longer opening hours for six weeks. Visits increased during the trial, and a short survey suggested that evening hours helped some workers attend. However, the trial coincided with a popular exhibition, so the rise in visits cannot be attributed to the new schedule alone. The library plans a second trial without an exhibition before making a permanent decision.”\nWhat is the main point of the passage?",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "The library has proved that all visitors prefer evenings."
+        },
+        {
+          "id": "B",
+          "text": "The first trial is promising, but another trial is needed before a permanent decision."
+        },
+        {
+          "id": "C",
+          "text": "The exhibition caused every extra visit."
+        },
+        {
+          "id": "D",
+          "text": "The library will stop lending books."
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "Đoạn nêu kết quả ban đầu tích cực nhưng có yếu tố triển lãm diễn ra cùng lúc, nên thư viện sẽ thử thêm trước khi quyết định lâu dài.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh12_002",
+      "grade": 12,
+      "subject": "tieng_anh",
+      "topic": "reading_evidence",
+      "question": "Read: “A city library tested longer opening hours for six weeks. Visits increased during the trial, and a short survey suggested that evening hours helped some workers attend. However, the trial coincided with a popular exhibition, so the rise in visits cannot be attributed to the new schedule alone. The library plans a second trial without an exhibition before making a permanent decision.”\nWhy can the increase in visits not be attributed to the new schedule alone?",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "The trial also coincided with a popular exhibition."
+        },
+        {
+          "id": "B",
+          "text": "The library recorded no visits."
+        },
+        {
+          "id": "C",
+          "text": "All workers refused to answer the survey."
+        },
+        {
+          "id": "D",
+          "text": "The trial lasted only one evening."
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "max_score": 1,
+      "explanation": "Triển lãm hấp dẫn diễn ra đồng thời cũng có thể tác động đến lượt đến thư viện. Đoạn không cho phép tách riêng tác động của giờ mở cửa.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh12_003",
+      "grade": 12,
+      "subject": "tieng_anh",
+      "topic": "reading_scope",
+      "question": "Read: “A city library tested longer opening hours for six weeks. Visits increased during the trial, and a short survey suggested that evening hours helped some workers attend. However, the trial coincided with a popular exhibition, so the rise in visits cannot be attributed to the new schedule alone. The library plans a second trial without an exhibition before making a permanent decision.”\nMark each statement true or false according to the passage.",
+      "type": "true_false",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "The first trial lasted six weeks."
+        },
+        {
+          "id": "B",
+          "text": "The library has already made its final permanent decision."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "max_score": 1,
+      "explanation": "Câu đầu nêu thời gian sáu tuần. Câu cuối nói còn lên kế hoạch thử lần hai trước khi quyết định lâu dài.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh12_004",
+      "grade": 12,
+      "subject": "tieng_anh",
+      "topic": "third_conditional",
+      "question": "Choose the correct form: “If she had checked the timetable, she … the last bus.”",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "would catch"
+        },
+        {
+          "id": "B",
+          "text": "will have caught"
+        },
+        {
+          "id": "C",
+          "text": "would have caught"
+        },
+        {
+          "id": "D",
+          "text": "catches"
+        }
+      ],
+      "correct_answer": [
+        "C"
+      ],
+      "max_score": 1,
+      "explanation": "Điều kiện không có thật trong quá khứ dùng If + quá khứ hoàn thành và would have + phân từ quá khứ.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh12_005",
+      "grade": 12,
+      "subject": "tieng_anh",
+      "topic": "concession",
+      "question": "Choose the correct word: “… the report was carefully written, it still needed updated figures.”",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "Because"
+        },
+        {
+          "id": "B",
+          "text": "Although"
+        },
+        {
+          "id": "C",
+          "text": "Unless"
+        },
+        {
+          "id": "D",
+          "text": "Therefore"
+        }
+      ],
+      "correct_answer": [
+        "B"
+      ],
+      "max_score": 1,
+      "explanation": "Hai ý “viết cẩn thận” và “vẫn cần số liệu cập nhật” tạo quan hệ nhượng bộ, nên dùng “Although”.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    },
+    {
+      "id": "tieng_anh12_006",
+      "grade": 12,
+      "subject": "tieng_anh",
+      "topic": "past_perfect",
+      "question": "Choose the correct form: “By the time the interview began yesterday, the candidate … all the required forms.”",
+      "type": "single_choice",
+      "difficulty": "medium",
+      "options": [
+        {
+          "id": "A",
+          "text": "has completed"
+        },
+        {
+          "id": "B",
+          "text": "completes"
+        },
+        {
+          "id": "C",
+          "text": "will complete"
+        },
+        {
+          "id": "D",
+          "text": "had completed"
+        }
+      ],
+      "correct_answer": [
+        "D"
+      ],
+      "max_score": 1,
+      "explanation": "Việc hoàn thành giấy tờ xảy ra trước thời điểm phỏng vấn trong quá khứ; dùng quá khứ hoàn thành “had completed”.",
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Câu hỏi, đoạn đọc và lời giải tự biên soạn cho fixture phát triển Kho Học 1–12; không trích sách giáo khoa hay tác phẩm bên ngoài; cần duyệt chuyên môn trước phát hành."
+    }
+  ]
+}

@@ -1,0 +1,399 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'main.dart' show Shell, Failure;
+import 'repository.dart';
+
+typedef DocumentFilter = ({
+  int grade,
+  String subject,
+  String search,
+  int semester,
+  String textbook,
+  String kind,
+  String topic,
+});
+final documentsProvider = FutureProvider.family<List<Json>, DocumentFilter>(
+  (ref, f) => ref.watch(apiProvider).documents({
+    'grade': f.grade,
+    'subject': f.subject,
+    'search': f.search,
+    if (f.semester != 0) 'semester': f.semester,
+    if (f.textbook.isNotEmpty) 'textbook': f.textbook,
+    if (f.kind.isNotEmpty) 'kind': f.kind,
+    if (f.topic.isNotEmpty) 'topic': f.topic,
+  }),
+);
+
+class LibraryScreen extends ConsumerStatefulWidget {
+  const LibraryScreen({super.key});
+  @override
+  ConsumerState<LibraryScreen> createState() => _LibraryState();
+}
+
+class _LibraryState extends ConsumerState<LibraryScreen> {
+  int grade = 1, semester = 0;
+  String subject = 'toan', search = '', textbook = '', kind = '', topic = '';
+  bool favoritesOnly = false, recentOnly = false;
+  @override
+  Widget build(BuildContext context) {
+    final filter = (
+      grade: grade,
+      subject: subject,
+      search: search,
+      semester: semester,
+      textbook: textbook,
+      kind: kind,
+      topic: topic,
+    );
+    final documents = ref.watch(documentsProvider(filter));
+    final subjects = ref.watch(subjectsProvider(grade));
+    final prefs = ref.watch(preferencesProvider).asData?.value;
+    final favorites = prefs?.getStringList('favorite_documents') ?? [];
+    final recent = prefs?.getStringList('recent_documents') ?? [];
+    return Shell(
+      title: 'Kho tài liệu',
+      index: 1,
+      child: ListView(
+        padding: const EdgeInsets.all(20),
+        children: [
+          const Text(
+            'Ghi chú học tập tự biên soạn. Chỉ hiển thị tài liệu đã duyệt và có quyền phân phối.',
+          ),
+          const SizedBox(height: 16),
+          DropdownButtonFormField<int>(
+            initialValue: grade,
+            decoration: const InputDecoration(labelText: 'Lớp học'),
+            items: [
+              for (int i = 1; i <= 12; i++)
+                DropdownMenuItem(value: i, child: Text('Lớp $i')),
+            ],
+            onChanged: (v) => setState(() {
+              grade = v!;
+              subject = 'toan';
+            }),
+          ),
+          subjects.when(
+            data: (items) => DropdownButtonFormField<String>(
+              key: ValueKey(grade),
+              initialValue: subject,
+              decoration: const InputDecoration(labelText: 'Môn học'),
+              items: items
+                  .map(
+                    (s) => DropdownMenuItem(
+                      value: s['id'] as String,
+                      child: Text(s['name']),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (v) => setState(() => subject = v!),
+            ),
+            loading: () => const LinearProgressIndicator(),
+            error: (_, _) =>
+                Failure(retry: () => ref.invalidate(subjectsProvider(grade))),
+          ),
+          TextField(
+            decoration: const InputDecoration(
+              labelText: 'Tìm tài liệu',
+              prefixIcon: Icon(Icons.search),
+            ),
+            onChanged: (v) => setState(() => search = v),
+          ),
+          DropdownButtonFormField<int>(
+            initialValue: semester,
+            decoration: const InputDecoration(labelText: 'Học kỳ'),
+            items: const [
+              DropdownMenuItem(value: 0, child: Text('Tất cả')),
+              DropdownMenuItem(value: 1, child: Text('Học kỳ 1')),
+              DropdownMenuItem(value: 2, child: Text('Học kỳ 2')),
+            ],
+            onChanged: (v) => setState(() => semester = v!),
+          ),
+          DropdownButtonFormField<String>(
+            initialValue: textbook,
+            decoration: const InputDecoration(labelText: 'Bộ sách'),
+            items: const [
+              DropdownMenuItem(value: '', child: Text('Tất cả')),
+              DropdownMenuItem(
+                value: 'independent',
+                child: Text('Không phụ thuộc bộ sách'),
+              ),
+              DropdownMenuItem(
+                value: 'ket_noi_tri_thuc',
+                child: Text('Kết nối tri thức'),
+              ),
+              DropdownMenuItem(
+                value: 'chan_troi_sang_tao',
+                child: Text('Chân trời sáng tạo'),
+              ),
+              DropdownMenuItem(value: 'canh_dieu', child: Text('Cánh Diều')),
+            ],
+            onChanged: (v) => setState(() => textbook = v!),
+          ),
+          DropdownButtonFormField<String>(
+            initialValue: kind,
+            decoration: const InputDecoration(labelText: 'Loại tài liệu'),
+            items: const [
+              DropdownMenuItem(value: '', child: Text('Tất cả')),
+              DropdownMenuItem(
+                value: 'study_notes',
+                child: Text('Ghi chú học tập'),
+              ),
+              DropdownMenuItem(value: 'worksheet', child: Text('Bài tập')),
+              DropdownMenuItem(value: 'reference', child: Text('Tham khảo')),
+              DropdownMenuItem(value: 'exam', child: Text('Đề kiểm tra')),
+            ],
+            onChanged: (v) => setState(() => kind = v!),
+          ),
+          TextField(
+            decoration: const InputDecoration(labelText: 'Chương/chủ đề'),
+            onChanged: (v) => setState(() => topic = v),
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            children: [
+              FilterChip(
+                label: const Text('Chỉ yêu thích'),
+                selected: favoritesOnly,
+                onSelected: (v) => setState(() => favoritesOnly = v),
+              ),
+              FilterChip(
+                label: const Text('Đọc gần đây'),
+                selected: recentOnly,
+                onSelected: (v) => setState(() => recentOnly = v),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          documents.when(
+            data: (items) {
+              final rows = items
+                  .where(
+                    (d) =>
+                        (!favoritesOnly || favorites.contains(d['id'])) &&
+                        (!recentOnly || recent.contains(d['id'])),
+                  )
+                  .toList();
+              if (recentOnly) {
+                rows.sort(
+                  (a, b) => recent
+                      .indexOf(a['id'])
+                      .compareTo(recent.indexOf(b['id'])),
+                );
+              }
+              if (rows.isEmpty) {
+                return const Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Text('Chưa có tài liệu phù hợp. Hãy đổi bộ lọc.'),
+                );
+              }
+              return Column(
+                children: rows
+                    .map(
+                      (d) => Card(
+                        child: ListTile(
+                          title: Text(d['title']),
+                          subtitle: Text(d['summary'] ?? ''),
+                          onTap: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => DocumentScreen(id: d['id']),
+                              ),
+                            );
+                            if (mounted) {
+                              setState(() {});
+                            }
+                          },
+                          trailing: IconButton(
+                            tooltip: favorites.contains(d['id'])
+                                ? 'Bỏ yêu thích'
+                                : 'Lưu tài liệu yêu thích',
+                            icon: Icon(
+                              favorites.contains(d['id'])
+                                  ? Icons.bookmark
+                                  : Icons.bookmark_outline,
+                            ),
+                            onPressed: prefs == null
+                                ? null
+                                : () async {
+                                    final next = [...favorites];
+                                    if (next.contains(d['id'])) {
+                                      next.remove(d['id']);
+                                    } else {
+                                      next.add(d['id']);
+                                    }
+                                    await prefs.setStringList(
+                                      'favorite_documents',
+                                      next,
+                                    );
+                                    if (mounted) {
+                                      setState(() {});
+                                    }
+                                  },
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              );
+            },
+            loading: () => const Padding(
+              padding: EdgeInsets.all(24),
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            error: (_, _) =>
+                Failure(retry: () => ref.invalidate(documentsProvider(filter))),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DocumentScreen extends ConsumerStatefulWidget {
+  const DocumentScreen({super.key, required this.id});
+  final String id;
+  @override
+  ConsumerState<DocumentScreen> createState() => _DocumentState();
+}
+
+class _DocumentState extends ConsumerState<DocumentScreen> {
+  late Future<Json> document;
+  String? message;
+  @override
+  void initState() {
+    super.initState();
+    document = load();
+  }
+
+  Future<Json> load() async {
+    final d = await ref.read(apiProvider).document(widget.id);
+    final p = await SharedPreferences.getInstance();
+    final recent = [
+      widget.id,
+      ...(p.getStringList('recent_documents') ?? []).where(
+        (id) => id != widget.id,
+      ),
+    ];
+    await p.setStringList('recent_documents', recent.take(30).toList());
+    return d;
+  }
+
+  Future<void> openSource(String value) async {
+    final uri = Uri.tryParse(value);
+    if (uri == null || uri.scheme != 'https' || uri.userInfo.isNotEmpty) return;
+    try {
+      if (!await launchUrl(
+        uri,
+        mode: LaunchMode.platformDefault,
+        webOnlyWindowName: '_blank',
+      )) {
+        throw StateError('Unavailable');
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(() => message = 'Không mở được nguồn gốc của tài liệu.');
+      }
+    }
+  }
+
+  Future<void> openPdf(Json d, bool download) async {
+    final uri = ref
+        .read(apiProvider)
+        .publicUrl(d['file_url'] ?? '/documents/${widget.id}/file')
+        .replace(queryParameters: download ? {'download': 'true'} : {});
+    try {
+      if (!await launchUrl(
+        uri,
+        mode: LaunchMode.platformDefault,
+        webOnlyWindowName: '_blank',
+      )) {
+        throw StateError('Unavailable');
+      }
+    } catch (_) {
+      if (mounted) {
+        setState(
+          () => message =
+              'Không mở được PDF. Kiểm tra kết nối và ứng dụng xem PDF.',
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: const Text('Tài liệu học tập')),
+    body: FutureBuilder<Json>(
+      future: document,
+      builder: (context, s) {
+        if (s.hasError) {
+          return Failure(retry: () => setState(() => document = load()));
+        }
+        if (!s.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        final d = s.data!;
+        final catalog =
+            ref.watch(subjectsProvider(d['grade'] as int)).asData?.value ?? [];
+        final subjectName =
+            catalog
+                .where((row) => row['id'] == d['subject'])
+                .map((row) => row['name'])
+                .firstOrNull ??
+            'Môn học';
+        final licenseName = d['license'] == 'original_content'
+            ? 'Nội dung tự biên soạn'
+            : d['license'];
+        final updated = DateTime.tryParse(d['updated_at'] as String);
+        final updatedLabel = updated == null
+            ? 'Chưa có ngày cập nhật'
+            : '${updated.day}/${updated.month}/${updated.year}';
+        return ListView(
+          padding: const EdgeInsets.all(24),
+          children: [
+            Text(d['title'], style: Theme.of(context).textTheme.headlineSmall),
+            const SizedBox(height: 12),
+            Text('Lớp ${d['grade']} · $subjectName · ${d['topic']}'),
+            Text('Tác giả: ${d['author']}'),
+            Text('Nguồn: ${d['source_name']}'),
+            Text('Quyền sử dụng: $licenseName'),
+            const Text('Trạng thái: Đã duyệt và xuất bản'),
+            Text('Cập nhật: $updatedLabel'),
+            const Divider(),
+            for (final section in (d['sections'] as List? ?? [])) ...[
+              Text(
+                section['heading'],
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 8),
+              SelectableText(section['text']),
+              const SizedBox(height: 20),
+            ],
+            if (d['source_url'] != null)
+              TextButton.icon(
+                onPressed: () => openSource(d['source_url']),
+                icon: const Icon(Icons.open_in_new),
+                label: const Text('Mở nguồn gốc tài liệu'),
+              ),
+            if (d['can_view_pdf'] == true)
+              FilledButton.icon(
+                onPressed: () => openPdf(d, false),
+                icon: const Icon(Icons.picture_as_pdf),
+                label: const Text('Mở PDF'),
+              ),
+            if (d['can_download'] == true)
+              TextButton.icon(
+                onPressed: () => openPdf(d, true),
+                icon: const Icon(Icons.download),
+                label: const Text('Tải PDF được phép'),
+              ),
+            if (message != null) Text(message!),
+          ],
+        );
+      },
+    ),
+  );
+}

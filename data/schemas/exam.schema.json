@@ -1,0 +1,52 @@
+{
+  "properties": {
+    "id": {
+      "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+      "title": "Id",
+      "type": "string"
+    },
+    "title": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "grade": {
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Grade",
+      "type": "integer"
+    },
+    "subject": {
+      "maxLength": 60,
+      "minLength": 1,
+      "title": "Subject",
+      "type": "string"
+    },
+    "question_ids": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 100,
+      "minItems": 1,
+      "title": "Question Ids",
+      "type": "array"
+    },
+    "duration_minutes": {
+      "maximum": 180,
+      "minimum": 1,
+      "title": "Duration Minutes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "grade",
+    "subject",
+    "question_ids",
+    "duration_minutes"
+  ],
+  "title": "ExamInput",
+  "type": "object"
+}

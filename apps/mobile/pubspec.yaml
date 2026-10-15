@@ -1,0 +1,32 @@
+name: kho_hoc_mobile
+description: Kho Học 1–12 — MVP học tập và luyện đề
+publish_to: none
+version: 0.1.0+1
+environment:
+  sdk: ^3.9.0
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_riverpod: 2.6.1
+  go_router: 16.2.5
+  dio: 5.8.0+1
+  shared_preferences: 2.5.3
+  url_launcher: 6.3.2
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: 5.0.0
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: NotoSans
+      fonts:
+        - asset: assets/fonts/NotoSans.ttf
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto.ttf
+  assets:
+    - assets/fonts/OFL.txt
+    - assets/fonts/Roboto-OFL.txt

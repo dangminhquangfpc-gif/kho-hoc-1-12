@@ -1,0 +1,122 @@
+[
+  {
+    "id": "tieng_viet1_practice",
+    "grade": 1,
+    "subject": "tieng_viet",
+    "title": "Tiếng Việt lớp 1 — đọc câu và nhận biết tiếng",
+    "duration_minutes": 15,
+    "question_ids": [
+      "tieng_viet1_001",
+      "tieng_viet1_002",
+      "tieng_viet1_003",
+      "tieng_viet1_004",
+      "tieng_viet1_005",
+      "tieng_viet1_006"
+    ]
+  },
+  {
+    "id": "tieng_viet5_practice",
+    "grade": 5,
+    "subject": "tieng_viet",
+    "title": "Tiếng Việt lớp 5 — đọc hiểu và sử dụng câu",
+    "duration_minutes": 15,
+    "question_ids": [
+      "tieng_viet5_001",
+      "tieng_viet5_002",
+      "tieng_viet5_003",
+      "tieng_viet5_004",
+      "tieng_viet5_005",
+      "tieng_viet5_006"
+    ]
+  },
+  {
+    "id": "ngu_van9_practice",
+    "grade": 9,
+    "subject": "ngu_van",
+    "title": "Ngữ văn lớp 9 — đọc truyện ngắn và nhận diện lập luận",
+    "duration_minutes": 20,
+    "question_ids": [
+      "ngu_van9_001",
+      "ngu_van9_002",
+      "ngu_van9_003",
+      "ngu_van9_004",
+      "ngu_van9_005",
+      "ngu_van9_006"
+    ]
+  },
+  {
+    "id": "ngu_van12_practice",
+    "grade": 12,
+    "subject": "ngu_van",
+    "title": "Ngữ văn lớp 12 — đọc văn bản nghị luận và đánh giá chứng cứ",
+    "duration_minutes": 20,
+    "question_ids": [
+      "ngu_van12_001",
+      "ngu_van12_002",
+      "ngu_van12_003",
+      "ngu_van12_004",
+      "ngu_van12_005",
+      "ngu_van12_006"
+    ]
+  },
+  {
+    "id": "tieng_anh3_practice",
+    "grade": 3,
+    "subject": "tieng_anh",
+    "title": "Tiếng Anh lớp 3 — từ vựng và đọc câu ngắn",
+    "duration_minutes": 15,
+    "question_ids": [
+      "tieng_anh3_001",
+      "tieng_anh3_002",
+      "tieng_anh3_003",
+      "tieng_anh3_004",
+      "tieng_anh3_005",
+      "tieng_anh3_006"
+    ]
+  },
+  {
+    "id": "tieng_anh5_practice",
+    "grade": 5,
+    "subject": "tieng_anh",
+    "title": "Tiếng Anh lớp 5 — thói quen và sự việc đã xảy ra",
+    "duration_minutes": 15,
+    "question_ids": [
+      "tieng_anh5_001",
+      "tieng_anh5_002",
+      "tieng_anh5_003",
+      "tieng_anh5_004",
+      "tieng_anh5_005",
+      "tieng_anh5_006"
+    ]
+  },
+  {
+    "id": "tieng_anh9_practice",
+    "grade": 9,
+    "subject": "tieng_anh",
+    "title": "Tiếng Anh lớp 9 — đọc hiểu và cấu trúc câu",
+    "duration_minutes": 20,
+    "question_ids": [
+      "tieng_anh9_001",
+      "tieng_anh9_002",
+      "tieng_anh9_003",
+      "tieng_anh9_004",
+      "tieng_anh9_005",
+      "tieng_anh9_006"
+    ]
+  },
+  {
+    "id": "tieng_anh12_practice",
+    "grade": 12,
+    "subject": "tieng_anh",
+    "title": "Tiếng Anh lớp 12 — đọc phân tích và ngữ pháp nâng cao",
+    "duration_minutes": 20,
+    "question_ids": [
+      "tieng_anh12_001",
+      "tieng_anh12_002",
+      "tieng_anh12_003",
+      "tieng_anh12_004",
+      "tieng_anh12_005",
+      "tieng_anh12_006"
+    ]
+  }
+]

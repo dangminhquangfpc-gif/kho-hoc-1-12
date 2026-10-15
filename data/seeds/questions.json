@@ -1,0 +1,1492 @@
+{
+  "questions": [
+    {
+      "id": "toan1_001",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "phep_cong",
+      "question": "3 + 2 bằng bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Gộp 3 và 2 được 5.",
+      "options": [
+        {
+          "id": "A",
+          "text": "5"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        },
+        {
+          "id": "D",
+          "text": "Không xác định"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "single_choice"
+    },
+    {
+      "id": "toan1_002",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "phep_tru",
+      "question": "9 − 4 bằng bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Bớt 4 từ 9 còn 5.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 5."
+        },
+        {
+          "id": "s2",
+          "text": "Không thể giải bài này từ dữ kiện đã cho."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan1_003",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "so_tu_nhien",
+      "question": "Số liền sau 7 là số nào?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Đếm tăng một đơn vị từ 7 được 8.",
+      "options": [],
+      "correct_answer": [
+        "8"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan1_004",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "day_so",
+      "question": "Điền số còn thiếu: 2, 4, 6, …",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Dãy tăng thêm 2 ở mỗi bước.",
+      "options": [],
+      "correct_answer": [
+        "8"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan1_005",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "bai_toan",
+      "question": "Lan có 6 bút, cho bạn 2 bút. Lan còn bao nhiêu bút?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "6 − 2 = 4.",
+      "options": [],
+      "correct_answer": [
+        "4"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan1_006",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "bai_toan",
+      "question": "Có 4 quả táo đỏ và 3 quả táo xanh. Có tất cả bao nhiêu quả táo?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "4 + 3 = 7.",
+      "options": [
+        {
+          "id": "A",
+          "text": "7"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        },
+        {
+          "id": "D",
+          "text": "Không xác định"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "single_choice"
+    },
+    {
+      "id": "toan1_007",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "so_sanh",
+      "question": "Số nào lớn hơn: 8 hay 5?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "8 đứng sau 5 trên dãy số.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 8."
+        },
+        {
+          "id": "s2",
+          "text": "Không thể giải bài này từ dữ kiện đã cho."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan1_008",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "hinh_hoc",
+      "question": "Một hình tam giác có bao nhiêu cạnh?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Tam giác có 3 cạnh.",
+      "options": [],
+      "correct_answer": [
+        "3"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan1_009",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "phep_tru",
+      "question": "10 − 7 bằng bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Từ 10 bớt 7 còn 3.",
+      "options": [],
+      "correct_answer": [
+        "3"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan1_010",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "phep_cong",
+      "question": "Điền số: … + 4 = 9.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "9 − 4 = 5.",
+      "options": [],
+      "correct_answer": [
+        "5"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan1_011",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "cau_tao_so",
+      "question": "12 gồm mấy chục và mấy đơn vị?",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "12 = 10 + 2.",
+      "options": [
+        {
+          "id": "A",
+          "text": "1 chục 2 đơn vị"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        },
+        {
+          "id": "D",
+          "text": "Không xác định"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "single_choice"
+    },
+    {
+      "id": "toan1_012",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "so_sanh",
+      "question": "Số bé nhất trong các số 4, 1, 6 là số nào?",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "So sánh ba số, 1 là số nhỏ nhất.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 1."
+        },
+        {
+          "id": "s2",
+          "text": "Không thể giải bài này từ dữ kiện đã cho."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan1_013",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "thoi_gian",
+      "question": "Một tuần có bao nhiêu ngày?",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "Một tuần có 7 ngày.",
+      "options": [],
+      "correct_answer": [
+        "7"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan1_014",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "lap_luan",
+      "question": "Giải thích vì sao 4 + 3 = 3 + 4.",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "Đổi thứ tự hai nhóm không đổi tổng.",
+      "options": [],
+      "correct_answer": [
+        "Hai cách gộp đều được 7."
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "essay",
+      "rubric": [
+        {
+          "description": "Nêu phương pháp đúng",
+          "points": 0.5
+        },
+        {
+          "description": "Tính hoặc kết luận đúng có lập luận",
+          "points": 0.5
+        }
+      ]
+    },
+    {
+      "id": "toan1_015",
+      "grade": 1,
+      "subject": "toan",
+      "topic": "bai_toan",
+      "question": "An có 5 viên bi, nhận thêm 2 rồi cho đi 1. Trình bày cách tính số bi còn lại.",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "Nhận thêm thì cộng, cho đi thì trừ; còn 6 viên.",
+      "options": [],
+      "correct_answer": [
+        "5 + 2 − 1 = 6"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "essay",
+      "rubric": [
+        {
+          "description": "Nêu phương pháp đúng",
+          "points": 0.5
+        },
+        {
+          "description": "Tính hoặc kết luận đúng có lập luận",
+          "points": 0.5
+        }
+      ]
+    },
+    {
+      "id": "toan5_001",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "phan_so",
+      "question": "Tính 1/2 + 1/4.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Quy đồng: 2/4 + 1/4 = 3/4.",
+      "options": [
+        {
+          "id": "A",
+          "text": "3/4"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        },
+        {
+          "id": "D",
+          "text": "Không xác định"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "single_choice"
+    },
+    {
+      "id": "toan5_002",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "dien_tich",
+      "question": "Đổi 0,25 km² ra ha.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "1 km² = 100 ha, nên 0,25 km² = 25 ha.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 25."
+        },
+        {
+          "id": "s2",
+          "text": "Không thể giải bài này từ dữ kiện đã cho."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan5_003",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "so_thap_phan",
+      "question": "Làm tròn 12,648 đến hàng phần mười.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Chữ số hàng phần trăm là 4 nên giữ hàng phần mười.",
+      "options": [],
+      "correct_answer": [
+        "12,6"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan5_004",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "so_thap_phan",
+      "question": "Tính 2,4 × 0,5.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Nhân với 0,5 là lấy một nửa: 2,4 : 2 = 1,2.",
+      "options": [],
+      "correct_answer": [
+        "1,2"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "numeric"
+    },
+    {
+      "id": "toan5_005",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "hinh_hoc",
+      "question": "Hình chữ nhật dài 8 m, rộng 5 m. Tính diện tích theo m².",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Diện tích = 8 × 5 = 40 m².",
+      "options": [],
+      "correct_answer": [
+        "40"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "numeric",
+      "unit": "m2"
+    },
+    {
+      "id": "toan5_006",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "do_dai",
+      "question": "Đổi 150 cm ra m.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "100 cm = 1 m nên 150 cm = 1,5 m.",
+      "options": [
+        {
+          "id": "A",
+          "text": "1,5"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        },
+        {
+          "id": "D",
+          "text": "Không xác định"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "single_choice"
+    },
+    {
+      "id": "toan5_007",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "phan_so",
+      "question": "Tính 3/5 − 1/10.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "6/10 − 1/10 = 5/10 = 1/2.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 1/2."
+        },
+        {
+          "id": "s2",
+          "text": "Không thể giải bài này từ dữ kiện đã cho."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan5_008",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "phan_tram",
+      "question": "20% của 150 bằng bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "150 × 20/100 = 30.",
+      "options": [],
+      "correct_answer": [
+        "30"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan5_009",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "hinh_hoc",
+      "question": "Hình tam giác có đáy 6 m, chiều cao 4 m. Tính diện tích.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "6 × 4 : 2 = 12 m².",
+      "options": [],
+      "correct_answer": [
+        "12"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "numeric",
+      "unit": "m2"
+    },
+    {
+      "id": "toan5_010",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "so_thap_phan",
+      "question": "Tính 4,5 : 0,9.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Nhân cả số bị chia và số chia với 10: 45 : 9 = 5.",
+      "options": [],
+      "correct_answer": [
+        "5"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "numeric"
+    },
+    {
+      "id": "toan5_011",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "dien_tich",
+      "question": "Đổi 2 ha ra m².",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "1 ha = 10000 m²; 2 ha = 20000 m².",
+      "options": [
+        {
+          "id": "A",
+          "text": "20000"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        },
+        {
+          "id": "D",
+          "text": "Không xác định"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "single_choice"
+    },
+    {
+      "id": "toan5_012",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "thong_ke",
+      "question": "Trung bình cộng của 6, 8, 10 là bao nhiêu?",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "(6 + 8 + 10) : 3 = 8.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 8."
+        },
+        {
+          "id": "s2",
+          "text": "Không thể giải bài này từ dữ kiện đã cho."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan5_013",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "chuyen_dong",
+      "question": "Một xe đi 120 km trong 3 giờ. Vận tốc trung bình bao nhiêu km/h?",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "120 : 3 = 40 km/h.",
+      "options": [],
+      "correct_answer": [
+        "40"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan5_014",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "phan_so",
+      "question": "Giải thích vì sao 0,75 = 3/4.",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "Viết 0,75 = 75/100 rồi chia tử và mẫu cho 25.",
+      "options": [],
+      "correct_answer": [
+        "75/100 = 3/4"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "essay",
+      "rubric": [
+        {
+          "description": "Nêu phương pháp đúng",
+          "points": 0.5
+        },
+        {
+          "description": "Tính hoặc kết luận đúng có lập luận",
+          "points": 0.5
+        }
+      ]
+    },
+    {
+      "id": "toan5_015",
+      "grade": 5,
+      "subject": "toan",
+      "topic": "dien_tich",
+      "question": "Nêu cách tính diện tích thửa ruộng hình chữ nhật 200 m × 50 m rồi đổi ra ha.",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "200 × 50 = 10000 m²; 10000 m² = 1 ha.",
+      "options": [],
+      "correct_answer": [
+        "10000 m² = 1 ha"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "essay",
+      "rubric": [
+        {
+          "description": "Nêu phương pháp đúng",
+          "points": 0.5
+        },
+        {
+          "description": "Tính hoặc kết luận đúng có lập luận",
+          "points": 0.5
+        }
+      ]
+    },
+    {
+      "id": "toan9_001",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "phuong_trinh",
+      "question": "Giải phương trình 2x + 3 = 11. Nhập giá trị x.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "2x = 8 nên x = 4.",
+      "options": [
+        {
+          "id": "A",
+          "text": "4"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        },
+        {
+          "id": "D",
+          "text": "Không xác định"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "single_choice"
+    },
+    {
+      "id": "toan9_002",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "can_bac_hai",
+      "question": "Tính căn bậc hai số học của 81.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "9 không âm và 9² = 81.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 9."
+        },
+        {
+          "id": "s2",
+          "text": "Không thể giải bài này từ dữ kiện đã cho."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan9_003",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "ham_so",
+      "question": "Hàm số y = 2x − 1. Khi x = 3 thì y bằng bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Thay x = 3: y = 6 − 1 = 5.",
+      "options": [],
+      "correct_answer": [
+        "5"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan9_004",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "hinh_hoc",
+      "question": "Tam giác vuông có hai cạnh góc vuông 3 cm và 4 cm. Cạnh huyền dài bao nhiêu cm?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Theo Pythagore: căn(9 + 16) = 5.",
+      "options": [],
+      "correct_answer": [
+        "5"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "numeric",
+      "unit": "cm"
+    },
+    {
+      "id": "toan9_005",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "phuong_trinh",
+      "question": "Phương trình x² − 5x + 6 = 0 có tổng hai nghiệm bằng bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Theo Viète, tổng nghiệm là 5.",
+      "options": [],
+      "correct_answer": [
+        "5"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "numeric"
+    },
+    {
+      "id": "toan9_006",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "xac_suat",
+      "question": "Xác suất xuất hiện mặt 6 khi gieo xúc xắc cân đối là bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Có 1 kết quả thuận lợi trong 6 kết quả đồng khả năng.",
+      "options": [
+        {
+          "id": "A",
+          "text": "1/6"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        },
+        {
+          "id": "D",
+          "text": "Không xác định"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "single_choice"
+    },
+    {
+      "id": "toan9_007",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "he_phuong_trinh",
+      "question": "Hệ x + y = 7 và x − y = 1 có x bằng bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Cộng hai phương trình được 2x = 8.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 4."
+        },
+        {
+          "id": "s2",
+          "text": "Không thể giải bài này từ dữ kiện đã cho."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan9_008",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "dai_so",
+      "question": "Tính giá trị 3x² khi x = −2.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "(−2)² = 4; 3 × 4 = 12.",
+      "options": [],
+      "correct_answer": [
+        "12"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan9_009",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "duong_tron",
+      "question": "Đường tròn bán kính 5 cm có đường kính bao nhiêu cm?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Đường kính bằng hai lần bán kính.",
+      "options": [],
+      "correct_answer": [
+        "10"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "numeric",
+      "unit": "cm"
+    },
+    {
+      "id": "toan9_010",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "duong_tron",
+      "question": "Một góc nội tiếp chắn cung 80° có số đo bao nhiêu độ?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Góc nội tiếp bằng nửa số đo cung bị chắn.",
+      "options": [],
+      "correct_answer": [
+        "40"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "numeric"
+    },
+    {
+      "id": "toan9_011",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "can_bac_hai",
+      "question": "Rút gọn căn bậc hai của 144.",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "12² = 144 và 12 ≥ 0.",
+      "options": [
+        {
+          "id": "A",
+          "text": "12"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        },
+        {
+          "id": "D",
+          "text": "Không xác định"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "single_choice"
+    },
+    {
+      "id": "toan9_012",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "thong_ke",
+      "question": "Tần số của giá trị 2 trong dãy 1, 2, 2, 3, 2 là bao nhiêu?",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "Giá trị 2 xuất hiện 3 lần.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 3."
+        },
+        {
+          "id": "s2",
+          "text": "Không thể giải bài này từ dữ kiện đã cho."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan9_013",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "phuong_trinh",
+      "question": "Giải x/3 = 5.",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "Nhân hai vế với 3 được x = 15.",
+      "options": [],
+      "correct_answer": [
+        "15"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan9_014",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "phuong_trinh",
+      "question": "Trình bày cách giải x² − 5x + 6 = 0.",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "Phân tích thành tích rồi áp dụng tích bằng 0.",
+      "options": [],
+      "correct_answer": [
+        "(x − 2)(x − 3) = 0; x = 2 hoặc x = 3"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "essay",
+      "rubric": [
+        {
+          "description": "Nêu phương pháp đúng",
+          "points": 0.5
+        },
+        {
+          "description": "Tính hoặc kết luận đúng có lập luận",
+          "points": 0.5
+        }
+      ]
+    },
+    {
+      "id": "toan9_015",
+      "grade": 9,
+      "subject": "toan",
+      "topic": "can_bac_hai",
+      "question": "Giải thích điều kiện để căn bậc hai của x − 2 có nghĩa trong tập số thực.",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "Biểu thức dưới căn phải không âm: x − 2 ≥ 0.",
+      "options": [],
+      "correct_answer": [
+        "x ≥ 2"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "essay",
+      "rubric": [
+        {
+          "description": "Nêu phương pháp đúng",
+          "points": 0.5
+        },
+        {
+          "description": "Tính hoặc kết luận đúng có lập luận",
+          "points": 0.5
+        }
+      ]
+    },
+    {
+      "id": "toan12_001",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "dao_ham",
+      "question": "Hàm số f(x) = x³ có f′(2) bằng bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "f′(x) = 3x²; f′(2) = 12.",
+      "options": [
+        {
+          "id": "A",
+          "text": "12"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        },
+        {
+          "id": "D",
+          "text": "Không xác định"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "single_choice"
+    },
+    {
+      "id": "toan12_002",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "tich_phan",
+      "question": "Tính tích phân từ 0 đến 1 của 2x dx.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Nguyên hàm x², thay cận được 1 − 0 = 1.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 1."
+        },
+        {
+          "id": "s2",
+          "text": "Không thể giải bài này từ dữ kiện đã cho."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan12_003",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "mu_logarit",
+      "question": "Giải 2^x = 8.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "8 = 2³ nên x = 3.",
+      "options": [],
+      "correct_answer": [
+        "3"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan12_004",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "mu_logarit",
+      "question": "Tính logarit cơ số 10 của 1000.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "10³ = 1000.",
+      "options": [],
+      "correct_answer": [
+        "3"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "numeric"
+    },
+    {
+      "id": "toan12_005",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "vectơ",
+      "question": "Vectơ a = (1, 2, 3), b = (2, 0, −1). Tính tích vô hướng a·b.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "1 × 2 + 2 × 0 + 3 × (−1) = −1.",
+      "options": [],
+      "correct_answer": [
+        "-1"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "numeric"
+    },
+    {
+      "id": "toan12_006",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "toa_do",
+      "question": "Điểm A(1, 2, 3) và B(4, 6, 3) có khoảng cách AB bằng bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "AB = căn(3² + 4² + 0²) = 5.",
+      "options": [
+        {
+          "id": "A",
+          "text": "5"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        },
+        {
+          "id": "D",
+          "text": "Không xác định"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "single_choice"
+    },
+    {
+      "id": "toan12_007",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "xac_suat",
+      "question": "Hộp có 3 bi đỏ và 2 bi xanh. Lấy ngẫu nhiên một bi, xác suất lấy bi đỏ là bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "Có 3 bi đỏ trong tổng 5 bi.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 3/5."
+        },
+        {
+          "id": "s2",
+          "text": "Không thể giải bài này từ dữ kiện đã cho."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan12_008",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "tich_phan",
+      "question": "Tính tích phân từ 1 đến 2 của 3 dx.",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "3 × (2 − 1) = 3.",
+      "options": [],
+      "correct_answer": [
+        "3"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan12_009",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "ham_so",
+      "question": "Hàm f(x) = x² − 4x + 5 đạt giá trị nhỏ nhất bằng bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "f(x) = (x − 2)² + 1 ≥ 1.",
+      "options": [],
+      "correct_answer": [
+        "1"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "numeric"
+    },
+    {
+      "id": "toan12_010",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "thong_ke",
+      "question": "Mẫu số liệu 2, 4, 6, 8 có trung bình bằng bao nhiêu?",
+      "difficulty": "easy",
+      "max_score": 1,
+      "explanation": "(2 + 4 + 6 + 8)/4 = 5.",
+      "options": [],
+      "correct_answer": [
+        "5"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "numeric"
+    },
+    {
+      "id": "toan12_011",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "toa_do",
+      "question": "Mặt phẳng 2x − y + 3z − 4 = 0 có vectơ pháp tuyến (2, −1, c). Nhập c.",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "Các hệ số của x, y, z tạo vectơ pháp tuyến.",
+      "options": [
+        {
+          "id": "A",
+          "text": "3"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        },
+        {
+          "id": "D",
+          "text": "Không xác định"
+        }
+      ],
+      "correct_answer": [
+        "A"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "single_choice"
+    },
+    {
+      "id": "toan12_012",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "mu_logarit",
+      "question": "Giải logarit cơ số 2 của x bằng 4.",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "x = 2⁴ = 16, thỏa x > 0.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kết quả đúng là 16."
+        },
+        {
+          "id": "s2",
+          "text": "Không thể giải bài này từ dữ kiện đã cho."
+        }
+      ],
+      "correct_answer": [
+        "true",
+        "false"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "true_false"
+    },
+    {
+      "id": "toan12_013",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "nguyen_ham",
+      "question": "Hàm F(x) = x³ + C là nguyên hàm của f(x). Tính f(2).",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "f(x) = F′(x) = 3x² nên f(2) = 12.",
+      "options": [],
+      "correct_answer": [
+        "12"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "short_answer"
+    },
+    {
+      "id": "toan12_014",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "ham_so",
+      "question": "Trình bày cách tìm cực trị của f(x) = x³ − 3x.",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "Giải f′ = 0 rồi xét dấu: +, −, +.",
+      "options": [],
+      "correct_answer": [
+        "f′ = 3x² − 3; cực đại tại x = −1, cực tiểu tại x = 1"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "essay",
+      "rubric": [
+        {
+          "description": "Nêu phương pháp đúng",
+          "points": 0.5
+        },
+        {
+          "description": "Tính hoặc kết luận đúng có lập luận",
+          "points": 0.5
+        }
+      ]
+    },
+    {
+      "id": "toan12_015",
+      "grade": 12,
+      "subject": "toan",
+      "topic": "tich_phan",
+      "question": "Giải thích vì sao tích phân từ 0 đến 1 của x² dx bằng 1/3.",
+      "difficulty": "medium",
+      "max_score": 1,
+      "explanation": "Áp dụng công thức Newton–Leibniz với nguyên hàm x³/3.",
+      "options": [],
+      "correct_answer": [
+        "Nguyên hàm x³/3; thay cận được 1/3"
+      ],
+      "source_type": "original",
+      "license": "original_content",
+      "rights_evidence": "Tự biên soạn cho fixture phát triển Kho Học 1–12; cần duyệt chuyên môn trước phát hành.",
+      "type": "essay",
+      "rubric": [
+        {
+          "description": "Nêu phương pháp đúng",
+          "points": 0.5
+        },
+        {
+          "description": "Tính hoặc kết luận đúng có lập luận",
+          "points": 0.5
+        }
+      ]
+    }
+  ]
+}

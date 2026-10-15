@@ -1,0 +1,2093 @@
+[
+  {
+    "id": "kntt_core_1_tieng_viet",
+    "grade": 1,
+    "subject": "tieng_viet",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Việt 1 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_1_tieng_viet_01",
+      "kntt_core_1_tieng_viet_02",
+      "kntt_core_1_tieng_viet_03",
+      "kntt_core_1_tieng_viet_04",
+      "kntt_core_1_tieng_viet_05",
+      "kntt_core_1_tieng_viet_06"
+    ]
+  },
+  {
+    "id": "kntt_core_1_dao_duc",
+    "grade": 1,
+    "subject": "dao_duc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Đạo đức 1 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_1_dao_duc_01",
+      "kntt_core_1_dao_duc_02",
+      "kntt_core_1_dao_duc_03",
+      "kntt_core_1_dao_duc_04",
+      "kntt_core_1_dao_duc_05",
+      "kntt_core_1_dao_duc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_1_the_chat",
+    "grade": 1,
+    "subject": "the_chat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục thể chất 1 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_1_the_chat_01",
+      "kntt_core_1_the_chat_02",
+      "kntt_core_1_the_chat_03",
+      "kntt_core_1_the_chat_04",
+      "kntt_core_1_the_chat_05",
+      "kntt_core_1_the_chat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_1_nghe_thuat",
+    "grade": 1,
+    "subject": "nghe_thuat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Nghệ thuật 1 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_1_nghe_thuat_01",
+      "kntt_core_1_nghe_thuat_02",
+      "kntt_core_1_nghe_thuat_03",
+      "kntt_core_1_nghe_thuat_04",
+      "kntt_core_1_nghe_thuat_05",
+      "kntt_core_1_nghe_thuat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_1_trai_nghiem",
+    "grade": 1,
+    "subject": "trai_nghiem",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hoạt động trải nghiệm 1 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_1_trai_nghiem_01",
+      "kntt_core_1_trai_nghiem_02",
+      "kntt_core_1_trai_nghiem_03",
+      "kntt_core_1_trai_nghiem_04",
+      "kntt_core_1_trai_nghiem_05",
+      "kntt_core_1_trai_nghiem_06"
+    ]
+  },
+  {
+    "id": "kntt_core_1_tu_nhien_xa_hoi",
+    "grade": 1,
+    "subject": "tu_nhien_xa_hoi",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tự nhiên và Xã hội 1 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_1_tu_nhien_xa_hoi_01",
+      "kntt_core_1_tu_nhien_xa_hoi_02",
+      "kntt_core_1_tu_nhien_xa_hoi_03",
+      "kntt_core_1_tu_nhien_xa_hoi_04",
+      "kntt_core_1_tu_nhien_xa_hoi_05",
+      "kntt_core_1_tu_nhien_xa_hoi_06"
+    ]
+  },
+  {
+    "id": "kntt_core_2_tieng_viet",
+    "grade": 2,
+    "subject": "tieng_viet",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Việt 2 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_2_tieng_viet_01",
+      "kntt_core_2_tieng_viet_02",
+      "kntt_core_2_tieng_viet_03",
+      "kntt_core_2_tieng_viet_04",
+      "kntt_core_2_tieng_viet_05",
+      "kntt_core_2_tieng_viet_06"
+    ]
+  },
+  {
+    "id": "kntt_core_2_dao_duc",
+    "grade": 2,
+    "subject": "dao_duc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Đạo đức 2 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_2_dao_duc_01",
+      "kntt_core_2_dao_duc_02",
+      "kntt_core_2_dao_duc_03",
+      "kntt_core_2_dao_duc_04",
+      "kntt_core_2_dao_duc_05",
+      "kntt_core_2_dao_duc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_2_the_chat",
+    "grade": 2,
+    "subject": "the_chat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục thể chất 2 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_2_the_chat_01",
+      "kntt_core_2_the_chat_02",
+      "kntt_core_2_the_chat_03",
+      "kntt_core_2_the_chat_04",
+      "kntt_core_2_the_chat_05",
+      "kntt_core_2_the_chat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_2_nghe_thuat",
+    "grade": 2,
+    "subject": "nghe_thuat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Nghệ thuật 2 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_2_nghe_thuat_01",
+      "kntt_core_2_nghe_thuat_02",
+      "kntt_core_2_nghe_thuat_03",
+      "kntt_core_2_nghe_thuat_04",
+      "kntt_core_2_nghe_thuat_05",
+      "kntt_core_2_nghe_thuat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_2_trai_nghiem",
+    "grade": 2,
+    "subject": "trai_nghiem",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hoạt động trải nghiệm 2 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_2_trai_nghiem_01",
+      "kntt_core_2_trai_nghiem_02",
+      "kntt_core_2_trai_nghiem_03",
+      "kntt_core_2_trai_nghiem_04",
+      "kntt_core_2_trai_nghiem_05",
+      "kntt_core_2_trai_nghiem_06"
+    ]
+  },
+  {
+    "id": "kntt_core_2_tu_nhien_xa_hoi",
+    "grade": 2,
+    "subject": "tu_nhien_xa_hoi",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tự nhiên và Xã hội 2 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_2_tu_nhien_xa_hoi_01",
+      "kntt_core_2_tu_nhien_xa_hoi_02",
+      "kntt_core_2_tu_nhien_xa_hoi_03",
+      "kntt_core_2_tu_nhien_xa_hoi_04",
+      "kntt_core_2_tu_nhien_xa_hoi_05",
+      "kntt_core_2_tu_nhien_xa_hoi_06"
+    ]
+  },
+  {
+    "id": "kntt_core_3_tieng_viet",
+    "grade": 3,
+    "subject": "tieng_viet",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Việt 3 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_3_tieng_viet_01",
+      "kntt_core_3_tieng_viet_02",
+      "kntt_core_3_tieng_viet_03",
+      "kntt_core_3_tieng_viet_04",
+      "kntt_core_3_tieng_viet_05",
+      "kntt_core_3_tieng_viet_06"
+    ]
+  },
+  {
+    "id": "kntt_core_3_dao_duc",
+    "grade": 3,
+    "subject": "dao_duc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Đạo đức 3 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_3_dao_duc_01",
+      "kntt_core_3_dao_duc_02",
+      "kntt_core_3_dao_duc_03",
+      "kntt_core_3_dao_duc_04",
+      "kntt_core_3_dao_duc_05",
+      "kntt_core_3_dao_duc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_3_the_chat",
+    "grade": 3,
+    "subject": "the_chat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục thể chất 3 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_3_the_chat_01",
+      "kntt_core_3_the_chat_02",
+      "kntt_core_3_the_chat_03",
+      "kntt_core_3_the_chat_04",
+      "kntt_core_3_the_chat_05",
+      "kntt_core_3_the_chat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_3_nghe_thuat",
+    "grade": 3,
+    "subject": "nghe_thuat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Nghệ thuật 3 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_3_nghe_thuat_01",
+      "kntt_core_3_nghe_thuat_02",
+      "kntt_core_3_nghe_thuat_03",
+      "kntt_core_3_nghe_thuat_04",
+      "kntt_core_3_nghe_thuat_05",
+      "kntt_core_3_nghe_thuat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_3_trai_nghiem",
+    "grade": 3,
+    "subject": "trai_nghiem",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hoạt động trải nghiệm 3 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_3_trai_nghiem_01",
+      "kntt_core_3_trai_nghiem_02",
+      "kntt_core_3_trai_nghiem_03",
+      "kntt_core_3_trai_nghiem_04",
+      "kntt_core_3_trai_nghiem_05",
+      "kntt_core_3_trai_nghiem_06"
+    ]
+  },
+  {
+    "id": "kntt_core_3_tu_nhien_xa_hoi",
+    "grade": 3,
+    "subject": "tu_nhien_xa_hoi",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tự nhiên và Xã hội 3 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_3_tu_nhien_xa_hoi_01",
+      "kntt_core_3_tu_nhien_xa_hoi_02",
+      "kntt_core_3_tu_nhien_xa_hoi_03",
+      "kntt_core_3_tu_nhien_xa_hoi_04",
+      "kntt_core_3_tu_nhien_xa_hoi_05",
+      "kntt_core_3_tu_nhien_xa_hoi_06"
+    ]
+  },
+  {
+    "id": "kntt_core_3_tieng_anh",
+    "grade": 3,
+    "subject": "tieng_anh",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Anh 3 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_3_tieng_anh_01",
+      "kntt_core_3_tieng_anh_02",
+      "kntt_core_3_tieng_anh_03",
+      "kntt_core_3_tieng_anh_04",
+      "kntt_core_3_tieng_anh_05",
+      "kntt_core_3_tieng_anh_06"
+    ]
+  },
+  {
+    "id": "kntt_core_3_tin_hoc_cong_nghe",
+    "grade": 3,
+    "subject": "tin_hoc_cong_nghe",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tin học và Công nghệ 3 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_3_tin_hoc_cong_nghe_01",
+      "kntt_core_3_tin_hoc_cong_nghe_02",
+      "kntt_core_3_tin_hoc_cong_nghe_03",
+      "kntt_core_3_tin_hoc_cong_nghe_04",
+      "kntt_core_3_tin_hoc_cong_nghe_05",
+      "kntt_core_3_tin_hoc_cong_nghe_06"
+    ]
+  },
+  {
+    "id": "kntt_core_4_tieng_viet",
+    "grade": 4,
+    "subject": "tieng_viet",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Việt 4 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_4_tieng_viet_01",
+      "kntt_core_4_tieng_viet_02",
+      "kntt_core_4_tieng_viet_03",
+      "kntt_core_4_tieng_viet_04",
+      "kntt_core_4_tieng_viet_05",
+      "kntt_core_4_tieng_viet_06"
+    ]
+  },
+  {
+    "id": "kntt_core_4_dao_duc",
+    "grade": 4,
+    "subject": "dao_duc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Đạo đức 4 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_4_dao_duc_01",
+      "kntt_core_4_dao_duc_02",
+      "kntt_core_4_dao_duc_03",
+      "kntt_core_4_dao_duc_04",
+      "kntt_core_4_dao_duc_05",
+      "kntt_core_4_dao_duc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_4_the_chat",
+    "grade": 4,
+    "subject": "the_chat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục thể chất 4 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_4_the_chat_01",
+      "kntt_core_4_the_chat_02",
+      "kntt_core_4_the_chat_03",
+      "kntt_core_4_the_chat_04",
+      "kntt_core_4_the_chat_05",
+      "kntt_core_4_the_chat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_4_nghe_thuat",
+    "grade": 4,
+    "subject": "nghe_thuat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Nghệ thuật 4 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_4_nghe_thuat_01",
+      "kntt_core_4_nghe_thuat_02",
+      "kntt_core_4_nghe_thuat_03",
+      "kntt_core_4_nghe_thuat_04",
+      "kntt_core_4_nghe_thuat_05",
+      "kntt_core_4_nghe_thuat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_4_trai_nghiem",
+    "grade": 4,
+    "subject": "trai_nghiem",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hoạt động trải nghiệm 4 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_4_trai_nghiem_01",
+      "kntt_core_4_trai_nghiem_02",
+      "kntt_core_4_trai_nghiem_03",
+      "kntt_core_4_trai_nghiem_04",
+      "kntt_core_4_trai_nghiem_05",
+      "kntt_core_4_trai_nghiem_06"
+    ]
+  },
+  {
+    "id": "kntt_core_4_khoa_hoc",
+    "grade": 4,
+    "subject": "khoa_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Khoa học 4 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_4_khoa_hoc_01",
+      "kntt_core_4_khoa_hoc_02",
+      "kntt_core_4_khoa_hoc_03",
+      "kntt_core_4_khoa_hoc_04",
+      "kntt_core_4_khoa_hoc_05",
+      "kntt_core_4_khoa_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_4_lich_su_dia_li",
+    "grade": 4,
+    "subject": "lich_su_dia_li",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Lịch sử và Địa lí 4 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_4_lich_su_dia_li_01",
+      "kntt_core_4_lich_su_dia_li_02",
+      "kntt_core_4_lich_su_dia_li_03",
+      "kntt_core_4_lich_su_dia_li_04",
+      "kntt_core_4_lich_su_dia_li_05",
+      "kntt_core_4_lich_su_dia_li_06"
+    ]
+  },
+  {
+    "id": "kntt_core_4_tieng_anh",
+    "grade": 4,
+    "subject": "tieng_anh",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Anh 4 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_4_tieng_anh_01",
+      "kntt_core_4_tieng_anh_02",
+      "kntt_core_4_tieng_anh_03",
+      "kntt_core_4_tieng_anh_04",
+      "kntt_core_4_tieng_anh_05",
+      "kntt_core_4_tieng_anh_06"
+    ]
+  },
+  {
+    "id": "kntt_core_4_tin_hoc_cong_nghe",
+    "grade": 4,
+    "subject": "tin_hoc_cong_nghe",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tin học và Công nghệ 4 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_4_tin_hoc_cong_nghe_01",
+      "kntt_core_4_tin_hoc_cong_nghe_02",
+      "kntt_core_4_tin_hoc_cong_nghe_03",
+      "kntt_core_4_tin_hoc_cong_nghe_04",
+      "kntt_core_4_tin_hoc_cong_nghe_05",
+      "kntt_core_4_tin_hoc_cong_nghe_06"
+    ]
+  },
+  {
+    "id": "kntt_core_5_tieng_viet",
+    "grade": 5,
+    "subject": "tieng_viet",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Việt 5 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_5_tieng_viet_01",
+      "kntt_core_5_tieng_viet_02",
+      "kntt_core_5_tieng_viet_03",
+      "kntt_core_5_tieng_viet_04",
+      "kntt_core_5_tieng_viet_05",
+      "kntt_core_5_tieng_viet_06"
+    ]
+  },
+  {
+    "id": "kntt_core_5_dao_duc",
+    "grade": 5,
+    "subject": "dao_duc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Đạo đức 5 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_5_dao_duc_01",
+      "kntt_core_5_dao_duc_02",
+      "kntt_core_5_dao_duc_03",
+      "kntt_core_5_dao_duc_04",
+      "kntt_core_5_dao_duc_05",
+      "kntt_core_5_dao_duc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_5_the_chat",
+    "grade": 5,
+    "subject": "the_chat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục thể chất 5 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_5_the_chat_01",
+      "kntt_core_5_the_chat_02",
+      "kntt_core_5_the_chat_03",
+      "kntt_core_5_the_chat_04",
+      "kntt_core_5_the_chat_05",
+      "kntt_core_5_the_chat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_5_nghe_thuat",
+    "grade": 5,
+    "subject": "nghe_thuat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Nghệ thuật 5 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_5_nghe_thuat_01",
+      "kntt_core_5_nghe_thuat_02",
+      "kntt_core_5_nghe_thuat_03",
+      "kntt_core_5_nghe_thuat_04",
+      "kntt_core_5_nghe_thuat_05",
+      "kntt_core_5_nghe_thuat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_5_trai_nghiem",
+    "grade": 5,
+    "subject": "trai_nghiem",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hoạt động trải nghiệm 5 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_5_trai_nghiem_01",
+      "kntt_core_5_trai_nghiem_02",
+      "kntt_core_5_trai_nghiem_03",
+      "kntt_core_5_trai_nghiem_04",
+      "kntt_core_5_trai_nghiem_05",
+      "kntt_core_5_trai_nghiem_06"
+    ]
+  },
+  {
+    "id": "kntt_core_5_khoa_hoc",
+    "grade": 5,
+    "subject": "khoa_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Khoa học 5 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_5_khoa_hoc_01",
+      "kntt_core_5_khoa_hoc_02",
+      "kntt_core_5_khoa_hoc_03",
+      "kntt_core_5_khoa_hoc_04",
+      "kntt_core_5_khoa_hoc_05",
+      "kntt_core_5_khoa_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_5_lich_su_dia_li",
+    "grade": 5,
+    "subject": "lich_su_dia_li",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Lịch sử và Địa lí 5 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_5_lich_su_dia_li_01",
+      "kntt_core_5_lich_su_dia_li_02",
+      "kntt_core_5_lich_su_dia_li_03",
+      "kntt_core_5_lich_su_dia_li_04",
+      "kntt_core_5_lich_su_dia_li_05",
+      "kntt_core_5_lich_su_dia_li_06"
+    ]
+  },
+  {
+    "id": "kntt_core_5_tieng_anh",
+    "grade": 5,
+    "subject": "tieng_anh",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Anh 5 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_5_tieng_anh_01",
+      "kntt_core_5_tieng_anh_02",
+      "kntt_core_5_tieng_anh_03",
+      "kntt_core_5_tieng_anh_04",
+      "kntt_core_5_tieng_anh_05",
+      "kntt_core_5_tieng_anh_06"
+    ]
+  },
+  {
+    "id": "kntt_core_5_tin_hoc_cong_nghe",
+    "grade": 5,
+    "subject": "tin_hoc_cong_nghe",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tin học và Công nghệ 5 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_5_tin_hoc_cong_nghe_01",
+      "kntt_core_5_tin_hoc_cong_nghe_02",
+      "kntt_core_5_tin_hoc_cong_nghe_03",
+      "kntt_core_5_tin_hoc_cong_nghe_04",
+      "kntt_core_5_tin_hoc_cong_nghe_05",
+      "kntt_core_5_tin_hoc_cong_nghe_06"
+    ]
+  },
+  {
+    "id": "kntt_core_6_ngu_van",
+    "grade": 6,
+    "subject": "ngu_van",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Ngữ văn 6 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_6_ngu_van_01",
+      "kntt_core_6_ngu_van_02",
+      "kntt_core_6_ngu_van_03",
+      "kntt_core_6_ngu_van_04",
+      "kntt_core_6_ngu_van_05",
+      "kntt_core_6_ngu_van_06"
+    ]
+  },
+  {
+    "id": "kntt_core_6_tieng_anh",
+    "grade": 6,
+    "subject": "tieng_anh",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Anh 6 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_6_tieng_anh_01",
+      "kntt_core_6_tieng_anh_02",
+      "kntt_core_6_tieng_anh_03",
+      "kntt_core_6_tieng_anh_04",
+      "kntt_core_6_tieng_anh_05",
+      "kntt_core_6_tieng_anh_06"
+    ]
+  },
+  {
+    "id": "kntt_core_6_lich_su_dia_li",
+    "grade": 6,
+    "subject": "lich_su_dia_li",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Lịch sử và Địa lí 6 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_6_lich_su_dia_li_01",
+      "kntt_core_6_lich_su_dia_li_02",
+      "kntt_core_6_lich_su_dia_li_03",
+      "kntt_core_6_lich_su_dia_li_04",
+      "kntt_core_6_lich_su_dia_li_05",
+      "kntt_core_6_lich_su_dia_li_06"
+    ]
+  },
+  {
+    "id": "kntt_core_6_khoa_hoc_tu_nhien",
+    "grade": 6,
+    "subject": "khoa_hoc_tu_nhien",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Khoa học tự nhiên 6 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_6_khoa_hoc_tu_nhien_01",
+      "kntt_core_6_khoa_hoc_tu_nhien_02",
+      "kntt_core_6_khoa_hoc_tu_nhien_03",
+      "kntt_core_6_khoa_hoc_tu_nhien_04",
+      "kntt_core_6_khoa_hoc_tu_nhien_05",
+      "kntt_core_6_khoa_hoc_tu_nhien_06"
+    ]
+  },
+  {
+    "id": "kntt_core_6_tin_hoc",
+    "grade": 6,
+    "subject": "tin_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tin học 6 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_6_tin_hoc_01",
+      "kntt_core_6_tin_hoc_02",
+      "kntt_core_6_tin_hoc_03",
+      "kntt_core_6_tin_hoc_04",
+      "kntt_core_6_tin_hoc_05",
+      "kntt_core_6_tin_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_6_cong_nghe",
+    "grade": 6,
+    "subject": "cong_nghe",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Công nghệ 6 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_6_cong_nghe_01",
+      "kntt_core_6_cong_nghe_02",
+      "kntt_core_6_cong_nghe_03",
+      "kntt_core_6_cong_nghe_04",
+      "kntt_core_6_cong_nghe_05",
+      "kntt_core_6_cong_nghe_06"
+    ]
+  },
+  {
+    "id": "kntt_core_6_gdcd",
+    "grade": 6,
+    "subject": "gdcd",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục công dân 6 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_6_gdcd_01",
+      "kntt_core_6_gdcd_02",
+      "kntt_core_6_gdcd_03",
+      "kntt_core_6_gdcd_04",
+      "kntt_core_6_gdcd_05",
+      "kntt_core_6_gdcd_06"
+    ]
+  },
+  {
+    "id": "kntt_core_6_the_chat",
+    "grade": 6,
+    "subject": "the_chat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục thể chất 6 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_6_the_chat_01",
+      "kntt_core_6_the_chat_02",
+      "kntt_core_6_the_chat_03",
+      "kntt_core_6_the_chat_04",
+      "kntt_core_6_the_chat_05",
+      "kntt_core_6_the_chat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_6_nghe_thuat",
+    "grade": 6,
+    "subject": "nghe_thuat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Nghệ thuật 6 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_6_nghe_thuat_01",
+      "kntt_core_6_nghe_thuat_02",
+      "kntt_core_6_nghe_thuat_03",
+      "kntt_core_6_nghe_thuat_04",
+      "kntt_core_6_nghe_thuat_05",
+      "kntt_core_6_nghe_thuat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_6_huong_nghiep",
+    "grade": 6,
+    "subject": "huong_nghiep",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hoạt động trải nghiệm, hướng nghiệp 6 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_6_huong_nghiep_01",
+      "kntt_core_6_huong_nghiep_02",
+      "kntt_core_6_huong_nghiep_03",
+      "kntt_core_6_huong_nghiep_04",
+      "kntt_core_6_huong_nghiep_05",
+      "kntt_core_6_huong_nghiep_06"
+    ]
+  },
+  {
+    "id": "kntt_core_7_ngu_van",
+    "grade": 7,
+    "subject": "ngu_van",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Ngữ văn 7 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_7_ngu_van_01",
+      "kntt_core_7_ngu_van_02",
+      "kntt_core_7_ngu_van_03",
+      "kntt_core_7_ngu_van_04",
+      "kntt_core_7_ngu_van_05",
+      "kntt_core_7_ngu_van_06"
+    ]
+  },
+  {
+    "id": "kntt_core_7_tieng_anh",
+    "grade": 7,
+    "subject": "tieng_anh",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Anh 7 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_7_tieng_anh_01",
+      "kntt_core_7_tieng_anh_02",
+      "kntt_core_7_tieng_anh_03",
+      "kntt_core_7_tieng_anh_04",
+      "kntt_core_7_tieng_anh_05",
+      "kntt_core_7_tieng_anh_06"
+    ]
+  },
+  {
+    "id": "kntt_core_7_lich_su_dia_li",
+    "grade": 7,
+    "subject": "lich_su_dia_li",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Lịch sử và Địa lí 7 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_7_lich_su_dia_li_01",
+      "kntt_core_7_lich_su_dia_li_02",
+      "kntt_core_7_lich_su_dia_li_03",
+      "kntt_core_7_lich_su_dia_li_04",
+      "kntt_core_7_lich_su_dia_li_05",
+      "kntt_core_7_lich_su_dia_li_06"
+    ]
+  },
+  {
+    "id": "kntt_core_7_khoa_hoc_tu_nhien",
+    "grade": 7,
+    "subject": "khoa_hoc_tu_nhien",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Khoa học tự nhiên 7 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_7_khoa_hoc_tu_nhien_01",
+      "kntt_core_7_khoa_hoc_tu_nhien_02",
+      "kntt_core_7_khoa_hoc_tu_nhien_03",
+      "kntt_core_7_khoa_hoc_tu_nhien_04",
+      "kntt_core_7_khoa_hoc_tu_nhien_05",
+      "kntt_core_7_khoa_hoc_tu_nhien_06"
+    ]
+  },
+  {
+    "id": "kntt_core_7_tin_hoc",
+    "grade": 7,
+    "subject": "tin_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tin học 7 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_7_tin_hoc_01",
+      "kntt_core_7_tin_hoc_02",
+      "kntt_core_7_tin_hoc_03",
+      "kntt_core_7_tin_hoc_04",
+      "kntt_core_7_tin_hoc_05",
+      "kntt_core_7_tin_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_7_cong_nghe",
+    "grade": 7,
+    "subject": "cong_nghe",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Công nghệ 7 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_7_cong_nghe_01",
+      "kntt_core_7_cong_nghe_02",
+      "kntt_core_7_cong_nghe_03",
+      "kntt_core_7_cong_nghe_04",
+      "kntt_core_7_cong_nghe_05",
+      "kntt_core_7_cong_nghe_06"
+    ]
+  },
+  {
+    "id": "kntt_core_7_gdcd",
+    "grade": 7,
+    "subject": "gdcd",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục công dân 7 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_7_gdcd_01",
+      "kntt_core_7_gdcd_02",
+      "kntt_core_7_gdcd_03",
+      "kntt_core_7_gdcd_04",
+      "kntt_core_7_gdcd_05",
+      "kntt_core_7_gdcd_06"
+    ]
+  },
+  {
+    "id": "kntt_core_7_the_chat",
+    "grade": 7,
+    "subject": "the_chat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục thể chất 7 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_7_the_chat_01",
+      "kntt_core_7_the_chat_02",
+      "kntt_core_7_the_chat_03",
+      "kntt_core_7_the_chat_04",
+      "kntt_core_7_the_chat_05",
+      "kntt_core_7_the_chat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_7_nghe_thuat",
+    "grade": 7,
+    "subject": "nghe_thuat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Nghệ thuật 7 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_7_nghe_thuat_01",
+      "kntt_core_7_nghe_thuat_02",
+      "kntt_core_7_nghe_thuat_03",
+      "kntt_core_7_nghe_thuat_04",
+      "kntt_core_7_nghe_thuat_05",
+      "kntt_core_7_nghe_thuat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_7_huong_nghiep",
+    "grade": 7,
+    "subject": "huong_nghiep",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hoạt động trải nghiệm, hướng nghiệp 7 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_7_huong_nghiep_01",
+      "kntt_core_7_huong_nghiep_02",
+      "kntt_core_7_huong_nghiep_03",
+      "kntt_core_7_huong_nghiep_04",
+      "kntt_core_7_huong_nghiep_05",
+      "kntt_core_7_huong_nghiep_06"
+    ]
+  },
+  {
+    "id": "kntt_core_8_ngu_van",
+    "grade": 8,
+    "subject": "ngu_van",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Ngữ văn 8 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_8_ngu_van_01",
+      "kntt_core_8_ngu_van_02",
+      "kntt_core_8_ngu_van_03",
+      "kntt_core_8_ngu_van_04",
+      "kntt_core_8_ngu_van_05",
+      "kntt_core_8_ngu_van_06"
+    ]
+  },
+  {
+    "id": "kntt_core_8_tieng_anh",
+    "grade": 8,
+    "subject": "tieng_anh",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Anh 8 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_8_tieng_anh_01",
+      "kntt_core_8_tieng_anh_02",
+      "kntt_core_8_tieng_anh_03",
+      "kntt_core_8_tieng_anh_04",
+      "kntt_core_8_tieng_anh_05",
+      "kntt_core_8_tieng_anh_06"
+    ]
+  },
+  {
+    "id": "kntt_core_8_lich_su_dia_li",
+    "grade": 8,
+    "subject": "lich_su_dia_li",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Lịch sử và Địa lí 8 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_8_lich_su_dia_li_01",
+      "kntt_core_8_lich_su_dia_li_02",
+      "kntt_core_8_lich_su_dia_li_03",
+      "kntt_core_8_lich_su_dia_li_04",
+      "kntt_core_8_lich_su_dia_li_05",
+      "kntt_core_8_lich_su_dia_li_06"
+    ]
+  },
+  {
+    "id": "kntt_core_8_khoa_hoc_tu_nhien",
+    "grade": 8,
+    "subject": "khoa_hoc_tu_nhien",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Khoa học tự nhiên 8 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_8_khoa_hoc_tu_nhien_01",
+      "kntt_core_8_khoa_hoc_tu_nhien_02",
+      "kntt_core_8_khoa_hoc_tu_nhien_03",
+      "kntt_core_8_khoa_hoc_tu_nhien_04",
+      "kntt_core_8_khoa_hoc_tu_nhien_05",
+      "kntt_core_8_khoa_hoc_tu_nhien_06"
+    ]
+  },
+  {
+    "id": "kntt_core_8_tin_hoc",
+    "grade": 8,
+    "subject": "tin_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tin học 8 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_8_tin_hoc_01",
+      "kntt_core_8_tin_hoc_02",
+      "kntt_core_8_tin_hoc_03",
+      "kntt_core_8_tin_hoc_04",
+      "kntt_core_8_tin_hoc_05",
+      "kntt_core_8_tin_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_8_cong_nghe",
+    "grade": 8,
+    "subject": "cong_nghe",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Công nghệ 8 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_8_cong_nghe_01",
+      "kntt_core_8_cong_nghe_02",
+      "kntt_core_8_cong_nghe_03",
+      "kntt_core_8_cong_nghe_04",
+      "kntt_core_8_cong_nghe_05",
+      "kntt_core_8_cong_nghe_06"
+    ]
+  },
+  {
+    "id": "kntt_core_8_gdcd",
+    "grade": 8,
+    "subject": "gdcd",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục công dân 8 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_8_gdcd_01",
+      "kntt_core_8_gdcd_02",
+      "kntt_core_8_gdcd_03",
+      "kntt_core_8_gdcd_04",
+      "kntt_core_8_gdcd_05",
+      "kntt_core_8_gdcd_06"
+    ]
+  },
+  {
+    "id": "kntt_core_8_the_chat",
+    "grade": 8,
+    "subject": "the_chat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục thể chất 8 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_8_the_chat_01",
+      "kntt_core_8_the_chat_02",
+      "kntt_core_8_the_chat_03",
+      "kntt_core_8_the_chat_04",
+      "kntt_core_8_the_chat_05",
+      "kntt_core_8_the_chat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_8_nghe_thuat",
+    "grade": 8,
+    "subject": "nghe_thuat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Nghệ thuật 8 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_8_nghe_thuat_01",
+      "kntt_core_8_nghe_thuat_02",
+      "kntt_core_8_nghe_thuat_03",
+      "kntt_core_8_nghe_thuat_04",
+      "kntt_core_8_nghe_thuat_05",
+      "kntt_core_8_nghe_thuat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_8_huong_nghiep",
+    "grade": 8,
+    "subject": "huong_nghiep",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hoạt động trải nghiệm, hướng nghiệp 8 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_8_huong_nghiep_01",
+      "kntt_core_8_huong_nghiep_02",
+      "kntt_core_8_huong_nghiep_03",
+      "kntt_core_8_huong_nghiep_04",
+      "kntt_core_8_huong_nghiep_05",
+      "kntt_core_8_huong_nghiep_06"
+    ]
+  },
+  {
+    "id": "kntt_core_9_ngu_van",
+    "grade": 9,
+    "subject": "ngu_van",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Ngữ văn 9 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_9_ngu_van_01",
+      "kntt_core_9_ngu_van_02",
+      "kntt_core_9_ngu_van_03",
+      "kntt_core_9_ngu_van_04",
+      "kntt_core_9_ngu_van_05",
+      "kntt_core_9_ngu_van_06"
+    ]
+  },
+  {
+    "id": "kntt_core_9_tieng_anh",
+    "grade": 9,
+    "subject": "tieng_anh",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Anh 9 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_9_tieng_anh_01",
+      "kntt_core_9_tieng_anh_02",
+      "kntt_core_9_tieng_anh_03",
+      "kntt_core_9_tieng_anh_04",
+      "kntt_core_9_tieng_anh_05",
+      "kntt_core_9_tieng_anh_06"
+    ]
+  },
+  {
+    "id": "kntt_core_9_lich_su_dia_li",
+    "grade": 9,
+    "subject": "lich_su_dia_li",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Lịch sử và Địa lí 9 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_9_lich_su_dia_li_01",
+      "kntt_core_9_lich_su_dia_li_02",
+      "kntt_core_9_lich_su_dia_li_03",
+      "kntt_core_9_lich_su_dia_li_04",
+      "kntt_core_9_lich_su_dia_li_05",
+      "kntt_core_9_lich_su_dia_li_06"
+    ]
+  },
+  {
+    "id": "kntt_core_9_khoa_hoc_tu_nhien",
+    "grade": 9,
+    "subject": "khoa_hoc_tu_nhien",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Khoa học tự nhiên 9 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_9_khoa_hoc_tu_nhien_01",
+      "kntt_core_9_khoa_hoc_tu_nhien_02",
+      "kntt_core_9_khoa_hoc_tu_nhien_03",
+      "kntt_core_9_khoa_hoc_tu_nhien_04",
+      "kntt_core_9_khoa_hoc_tu_nhien_05",
+      "kntt_core_9_khoa_hoc_tu_nhien_06"
+    ]
+  },
+  {
+    "id": "kntt_core_9_tin_hoc",
+    "grade": 9,
+    "subject": "tin_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tin học 9 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_9_tin_hoc_01",
+      "kntt_core_9_tin_hoc_02",
+      "kntt_core_9_tin_hoc_03",
+      "kntt_core_9_tin_hoc_04",
+      "kntt_core_9_tin_hoc_05",
+      "kntt_core_9_tin_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_9_cong_nghe",
+    "grade": 9,
+    "subject": "cong_nghe",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Công nghệ 9 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_9_cong_nghe_01",
+      "kntt_core_9_cong_nghe_02",
+      "kntt_core_9_cong_nghe_03",
+      "kntt_core_9_cong_nghe_04",
+      "kntt_core_9_cong_nghe_05",
+      "kntt_core_9_cong_nghe_06"
+    ]
+  },
+  {
+    "id": "kntt_core_9_gdcd",
+    "grade": 9,
+    "subject": "gdcd",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục công dân 9 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_9_gdcd_01",
+      "kntt_core_9_gdcd_02",
+      "kntt_core_9_gdcd_03",
+      "kntt_core_9_gdcd_04",
+      "kntt_core_9_gdcd_05",
+      "kntt_core_9_gdcd_06"
+    ]
+  },
+  {
+    "id": "kntt_core_9_the_chat",
+    "grade": 9,
+    "subject": "the_chat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục thể chất 9 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_9_the_chat_01",
+      "kntt_core_9_the_chat_02",
+      "kntt_core_9_the_chat_03",
+      "kntt_core_9_the_chat_04",
+      "kntt_core_9_the_chat_05",
+      "kntt_core_9_the_chat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_9_nghe_thuat",
+    "grade": 9,
+    "subject": "nghe_thuat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Nghệ thuật 9 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_9_nghe_thuat_01",
+      "kntt_core_9_nghe_thuat_02",
+      "kntt_core_9_nghe_thuat_03",
+      "kntt_core_9_nghe_thuat_04",
+      "kntt_core_9_nghe_thuat_05",
+      "kntt_core_9_nghe_thuat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_9_huong_nghiep",
+    "grade": 9,
+    "subject": "huong_nghiep",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hoạt động trải nghiệm, hướng nghiệp 9 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_9_huong_nghiep_01",
+      "kntt_core_9_huong_nghiep_02",
+      "kntt_core_9_huong_nghiep_03",
+      "kntt_core_9_huong_nghiep_04",
+      "kntt_core_9_huong_nghiep_05",
+      "kntt_core_9_huong_nghiep_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_ngu_van",
+    "grade": 10,
+    "subject": "ngu_van",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Ngữ văn 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_ngu_van_01",
+      "kntt_core_10_ngu_van_02",
+      "kntt_core_10_ngu_van_03",
+      "kntt_core_10_ngu_van_04",
+      "kntt_core_10_ngu_van_05",
+      "kntt_core_10_ngu_van_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_tieng_anh",
+    "grade": 10,
+    "subject": "tieng_anh",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Anh 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_tieng_anh_01",
+      "kntt_core_10_tieng_anh_02",
+      "kntt_core_10_tieng_anh_03",
+      "kntt_core_10_tieng_anh_04",
+      "kntt_core_10_tieng_anh_05",
+      "kntt_core_10_tieng_anh_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_lich_su",
+    "grade": 10,
+    "subject": "lich_su",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Lịch sử 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_lich_su_01",
+      "kntt_core_10_lich_su_02",
+      "kntt_core_10_lich_su_03",
+      "kntt_core_10_lich_su_04",
+      "kntt_core_10_lich_su_05",
+      "kntt_core_10_lich_su_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_the_chat",
+    "grade": 10,
+    "subject": "the_chat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục thể chất 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_the_chat_01",
+      "kntt_core_10_the_chat_02",
+      "kntt_core_10_the_chat_03",
+      "kntt_core_10_the_chat_04",
+      "kntt_core_10_the_chat_05",
+      "kntt_core_10_the_chat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_quoc_phong",
+    "grade": 10,
+    "subject": "quoc_phong",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục quốc phòng và an ninh 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_quoc_phong_01",
+      "kntt_core_10_quoc_phong_02",
+      "kntt_core_10_quoc_phong_03",
+      "kntt_core_10_quoc_phong_04",
+      "kntt_core_10_quoc_phong_05",
+      "kntt_core_10_quoc_phong_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_huong_nghiep",
+    "grade": 10,
+    "subject": "huong_nghiep",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hoạt động trải nghiệm, hướng nghiệp 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_huong_nghiep_01",
+      "kntt_core_10_huong_nghiep_02",
+      "kntt_core_10_huong_nghiep_03",
+      "kntt_core_10_huong_nghiep_04",
+      "kntt_core_10_huong_nghiep_05",
+      "kntt_core_10_huong_nghiep_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_dia_li",
+    "grade": 10,
+    "subject": "dia_li",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Địa lí 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_dia_li_01",
+      "kntt_core_10_dia_li_02",
+      "kntt_core_10_dia_li_03",
+      "kntt_core_10_dia_li_04",
+      "kntt_core_10_dia_li_05",
+      "kntt_core_10_dia_li_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_vat_li",
+    "grade": 10,
+    "subject": "vat_li",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Vật lí 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_vat_li_01",
+      "kntt_core_10_vat_li_02",
+      "kntt_core_10_vat_li_03",
+      "kntt_core_10_vat_li_04",
+      "kntt_core_10_vat_li_05",
+      "kntt_core_10_vat_li_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_hoa_hoc",
+    "grade": 10,
+    "subject": "hoa_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hóa học 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_hoa_hoc_01",
+      "kntt_core_10_hoa_hoc_02",
+      "kntt_core_10_hoa_hoc_03",
+      "kntt_core_10_hoa_hoc_04",
+      "kntt_core_10_hoa_hoc_05",
+      "kntt_core_10_hoa_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_sinh_hoc",
+    "grade": 10,
+    "subject": "sinh_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Sinh học 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_sinh_hoc_01",
+      "kntt_core_10_sinh_hoc_02",
+      "kntt_core_10_sinh_hoc_03",
+      "kntt_core_10_sinh_hoc_04",
+      "kntt_core_10_sinh_hoc_05",
+      "kntt_core_10_sinh_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_tin_hoc",
+    "grade": 10,
+    "subject": "tin_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tin học 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_tin_hoc_01",
+      "kntt_core_10_tin_hoc_02",
+      "kntt_core_10_tin_hoc_03",
+      "kntt_core_10_tin_hoc_04",
+      "kntt_core_10_tin_hoc_05",
+      "kntt_core_10_tin_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_cong_nghe",
+    "grade": 10,
+    "subject": "cong_nghe",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Công nghệ 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_cong_nghe_01",
+      "kntt_core_10_cong_nghe_02",
+      "kntt_core_10_cong_nghe_03",
+      "kntt_core_10_cong_nghe_04",
+      "kntt_core_10_cong_nghe_05",
+      "kntt_core_10_cong_nghe_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_kinh_te_phap_luat",
+    "grade": 10,
+    "subject": "kinh_te_phap_luat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục kinh tế và pháp luật 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_kinh_te_phap_luat_01",
+      "kntt_core_10_kinh_te_phap_luat_02",
+      "kntt_core_10_kinh_te_phap_luat_03",
+      "kntt_core_10_kinh_te_phap_luat_04",
+      "kntt_core_10_kinh_te_phap_luat_05",
+      "kntt_core_10_kinh_te_phap_luat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_am_nhac",
+    "grade": 10,
+    "subject": "am_nhac",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Âm nhạc 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_am_nhac_01",
+      "kntt_core_10_am_nhac_02",
+      "kntt_core_10_am_nhac_03",
+      "kntt_core_10_am_nhac_04",
+      "kntt_core_10_am_nhac_05",
+      "kntt_core_10_am_nhac_06"
+    ]
+  },
+  {
+    "id": "kntt_core_10_mi_thuat",
+    "grade": 10,
+    "subject": "mi_thuat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Mĩ thuật 10 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_10_mi_thuat_01",
+      "kntt_core_10_mi_thuat_02",
+      "kntt_core_10_mi_thuat_03",
+      "kntt_core_10_mi_thuat_04",
+      "kntt_core_10_mi_thuat_05",
+      "kntt_core_10_mi_thuat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_ngu_van",
+    "grade": 11,
+    "subject": "ngu_van",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Ngữ văn 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_ngu_van_01",
+      "kntt_core_11_ngu_van_02",
+      "kntt_core_11_ngu_van_03",
+      "kntt_core_11_ngu_van_04",
+      "kntt_core_11_ngu_van_05",
+      "kntt_core_11_ngu_van_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_tieng_anh",
+    "grade": 11,
+    "subject": "tieng_anh",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Anh 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_tieng_anh_01",
+      "kntt_core_11_tieng_anh_02",
+      "kntt_core_11_tieng_anh_03",
+      "kntt_core_11_tieng_anh_04",
+      "kntt_core_11_tieng_anh_05",
+      "kntt_core_11_tieng_anh_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_lich_su",
+    "grade": 11,
+    "subject": "lich_su",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Lịch sử 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_lich_su_01",
+      "kntt_core_11_lich_su_02",
+      "kntt_core_11_lich_su_03",
+      "kntt_core_11_lich_su_04",
+      "kntt_core_11_lich_su_05",
+      "kntt_core_11_lich_su_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_the_chat",
+    "grade": 11,
+    "subject": "the_chat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục thể chất 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_the_chat_01",
+      "kntt_core_11_the_chat_02",
+      "kntt_core_11_the_chat_03",
+      "kntt_core_11_the_chat_04",
+      "kntt_core_11_the_chat_05",
+      "kntt_core_11_the_chat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_quoc_phong",
+    "grade": 11,
+    "subject": "quoc_phong",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục quốc phòng và an ninh 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_quoc_phong_01",
+      "kntt_core_11_quoc_phong_02",
+      "kntt_core_11_quoc_phong_03",
+      "kntt_core_11_quoc_phong_04",
+      "kntt_core_11_quoc_phong_05",
+      "kntt_core_11_quoc_phong_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_huong_nghiep",
+    "grade": 11,
+    "subject": "huong_nghiep",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hoạt động trải nghiệm, hướng nghiệp 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_huong_nghiep_01",
+      "kntt_core_11_huong_nghiep_02",
+      "kntt_core_11_huong_nghiep_03",
+      "kntt_core_11_huong_nghiep_04",
+      "kntt_core_11_huong_nghiep_05",
+      "kntt_core_11_huong_nghiep_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_dia_li",
+    "grade": 11,
+    "subject": "dia_li",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Địa lí 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_dia_li_01",
+      "kntt_core_11_dia_li_02",
+      "kntt_core_11_dia_li_03",
+      "kntt_core_11_dia_li_04",
+      "kntt_core_11_dia_li_05",
+      "kntt_core_11_dia_li_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_vat_li",
+    "grade": 11,
+    "subject": "vat_li",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Vật lí 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_vat_li_01",
+      "kntt_core_11_vat_li_02",
+      "kntt_core_11_vat_li_03",
+      "kntt_core_11_vat_li_04",
+      "kntt_core_11_vat_li_05",
+      "kntt_core_11_vat_li_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_hoa_hoc",
+    "grade": 11,
+    "subject": "hoa_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hóa học 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_hoa_hoc_01",
+      "kntt_core_11_hoa_hoc_02",
+      "kntt_core_11_hoa_hoc_03",
+      "kntt_core_11_hoa_hoc_04",
+      "kntt_core_11_hoa_hoc_05",
+      "kntt_core_11_hoa_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_sinh_hoc",
+    "grade": 11,
+    "subject": "sinh_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Sinh học 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_sinh_hoc_01",
+      "kntt_core_11_sinh_hoc_02",
+      "kntt_core_11_sinh_hoc_03",
+      "kntt_core_11_sinh_hoc_04",
+      "kntt_core_11_sinh_hoc_05",
+      "kntt_core_11_sinh_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_tin_hoc",
+    "grade": 11,
+    "subject": "tin_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tin học 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_tin_hoc_01",
+      "kntt_core_11_tin_hoc_02",
+      "kntt_core_11_tin_hoc_03",
+      "kntt_core_11_tin_hoc_04",
+      "kntt_core_11_tin_hoc_05",
+      "kntt_core_11_tin_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_cong_nghe",
+    "grade": 11,
+    "subject": "cong_nghe",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Công nghệ 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_cong_nghe_01",
+      "kntt_core_11_cong_nghe_02",
+      "kntt_core_11_cong_nghe_03",
+      "kntt_core_11_cong_nghe_04",
+      "kntt_core_11_cong_nghe_05",
+      "kntt_core_11_cong_nghe_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_kinh_te_phap_luat",
+    "grade": 11,
+    "subject": "kinh_te_phap_luat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục kinh tế và pháp luật 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_kinh_te_phap_luat_01",
+      "kntt_core_11_kinh_te_phap_luat_02",
+      "kntt_core_11_kinh_te_phap_luat_03",
+      "kntt_core_11_kinh_te_phap_luat_04",
+      "kntt_core_11_kinh_te_phap_luat_05",
+      "kntt_core_11_kinh_te_phap_luat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_am_nhac",
+    "grade": 11,
+    "subject": "am_nhac",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Âm nhạc 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_am_nhac_01",
+      "kntt_core_11_am_nhac_02",
+      "kntt_core_11_am_nhac_03",
+      "kntt_core_11_am_nhac_04",
+      "kntt_core_11_am_nhac_05",
+      "kntt_core_11_am_nhac_06"
+    ]
+  },
+  {
+    "id": "kntt_core_11_mi_thuat",
+    "grade": 11,
+    "subject": "mi_thuat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Mĩ thuật 11 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_11_mi_thuat_01",
+      "kntt_core_11_mi_thuat_02",
+      "kntt_core_11_mi_thuat_03",
+      "kntt_core_11_mi_thuat_04",
+      "kntt_core_11_mi_thuat_05",
+      "kntt_core_11_mi_thuat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_ngu_van",
+    "grade": 12,
+    "subject": "ngu_van",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Ngữ văn 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_ngu_van_01",
+      "kntt_core_12_ngu_van_02",
+      "kntt_core_12_ngu_van_03",
+      "kntt_core_12_ngu_van_04",
+      "kntt_core_12_ngu_van_05",
+      "kntt_core_12_ngu_van_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_tieng_anh",
+    "grade": 12,
+    "subject": "tieng_anh",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tiếng Anh 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_tieng_anh_01",
+      "kntt_core_12_tieng_anh_02",
+      "kntt_core_12_tieng_anh_03",
+      "kntt_core_12_tieng_anh_04",
+      "kntt_core_12_tieng_anh_05",
+      "kntt_core_12_tieng_anh_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_lich_su",
+    "grade": 12,
+    "subject": "lich_su",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Lịch sử 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_lich_su_01",
+      "kntt_core_12_lich_su_02",
+      "kntt_core_12_lich_su_03",
+      "kntt_core_12_lich_su_04",
+      "kntt_core_12_lich_su_05",
+      "kntt_core_12_lich_su_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_the_chat",
+    "grade": 12,
+    "subject": "the_chat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục thể chất 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_the_chat_01",
+      "kntt_core_12_the_chat_02",
+      "kntt_core_12_the_chat_03",
+      "kntt_core_12_the_chat_04",
+      "kntt_core_12_the_chat_05",
+      "kntt_core_12_the_chat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_quoc_phong",
+    "grade": 12,
+    "subject": "quoc_phong",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục quốc phòng và an ninh 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_quoc_phong_01",
+      "kntt_core_12_quoc_phong_02",
+      "kntt_core_12_quoc_phong_03",
+      "kntt_core_12_quoc_phong_04",
+      "kntt_core_12_quoc_phong_05",
+      "kntt_core_12_quoc_phong_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_huong_nghiep",
+    "grade": 12,
+    "subject": "huong_nghiep",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hoạt động trải nghiệm, hướng nghiệp 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_huong_nghiep_01",
+      "kntt_core_12_huong_nghiep_02",
+      "kntt_core_12_huong_nghiep_03",
+      "kntt_core_12_huong_nghiep_04",
+      "kntt_core_12_huong_nghiep_05",
+      "kntt_core_12_huong_nghiep_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_dia_li",
+    "grade": 12,
+    "subject": "dia_li",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Địa lí 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_dia_li_01",
+      "kntt_core_12_dia_li_02",
+      "kntt_core_12_dia_li_03",
+      "kntt_core_12_dia_li_04",
+      "kntt_core_12_dia_li_05",
+      "kntt_core_12_dia_li_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_vat_li",
+    "grade": 12,
+    "subject": "vat_li",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Vật lí 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_vat_li_01",
+      "kntt_core_12_vat_li_02",
+      "kntt_core_12_vat_li_03",
+      "kntt_core_12_vat_li_04",
+      "kntt_core_12_vat_li_05",
+      "kntt_core_12_vat_li_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_hoa_hoc",
+    "grade": 12,
+    "subject": "hoa_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Hóa học 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_hoa_hoc_01",
+      "kntt_core_12_hoa_hoc_02",
+      "kntt_core_12_hoa_hoc_03",
+      "kntt_core_12_hoa_hoc_04",
+      "kntt_core_12_hoa_hoc_05",
+      "kntt_core_12_hoa_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_sinh_hoc",
+    "grade": 12,
+    "subject": "sinh_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Sinh học 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_sinh_hoc_01",
+      "kntt_core_12_sinh_hoc_02",
+      "kntt_core_12_sinh_hoc_03",
+      "kntt_core_12_sinh_hoc_04",
+      "kntt_core_12_sinh_hoc_05",
+      "kntt_core_12_sinh_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_tin_hoc",
+    "grade": 12,
+    "subject": "tin_hoc",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Tin học 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_tin_hoc_01",
+      "kntt_core_12_tin_hoc_02",
+      "kntt_core_12_tin_hoc_03",
+      "kntt_core_12_tin_hoc_04",
+      "kntt_core_12_tin_hoc_05",
+      "kntt_core_12_tin_hoc_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_cong_nghe",
+    "grade": 12,
+    "subject": "cong_nghe",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Công nghệ 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_cong_nghe_01",
+      "kntt_core_12_cong_nghe_02",
+      "kntt_core_12_cong_nghe_03",
+      "kntt_core_12_cong_nghe_04",
+      "kntt_core_12_cong_nghe_05",
+      "kntt_core_12_cong_nghe_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_kinh_te_phap_luat",
+    "grade": 12,
+    "subject": "kinh_te_phap_luat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Giáo dục kinh tế và pháp luật 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_kinh_te_phap_luat_01",
+      "kntt_core_12_kinh_te_phap_luat_02",
+      "kntt_core_12_kinh_te_phap_luat_03",
+      "kntt_core_12_kinh_te_phap_luat_04",
+      "kntt_core_12_kinh_te_phap_luat_05",
+      "kntt_core_12_kinh_te_phap_luat_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_am_nhac",
+    "grade": 12,
+    "subject": "am_nhac",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Âm nhạc 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_am_nhac_01",
+      "kntt_core_12_am_nhac_02",
+      "kntt_core_12_am_nhac_03",
+      "kntt_core_12_am_nhac_04",
+      "kntt_core_12_am_nhac_05",
+      "kntt_core_12_am_nhac_06"
+    ]
+  },
+  {
+    "id": "kntt_core_12_mi_thuat",
+    "grade": 12,
+    "subject": "mi_thuat",
+    "topic": "kien_thuc_nen",
+    "textbook": "ket_noi_tri_thuc",
+    "title": "Mĩ thuật 12 · Ôn kiến thức nền · KNTT",
+    "duration_minutes": 15,
+    "question_ids": [
+      "kntt_core_12_mi_thuat_01",
+      "kntt_core_12_mi_thuat_02",
+      "kntt_core_12_mi_thuat_03",
+      "kntt_core_12_mi_thuat_04",
+      "kntt_core_12_mi_thuat_05",
+      "kntt_core_12_mi_thuat_06"
+    ]
+  }
+]
