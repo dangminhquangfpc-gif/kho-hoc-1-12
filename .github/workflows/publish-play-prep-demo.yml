@@ -1,0 +1,33 @@
+name: Publish no-paid-AI Windows and Android demo
+on:
+  push:
+    branches: [feature/play-prep-without-paid-ai-20261015]
+permissions:
+  contents: write
+concurrency:
+  group: publish-play-prep-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify packaged test artifacts
+        run: |
+          cd demo-package
+          sha256sum --check tu-hoc-111-demo-windows.zip.sha256
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          with ZipFile('tu-hoc-111-android-debug.apk.zip') as archive:
+              assert archive.namelist() == ['tu-hoc-111-android-debug.apk']
+              assert archive.testzip() is None
+              archive.extractall('.')
+          PY
+          sha256sum --check tu-hoc-111-android-debug.apk.sha256
+      - name: Prepare prerelease assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd demo-package
+          gh release view demo-tu-hoc-111-2026-10-15-v18 --repo "$GITHUB_REPOSITORY" || gh release create demo-tu-hoc-111-2026-10-15-v18 --draft --target "$GITHUB_SHA" --title 'Tự học 111 · v18 · OCR miễn phí và chuẩn bị Google Play' --notes 'Bản thử đã gỡ trợ lý AI trả phí; giữ OCR miễn phí. Windows local và APK Android debug, chưa phải bản phát hành Google Play. Chức năng máy chủ trên điện thoại cần backend HTTPS. Khi nâng cấp Windows: dừng bản cũ, sao lưu rồi chép nguyên state sang bản mới trước khi chạy.' --repo "$GITHUB_REPOSITORY"
+          gh release upload demo-tu-hoc-111-2026-10-15-v18 tu-hoc-111-demo-windows.zip tu-hoc-111-demo-windows.zip.sha256 tu-hoc-111-android-debug.apk tu-hoc-111-android-debug.apk.sha256 --clobber --repo "$GITHUB_REPOSITORY"

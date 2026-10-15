@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kho_hoc_mobile/ai_ocr_screen.dart';
+import 'package:kho_hoc_mobile/ocr_screen.dart';
 import 'package:kho_hoc_mobile/main.dart';
 import 'package:kho_hoc_mobile/ocr_runtime.dart';
 import 'package:kho_hoc_mobile/repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'ai_ocr_test.dart' show TestOcr, TutorApi;
+import 'ocr_screen_test.dart' show TestOcr;
+import 'practice_test.dart' show FakeApi;
 
-class OfflineTutorApi extends TutorApi {
+class OfflineOcrApi extends FakeApi {
   int subjectCalls = 0;
 
   @override
@@ -59,7 +60,7 @@ void main() {
       });
       final prefs = await SharedPreferences.getInstance();
       final original = {for (final key in prefs.getKeys()) key: prefs.get(key)};
-      final api = OfflineTutorApi()..expectedAccountId = account;
+      final api = OfflineOcrApi()..expectedAccountId = account;
       final user = {'id': account, 'role': 'student', 'grade': 5};
       var bootstrapCalls = 0;
       final container = ProviderContainer(
@@ -105,12 +106,9 @@ void main() {
       await tester.tap(find.text('Nhận chữ từ ảnh trên thiết bị'));
       await tester.pumpAndSettle();
       expect(find.text('Nhận chữ trên thiết bị'), findsOneWidget);
-      final ocrContext = tester.element(find.byType(AiOcrScreen));
+      final ocrContext = tester.element(find.byType(OcrScreen));
       expect(Localizations.localeOf(ocrContext), const Locale('vi'));
       expect(Theme.of(ocrContext).textTheme.bodyMedium!.fontFamily, 'NotoSans');
-      expect(find.text('Trợ lý học tập AI'), findsNothing);
-      expect(find.text('Đăng nhập để dùng AI'), findsNothing);
-      expect(find.text('Kiểm tra lại trạng thái AI'), findsNothing);
       expect(find.text('Dùng văn bản này cho câu trả lời'), findsNothing);
       await tester.enterText(find.byKey(const Key('ocr-edited-text')), '5');
       await tester.pump();
@@ -122,9 +120,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(copied, '5');
       expect(find.text('Đã sao chép văn bản.'), findsOneWidget);
-      expect(api.statusCalls, 0);
       expect(api.subjectCalls, 0);
-      expect(api.requests, isEmpty);
       expect(container.read(authUserProvider), user);
       expect(api.expectedAccountId, account);
       expect({
@@ -145,24 +141,23 @@ void main() {
   );
 
   testWidgets(
-    'OCR-only mode recognizes and edits without loading any AI data',
+    'OCR recognizes and edits without loading account or backend data',
     (tester) async {
       await wide(tester);
-      final api = OfflineTutorApi();
       final recognizer = TestOcr(
         () async => const OcrResult(text: '12 + 5', confidence: null),
       );
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            apiProvider.overrideWithValue(api),
+            apiProvider.overrideWith(
+              (ref) => throw StateError('OCR must not read the backend'),
+            ),
             authUserProvider.overrideWith(
-              (ref) => {'id': 'cached-student', 'grade': 5},
+              (ref) => throw StateError('OCR must not load an account'),
             ),
           ],
-          child: MaterialApp(
-            home: AiOcrScreen(ocrOnly: true, recognizer: recognizer),
-          ),
+          child: MaterialApp(home: OcrScreen(recognizer: recognizer)),
         ),
       );
       await tester.pumpAndSettle();
@@ -178,10 +173,6 @@ void main() {
         tester.widget<FilledButton>(checkedCopyButton()).onPressed,
         isNull,
       );
-      expect(api.statusCalls, 0);
-      expect(api.subjectCalls, 0);
-      expect(api.requests, isEmpty);
-      expect(find.text('Trợ lý học tập AI'), findsNothing);
     },
   );
 }

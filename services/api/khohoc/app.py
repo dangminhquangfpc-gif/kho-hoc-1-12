@@ -218,9 +218,6 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     from .assignments import create_assignments_router
 
     app.include_router(create_assignments_router(db=db, accounts=accounts))
-    from .ai_tutor import create_ai_tutor_router
-
-    app.include_router(create_ai_tutor_router(db=db, accounts=accounts, engine=engine))
     from .sync import create_sync_router
 
     app.include_router(create_sync_router(db, accounts, public_question))

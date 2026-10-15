@@ -1,7 +1,7 @@
 name: iOS engineering build (unsigned)
 on:
   push:
-    branches: [demo/tu-hoc-111-2026-10-15, feature/native-ocr-ai-activation-20261015]
+    branches: [demo/tu-hoc-111-2026-10-15, feature/native-ocr-ai-activation-20261015, feature/play-prep-without-paid-ai-20261015]
   workflow_dispatch:
 permissions:
   contents: read

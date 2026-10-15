@@ -1,4 +1,4 @@
-import 'ai_ocr_screen.dart';
+import 'ocr_screen.dart';
 import 'content_reports.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -134,9 +134,7 @@ class KhoHocApp extends ConsumerWidget {
                     ),
                     TextButton.icon(
                       onPressed: () => Navigator.of(offlineContext).push<void>(
-                        MaterialPageRoute(
-                          builder: (_) => const AiOcrScreen(ocrOnly: true),
-                        ),
+                        MaterialPageRoute(builder: (_) => const OcrScreen()),
                       ),
                       icon: const Icon(Icons.document_scanner_outlined),
                       label: const Text('Nhận chữ từ ảnh trên thiết bị'),
@@ -276,7 +274,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
           const Text(
             'Chọn lớp và môn để luyện tập. Đăng nhập để đồng bộ bài làm và kết quả.',
           ),
-          const Text('Bản thử 2026.10.15.17'),
+          const Text('Bản thử 2026.10.15.18'),
           if (widget.index == 2 &&
               [
                 'manager',
@@ -1101,26 +1099,6 @@ class ResultView extends StatelessWidget {
                   "Đáp án: ${((d['answer_display'] ?? d['correct_answer']) as List).join(', ')}",
                 ),
                 Text(d['explanation']),
-                if (result['attempt_id'] != null &&
-                    result['grade'] is int &&
-                    result['subject'] is String)
-                  TextButton.icon(
-                    icon: const Icon(Icons.auto_awesome_outlined),
-                    label: const Text('Nhờ AI giải thích'),
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => AiOcrScreen(
-                          initialText:
-                              '${d['question'] ?? ''}\nBài làm: ${(d['submitted_answer_display'] as List? ?? []).join(', ')}',
-                          attemptId: result['attempt_id'],
-                          questionId: d['question_id'],
-                          initialGrade: result['grade'],
-                          initialSubject: result['subject'],
-                        ),
-                      ),
-                    ),
-                  ),
                 if (result['attempt_id'] != null)
                   ReportContentButton(
                     kind: 'question',
@@ -1266,18 +1244,18 @@ class SettingsScreen extends ConsumerWidget {
         const BackendSettings(),
         ListTile(
           leading: const Icon(Icons.document_scanner_outlined),
-          title: const Text('Ảnh và trợ lý học tập'),
+          title: const Text('Nhận chữ từ ảnh'),
           subtitle: const Text(
-            'Đọc chữ từ ảnh, kiểm tra văn bản rồi dùng gợi ý AI nếu đã kết nối',
+            'Đọc chữ ngay trên thiết bị, kiểm tra và sao chép văn bản',
           ),
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => const AiOcrScreen()),
+            MaterialPageRoute(builder: (_) => const OcrScreen()),
           ),
         ),
         const Divider(),
         const Text(
-          'Chế độ khách lưu lịch sử trên thiết bị. Khi đăng nhập, kết quả được máy chủ lưu theo tài khoản và người quản lý của bạn có thể xem. Xóa lịch sử trên thiết bị không xóa hồ sơ kết quả của lớp. OCR ảnh được xử lý trong trình duyệt ở bản web/Windows. AI chỉ gửi văn bản sau khi bạn xác nhận và khi máy chủ đã được cấu hình; ảnh không gửi đến nhà cung cấp AI.',
+          'Bài làm khách được gửi tới máy chủ để chấm; lịch sử khách lưu trên thiết bị. Khi đăng nhập, kết quả được máy chủ lưu theo tài khoản và người quản lý của bạn có thể xem. Xóa lịch sử trên thiết bị không xóa hồ sơ kết quả của lớp. OCR xử lý ảnh ngay trên thiết bị; ở bản web/Windows, ảnh được xử lý trong trình duyệt. Ứng dụng không tải ảnh OCR lên máy chủ. Trên Android/iOS, Google ML Kit có thể gửi thông tin thiết bị, ứng dụng và hiệu năng cho Google.',
         ),
         const SizedBox(height: 16),
         const Text(

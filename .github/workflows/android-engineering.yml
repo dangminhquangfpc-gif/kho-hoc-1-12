@@ -1,0 +1,44 @@
+name: Android Play engineering checks
+on:
+  push:
+    branches: [feature/play-prep-without-paid-ai-20261015]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: android-engineering-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  aab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+          channel: stable
+          cache: true
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
+      - run: sdkmanager 'platforms;android-36' 'build-tools;35.0.0' 'platform-tools'
+      - run: flutter pub get --enforce-lockfile
+        working-directory: apps/mobile
+      - name: Build unsigned AAB and inspect 16 KB compatibility
+        run: python scripts/store_preflight.py --platform android --engineering --build --report android-engineering.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tu-hoc-111-android-unsigned-engineering
+          path: |
+            apps/mobile/build/app/outputs/bundle/release/app-release.aab
+            android-engineering.json
+          retention-days: 14

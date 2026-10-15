@@ -64,7 +64,6 @@ def main():
                     "-q",
                     "services/api/tests/test_shared_server.py",
                     "services/api/tests/test_assignment_sync.py",
-                    "services/api/tests/test_ai_tutor.py",
                     "services/api/tests/test_postgres_operations.py",
                     "-k",
                     "postgresql or unsafe or operations",

@@ -17,12 +17,6 @@ from urllib.request import ProxyHandler, Request, build_opener
 import venv
 import webbrowser
 
-if __package__:
-    from .configure_ai import AIConfigurationError, load_ai_environment
-else:
-    from configure_ai import AIConfigurationError, load_ai_environment
-
-
 ROOT = Path(__file__).resolve().parents[1]
 OPENER = build_opener(ProxyHandler({}))
 
@@ -188,33 +182,12 @@ def python_environment(state: Path) -> Path:
 
 
 def child_environment(state: Path, api_port: int, web_port: int) -> dict[str, str]:
-    # Never inherit a configured production database or an administrator credential.
+    # Never inherit production state, administrator credentials, or legacy paid
+    # AI settings. This release has no remote AI provider. Existing private AI
+    # files are deliberately left untouched so upgrading never deletes secrets.
     environ = {
         key: value for key, value in os.environ.items() if not key.startswith("KHOHOC_")
     }
-    # Select one complete AI source; mixing file/env fields could send a key
-    # to a provider different from the one its operator intended.
-    ai_names = (
-        "KHOHOC_AI_ENABLED",
-        "KHOHOC_AI_BASE_URL",
-        "KHOHOC_AI_MODEL",
-        "KHOHOC_AI_API_KEY_FILE",
-        "KHOHOC_AI_API_KEY",
-        "KHOHOC_AI_DAILY_USER_LIMIT",
-        "KHOHOC_AI_DAILY_SERVER_LIMIT",
-        "KHOHOC_AI_OUTPUT_TOKENS",
-    )
-    explicit_ai = {key: os.environ[key] for key in ai_names if key in os.environ}
-    if explicit_ai:
-        environ.update(explicit_ai)
-    else:
-        try:
-            environ.update(load_ai_environment(state))
-        except AIConfigurationError as exc:
-            raise DemoError(
-                "Cấu hình AI không hợp lệ. Dừng demo rồi chạy configure-ai.bat "
-                "(hoặc scripts/configure_ai.py --state state) để sửa hoặc tắt AI."
-            ) from exc
     environ.update(
         {
             "PYTHONPATH": os.pathsep.join((str(ROOT / "services/api"), str(ROOT))),

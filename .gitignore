@@ -144,3 +144,6 @@ __pycache__/
 # Redistributed OCR licenses must accompany the vendored binaries
 !apps/mobile/web/ocr/licenses/*.md
 !apps/mobile/web/ocr/licenses/*.txt
+
+# Kotlin compiler session cache
+**/.kotlin/
