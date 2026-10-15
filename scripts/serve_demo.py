@@ -25,7 +25,7 @@ if (
 BACKEND_URL = BACKEND_URL.rstrip("/")
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 PUBLIC = re.compile(
-    r"(?:auth/(?:me|login|logout|register|password)|account/results|account/attempts|account/attempts/[^/]+|account/attempts/[^/]+/draft|account/delete|classroom/groups|classroom/groups/join|classroom/groups/[^/]+|classroom/groups/[^/]+/members|classroom/groups/[^/]+/members/[^/]+|classroom/students|classroom/students/bulk|classroom/students/[^/]+|classroom/students/[^/]+/(?:results|reset-password)|health|coverage|curriculum|practice-options|practice-attempts|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|exams/[^/]+/attempts|attempts/[^/]+|attempts/[^/]+/(?:submit|result)|documents|documents/[^/]+|documents/[^/]+/file)"
+    r"(?:auth/(?:me|login|logout|register|password)|account/results|account/attempts|account/attempts/[^/]+|account/attempts/[^/]+/draft|account/delete|classroom/groups|classroom/groups/join|classroom/groups/[^/]+|classroom/groups/[^/]+/members|classroom/groups/[^/]+/members/[^/]+|classroom/students|classroom/students/bulk|classroom/students/[^/]+|classroom/students/[^/]+/(?:results|reset-password)|health|ready|coverage|curriculum|practice-options|practice-attempts|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|exams/[^/]+/attempts|attempts/[^/]+|attempts/[^/]+/(?:submit|result)|documents|documents/[^/]+|documents/[^/]+/file)"
 )
 
 

@@ -89,3 +89,19 @@ chủ/tên miền Internet của người dùng được triển khai. `shared` 
 soát; chế độ phát hành `production` vẫn bị khóa. Còn sao lưu PostgreSQL tự động,
 giám sát/retention, thẩm định nội dung và quyền riêng tư, kiểm thử thiết bị thật
 và tài khoản/ký cửa hàng. Không coi volume database là bản sao lưu.
+
+## Vận hành PostgreSQL sau bản .12
+
+Bổ sung archive AES-256-GCM dạng luồng, khóa chống job chồng, trạng thái backup,
+retention có kiểm tra (giữ ít nhất hai bản hợp lệ) và khôi phục vào database mới
+`recovery_*`, thu hồi session trong bản khôi phục. Nguồn backup tự đọc cấu hình
+API, tránh sao lưu nhầm database cũ sau khi chuyển sang bản phục hồi.
+
+Có `/ready` kiểm tra schema, trả 503 khi DB/schema chưa sẵn sàng; hạn thời gian
+truy vấn/kết nối PostgreSQL, monitor HTTPS và unit systemd backup hàng ngày/
+kiểm tra mỗi 5 phút. Đã kiểm thử restore PostgreSQL thật và luồng HTTPS mất DB,
+phục hồi dữ liệu, đăng nhập lại. [Runbook vận hành](POSTGRES_OPERATIONS.md).
+
+Chưa cài lịch trên máy chủ Internet, chưa cấu hình offsite/nhà cung cấp cảnh báo
+hoặc đối soát yêu cầu xóa sau snapshot. Không thay đổi trạng thái phát hành cửa
+hàng, không mở khóa production và không yêu cầu tải lại ZIP Windows cho phần này.

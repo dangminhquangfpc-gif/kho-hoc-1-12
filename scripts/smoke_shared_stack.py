@@ -18,6 +18,7 @@ def main():
     from khohoc.database import make_engine, migrate
     from khohoc.models import LearningUser, ContentQuestion, Exam
     from khohoc.schemas import Question
+    from backup_postgres import PostgresDocker, backup, backup_status, keygen, restore
 
     project = "tuhoc-smoke-" + secrets.token_hex(4)
     domain = "study.test.edu.vn"
@@ -285,6 +286,61 @@ def main():
                     if time.monotonic() > deadline:
                         raise
                     time.sleep(0.5)
+            # Confirm DB outages are reported as 503, then reconnect without replacing data.
+            run("stop", "db")
+            request("/ready", status=503)
+            request("/grades", status=503)
+            run("up", "-d", "--wait", "db")
+            assert request("/ready")["status"] == "ok"
+            key = staging / "postgres.backup-key"
+            keygen(key)
+            driver = PostgresDocker(
+                compose_file=compose, env_file=staging / ".env", project=project
+            )
+            assert driver.configured_database() == "tuhoc"
+            archive = backup(
+                driver, driver.configured_database(), staging / "backups", key, 30
+            )
+            assert backup_status(staging / "backups") == "fresh"
+            driver.sql("tuhoc", "DELETE FROM learning_records")
+            assert request("/account/results") == []
+            recovery = "recovery_smoke_" + secrets.token_hex(6)
+            restore(driver, archive, recovery, key)
+            owner_url = "postgresql+psycopg://tuhoc_owner@db:5432/" + recovery
+            run(
+                "run",
+                "--rm",
+                "-e",
+                "KHOHOC_DATABASE_URL=" + owner_url,
+                "maintenance",
+                "python",
+                "-m",
+                "khohoc.server_admin",
+                "grant-runtime",
+                "--role",
+                "tuhoc_app",
+            )
+            config["services"]["api"]["environment"]["KHOHOC_DATABASE_URL"] = (
+                "postgresql+psycopg://tuhoc_app@db:5432/" + recovery
+            )
+            compose.write_text(json.dumps(config))
+            assert driver.configured_database() == recovery
+            run("up", "-d", "api")
+            deadline = time.monotonic() + 45
+            while True:
+                try:
+                    assert request("/ready")["status"] == "ok"
+                    break
+                except (RuntimeError, subprocess.CalledProcessError):
+                    if time.monotonic() > deadline:
+                        raise
+                    time.sleep(0.5)
+            request("/auth/me", status=401)  # Backup sessions must not be reactivated.
+            request("/auth/login", {"username": "student", "password": password})
+            restored = request("/account/results")
+            assert restored[0]["id"] == attempt["id"]
+            assert restored[0]["result"]["score"] == submitted["score"]
+            assert driver.sql("tuhoc", "SELECT count(*) FROM learning_records") == b"0"
             for service in ["api", "db"]:
                 ident = subprocess.check_output(
                     command + ["ps", "-q", service], text=True
@@ -297,7 +353,7 @@ def main():
                     assert info["HostConfig"]["ReadonlyRootfs"]
                     assert info["Config"]["User"] == "10001:10001"
             print(
-                "PASS: verified local HTTPS, restricted API role, SQLite transfer, two-device drafts/results, isolation, restart persistence and private DB/API ports."
+                "PASS: verified local HTTPS, restricted API role, SQLite transfer, two-device drafts/results, isolation, restart persistence, DB outage 503, verified encrypted PostgreSQL restore with revoked sessions and private DB/API ports."
             )
         finally:
             subprocess.run(

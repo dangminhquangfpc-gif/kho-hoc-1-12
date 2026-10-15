@@ -1,0 +1,10 @@
+[Unit]
+Description=Tu hoc 111 readiness every five minutes
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=5min
+Unit=tuhoc-monitor.service
+
+[Install]
+WantedBy=timers.target

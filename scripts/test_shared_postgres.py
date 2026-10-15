@@ -55,6 +55,7 @@ def main():
             environment["KHOHOC_TEST_POSTGRES_URL"] = (
                 f"postgresql+psycopg://postgres:{password}@127.0.0.1:{port}/postgres"
             )
+            environment["KHOHOC_TEST_POSTGRES_CONTAINER"] = name
             return subprocess.run(
                 [
                     sys.executable,
@@ -62,8 +63,9 @@ def main():
                     "pytest",
                     "-q",
                     "services/api/tests/test_shared_server.py",
+                    "services/api/tests/test_postgres_operations.py",
                     "-k",
-                    "postgresql or unsafe",
+                    "postgresql or unsafe or operations",
                 ],
                 cwd=ROOT,
                 env=environment,

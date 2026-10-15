@@ -69,3 +69,10 @@ thiết bị và chống ghi đè bằng revision. Xem `docs/SHARED_SERVER.md`. 
 khai endpoint Internet, backup PostgreSQL định kỳ hoặc hoàn tất điều kiện cửa
 hàng. Health của pilot trả `mode=shared`; preflight vẫn yêu cầu production để
 ngăn nhầm bản pilot thành bản phát hành.
+
+## Bổ sung vận hành sau .12
+
+Đã có công cụ backup PostgreSQL mã hóa, restore cách ly và monitor HTTPS/readiness,
+unit lịch chạy kèm runbook. Chưa kích hoạt lịch/giám sát trên máy chủ Internet,
+chưa có offsite hoặc đối soát dữ liệu đã xóa sau phục hồi; không coi đây là hoàn
+tất vận hành production. Xem docs/POSTGRES_OPERATIONS.md.

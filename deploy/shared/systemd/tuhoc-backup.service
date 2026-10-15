@@ -1,0 +1,17 @@
+[Unit]
+Description=Tu hoc 111 encrypted PostgreSQL backup
+Requires=docker.service
+After=docker.service network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/tu-hoc-111
+ExecStart=/opt/tu-hoc-111/.server-venv/bin/python /opt/tu-hoc-111/scripts/backup_postgres.py backup --key-file /etc/tu-hoc-111/postgres.backup-key --directory /var/backups/tu-hoc-111 --retention-days 30
+TimeoutStartSec=20min
+Nice=10
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/var/backups/tu-hoc-111
+UMask=0077
