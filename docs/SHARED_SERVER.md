@@ -109,7 +109,7 @@ Máy chủ kiểm tra revision khi lưu và khi nộp bằng client mới: hai t
 sửa thì bản cũ nhận 409. App giữ bản local, yêu cầu mở lại bản máy chủ hoặc xem
 kết quả đã nộp; không tự gộp/ghi đè câu trả lời. Mở bản máy chủ có xác nhận trước
 khi thay bản local. Tài khoản hiển thị 100 bài gần nhất chưa nộp/còn hạn và 500 kết
-quả gần nhất. Bài đang làm tuân theo thời hạn nộp hiện có (thời lượng đề + 24 giờ).
+quả gần nhất. Bài đang làm tuân theo thời hạn nộp hiện có (24 giờ từ khi tạo bài, đồng nhất với lúc nộp).
 Đánh dấu câu, yêu thích tài liệu và tùy chọn thiết bị chưa đồng bộ.
 
 ## Kiểm tra và vận hành

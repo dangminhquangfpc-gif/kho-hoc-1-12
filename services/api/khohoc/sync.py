@@ -3,7 +3,7 @@
 from datetime import datetime, timezone, timedelta
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, Field
-from sqlalchemy import select, update
+from sqlalchemy import select, update, or_, cast, String
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from .models import Attempt, AccountAttempt, AttemptDraft
@@ -29,9 +29,8 @@ def create_sync_router(db_dependency, accounts, public_question):
         created = attempt.created_at
         if created.tzinfo is None:
             created = created.replace(tzinfo=timezone.utc)
-        return created + timedelta(
-            minutes=attempt.snapshot["exam"]["duration_minutes"], hours=24
-        )
+        # Match the existing submission cutoff: 24 hours from attempt creation.
+        return created + timedelta(hours=24)
 
     @router.get("/account/attempts")
     def pending(request: Request, db: Session = Depends(db_dependency)):
@@ -39,7 +38,11 @@ def create_sync_router(db_dependency, accounts, public_question):
         rows = db.scalars(
             select(Attempt)
             .join(AccountAttempt, AccountAttempt.attempt_id == Attempt.id)
-            .where(AccountAttempt.user_id == user.id)
+            .where(
+                AccountAttempt.user_id == user.id,
+                or_(Attempt.result.is_(None), cast(Attempt.result, String) == "null"),
+                Attempt.created_at >= datetime.now(timezone.utc) - timedelta(hours=24),
+            )
             .order_by(Attempt.created_at.desc())
             .limit(100)
         )
@@ -47,6 +50,7 @@ def create_sync_router(db_dependency, accounts, public_question):
             dict(
                 id=row.id,
                 title=row.snapshot["exam"]["title"],
+                exam_id=row.snapshot["exam"]["id"],
                 created_at=row.created_at.isoformat(),
             )
             for row in rows

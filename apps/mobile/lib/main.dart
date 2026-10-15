@@ -242,7 +242,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
           const Text(
             'Chọn lớp và môn để luyện tập. Đăng nhập để đồng bộ bài làm và kết quả.',
           ),
-          const Text('Bản thử 2026.10.15.14'),
+          const Text('Bản thử 2026.10.15.15'),
           if (widget.index == 2 &&
               [
                 'manager',

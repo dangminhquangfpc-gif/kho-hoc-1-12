@@ -8,7 +8,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy import text, select
+from sqlalchemy import text, select, update
 from sqlalchemy.engine import make_url
 from sqlalchemy.orm import Session
 from khohoc.accounts import password_hash
@@ -121,6 +121,61 @@ def login(client, username="student"):
     )
     assert response.status_code == 200
     return response
+
+
+def test_assignment_progress_across_workers_and_json_null_drafts(school):
+    one, two, engine, q, postgres = school
+    login(one, "manager")
+    group_response = one.post("/classroom/groups", json={"name": "Nhóm giao đề"})
+    assert group_response.status_code == 201
+    group = group_response.json()
+    login(two)
+    assert (
+        two.post(
+            "/classroom/groups/join", json={"code": group["join_code"]}
+        ).status_code
+        == 200
+    )
+    path = f"/classroom/groups/{group['id']}/assignments"
+    assigned = one.post(path, json={"exam_id": "sync-exam"})
+    assert assigned.status_code == 201, assigned.text
+    exam_id = assigned.json()["exam_id"]
+    own = two.get("/account/assignments").json()
+    assert len(own) == 1 and own[0]["exam_id"] == exam_id
+    assert own[0]["status"] == "not_started" and "students" not in own[0]
+    attempt_response = two.post(f"/exams/{exam_id}/attempts")
+    assert attempt_response.status_code == 201
+    attempt = attempt_response.json()
+    from khohoc.models import Attempt
+
+    with Session(engine) as db:
+        # Force SQL UPDATE: assigning decoded None to ORM None would be a no-op.
+        db.execute(
+            update(Attempt).where(Attempt.id == attempt["id"]).values(result=None)
+        )
+        db.commit()
+    started = one.get(path + "/" + exam_id).json()
+    assert started["in_progress_count"] == 1
+    assert started["students"][0]["status"] == "in_progress"
+    submitted = two.post(
+        f"/attempts/{attempt['id']}/submit",
+        json={"answers": {q["id"]: q["correct_answer"]}},
+    )
+    assert submitted.status_code == 200
+    detail = one.get(path + "/" + exam_id).json()
+    assert detail["submitted_count"] == 1 and detail["in_progress_count"] == 0
+    assert detail["students"][0]["latest_percent"] == 100
+    assert detail["students"][0]["attempts_count"] == 1
+    csv_response = one.get(path + "/" + exam_id + "/results.csv")
+    assert csv_response.status_code == 200
+    assert csv_response.content.startswith(b"\xef\xbb\xbf")
+    assert two.get(path + "/" + exam_id + "/results.csv").status_code == 403
+    assert (
+        one.delete(f"/classroom/groups/{group['id']}/members/student").status_code
+        == 204
+    )
+    assert two.get("/account/assignments").json() == []
+    assert one.get(path + "/" + exam_id).json()["member_count"] == 0
 
 
 def test_two_servers_sync_resume_submit_and_privacy(school):

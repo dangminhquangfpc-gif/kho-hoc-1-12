@@ -151,6 +151,16 @@ def test_phone_preview_seed_private_routes_and_rate_limit(tmp_path, monkeypatch)
         )
         assert group.status_code == 201
         assert client.get("/classroom/groups").json()[0]["id"] == group.json()["id"]
+        assignment_url = f"/classroom/groups/{group.json()['id']}/assignments"
+        assert client.get(assignment_url).json() == []
+        assigned = client.post(assignment_url, json={"exam_id": source_exams[0]["id"]})
+        assert assigned.status_code == 201
+        assigned_id = assigned.json()["exam_id"]
+        assert client.get(f"{assignment_url}/{assigned_id}").status_code == 200
+        assert (
+            client.get(f"{assignment_url}/{assigned_id}/results.csv").status_code == 200
+        )
+        assert client.get("/account/assignments").status_code == 403
         assert (
             client.delete("/classroom/groups/" + group.json()["id"]).status_code == 204
         )

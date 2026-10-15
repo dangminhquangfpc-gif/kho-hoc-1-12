@@ -8,6 +8,7 @@ import 'main.dart' show Shell, Failure, ResultView;
 import 'repository.dart';
 import 'study_progress.dart';
 import 'report_export.dart';
+import 'assignments_screen.dart';
 
 final serverResultsProvider = FutureProvider.autoDispose<List<Json>>((ref) {
   final user = ref.watch(authUserProvider);
@@ -318,7 +319,19 @@ class _AccountState extends ConsumerState<AccountScreen> {
                   icon: const Icon(Icons.feedback_outlined),
                   label: const Text('Xử lý phản hồi nội dung'),
                 ),
-              if (user['role'] == 'student') const GroupPanel(student: true),
+              if (user['role'] == 'student') ...[
+                FilledButton.icon(
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const AssignmentsScreen(),
+                    ),
+                  ),
+                  icon: const Icon(Icons.assignment_outlined),
+                  label: const Text('Bài được giao'),
+                ),
+                const GroupPanel(student: true),
+              ],
               Row(
                 children: [
                   const Expanded(child: Text('Bài đang làm trên các thiết bị')),
@@ -936,6 +949,19 @@ class _GroupPanelState extends ConsumerState<GroupPanel> {
                       children: widget.student
                           ? const []
                           : [
+                              TextButton.icon(
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => AssignmentsScreen(
+                                      groupId: group['id'],
+                                      groupName: group['name'],
+                                    ),
+                                  ),
+                                ),
+                                icon: const Icon(Icons.assignment_outlined),
+                                label: const Text('Bài giao và tiến độ'),
+                              ),
                               const Padding(
                                 padding: EdgeInsets.all(12),
                                 child: Text(

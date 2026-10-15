@@ -1,0 +1,19 @@
+name: Publish group assignments Windows demo
+on:
+  push:
+    branches: [feature/group-assignments-20261015]
+permissions:
+  contents: write
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify and upload assignment demo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd demo-package
+          sha256sum --check tu-hoc-111-demo-windows.zip.sha256
+          gh release view demo-tu-hoc-111-2026-10-15-v15 --repo "$GITHUB_REPOSITORY" || gh release create demo-tu-hoc-111-2026-10-15-v15 --draft --target "$GITHUB_SHA" --title 'Tự học 111 · v15 · Giao bài và tiến độ theo đề' --notes 'Bản thử Windows local. Giao đề cho nhóm, tiến độ từng học viên và CSV theo đề; sửa tiếp tục bản nháp; chưa triển khai backend Internet hoặc phát hành cửa hàng. Dừng bản cũ, sao lưu và chép nguyên thư mục state sang bản mới trước khi chạy.' --repo "$GITHUB_REPOSITORY"
+          gh release upload demo-tu-hoc-111-2026-10-15-v15 tu-hoc-111-demo-windows.zip tu-hoc-111-demo-windows.zip.sha256 --clobber --repo "$GITHUB_REPOSITORY"

@@ -7,14 +7,16 @@ import 'dart:convert';
 const reportExportLabel = 'Tải bảng điểm CSV';
 const reportExportMessage =
     'Đã tạo tệp CSV. Bảng gồm kết quả mọi môn, mọi lần nộp của thành viên hiện tại; học viên chưa nộp bài có điểm để trống.';
-Future<void> exportReport(String csv) async {
+Future<void> exportReport(
+  String csv, {
+  String filename = 'tu-hoc-111-bang-diem.csv',
+}) async {
   final url = html.Url.createObjectUrlFromBlob(
     html.Blob([
       utf8.encode(csv.startsWith('\ufeff') ? csv : '\ufeff$csv'),
     ], 'text/csv;charset=utf-8'),
   );
-  final anchor = html.AnchorElement(href: url)
-    ..download = 'tu-hoc-111-bang-diem.csv';
+  final anchor = html.AnchorElement(href: url)..download = filename;
   anchor.click();
   Future<void>.delayed(
     const Duration(seconds: 30),
