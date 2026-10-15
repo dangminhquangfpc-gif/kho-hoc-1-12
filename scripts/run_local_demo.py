@@ -307,7 +307,7 @@ def run(api_port: int, web_port: int, no_browser: bool) -> None:
                     executable, "scripts.serve_demo:app", web_port, web_output, environ
                 )
             )
-            deadline = time.monotonic() + 180
+            deadline = time.monotonic() + 300
             while not demo_ready(api_port, web_port):
                 failed = [child for child in children if child.poll() is not None]
                 if failed:
@@ -316,7 +316,7 @@ def run(api_port: int, web_port: int, no_browser: bool) -> None:
                     )
                 if time.monotonic() >= deadline:
                     raise DemoError(
-                        f"The demo did not become ready within 180 seconds. See {api_log} and {web_log}."
+                        f"The demo did not become ready within 300 seconds. See {api_log} and {web_log}."
                     )
                 time.sleep(0.25)
             if any(child.poll() is not None for child in children):

@@ -32,11 +32,19 @@ class LearningApi {
     await subjects(1);
   }
 
-  Future<List<Json>> documents(Map<String, dynamic> filter) async =>
-      (await client.get<List<dynamic>>(
+  Future<List<Json>> documents(Map<String, dynamic> filter) async {
+    final output = <Json>[];
+    for (var offset = 0; offset <= 10000; offset += 100) {
+      final page = (await client.get<List<dynamic>>(
         '/documents',
-        queryParameters: filter,
+        queryParameters: {...filter, 'limit': 100, 'offset': offset},
       )).data!.cast<Json>();
+      output.addAll(page);
+      if (page.length < 100) return output;
+    }
+    throw StateError('Quá nhiều tài liệu. Hãy chọn thêm bộ lọc.');
+  }
+
   Future<Json> document(String id) async =>
       (await client.get<Json>('/documents/$id')).data!;
   Uri publicUrl(String path) {

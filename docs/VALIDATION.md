@@ -64,3 +64,8 @@ Bản cuối sau Việt hóa metadata và xử lý xóa lịch sử: 6 Flutter t
 ## Expanded local demo — 15/10/2026
 
 60 backend tests passed after adding the curriculum bank and coverage endpoint. The final grade-specific physics/chemistry/biology modules subsequently passed content integrity and preview integration checks (3 tests). Flutter analyze passed, 6 Flutter tests passed, and the release web build completed. A ZIP extracted into a Vietnamese path successfully upgraded a database from the earlier package. HTTP checks confirmed 135 grade–subject pairs, totals of 1,566 questions/219 exams/199 notes, full marks for four new math/science exams, hidden answer keys, and blocked admin routes. Browser practice/reload/resume/submit/history smoke passed. Windows wheel closure, runtime provenance and ZIP CRC checks passed; Windows native execution remains unrun in this Linux environment. Textbook chapter-by-chapter alignment and independent teacher review remain pending; see CURRICULUM_EXPANSION.md.
+
+
+## Internet library — 15/10/2026
+
+63 backend tests passed, including source provenance, correct grade/period classification, namespace rules for national exams, and period/year filtering. Flutter analyze passed; 7 Flutter tests passed including paginated document retrieval; release web build passed. A package extracted into a Vietnamese path upgraded the previous demo database and exposed 2,133 documents/1,934 link-only sources. HTTP checks verified term/year filters, private evidence omission, denied local PDF copies and blocked admin. Source HTTP 200 records with book evidence and hashes are stored in data/library/source_checks.json. Windows native execution remains unrun.

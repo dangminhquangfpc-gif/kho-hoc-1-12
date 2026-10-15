@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kho_hoc_mobile/repository.dart';
@@ -22,7 +23,47 @@ class StatusAdapter implements HttpClientAdapter {
   void close({bool force = false}) {}
 }
 
+class PagedAdapter implements HttpClientAdapter {
+  final offsets = <int>[];
+  @override
+  Future<ResponseBody> fetch(
+    RequestOptions options,
+    Stream<Uint8List>? requestStream,
+    Future<void>? cancelFuture,
+  ) async {
+    final offset = options.queryParameters['offset'] as int;
+    offsets.add(offset);
+    expect(options.queryParameters['grade'], 6);
+    expect(options.queryParameters['assessment_period'], 'midterm_1');
+    final count = offset == 0 ? 100 : 3;
+    return ResponseBody.fromString(
+      jsonEncode(List.generate(count, (i) => {'id': 'doc_${offset + i}'})),
+      200,
+      headers: {
+        Headers.contentTypeHeader: [Headers.jsonContentType],
+      },
+    );
+  }
+
+  @override
+  void close({bool force = false}) {}
+}
+
 void main() {
+  test(
+    'Document search retrieves pages beyond the first hundred and keeps filters',
+    () async {
+      final adapter = PagedAdapter();
+      final dio = Dio(BaseOptions(baseUrl: 'https://example.test'))
+        ..httpClientAdapter = adapter;
+      final documents = await LearningApi(
+        client: dio,
+      ).documents({'grade': 6, 'assessment_period': 'midterm_1'});
+      expect(documents.length, 103);
+      expect(documents.last['id'], 'doc_102');
+      expect(adapter.offsets, [0, 100]);
+    },
+  );
   test('HTTPS endpoint normalization and credential rejection', () {
     expect(validateBackendUrl(' https://example.org/ '), 'https://example.org');
     for (final value in [

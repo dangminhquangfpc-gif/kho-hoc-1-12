@@ -3,7 +3,7 @@
 import hashlib
 import re
 import unicodedata
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Callable, Literal
 from urllib.parse import urlsplit
@@ -21,7 +21,13 @@ from .models import Base
 MAX_PDF_BYTES = 10 * 1024 * 1024
 DEFAULT_LIBRARY_ROOT = Path(__file__).resolve().parents[3] / "data/library/files"
 DocumentKind = Literal["study_notes", "worksheet", "reference", "exam"]
-Textbook = Literal["independent", "ket_noi_tri_thuc", "chan_troi_sang_tao", "canh_dieu"]
+Textbook = Literal[
+    "independent",
+    "ket_noi_tri_thuc",
+    "chan_troi_sang_tao",
+    "canh_dieu",
+    "national_common",
+]
 
 
 def search_key(value: str) -> str:
@@ -30,6 +36,11 @@ def search_key(value: str) -> str:
     return " ".join(
         "".join(c for c in decomposed if not unicodedata.combining(c)).split()
     )
+
+
+AssessmentPeriod = Literal[
+    "midterm_1", "final_1", "midterm_2", "final_2", "graduation", "review"
+]
 
 
 class DocumentSection(BaseModel):
@@ -52,6 +63,11 @@ class DocumentInput(BaseModel):
     author: str = Field(min_length=1, max_length=200)
     source_name: str = Field(min_length=1, max_length=200)
     source_url: str | None = Field(default=None, max_length=2000)
+    assessment_period: AssessmentPeriod | None = None
+    exam_year: int | None = Field(default=None, ge=2000, le=2100)
+    source_verified_on: date | None = None
+    resource_scope: Literal["single_paper", "collection", "study_guide"] = "study_guide"
+    access_notice: str = Field(default="", max_length=500)
     source_type: Literal["original", "licensed", "link_only"] = "original"
     license: Literal[
         "original_content",
@@ -70,6 +86,21 @@ class DocumentInput(BaseModel):
 
     @model_validator(mode="after")
     def validate_permissions(self):
+        if (
+            self.assessment_period == "graduation"
+            and self.textbook != "national_common"
+        ):
+            raise ValueError(
+                "National graduation exams must use national_common, not a textbook label"
+            )
+        if self.textbook == "national_common" and self.grade != 12:
+            raise ValueError("National graduation resources belong to grade 12")
+        if (
+            self.assessment_period == "graduation"
+            and self.resource_scope == "single_paper"
+            and self.exam_year is None
+        ):
+            raise ValueError("An individual national exam must identify its year")
         if self.subject not in {s["id"] for s in subjects_for_grade(self.grade)}:
             raise ValueError("Subject not available for grade")
         if self.source_url:
@@ -187,6 +218,18 @@ def public_document(row: LibraryDocument, *, detail: bool = False) -> dict:
     }
     view = bool(body.get("pdf_filename") and body["distribution_allowed"])
     metadata.update(
+        {
+            key: body.get(key)
+            for key in (
+                "assessment_period",
+                "exam_year",
+                "source_verified_on",
+                "resource_scope",
+                "access_notice",
+            )
+        }
+    )
+    metadata.update(
         state=row.state,
         version=row.version,
         updated_at=row.updated_at.isoformat()
@@ -231,6 +274,8 @@ def create_library_router(
         topic: str = Query(default="", max_length=100),
         textbook: Textbook | None = None,
         kind: DocumentKind | None = None,
+        assessment_period: AssessmentPeriod | None = None,
+        exam_year: int | None = Query(default=None, ge=2000, le=2100),
         search: str = Query(default="", max_length=100),
         limit: int = Query(default=50, ge=1, le=100),
         offset: int = Query(default=0, ge=0, le=10000),
@@ -246,13 +291,15 @@ def create_library_router(
                 continue
             item = row.payload
             if any(
-                expected is not None and item[field] != expected
+                expected is not None and item.get(field) != expected
                 for field, expected in (
                     ("grade", grade),
                     ("subject", subject),
                     ("semester", semester),
                     ("textbook", textbook),
                     ("kind", kind),
+                    ("assessment_period", assessment_period),
+                    ("exam_year", exam_year),
                 )
             ):
                 continue

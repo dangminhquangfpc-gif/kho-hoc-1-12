@@ -92,8 +92,12 @@ def create_preview():
         ExamInput,
     )
     notes = canonical_fixture_map(
-        json.loads((root / "data/library/documents.json").read_text(encoding="utf-8"))[
-            "documents"
+        [
+            document
+            for filename in ("documents.json", "external_documents.json")
+            for document in json.loads(
+                (root / "data/library" / filename).read_text(encoding="utf-8")
+            )["documents"]
         ],
         DocumentInput,
     )

@@ -32,7 +32,13 @@ def main():
     if not token:
         raise SystemExit("Configure KHOHOC_ADMIN_TOKEN in a local ignored file")
     fixtures = canonical_fixture_map(
-        json.loads((ROOT / "data/library/documents.json").read_text())["documents"],
+        [
+            document
+            for name in ("documents.json", "external_documents.json")
+            for document in json.loads(
+                (ROOT / "data/library" / name).read_text(encoding="utf-8")
+            )["documents"]
+        ],
         DocumentInput,
     )
     with httpx.Client(

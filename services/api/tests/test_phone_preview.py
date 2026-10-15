@@ -13,7 +13,7 @@ def test_phone_preview_seed_private_routes_and_rate_limit(tmp_path, monkeypatch)
         assert len(client.get("/documents", params={"limit": 100}).json()) == 100
         assert (
             len(client.get("/documents", params={"limit": 100, "offset": 100}).json())
-            == 99
+            == 100
         )
         coverage = client.get("/coverage", params={"grade": 2}).json()
         math = next(row for row in coverage if row["subject"] == "toan")

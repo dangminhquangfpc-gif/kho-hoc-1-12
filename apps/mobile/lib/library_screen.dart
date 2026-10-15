@@ -13,6 +13,8 @@ typedef DocumentFilter = ({
   String textbook,
   String kind,
   String topic,
+  String period,
+  int year,
 });
 final documentsProvider = FutureProvider.family<List<Json>, DocumentFilter>(
   (ref, f) => ref.watch(apiProvider).documents({
@@ -23,6 +25,8 @@ final documentsProvider = FutureProvider.family<List<Json>, DocumentFilter>(
     if (f.textbook.isNotEmpty) 'textbook': f.textbook,
     if (f.kind.isNotEmpty) 'kind': f.kind,
     if (f.topic.isNotEmpty) 'topic': f.topic,
+    if (f.period.isNotEmpty) 'assessment_period': f.period,
+    if (f.year != 0) 'exam_year': f.year,
   }),
 );
 
@@ -35,6 +39,8 @@ class LibraryScreen extends ConsumerStatefulWidget {
 class _LibraryState extends ConsumerState<LibraryScreen> {
   int grade = 1, semester = 0;
   String subject = 'toan', search = '', textbook = '', kind = '', topic = '';
+  String period = '';
+  int year = 0;
   bool favoritesOnly = false, recentOnly = false;
   @override
   Widget build(BuildContext context) {
@@ -46,6 +52,8 @@ class _LibraryState extends ConsumerState<LibraryScreen> {
       textbook: textbook,
       kind: kind,
       topic: topic,
+      period: period,
+      year: year,
     );
     final documents = ref.watch(documentsProvider(filter));
     final subjects = ref.watch(subjectsProvider(grade));
@@ -59,7 +67,7 @@ class _LibraryState extends ConsumerState<LibraryScreen> {
         padding: const EdgeInsets.all(20),
         children: [
           const Text(
-            'Ghi chú học tập tự biên soạn. Chỉ hiển thị tài liệu đã duyệt và có quyền phân phối.',
+            'Ghi chú đọc trong app và tài liệu Internet. Các mục nguồn ngoài mở tại trang gốc.',
           ),
           const SizedBox(height: 16),
           DropdownButtonFormField<int>(
@@ -128,6 +136,10 @@ class _LibraryState extends ConsumerState<LibraryScreen> {
                 child: Text('Chân trời sáng tạo'),
               ),
               DropdownMenuItem(value: 'canh_dieu', child: Text('Cánh Diều')),
+              DropdownMenuItem(
+                value: 'national_common',
+                child: Text('Đề quốc gia dùng chung'),
+              ),
             ],
             onChanged: (v) => setState(() => textbook = v!),
           ),
@@ -145,6 +157,45 @@ class _LibraryState extends ConsumerState<LibraryScreen> {
               DropdownMenuItem(value: 'exam', child: Text('Đề kiểm tra')),
             ],
             onChanged: (v) => setState(() => kind = v!),
+          ),
+          DropdownButtonFormField<String>(
+            initialValue: period,
+            decoration: const InputDecoration(
+              labelText: 'Đợt kiểm tra / ôn tập',
+            ),
+            items: const [
+              DropdownMenuItem(value: '', child: Text('Tất cả')),
+              DropdownMenuItem(
+                value: 'midterm_1',
+                child: Text('Giữa học kỳ 1'),
+              ),
+              DropdownMenuItem(value: 'final_1', child: Text('Cuối học kỳ 1')),
+              DropdownMenuItem(
+                value: 'midterm_2',
+                child: Text('Giữa học kỳ 2'),
+              ),
+              DropdownMenuItem(value: 'final_2', child: Text('Cuối học kỳ 2')),
+              DropdownMenuItem(
+                value: 'graduation',
+                child: Text('Tốt nghiệp THPT'),
+              ),
+              DropdownMenuItem(
+                value: 'review',
+                child: Text('Ôn tập / củng cố'),
+              ),
+            ],
+            onChanged: (value) => setState(() => period = value!),
+          ),
+          TextField(
+            decoration: const InputDecoration(
+              labelText: 'Năm đề thi (để trống xem tất cả)',
+            ),
+            keyboardType: TextInputType.number,
+            onChanged: (value) =>
+                setState(() => year = int.tryParse(value) ?? 0),
+          ),
+          const Text(
+            'Đề tốt nghiệp quốc gia dùng chung cho các bộ sách. Liên kết Internet cần mạng và có thể yêu cầu tài khoản ở trang nguồn.',
           ),
           TextField(
             decoration: const InputDecoration(labelText: 'Chương/chủ đề'),
@@ -362,6 +413,15 @@ class _DocumentState extends ConsumerState<DocumentScreen> {
             Text('Quyền sử dụng: $licenseName'),
             const Text('Trạng thái: Đã duyệt và xuất bản'),
             Text('Cập nhật: $updatedLabel'),
+            if (d['exam_year'] != null) Text('Năm đề thi: ${d["exam_year"]}'),
+            if (d['source_verified_on'] != null)
+              Text('Kiểm tra nguồn: ${d["source_verified_on"]}'),
+            if (d['access_notice'] != null && d['access_notice'] != '')
+              Text(d['access_notice']),
+            if (d['resource_scope'] == 'collection')
+              const Text(
+                'Liên kết tới một bộ tài liệu/đề, chưa phải từng đề riêng lẻ.',
+              ),
             const Divider(),
             for (final section in (d['sections'] as List? ?? [])) ...[
               Text(

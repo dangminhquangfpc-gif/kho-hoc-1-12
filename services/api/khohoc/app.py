@@ -200,6 +200,16 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 "question_count": sum(q["subject"] == subject["id"] for q in questions),
                 "exam_count": sum(e["subject"] == subject["id"] for e in exams),
                 "document_count": sum(d["subject"] == subject["id"] for d in documents),
+                "external_document_count": sum(
+                    d["subject"] == subject["id"] and d["source_type"] == "link_only"
+                    for d in documents
+                ),
+                "external_paper_count": sum(
+                    d["subject"] == subject["id"]
+                    and d["source_type"] == "link_only"
+                    and d.get("resource_scope") == "single_paper"
+                    for d in documents
+                ),
                 "topic_count": len(
                     {q["topic"] for q in questions if q["subject"] == subject["id"]}
                 ),

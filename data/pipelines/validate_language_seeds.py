@@ -38,11 +38,7 @@ def validate():
         raise ValueError("Normalized duplicate question text in combined seeds")
 
     catalog = read_json(seed_dir / "catalog.json")
-    valid_pairs = {
-        (g["id"], s["id"])
-        for g in catalog["grades"]
-        for s in g["subjects"]
-    }
+    valid_pairs = {(g["id"], s["id"]) for g in catalog["grades"] for s in g["subjects"]}
     language_questions = batches[1].questions
     groups = Counter((q.grade, q.subject) for q in language_questions)
     expected_groups = {
@@ -63,8 +59,12 @@ def validate():
         if q.source_type != "original" or q.license != "original_content":
             raise ValueError(f"Unexpected rights declaration: {q.id}")
         if q.type == "essay":
-            raise ValueError(f"Objective language fixtures cannot contain essays: {q.id}")
-        accepted = q.correct_answer if q.type != "short_answer" else q.correct_answer[:1]
+            raise ValueError(
+                f"Objective language fixtures cannot contain essays: {q.id}"
+            )
+        accepted = (
+            q.correct_answer if q.type != "short_answer" else q.correct_answer[:1]
+        )
         if grade(q, accepted)["score"] != float(q.max_score):
             raise ValueError(f"Canonical answer is not awarded full credit: {q.id}")
         if q.type == "true_false":
@@ -89,7 +89,9 @@ def validate():
         for question_id in exam.question_ids:
             q = questions_by_id.get(question_id)
             if q is None:
-                raise ValueError(f"Exam {exam.id} references missing question {question_id}")
+                raise ValueError(
+                    f"Exam {exam.id} references missing question {question_id}"
+                )
             if (q.grade, q.subject) != (exam.grade, exam.subject):
                 raise ValueError(f"Grade/subject mismatch in {exam.id}: {q.id}")
             if q.type == "essay":

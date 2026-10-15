@@ -80,6 +80,7 @@ def build(artifacts: Path):
         "start-demo.sh",
         "LICENSE",
         "data/library/documents.json",
+        "data/library/external_documents.json",
     ]:
         target = staging / name
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -125,15 +126,19 @@ def build(artifacts: Path):
         len(json.loads(path.read_text(encoding="utf-8")))
         for path in (ROOT / "data/seeds").glob("*exams.json")
     )
-    document_count = len(
-        json.loads((ROOT / "data/library/documents.json").read_text(encoding="utf-8"))[
-            "documents"
-        ]
+    document_count = sum(
+        len(
+            json.loads((ROOT / "data/library" / name).read_text(encoding="utf-8"))[
+                "documents"
+            ]
+        )
+        for name in ("documents.json", "external_documents.json")
     )
     guide = guide.replace(
         "Có 108 câu/12 đề và 4 tài liệu",
         f"Có {question_count} câu/{exam_count} đề và {document_count} tài liệu",
     )
+    guide += "\nTài liệu Internet được liên kết tới trang nguồn, cần mạng để mở. Có bộ lọc giữa/cuối kỳ và năm đề tốt nghiệp; đề quốc gia dùng chung các bộ sách.\n"
     guide += "\nDữ liệu mở rộng hướng tới Kết nối tri thức: 720 biến thể Toán từ 72 dạng; các môn khác có bộ ôn kiến thức nền, một số câu dùng lại giữa các lớp. Chưa đối chiếu từng bài/ấn bản SGK hiện hành.\n"
     (staging / "HUONG-DAN.txt").write_text(guide, encoding="utf-8-sig")
     for bat in [staging / "start-demo.bat"]:

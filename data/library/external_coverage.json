@@ -1,0 +1,87 @@
+{
+  "external_count": 1934,
+  "book_specific_count": 1830,
+  "national_count": 104,
+  "period_counts": {
+    "review": 330,
+    "all_periods": 56,
+    "midterm_1": 340,
+    "final_1": 452,
+    "midterm_2": 295,
+    "final_2": 357,
+    "graduation": 104
+  },
+  "book_specific_grade_subject_pairs": 122,
+  "missing_book_specific_pairs": [
+    {
+      "grade": 1,
+      "subject": "dao_duc",
+      "name": "Đạo đức"
+    },
+    {
+      "grade": 1,
+      "subject": "the_chat",
+      "name": "Giáo dục thể chất"
+    },
+    {
+      "grade": 1,
+      "subject": "nghe_thuat",
+      "name": "Nghệ thuật"
+    },
+    {
+      "grade": 1,
+      "subject": "trai_nghiem",
+      "name": "Hoạt động trải nghiệm"
+    },
+    {
+      "grade": 1,
+      "subject": "tu_nhien_xa_hoi",
+      "name": "Tự nhiên và Xã hội"
+    },
+    {
+      "grade": 6,
+      "subject": "the_chat",
+      "name": "Giáo dục thể chất"
+    },
+    {
+      "grade": 7,
+      "subject": "the_chat",
+      "name": "Giáo dục thể chất"
+    },
+    {
+      "grade": 8,
+      "subject": "the_chat",
+      "name": "Giáo dục thể chất"
+    },
+    {
+      "grade": 9,
+      "subject": "the_chat",
+      "name": "Giáo dục thể chất"
+    },
+    {
+      "grade": 10,
+      "subject": "the_chat",
+      "name": "Giáo dục thể chất"
+    },
+    {
+      "grade": 11,
+      "subject": "the_chat",
+      "name": "Giáo dục thể chất"
+    },
+    {
+      "grade": 12,
+      "subject": "the_chat",
+      "name": "Giáo dục thể chất"
+    },
+    {
+      "grade": 12,
+      "subject": "mi_thuat",
+      "name": "Mĩ thuật"
+    }
+  ],
+  "scope_counts": {
+    "collection": 398,
+    "single_paper": 1535,
+    "study_guide": 1
+  }
+}

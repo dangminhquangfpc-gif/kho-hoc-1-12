@@ -254,7 +254,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Text(
-                  '${row["question_count"]} câu · ${row["topic_count"]} chủ đề · ${row["exam_count"]} đề · ${row["document_count"]} tài liệu',
+                  '${row["question_count"]} câu · ${row["topic_count"]} chủ đề · ${row["exam_count"]} đề · ${row["document_count"]} tài liệu · ${row["external_document_count"] ?? 0} nguồn Internet',
                 ),
               );
             },
