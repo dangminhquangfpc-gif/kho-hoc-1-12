@@ -73,11 +73,7 @@ Future<void> _tap(
 
 Future<void> _chooseGrade(WidgetTester tester, int grade) async {
   final field = find.byType(DropdownButtonFormField<int>).first;
-  await _tap(
-    tester,
-    field,
-    scroll: -300,
-  );
+  await _tap(tester, field, scroll: -300);
   final previous = tester.state<FormFieldState<int>>(field).value ?? 1;
   final choice = find.text('Lớp $grade').last;
   await tester.scrollUntilVisible(
@@ -161,6 +157,9 @@ void main() {
         () => find.textContaining('câu ·').evaluate().isNotEmpty,
       );
       expect(find.text('Vật lí'), findsOneWidget);
+      debugPrint(
+        'Offline QA: native default and grade 12 subject catalog passed',
+      );
 
       await _chooseGrade(tester, 1);
       await _show(tester, _field('Tìm tên đề'));
@@ -210,6 +209,7 @@ void main() {
         find.descendant(of: _answer(), matching: find.byType(EditableText)),
       );
       expect(editable.controller.text, '5');
+      debugPrint('Offline QA: real platform draft survived a fresh app tree');
 
       await _tap(tester, find.widgetWithText(FilledButton, 'Nộp bài'));
       await _until(tester, () => find.text('Nộp bài?').evaluate().isNotEmpty);
@@ -235,6 +235,7 @@ void main() {
       await _show(tester, find.text('Đếm tăng một đơn vị từ 7 được 8.'));
       expect(find.text('Bài làm: 5'), findsWidgets);
       expect(find.text('Đáp án: 8'), findsWidgets);
+      debugPrint('Offline QA: explicit local submission and correction passed');
 
       await _tap(tester, find.text('Về trang luyện đề'), scroll: 550);
       await _tap(tester, find.widgetWithText(NavigationDestination, 'Tiến độ'));
@@ -242,19 +243,35 @@ void main() {
         tester,
         () => find.text('Đã hoàn thành 1 bài luyện tập').evaluate().isNotEmpty,
       );
-      await _tap(tester, find.widgetWithText(FilledButton, 'Lịch sử bài làm'));
+      // FilledButton.icon has a private runtime subclass; an exact byType
+      // FilledButton finder would miss this real history button on every device.
+      await _tap(tester, find.text('Lịch sử bài làm'));
+      await _until(
+        tester,
+        () => find.byType(app.HistoryScreen).evaluate().isNotEmpty,
+      );
       await _tap(tester, find.text(examTitle));
       await _until(
         tester,
         () => find.text('Kết quả đã lưu').evaluate().isNotEmpty,
       );
-      await tester.pageBack();
-      await tester.pump(const Duration(milliseconds: 250));
-
-      await _tap(
-        tester,
-        find.widgetWithText(NavigationDestination, 'Tài liệu'),
+      debugPrint(
+        'Offline QA: saved result opened from the real history screen',
       );
+      await tester.pageBack();
+      final documentsTab = find.widgetWithText(
+        NavigationDestination,
+        'Tài liệu',
+      );
+      await _until(
+        tester,
+        () =>
+            find.byType(app.HistoryScreen).evaluate().isNotEmpty &&
+            documentsTab.hitTestable().evaluate().isNotEmpty,
+        reason:
+            'Wait for the saved-result route to pop before using navigation',
+      );
+      await _tap(tester, documentsTab);
       await _until(tester, () => _field('Tìm tài liệu').evaluate().isNotEmpty);
       await _chooseGrade(tester, 5);
       await _show(tester, _field('Tìm tài liệu'));
@@ -278,6 +295,9 @@ void main() {
       );
       await _show(tester, fullSolution);
       expect(fullSolution, findsOneWidget);
+      debugPrint(
+        'Offline QA: bundled grade 5 guide and full worked solution passed',
+      );
       expect(
         guard.clientsCreated,
         0,

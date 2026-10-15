@@ -38,19 +38,35 @@ nhóm trong chế độ ngoại tuyến và giữ điểm tài khoản phía má
 Kiểm thử mock/storage này không thay bằng chứng chạy SharedPreferences và
 vòng đời ứng dụng trên Android thật.
 
-### Đang kiểm tra hoặc chưa chạy ở .19
+### QA trình duyệt, gói cài và CI của .19
 
-- QA trình duyệt của build .19 đang thực hiện; chưa ghi nhận toàn bộ luồng
-  trình duyệt đạt ở mốc này.
-- AAB engineering .19 đang build/kiểm tra; chưa lấy kết quả AAB .18 làm kết
-  quả .19. Chưa có gói upload ký bằng khóa phát hành của chủ ứng dụng.
-- Workflow GitHub native offline integration, iOS engineering và MVP của
-  source .19 chưa chạy vì chưa đẩy source .19. Bài native ở
-  `apps/mobile/integration_test/native_offline_study_test.dart` đã được
-  chuẩn bị, chưa coi việc có mã kiểm thử là kết quả thực thi.
+- Trình duyệt dùng asset thật, chặn toàn bộ API/ngoài miền: làm đề 13 câu,
+  lưu và tải lại câu trả lời, nộp được 1/13, mở tiến độ/lịch sử và hướng dẫn
+  hình tròn lớp 5 với lời giải/đáp số đầy đủ. Không có lỗi JavaScript hoặc
+  yêu cầu API/ngoài miền; tài khoản, bài đang làm và lịch sử máy chủ đã gieo
+  trước được giữ nguyên. Đây là Chromium web, không phải ảnh Android.
+- APK version 19 cùng application ID/chứng thư debug với .18, xác minh
+  chữ ký, CRC, asset đúng nguồn và ZIP alignment 16 KB đạt; quyền không đổi.
+  Gói ZIP tải xuống chứa đúng một APK đã ký.
+- AAB engineering .19 build/preflight đạt, 10 thư viện native 64-bit và
+  BundleConfig đạt kiểm tra alignment 16 KB; asset khớp nguồn. AAB vẫn
+  **chưa ký**, không dùng để upload Google Play.
+- Source `c27cbe05c9f846dbf3c6c99aeda9b6474bcfc975`: hai lượt MVP CI đạt,
+  gồm Flutter 229, backend **187 đạt / 19 bỏ qua**, launcher 4 đạt,
+  PostgreSQL riêng **38 đạt / 10 không chọn** và kiểm tra RLS đạt. Các ca
+  bỏ qua không được tính là đã đạt. Android AAB và iOS unsigned CI cùng
+  source đều đạt; iOS kiểm tra tên app, SDK 26+ và privacy manifest.
+- Native OCR thật đạt khi tắt Wi-Fi/dữ liệu. Kiểm thử học ngoại tuyến thật
+  đã qua mở lần đầu, lớp 12, lưu/mở lại/nộp 1/13 và tiến độ; sau đó thất bại
+  do finder chỉ khớp runtime type `FilledButton`, trong khi nút Lịch sử
+  dùng `FilledButton.icon`. Đã sửa finder trong kiểm thử và thêm chờ chuyển
+  màn hình; **đang chạy lại**, chưa coi lịch sử/hướng dẫn native là đã đạt.
+
+### Chưa nghiệm thu/phát hành production
+
 - Chưa nghiệm thu cập nhật .18 → .19 trên điện thoại vật lý, hành vi chọn
   ảnh/quyền hệ điều hành, bộ nhớ thấp, hệ điều hành trang nhớ 16 KB hoặc
-  Windows runtime thật. Chưa công bố kết quả CI/public-download .19 ở đây.
+  Windows runtime thật. Tải xuống công khai .19 đang chờ kiểm tra cuối.
 - Chưa có backend production, tài khoản Play Console, khóa upload hoặc
   nghiệm thu đầy đủ nội dung/quy trình trẻ em. Native ML Kit vẫn có công bố
   dữ liệu chẩn đoán; học ngoại tuyến không chứng minh SDK không nối mạng.
