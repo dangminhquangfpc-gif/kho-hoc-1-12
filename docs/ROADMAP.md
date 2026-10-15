@@ -119,3 +119,17 @@ Web tải tệp UTF-8 có BOM; app điện thoại sao chép CSV vào clipboard 
 tệp không có mật khẩu, lời giải hay đáp án học viên. Xem CLASSROOM_REPORTS.md.
 Backend Internet, thiết bị thật, nội dung thẩm định và ký/phát hành cửa hàng
 vẫn chưa hoàn tất.
+
+## Bản thử .14 — báo lỗi và xem xét phản hồi
+
+Bổ sung báo lỗi câu hỏi trong bài thuộc tài khoản và tài liệu đã xuất bản; danh
+sách riêng của người gửi, hộp xử lý cho giáo viên/quản lý theo phạm vi học viên,
+chống trùng/quota và revision chống ghi đè. Không tự sửa điểm hay xác nhận lại
+nội dung SGK. Schema 2 có migration bổ sung từ 1, hỗ trợ chuyển SQLite cũ và
+backup/restore PostgreSQL schema 1–2. Sửa lớp lọc preview local để cho phép
+danh sách/khôi phục/lưu bản nháp theo tài khoản đi qua; gateway ngoài đã có
+nhưng lớp preview bên trong còn chặn ở bản .13. Xem CONTENT_REPORTS.md.
+
+Checklist kiểm tra toàn bộ bản thử: EVENING_CHECKLIST.md. Còn nội dung chuyên
+môn, chấm lại, AI/OCR, thiết bị thật và triển khai/phát hành; chưa hoàn tất toàn
+bộ kế hoạch hoặc vận hành production.

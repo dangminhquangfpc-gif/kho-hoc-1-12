@@ -10,7 +10,7 @@ from pathlib import Path
 from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.trustedhost import TrustedHostMiddleware
-from .database import make_engine, verify_schema, SCHEMA_VERSION
+from .database import make_engine, migrate, verify_schema, SCHEMA_VERSION
 from .server_security import validate_shared, reserve
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy import select, update, delete, text
@@ -22,7 +22,6 @@ from .grading import grade, normalize
 from .models import (
     Attempt,
     AuditEvent,
-    Base,
     ContentQuestion,
     Exam,
     AccountAttempt,
@@ -110,7 +109,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         if shared:
             verify_schema(engine)
         else:
-            Base.metadata.create_all(engine)
+            migrate(engine)
             ensure_manager(engine, config.manager_credentials_file)
         yield
         engine.dispose()
@@ -213,6 +212,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     accounts = AccountService(db)
     app.include_router(accounts.router)
+    from .reports import create_reports_router
+
+    app.include_router(create_reports_router(db, accounts))
     from .sync import create_sync_router
 
     app.include_router(create_sync_router(db, accounts, public_question))

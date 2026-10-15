@@ -19,7 +19,7 @@ from .document_upgrades import reviewed_transition, upgrade_documents
 from sqlalchemy.orm import Session
 
 PUBLIC = re.compile(
-    r"/(?:auth/(?:me|login|logout|register|password)|account/results|account/delete|classroom/groups|classroom/groups/join|classroom/groups/[^/]+|classroom/groups/[^/]+/results\.csv|classroom/groups/[^/]+/members|classroom/groups/[^/]+/members/[^/]+|classroom/students|classroom/students/bulk|classroom/students/[^/]+|classroom/students/[^/]+/(?:results|reset-password)|health|coverage|curriculum|practice-options|practice-attempts|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|"
+    r"/(?:content-reports|classroom/content-reports|classroom/content-reports/[^/]+/review|auth/(?:me|login|logout|register|password)|account/results|account/attempts|account/attempts/[^/]+|account/attempts/[^/]+/draft|account/delete|classroom/groups|classroom/groups/join|classroom/groups/[^/]+|classroom/groups/[^/]+/results\.csv|classroom/groups/[^/]+/members|classroom/groups/[^/]+/members/[^/]+|classroom/students|classroom/students/bulk|classroom/students/[^/]+|classroom/students/[^/]+/(?:results|reset-password)|health|coverage|curriculum|practice-options|practice-attempts|grades|grades/[0-9]+/subjects|exams|exams/[^/]+|"
     r"exams/[^/]+/attempts|attempts/[^/]+/(?:submit|result)|attempts/[^/]+|documents|documents/[^/]+|documents/[^/]+/file)"
 )
 

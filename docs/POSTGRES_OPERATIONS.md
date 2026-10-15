@@ -75,9 +75,12 @@ khoản xảy ra sau thời điểm snapshot. Chưa tự đối soát nhật ký
 không mở ngay một snapshot cũ cho học viên vì có thể đưa dữ liệu đã xóa trở lại.
 
 Nếu quyết định chuyển pilot sang bản đã kiểm tra, cấp quyền role API cho database
-mới bằng lệnh bảo trì (ví dụ):
+mới bằng lệnh bảo trì (ví dụ). Archive schema 1 cũ cần chạy migration
+1 → 2 trước khi cấp quyền và chạy API .14; schema 2 chạy migrate lặp không
+thay đổi dữ liệu:
 
 ```sh
+docker compose -f deploy/shared/compose.yaml run --rm -e KHOHOC_DATABASE_URL=postgresql+psycopg://tuhoc_owner@db:5432/recovery_20261015 maintenance python -m khohoc.server_admin migrate
 docker compose -f deploy/shared/compose.yaml run --rm -e KHOHOC_DATABASE_URL=postgresql+psycopg://tuhoc_owner@db:5432/recovery_20261015 maintenance python -m khohoc.server_admin grant-runtime --role tuhoc_app
 ```
 

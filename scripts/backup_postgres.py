@@ -151,7 +151,10 @@ def unseal(archive, destination, key):
             with destination.open("rb") as stream:
                 if stream.read(5) != b"PGDMP":
                     raise ValueError("Not a PostgreSQL custom archive")
-            if metadata.get("schema_version") != 1 or metadata.get("format") != 1:
+            if (
+                metadata.get("schema_version") not in (1, 2)
+                or metadata.get("format") != 1
+            ):
                 raise ValueError("Unsupported backup/schema version")
             created = datetime.fromisoformat(metadata["created_at"])
             if created.tzinfo is None:
@@ -253,12 +256,16 @@ class PostgresDocker:
         ).strip()
 
     def verify(self, database):
-        if self.sql(database, "SELECT version FROM app_schema_version") != b"1":
+        version = self.sql(database, "SELECT version FROM app_schema_version")
+        if version not in (b"1", b"2"):
             raise ValueError("Unsupported schema")
         self.sql(
             database,
             "SELECT id FROM learning_users LIMIT 1; SELECT attempt_id FROM learning_records LIMIT 1;",
         )
+        if version == b"2":
+            self.sql(database, "SELECT id FROM content_reports LIMIT 1")
+        return int(version)
 
 
 def atomic_json(path, value):
@@ -343,7 +350,7 @@ def backup(driver, database, directory, key_file, retention_days=None):
         attempt_at = utcnow().isoformat()
         try:
             key = read_key(key_file)
-            driver.verify(database)
+            schema_version = driver.verify(database)
             with tempfile.TemporaryDirectory(prefix="tuhoc-pg-backup-") as temporary:
                 temporary = Path(temporary)
                 dump = temporary / "dump"
@@ -364,7 +371,7 @@ def backup(driver, database, directory, key_file, retention_days=None):
                 created = utcnow()
                 metadata = dict(
                     format=1,
-                    schema_version=1,
+                    schema_version=schema_version,
                     database=database,
                     created_at=created.isoformat(),
                 )
@@ -417,7 +424,7 @@ def restore(driver, archive, database, key_file):
     key = read_key(key_file)
     with tempfile.TemporaryDirectory(prefix="tuhoc-pg-restore-") as temporary:
         dump = Path(temporary) / "dump"
-        unseal(archive, dump, key)
+        metadata = unseal(archive, dump, key)
         with dump.open("rb") as source:
             driver.run(["pg_restore", "--list"], source=source)
         # createdb refuses existing targets. Never issue drop/clean/overwrite commands.
@@ -439,7 +446,8 @@ def restore(driver, archive, database, key_file):
                 ],
                 source=source,
             )
-        driver.verify(database)
+        if driver.verify(database) != metadata["schema_version"]:
+            raise ValueError("Restored schema differs from archive metadata")
         driver.sql(
             database,
             "BEGIN; DELETE FROM learning_sessions; DELETE FROM request_budgets; COMMIT;",

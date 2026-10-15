@@ -473,6 +473,9 @@ class AccountService:
             db.execute(
                 delete(LearningSession).where(LearningSession.user_id == user.id)
             )
+            from .reports import remove_account_reports
+
+            remove_account_reports(db, user.id)
             db.delete(user)
             # Keep no account name/password or deleted answers in the deletion event.
             db.add(
@@ -663,6 +666,9 @@ class AccountService:
                     target=student.id,
                 )
             )
+            from .reports import remove_account_reports
+
+            remove_account_reports(db, student.id)
             db.delete(student)
             db.commit()
 

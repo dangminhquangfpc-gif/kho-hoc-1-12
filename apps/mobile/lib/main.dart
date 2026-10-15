@@ -1,3 +1,4 @@
+import 'content_reports.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:dio/dio.dart';
@@ -241,7 +242,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
           const Text(
             'Chọn lớp và môn để luyện tập. Đăng nhập để đồng bộ bài làm và kết quả.',
           ),
-          const Text('Bản thử 2026.10.15.13'),
+          const Text('Bản thử 2026.10.15.14'),
           if (widget.index == 2 &&
               [
                 'manager',
@@ -843,6 +844,11 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
             LinearProgressIndicator(value: (index + 1) / questions.length),
             const SizedBox(height: 24),
             Text(q['question'], style: Theme.of(context).textTheme.titleLarge),
+            ReportContentButton(
+              kind: 'question',
+              targetId: q['id'],
+              attemptId: session!['id'],
+            ),
             const SizedBox(height: 20),
             if (q['type'] == 'single_choice' || q['type'] == 'multiple_choice')
               ...[
@@ -1035,6 +1041,12 @@ class ResultView extends StatelessWidget {
                   "Đáp án: ${((d['answer_display'] ?? d['correct_answer']) as List).join(', ')}",
                 ),
                 Text(d['explanation']),
+                if (result['attempt_id'] != null)
+                  ReportContentButton(
+                    kind: 'question',
+                    targetId: d['question_id'],
+                    attemptId: result['attempt_id'],
+                  ),
               ],
             ),
           ),
