@@ -6,6 +6,8 @@ Bản thử 2026.10.15.6: chọn nhiều chủ đề, bổ sung 731 câu Toán 5
 
 Bản thử 2026.10.15.7: trình bày lại lời giải và đáp số trong 75 tài liệu Toán 5; [phạm vi và cách kiểm chứng](docs/TEXTBOOK_LESSONS.md).
 
+Bản thử 2026.10.15.8: thêm 267 hướng dẫn Toán lớp 1–4, 476 ví dụ và 952 bài tự luyện có lời giải. [Phạm vi và phần còn thiếu](docs/PRIMARY_MATH_GUIDES.md).
+
 ## Thành phần
 
 - apps/mobile: Flutter, Riverpod, GoRouter, Dio; chọn lớp/môn/đề, làm bài, chấm qua API, đánh dấu câu, lưu bài/lịch sử; kho tài liệu, yêu thích/đọc gần đây và tiến độ cục bộ.

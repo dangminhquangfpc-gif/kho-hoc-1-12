@@ -53,3 +53,7 @@ Chi tiết tài khoản bản .6: [CLASSROOM_ACCOUNTS.md](CLASSROOM_ACCOUNTS.md)
 ## Bản thử 2026.10.15.7
 
 Hoàn thiện cách trình bày 139 ví dụ và 278 lời giải trong 75 bài Toán 5: kiến thức bằng lời, cách làm từng bước, câu lời giải/phép tính/đơn vị và Đáp số; hiển thị đặt tính giữ cột. Không tăng số bài SGK được ánh xạ và chưa xác minh nguyên mẫu toàn bộ SGK. Xem [TEXTBOOK_LESSONS.md](TEXTBOOK_LESSONS.md).
+
+## Bản thử 2026.10.15.8
+
+Bổ sung 267 bài hướng dẫn Toán 1–4 vào các mục nguồn đã ghi nhận; tổng Toán 1–5 là 342 hướng dẫn. Có thêm 476 ví dụ và 952 bài tự luyện kèm lời giải, đáp số; chưa phải câu mới chấm tự động. Mục lục vẫn có chỗ thiếu và các môn/lớp khác còn cần soạn. Xem [PRIMARY_MATH_GUIDES.md](PRIMARY_MATH_GUIDES.md).

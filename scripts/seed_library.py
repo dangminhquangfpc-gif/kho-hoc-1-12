@@ -38,6 +38,7 @@ def main():
                 "documents.json",
                 "external_documents.json",
                 "curriculum_documents.json",
+                "primary_math_documents.json",
             )
             for document in json.loads(
                 (ROOT / "data/library" / name).read_text(encoding="utf-8")

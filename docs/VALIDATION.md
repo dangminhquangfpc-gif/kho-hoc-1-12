@@ -112,3 +112,7 @@ tiến độ đã hoàn tất kiểm tra trên gói giải nén.
 ## Bản 2026.10.15.7 — lời giải tài liệu
 
 83 kiểm thử backend và 23 kiểm thử Flutter đạt; Flutter analyze không có lỗi; web release build thành công. 75 tài liệu, 139 ví dụ và 278 lời giải tự luyện có bước giải và đáp số; kiểm tra đẳng thức bằng Fraction, kiểm tra đặt tính trên màn hình 320 px. Gói nâng cấp dùng state bản .6 đã chạy: 75 tài liệu lên phiên bản 2, 75 mục nhật ký lưu nội dung cũ, số tài khoản và kết quả không đổi. Chưa nghiệm thu Windows thật hoặc xác minh nguyên mẫu từng trang SGK.
+
+## Bản 2026.10.15.8 — hướng dẫn Toán ngoài lớp 5
+
+88 kiểm thử backend và 23 kiểm thử Flutter đạt; Flutter analyze và web release build đạt. Kiểm tra 267 bài mới khớp ID/tiêu đề/URL mục lục, có 476 ví dụ và 952 bài luyện kèm lời giải/đáp số, các đẳng thức tính được chính xác bằng Fraction, miền số và số chữ số của bài tính phù hợp lớp. Gói nâng cấp từ .7 nhập đủ bài, tổng Toán 1–5 có 342 hướng dẫn; số tài khoản/kết quả và phiên bản 75 bài Toán 5 giữ nguyên. Chưa xác nhận đủ toàn SGK, chưa thẩm định sư phạm độc lập hoặc nghiệm thu Windows thật.

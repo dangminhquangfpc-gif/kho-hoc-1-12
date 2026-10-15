@@ -82,6 +82,7 @@ def build(artifacts: Path):
         "data/library/documents.json",
         "data/library/external_documents.json",
         "data/library/curriculum_documents.json",
+        "data/library/primary_math_documents.json",
         "data/library/document_upgrades.json",
     ]:
         target = staging / name
@@ -138,13 +139,14 @@ def build(artifacts: Path):
             "documents.json",
             "external_documents.json",
             "curriculum_documents.json",
+            "primary_math_documents.json",
         )
     )
     guide = guide.replace(
         "Có 108 câu/12 đề và 4 tài liệu",
         f"Có {question_count - 1} câu đang dùng/{exam_count} đề và {document_count} tài liệu/liên kết (1 câu cũ đã rút và thay thế)",
     )
-    guide += "\nBản thử 2026.10.15.7. Nếu bài lưu quá hạn hoặc thuộc máy chủ cũ, dùng Khôi phục bài đã lưu; app chỉ giữ đáp án cho câu không đổi. Đã tránh cache giao diện của bản ZIP cũ, không xóa bài làm trong trình duyệt.\n"
+    guide += "\nBản thử 2026.10.15.8. Nếu bài lưu quá hạn hoặc thuộc máy chủ cũ, dùng Khôi phục bài đã lưu; app chỉ giữ đáp án cho câu không đổi. Đã tránh cache giao diện của bản ZIP cũ, không xóa bài làm trong trình duyệt.\n"
     guide += "\nMới: Luyện đề > Tạo đề theo chủ đề và độ khó (1–50 câu tùy ngân hàng); Tiến độ > Ôn các câu chưa đúng. Thống kê chủ đề chỉ tính lần làm mới nhất của mỗi câu, không phải đánh giá năng lực chính thức. Có thể luyện khách hoặc đăng nhập để lưu kết quả tập trung; chưa tích hợp AI.\n"
     guide += "\nTài liệu chỉ hiển thị bài gắn đúng mục lục SGK. Đề kiểm tra Internet ở Luyện đề > Đề giữa kỳ, cuối kỳ và tốt nghiệp từ Internet. 87 bộ luyện Toán 5 mới dùng 344 câu tự biên soạn; các bộ ôn tổng hợp dùng lại câu của bộ luyện theo bài. Chưa chuyển nguyên đề PDF của nguồn Internet vào app.\n"
     guide += "\nTài liệu Internet được liên kết tới trang nguồn, cần mạng để mở. Có bộ lọc giữa/cuối kỳ và năm đề tốt nghiệp; đề quốc gia dùng chung các bộ sách.\n"
@@ -153,6 +155,7 @@ def build(artifacts: Path):
     guide += "\nTÀI KHOẢN: chạy start-demo.bat rồi mở state/TAI-KHOAN-QUAN-LY.txt trên chính máy bạn để lấy tài khoản quanly và mật khẩu ban đầu; đổi mật khẩu khi đăng nhập lần đầu. Trong Cá nhân > Tài khoản > Quản lý học viên có tạo hàng loạt, cấp lại mật khẩu và xem kết quả. Học viên cũng có thể tự đăng ký. Không chia sẻ tệp mật khẩu quản lý.\n"
     guide += "\nNÂNG CẤP: dừng bản cũ, sao lưu và chép toàn bộ thư mục state từ bản cũ sang bản mới trước khi chạy để giữ tài khoản và kết quả. Không chép state từ người khác. Mỗi bản chạy riêng có cơ sở dữ liệu riêng. Để giám sát học viên trên máy khác, cần triển khai một backend HTTPS dùng chung; bản ZIP hiện chạy local.\n"
     guide += "\nBản .7: 75 tài liệu Toán 5 có kiến thức bằng lời, hướng dẫn từng bước, ví dụ và bài tập kèm Lời giải đầy đủ, phép tính có đơn vị, Đáp số ở cuối. Đặt tính cộng/trừ thập phân hiển thị thẳng cột. Đây là nội dung tự biên soạn theo mục lục nguồn thứ cấp, chưa xác minh nguyên mẫu mọi trang SGK. Bản mới nâng cấp đúng dữ liệu gốc cũ; nếu tài liệu đã sửa riêng, giữ bản sao state và liên hệ để xử lý, không xóa dữ liệu.\n"
+    guide += "\nBản .8: thêm 267 bài hướng dẫn Toán 1–4 theo các mục đã ghi nhận từ nguồn mục lục, gồm 476 ví dụ và 952 bài luyện có lời giải, đáp số. Vào Tài liệu chọn lớp 1–4, môn Toán. Các bài chưa có nguồn hoặc các môn/lớp khác vẫn cần bổ sung, chưa tuyên bố đủ mọi SGK.\n"
     (staging / "HUONG-DAN.txt").write_text(guide, encoding="utf-8-sig")
     for bat in [staging / "start-demo.bat"]:
         content = (

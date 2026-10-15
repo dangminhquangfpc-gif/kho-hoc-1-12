@@ -53,6 +53,25 @@ def test_phone_preview_seed_private_routes_and_rate_limit(tmp_path, monkeypatch)
         assert partial["authored_count"] == 0 and all(
             u["content_status"] == "missing" for u in partial["units"]
         )
+        for grade, count in [(1, 41), (2, 74), (3, 79), (4, 73)]:
+            guide_index = client.get(
+                "/curriculum", params={"grade": grade, "subject": "toan"}
+            ).json()
+            assert guide_index["authored_count"] == guide_index["unit_count"] == count
+            assert all(u["document_id"] for u in guide_index["units"])
+            guides = client.get(
+                "/documents",
+                params={
+                    "grade": grade,
+                    "subject": "toan",
+                    "section": "lessons",
+                    "limit": 100,
+                },
+            ).json()
+            assert len(guides) == count
+        circle3 = client.get("/documents/kntt_math3_lesson_17").json()
+        assert circle3["grade"] == 3 and circle3["sections"]
+        assert "3,14" not in str(circle3["sections"])
         options = client.get(
             "/practice-options", params={"grade": 5, "subject": "toan"}
         )

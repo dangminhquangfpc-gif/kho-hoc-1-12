@@ -113,6 +113,7 @@ def create_preview():
                 "documents.json",
                 "external_documents.json",
                 "curriculum_documents.json",
+                "primary_math_documents.json",
             )
             for document in json.loads(
                 (root / "data/library" / filename).read_text(encoding="utf-8")
