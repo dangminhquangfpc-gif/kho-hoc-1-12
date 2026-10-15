@@ -109,6 +109,17 @@ class SubmittedApi extends FakeApi {
   }
 }
 
+class LoginRequiredApi extends FakeApi {
+  @override
+  Future<Json> start(String id) async => throw DioException(
+    requestOptions: RequestOptions(path: '/exams/$id/attempts'),
+    response: Response(
+      statusCode: 401,
+      requestOptions: RequestOptions(path: '/exams/$id/attempts'),
+    ),
+  );
+}
+
 void main() {
   testWidgets(
     'Previously submitted result clears stale draft without changing server score',
@@ -158,7 +169,11 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Lớp học'), findsOneWidget);
       expect(find.text('Môn học'), findsOneWidget);
-      await tester.ensureVisible(find.text('Đề kiểm thử'));
+      await tester.scrollUntilVisible(
+        find.text('Đề kiểm thử'),
+        180,
+        scrollable: find.byType(Scrollable).first,
+      );
       await tester.drag(find.byType(ListView).first, const Offset(0, -120));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Đề kiểm thử'));
@@ -274,4 +289,31 @@ void main() {
       expect(LocalStore(prefs).history.length, 1);
     },
   );
+  testWidgets('Shared server requiring login opens the account screen', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({});
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [apiProvider.overrideWithValue(LoginRequiredApi())],
+        child: const KhoHocApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.text('Đề kiểm thử'),
+      180,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.drag(find.byType(ListView).first, const Offset(0, -120));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Đề kiểm thử'));
+    await tester.pumpAndSettle();
+    expect(find.widgetWithText(TextField, 'Tên đăng nhập'), findsOneWidget);
+    expect(
+      find.text('Không thể bắt đầu bài. Kiểm tra mạng và bộ nhớ thiết bị.'),
+      findsNothing,
+    );
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
 }

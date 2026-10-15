@@ -55,6 +55,10 @@ class _CreatePracticeState extends ConsumerState<CreatePracticeScreen> {
       });
       if (mounted) context.go('/practice');
     } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        if (mounted) context.go('/account');
+        return;
+      }
       if (mounted) {
         setState(
           () => error = e.response?.statusCode == 422

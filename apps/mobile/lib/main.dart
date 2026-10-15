@@ -238,7 +238,9 @@ class _HomeState extends ConsumerState<HomeScreen> {
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 8),
-          const Text('Chọn lớp và môn để luyện tập. Không cần tài khoản.'),
+          const Text(
+            'Chọn lớp và môn để luyện tập. Đăng nhập để đồng bộ bài làm và kết quả.',
+          ),
           const Text('Bản thử 2026.10.15.12'),
           if (widget.index == 2 &&
               [
@@ -427,7 +429,11 @@ class _HomeState extends ConsumerState<HomeScreen> {
         'answers': <String, List<String>>{},
       });
       if (mounted) context.go('/practice');
-    } catch (_) {
+    } catch (e) {
+      if (e is DioException && e.response?.statusCode == 401) {
+        if (mounted) context.go('/account');
+        return;
+      }
       if (mounted) {
         setState(
           () => error =
