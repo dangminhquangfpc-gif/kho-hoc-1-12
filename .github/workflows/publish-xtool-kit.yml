@@ -1,0 +1,49 @@
+name: Package xtool Windows WSL installer kit
+on:
+  push:
+    branches: [feature/xtool-ios-install-20261015]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Package verified IPA and installation helpers
+        run: |
+          bash -n scripts/xtool/install-xtool.sh
+          bash -n scripts/xtool/install-ios.sh
+          mkdir kit
+          curl --fail --location --retry 2 --proto '=https' 'https://github.com/dangminhquangfpc-gif/kho-hoc-1-12/releases/download/demo-tu-hoc-111-ios-2026-10-15-v20/tu-hoc-111-ios-unsigned.ipa' --output kit/tu-hoc-111-ios-unsigned.ipa
+          printf '%s  %s\n' '20ebc3e2bd5205bf9367db496c5a06bef5b57ba09dfccc06bdbfa3d5cdfdcd7f' 'kit/tu-hoc-111-ios-unsigned.ipa' | sha256sum --check
+          cp scripts/xtool/*.sh kit/
+          cp docs/IOS_XTOOL.md kit/DOC-TRUOC.md
+          python3 - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+          files = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in Path('kit').iterdir()}
+          manifest = dict(kind='tuhoc111.xtool-wsl-kit', source_commit=os.environ['GITHUB_SHA'], files=files,
+                          xtool_version='1.22.2', signed_for_installation=False, physical_iphone_verified=False)
+          Path('kit/MANIFEST.json').write_text(json.dumps(manifest, indent=2)+'\n')
+          output=Path('tu-hoc-111-xtool-wsl.zip')
+          with ZipFile(output,'x',compression=ZIP_DEFLATED) as z:
+              for p in sorted(Path('kit').iterdir()): z.write(p,p.name)
+          with ZipFile(output) as z: assert z.testzip() is None
+          Path(str(output)+'.sha256').write_text(hashlib.sha256(output.read_bytes()).hexdigest()+'  '+output.name+'\n')
+          PY
+      - name: Prepare draft kit release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: demo-tu-hoc-111-xtool-2026-10-15
+        run: |
+          if gh release view "$TAG" --json isDraft --jq .isDraft > "$RUNNER_TEMP/xtool-draft"; then
+            test "$(cat "$RUNNER_TEMP/xtool-draft")" = true || { echo 'Refusing to overwrite a public release.'; exit 1; }
+          else
+            gh release create "$TAG" --draft --prerelease --target "$GITHUB_SHA" --title 'Tự học 111 · xtool · Cài iOS qua Windows/WSL' --notes-file docs/IOS_XTOOL.md
+          fi
+          gh release upload "$TAG" tu-hoc-111-xtool-wsl.zip tu-hoc-111-xtool-wsl.zip.sha256 docs/IOS_XTOOL.md --clobber
