@@ -9,6 +9,7 @@ import 'repository.dart';
 import 'study_progress.dart';
 import 'report_export.dart';
 import 'assignments_screen.dart';
+import 'ai_ocr_screen.dart';
 
 final serverResultsProvider = FutureProvider.autoDispose<List<Json>>((ref) {
   final user = ref.watch(authUserProvider);
@@ -203,6 +204,14 @@ class _AccountState extends ConsumerState<AccountScreen> {
       child: ListView(
         padding: const EdgeInsets.all(24),
         children: [
+          TextButton.icon(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const AiOcrScreen()),
+            ),
+            icon: const Icon(Icons.document_scanner_outlined),
+            label: const Text('Ảnh và trợ lý học tập'),
+          ),
           if (user == null) ...[
             Text(
               register ? 'Đăng ký tài khoản' : 'Đăng nhập',

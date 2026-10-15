@@ -1,3 +1,4 @@
+import 'ai_ocr_screen.dart';
 import 'content_reports.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -242,7 +243,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
           const Text(
             'Chọn lớp và môn để luyện tập. Đăng nhập để đồng bộ bài làm và kết quả.',
           ),
-          const Text('Bản thử 2026.10.15.15'),
+          const Text('Bản thử 2026.10.15.16'),
           if (widget.index == 2 &&
               [
                 'manager',
@@ -456,6 +457,7 @@ class PracticeScreen extends ConsumerStatefulWidget {
 class _PracticeState extends ConsumerState<PracticeScreen> {
   Json? session, result;
   int index = 0;
+  final textRevisions = <String, int>{};
   bool busy = false;
   bool recoveryAvailable = false;
   String? error;
@@ -919,7 +921,11 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
               ].expand((v) => v),
             if (['numeric', 'short_answer', 'essay'].contains(q['type']))
               TextFormField(
-                key: ValueKey(q['id']),
+                key: ValueKey(
+                  textRevisions[q['id']] == null
+                      ? q['id']
+                      : '${q['id']}#ocr${textRevisions[q['id']]}',
+                ),
                 initialValue: values.isEmpty ? '' : values.first,
                 enabled: !busy,
                 maxLines: q['type'] == 'essay' ? 5 : 1,
@@ -930,8 +936,29 @@ class _PracticeState extends ConsumerState<PracticeScreen> {
                 ),
                 onChanged: (v) => answer(q, [v]),
               ),
+            if (['numeric', 'short_answer', 'essay'].contains(q['type']))
+              TextButton.icon(
+                icon: const Icon(Icons.document_scanner_outlined),
+                label: const Text('Nhập từ ảnh hoặc văn bản'),
+                onPressed: busy
+                    ? null
+                    : () async {
+                        final text = await showOcrTextDialog(
+                          context,
+                          initialText: values.isEmpty ? '' : values.first,
+                        );
+                        if (!mounted || text == null) return;
+                        setState(
+                          () => textRevisions[q['id']] =
+                              (textRevisions[q['id']] ?? 0) + 1,
+                        );
+                        answer(q, [text]);
+                      },
+              ),
             if (q['type'] == 'essay')
-              const Text('Tự luận cần người duyệt; AI chưa được cấu hình.'),
+              const Text(
+                'Tự luận cần người duyệt. Trợ lý chỉ đưa gợi ý, không tự đổi điểm.',
+              ),
             if (session!['recovery_notice'] != null)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
@@ -1041,6 +1068,26 @@ class ResultView extends StatelessWidget {
                   "Đáp án: ${((d['answer_display'] ?? d['correct_answer']) as List).join(', ')}",
                 ),
                 Text(d['explanation']),
+                if (result['attempt_id'] != null &&
+                    result['grade'] is int &&
+                    result['subject'] is String)
+                  TextButton.icon(
+                    icon: const Icon(Icons.auto_awesome_outlined),
+                    label: const Text('Nhờ AI giải thích'),
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => AiOcrScreen(
+                          initialText:
+                              '${d['question'] ?? ''}\nBài làm: ${(d['submitted_answer_display'] as List? ?? []).join(', ')}',
+                          attemptId: result['attempt_id'],
+                          questionId: d['question_id'],
+                          initialGrade: result['grade'],
+                          initialSubject: result['subject'],
+                        ),
+                      ),
+                    ),
+                  ),
                 if (result['attempt_id'] != null)
                   ReportContentButton(
                     kind: 'question',
@@ -1184,9 +1231,20 @@ class SettingsScreen extends ConsumerWidget {
         ),
         const Divider(),
         const BackendSettings(),
+        ListTile(
+          leading: const Icon(Icons.document_scanner_outlined),
+          title: const Text('Ảnh và trợ lý học tập'),
+          subtitle: const Text(
+            'Đọc chữ từ ảnh, kiểm tra văn bản rồi dùng gợi ý AI nếu đã kết nối',
+          ),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const AiOcrScreen()),
+          ),
+        ),
         const Divider(),
         const Text(
-          'Chế độ khách lưu lịch sử trên thiết bị. Khi đăng nhập, kết quả được máy chủ lưu theo tài khoản và người quản lý của bạn có thể xem. Xóa lịch sử trên thiết bị không xóa hồ sơ kết quả của lớp. AI và OCR chưa hoạt động; không gửi bài đến nhà cung cấp AI.',
+          'Chế độ khách lưu lịch sử trên thiết bị. Khi đăng nhập, kết quả được máy chủ lưu theo tài khoản và người quản lý của bạn có thể xem. Xóa lịch sử trên thiết bị không xóa hồ sơ kết quả của lớp. OCR ảnh được xử lý trong trình duyệt ở bản web/Windows. AI chỉ gửi văn bản sau khi bạn xác nhận và khi máy chủ đã được cấu hình; ảnh không gửi đến nhà cung cấp AI.',
         ),
         const SizedBox(height: 16),
         const Text(

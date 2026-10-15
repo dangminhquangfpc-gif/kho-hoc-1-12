@@ -187,6 +187,18 @@ def child_environment(state: Path, api_port: int, web_port: int) -> dict[str, st
     environ = {
         key: value for key, value in os.environ.items() if not key.startswith("KHOHOC_")
     }
+    # Explicit optional AI configuration; production DB/admin settings stay excluded.
+    for key in (
+        "KHOHOC_AI_ENABLED",
+        "KHOHOC_AI_BASE_URL",
+        "KHOHOC_AI_MODEL",
+        "KHOHOC_AI_API_KEY_FILE",
+        "KHOHOC_AI_DAILY_USER_LIMIT",
+        "KHOHOC_AI_DAILY_SERVER_LIMIT",
+        "KHOHOC_AI_OUTPUT_TOKENS",
+    ):
+        if key in os.environ:
+            environ[key] = os.environ[key]
     environ.update(
         {
             "PYTHONPATH": os.pathsep.join((str(ROOT / "services/api"), str(ROOT))),

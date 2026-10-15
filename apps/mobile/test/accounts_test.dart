@@ -145,8 +145,11 @@ void main() {
         find.widgetWithText(TextField, 'Tên hiển thị'),
         'Học viên thử',
       );
-      await tester.ensureVisible(find.widgetWithText(FilledButton, 'Đăng ký'));
-      await tester.drag(find.byType(ListView).first, const Offset(0, -140));
+      await tester.scrollUntilVisible(
+        find.widgetWithText(FilledButton, 'Đăng ký'),
+        200,
+        scrollable: find.byType(Scrollable).first,
+      );
       await tester.pumpAndSettle();
       await tester.tap(find.widgetWithText(FilledButton, 'Đăng ký'));
       await tester.pumpAndSettle();

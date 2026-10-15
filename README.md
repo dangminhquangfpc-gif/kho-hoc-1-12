@@ -3,6 +3,12 @@
 
 Monorepo MVP phát triển theo docs/PRODUCT_PLAN.md. Ứng dụng QuizApp Firebase cũ ở lib/ và android/ được giữ nguyên; ứng dụng mới ở apps/mobile/. Hướng dẫn cũ được giữ ở docs/LEGACY_QUIZAPP_README.md. Chưa hoàn thành tất cả tiêu chí MVP hoặc sẵn sàng Google Play.
 
+Bản thử hiện tại **2026.10.15.16**: OCR tiếng Việt chạy local trên web/Windows,
+xem ảnh, sửa và xác nhận văn bản trước khi dùng cho câu trả lời. Trợ lý AI có
+xác nhận gửi văn bản, phân quyền và hạn mức; mặc định chưa kết nối dịch vụ AI.
+Xem [hướng dẫn và giới hạn AI/OCR](docs/AI_OCR.md). Các con số và trạng thái trong
+những mục ghi phiên bản cũ bên dưới là lịch sử phát triển.
+
 Bản thử 2026.10.15.6: chọn nhiều chủ đề, bổ sung 731 câu Toán 5, tài khoản học viên và quản lý kết quả trên backend local. Hướng dẫn: [Tài khoản và quản lý học viên](docs/CLASSROOM_ACCOUNTS.md).
 
 Bản thử 2026.10.15.7: trình bày lại lời giải và đáp số trong 75 tài liệu Toán 5; [phạm vi và cách kiểm chứng](docs/TEXTBOOK_LESSONS.md).
@@ -92,7 +98,11 @@ npm run build --prefix apps/admin
 bash scripts/test_rls.sh
 ```
 
-Xem docs/VALIDATION.md để biết chính xác lệnh đã chạy và docs/ROADMAP.md cho phần chưa làm. Chưa có kho PDF, OCR, AI provider, dashboard giáo viên/phụ huynh, tài khoản hoặc thanh toán trong ứng dụng mới. Không crawl hoặc tuyên bố quyền dùng tài liệu bên ngoài.
+Xem docs/VALIDATION.md, docs/AI_OCR.md để biết phạm vi kiểm tra và docs/ROADMAP.md
+cho phần chưa làm. Đã có tài khoản, nhóm giáo viên, kết quả, tài liệu và OCR web;
+AI cần dịch vụ được cấu hình và chưa được đánh giá với nhà cung cấp thật.
+Chưa có liên kết phụ huynh, thanh toán hoặc OCR native. Không tuyên bố quyền dùng
+tài liệu bên ngoài chỉ vì nguồn được mở công khai.
 
 Gradle proxy được cấu hình từ proxy có sẵn ở /workspace/cache/gradle/gradle.properties. Nếu sandbox chặn cache Dart trong ~/.dart-tool hoặc ~/.dartServer, cấp quyền ghi đúng thư mục công cụ hoặc chạy kiểm tra với quyền phù hợp; không đổi HOME hoặc tắt xác minh TLS.
 

@@ -1,12 +1,20 @@
 # Tiến độ
 
+Trạng thái mới nhất: bản thử **.16 / 0.2.0+16**. Các mốc bên dưới ghi lại tiến
+độ từng bản; không coi hạn chế của một mốc cũ là trạng thái hiện hành. Xem phần
+.16 cuối tài liệu và [AI_OCR.md](AI_OCR.md) cho phạm vi AI/OCR đang có.
+
 ## Giai đoạn 1
 - Đã có: kiến trúc, schema, 108 câu hỏi gốc/12 đề, catalog lớp/môn, FastAPI chấm điểm xác định, quyền admin cục bộ, capability cho guest, snapshot bài, nhập/duyệt/xuất bản, Flutter luyện đề/lưu bài/lịch sử, Next.js admin; thư viện 4 ghi chú/PDF gốc, tìm kiếm tiếng Việt không dấu, yêu thích/đọc gần đây; đánh dấu câu và tiến độ thiết bị; sửa câu hỏi/rollback revision, duyệt lại và giữ nguyên snapshot bài đang làm.
 - Cần hoàn thành trước nghiệm thu MVP toàn bộ: Supabase Auth/Storage và adapter schema production; rate limiting phân tán; kiểm thử Android thiết bị và AAB (APK debug đã build được); kiểm duyệt chuyên môn; policy/privacy cuối cùng.
 - Database SQL có RLS được kiểm tra trên PostgreSQL local với shim auth.uid; không khẳng định đã triển khai Supabase hosted.
 
 ## Giai đoạn 2
-AI interface đã có; không có provider hoạt động. Tiếp theo: rubric validation, OCR có bước sửa, confidence threshold, log chi phí, consent, quota và dataset đánh giá.
+Đã có OCR chữ in tiếng Việt/Anh cục bộ ở web/Windows, xem trước/sửa/xác nhận
+văn bản, nhập văn bản vào câu tự luận và backend trợ giảng AI tùy chọn có
+consent/quota. AI mặc định tắt, chưa gọi hay đánh giá provider thật. Còn OCR
+native/cắt ảnh, chấm tự luận theo rubric, báo lỗi/lưu phản hồi AI, đánh giá sư
+phạm và quản lý chi phí; chưa hoàn tất giai đoạn này.
 
 ## Giai đoạn 3
 Giáo viên/phụ huynh và liên kết có xác nhận; đồng bộ đa thiết bị; phân tích năng lực; mở rộng môn/lớp; cache nâng cao.
@@ -25,7 +33,7 @@ Bản thử hiện có 1.566 câu, 219 đề và 199 tài liệu; có dữ liệ
 Bổ sung 1.934 mục nguồn Internet, tổng 2.133 tài liệu/liên kết; gồm 1.444 trang đề giữa/cuối kỳ KNTT và 104 mục tốt nghiệp dùng chung. Đây là liên kết nguồn, không phải PDF/câu hỏi của bên thứ ba được sao chép vào app. Chi tiết, quyền sử dụng và phần còn thiếu: `docs/INTERNET_LIBRARY.md`.
 
 
-## Trạng thái hiện hành — bản thử 2026.10.15.6
+## Mốc bản thử 2026.10.15.6
 
 - Ngân hàng: 2.640 câu đang dùng, 306 đề cố định; 75 bài Toán 5 đã gắn mục lục nguồn
   thứ cấp; 1.934 liên kết nguồn Internet. Chưa phủ đủ SGK mọi môn/lớp và
@@ -146,3 +154,24 @@ trợ nộp dữ liệu legacy JSON null. Xem GROUP_ASSIGNMENTS.md.
 Chưa có hạn giao bài/thông báo đẩy, chấm lại thủ công, AI/OCR hoặc liên kết phụ
 huynh. Nội dung chuyên môn và triển khai production/thiết bị/cửa hàng vẫn còn;
 không coi .15 là hoàn tất toàn bộ kế hoạch.
+
+## Bản thử .16 — nhận chữ cục bộ và nền tảng trợ giảng AI
+
+OCR Tesseract chạy trong trình duyệt, kèm worker/core và dữ liệu tiếng Việt/Anh
+đã ghim phiên bản, giấy phép/checksum. Có xem trước, sửa và xác nhận trước khi
+đưa văn bản vào ô tự luận; ảnh không tải lên máy chủ. Đã chạy nhận chữ thật
+bằng Chromium và kiểm tra không gọi URL ngoài. Bản native chưa nhận chữ từ
+ảnh, vẫn nhập/dán văn bản được. Chưa có công cụ cắt ảnh trong app.
+
+Backend có trợ giảng văn bản theo tài khoản, chỉ gọi khi cấu hình provider và
+người dùng xác nhận gửi tới đúng host. Có tham chiếu tùy chọn từ câu đã nộp
+thuộc tài khoản; hộp thoại nói rõ gửi thêm đề/lựa chọn/đáp án/lời giải đã lưu,
+hoặc chọn chỉ gửi văn bản đã sửa. Khóa nằm trong tệp riêng của backend; quota
+database, hạn kích thước/thời gian, kiểm tra phản hồi và nhật ký metadata/số
+token. Hướng dẫn luôn tham khảo, không thay đổi điểm hoặc đáp án.
+
+AI vẫn tắt mặc định; kiểm thử provider mô phỏng không chứng minh chất lượng
+mô hình thật. Còn chấm rubric, báo lỗi/xem xét phản hồi AI, nhập đề OCR có
+người duyệt, chi phí, retention và chính sách trẻ em/nhà cung cấp. Không tăng
+phạm vi dữ liệu đã thẩm định SGK. Backend Internet, thiết bị thật và ký/phát
+hành cửa hàng vẫn chưa hoàn tất. Xem [AI_OCR.md](AI_OCR.md).

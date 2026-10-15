@@ -134,3 +134,37 @@ Gói giải nén nâng cấp giữ nguyên tài khoản/kết quả cũ, có 7.8
 Gói giải nén nâng cấp giữ nguyên tài khoản, kết quả và đề riêng giáo viên. Chromium qua gateway/backend thực: tên Tự học 111, câu Đúng/Sai sạch trên giao diện; thẻ Toán 5 mở đề 24 câu, API chấm 24/24; xóa tài khoản qua gateway làm phiên hết hiệu lực. AAB release engineering 0.2.0+11 biên dịch đạt, manifest có đúng tên/application ID và targetSdkVersion 36, ZIP nguyên vẹn, jarsigner xác nhận unsigned. Chưa phải AAB được ký/cấu hình backend production để tải lên Play.
 
 iOS đã thêm project, Podfile, privacy manifest UserDefaults CA92.1 và workflow build engineering không ký trên macOS có SDK 26+. Trên môi trường Linux chỉ kiểm tra cấu hình/plist; không tuyên bố đã tạo IPA có chữ ký hoặc kiểm thử iPhone thật. Chưa có tài khoản Play Console/Apple Developer/backend HTTPS, chưa triển khai/gửi xét duyệt. Chi tiết nguồn chính sách hiện hành và các bước còn thiếu: store/RELEASE_STATUS.md.
+
+## Bản 2026.10.15.16 — OCR local và nền tảng trợ lý AI
+
+Backend đầy đủ: **224 passed, 20 skipped**; PostgreSQL container: **54 passed,
+55 deselected**, có kiểm tra quota AI nguyên tử. Flutter: **43 passed** và
+analyze sạch; Ruff, kiểm tra khoảng trắng và web release build đạt. Kiểm thử
+đăng ký được cập nhật cuộn đến nút trong ListView khi thêm mục OCR.
+
+`node scripts/test_browser_ocr.cjs` chạy Tesseract thật trong Chromium: đọc
+đúng chữ in tiếng Việt, 12 cm/5 cm/60 cm² với chỉ số confidence 95. Kiểm tra
+PNG/JPEG/WebP, tệp giả/SVG/MIME sai/ảnh quá lớn, tác vụ đồng thời, hủy ngay
+worker, hủy chọn tệp và timeout. Không có request ngoài origin hoặc ảnh trong
+localStorage/IndexedDB. `prepare_ocr_assets.py --verify` xác nhận 14 tệp local;
+packager đối chiếu tất cả checksum với bản web biên dịch, giữ giấy phép.
+
+AI dùng provider mô phỏng để kiểm tra consent/host, xác thực, tham chiếu bài
+của chính học viên sau khi nộp, phản hồi sai/quá lớn, timeout, quota và điểm
+không đổi. Không có khóa hoặc yêu cầu đến nhà cung cấp AI thật; chưa đánh giá
+chất lượng mô hình. Mặc định API báo chưa cấu hình và không tạo lời giải giả.
+
+Shared HTTPS smoke đạt xác minh TLS, tài khoản/phân quyền, trạng thái AI tắt,
+đồng bộ hai thiết bị, khởi động lại, database lỗi và khôi phục PostgreSQL mã
+hóa với phiên cũ bị thu hồi. Docker image mới đã build. Không triển khai lên
+máy chủ Internet. Các giới hạn còn lại được ghi trong [AI_OCR.md](AI_OCR.md).
+
+Đã chạy chính ZIP .16 giải nén qua launcher/backend thật trong Chromium:
+chọn ảnh tiếng Việt, thấy ảnh/chữ/confidence 95; sửa chữ làm mất xác nhận cũ.
+Câu nhập đáp án giữ nội dung đã gõ, nhận văn bản một ký tự `5` từ màn hình
+kiểm tra, không tự nộp; chỉ nộp khi bấm nút và xác nhận. Kết quả mở được trợ
+lý với trạng thái chưa cấu hình và lựa chọn tham chiếu. Không có request
+ngoài origin, ảnh trong POST hoặc lỗi JavaScript. Nâng cấp từ database .15
+giữ nguyên từng dòng tài khoản, kết quả, nhóm và phản hồi cũ. Backend/web/docs
+và toàn bộ 14 tài sản OCR trong ZIP khớp nguồn/build; ZIP không chứa state.
+Runtime/batch Windows chỉ kiểm tra tĩnh, chưa chạy máy Windows thật.
