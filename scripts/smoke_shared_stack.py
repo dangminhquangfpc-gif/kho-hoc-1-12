@@ -244,7 +244,27 @@ def main():
                     {"username": "student", "password": password},
                     device=device,
                 )
-            attempt = request("/exams/https-exam/attempts", {}, status=201)
+            # Assign a public source privately, then carry assignment progress through recovery.
+            request(
+                "/auth/login", {"username": "manager", "password": password}, device=1
+            )
+            group = request(
+                "/classroom/groups", {"name": "Nhóm HTTPS"}, status=201, device=1
+            )
+            group_path = "/classroom/groups/" + group["id"]
+            request(group_path + "/members", {"username": "student"}, device=1)
+            assigned = request(
+                group_path + "/assignments",
+                {"exam_id": "https-exam"},
+                status=201,
+                device=1,
+            )
+            exam_id = assigned["exam_id"]
+            request(
+                "/auth/login", {"username": "student", "password": password}, device=1
+            )
+            assert request("/account/assignments")[0]["status"] == "not_started"
+            attempt = request("/exams/" + exam_id + "/attempts", {}, status=201)
             path = "/account/attempts/" + attempt["id"]
             request(
                 path + "/draft",
@@ -263,6 +283,13 @@ def main():
                 device=1,
             )
             assert submitted["score"] == float(question["max_score"])
+            request(
+                "/auth/login", {"username": "manager", "password": password}, device=1
+            )
+            progress = request(group_path + "/assignments/" + exam_id, device=1)
+            assert progress["submitted_count"] == 1
+            assert progress["students"][0]["latest_percent"] == 100
+
             assert request("/account/results")[0]["id"] == attempt["id"]
             feedback = request(
                 "/content-reports",
@@ -280,6 +307,8 @@ def main():
                 "/auth/login", {"username": "other", "password": password}, device=1
             )
             request(path, device=1, status=404)
+            assert request("/account/assignments", device=1) == []
+            request("/exams/" + exam_id, device=1, status=404)
             request(
                 "/auth/login",
                 {"username": "student", "password": password},
@@ -354,6 +383,10 @@ def main():
             assert restored[0]["result"]["score"] == submitted["score"]
             assert driver.sql("tuhoc", "SELECT count(*) FROM learning_records") == b"0"
             assert request("/content-reports")[0]["id"] == feedback["id"]
+            restored_assignments = request("/account/assignments")
+            assert restored_assignments[0]["exam_id"] == exam_id
+            assert restored_assignments[0]["status"] == "submitted"
+            assert restored_assignments[0]["latest_percent"] == 100
             for service in ["api", "db"]:
                 ident = subprocess.check_output(
                     command + ["ps", "-q", service], text=True

@@ -115,6 +115,30 @@ class LearningApi {
       )).data!;
   Future<List<Json>> classroomGroups() async =>
       (await client.get<List<dynamic>>('/classroom/groups')).data!.cast<Json>();
+  Future<List<Json>> accountAssignments({int offset = 0}) async =>
+      (await client.get<List<dynamic>>(
+        '/account/assignments',
+        queryParameters: {'offset': offset, 'limit': 30},
+      )).data!.cast<Json>();
+  Future<List<Json>> groupAssignments(String id, {int offset = 0}) async =>
+      (await client.get<List<dynamic>>(
+        '/classroom/groups/$id/assignments',
+        queryParameters: {'offset': offset, 'limit': 30},
+      )).data!.cast<Json>();
+  Future<Json> assignGroupExam(String groupId, String examId) async =>
+      (await client.post<Json>(
+        '/classroom/groups/$groupId/assignments',
+        data: {'exam_id': examId},
+      )).data!;
+  Future<Json> groupAssignmentProgress(String groupId, String examId) async =>
+      (await client.get<Json>(
+        '/classroom/groups/$groupId/assignments/$examId',
+      )).data!;
+  Future<String> groupAssignmentCsv(String groupId, String examId) async =>
+      (await client.get<String>(
+        '/classroom/groups/$groupId/assignments/$examId/results.csv',
+        options: Options(responseType: ResponseType.plain),
+      )).data!;
   Future<String> groupResultsCsv(String id) async => (await client.get<String>(
     '/classroom/groups/$id/results.csv',
     options: Options(responseType: ResponseType.plain),

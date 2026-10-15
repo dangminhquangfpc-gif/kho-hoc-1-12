@@ -90,3 +90,10 @@ Có luồng báo lỗi nội dung và người quản lý/giáo viên trả lờ
 Không phải kiểm duyệt sư phạm độc lập, không phải chấm lại bài hoặc xác minh
 vai trò giáo viên. Chưa tích hợp thông báo đẩy/email, AI/OCR hoặc triển khai
 backend Internet; điều kiện phát hành cửa hàng vẫn chưa hoàn tất.
+
+## Bản thử .15
+
+Có giao bài theo nhóm, theo dõi tiến độ riêng từng đề và xuất CSV; học sinh chỉ
+xem dữ liệu của mình. Không thêm SDK, quyền thiết bị, AI hoặc endpoint Internet.
+Chưa có hạn giao bài/thông báo đẩy; trạng thái pilot và điều kiện cửa hàng
+không đổi. Xem GROUP_ASSIGNMENTS.md.

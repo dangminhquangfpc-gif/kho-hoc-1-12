@@ -82,6 +82,7 @@ def build(artifacts: Path):
         "docs/CONTENT_REPORTS.md",
         "docs/CLASSROOM_REPORTS.md",
         "docs/EVENING_CHECKLIST.md",
+        "docs/GROUP_ASSIGNMENTS.md",
         "start-demo.bat",
         "start-demo.sh",
         "LICENSE",
@@ -154,7 +155,7 @@ def build(artifacts: Path):
         "Có 108 câu/12 đề và 4 tài liệu",
         f"Có {question_count} bản ghi câu hỏi (gồm câu cũ đã rút/thay thế)/{exam_count} đề và {document_count} tài liệu/liên kết",
     )
-    guide += "\nBản thử 2026.10.15.14. Nếu bài lưu quá hạn hoặc thuộc máy chủ cũ, dùng Khôi phục bài đã lưu; app chỉ giữ đáp án cho câu không đổi. Đã tránh cache giao diện của bản ZIP cũ, không xóa bài làm trong trình duyệt.\n"
+    guide += "\nBản thử 2026.10.15.15. Nếu bài lưu quá hạn hoặc thuộc máy chủ cũ, dùng Khôi phục bài đã lưu; app chỉ giữ đáp án cho câu không đổi. Đã tránh cache giao diện của bản ZIP cũ, không xóa bài làm trong trình duyệt.\n"
     guide += "\nMới: Luyện đề > Tạo đề theo chủ đề và độ khó (1–50 câu tùy ngân hàng); Tiến độ > Ôn các câu chưa đúng. Thống kê chủ đề chỉ tính lần làm mới nhất của mỗi câu, không phải đánh giá năng lực chính thức. Có thể luyện khách hoặc đăng nhập để lưu kết quả tập trung; chưa tích hợp AI.\n"
     guide += "\nTài liệu chỉ hiển thị bài gắn đúng mục lục SGK. Đề kiểm tra Internet ở Luyện đề > Đề giữa kỳ, cuối kỳ và tốt nghiệp từ Internet. 87 bộ luyện Toán 5 mới dùng 344 câu tự biên soạn; các bộ ôn tổng hợp dùng lại câu của bộ luyện theo bài. Chưa chuyển nguyên đề PDF của nguồn Internet vào app.\n"
     guide += "\nTài liệu Internet được liên kết tới trang nguồn, cần mạng để mở. Có bộ lọc giữa/cuối kỳ và năm đề tốt nghiệp; đề quốc gia dùng chung các bộ sách.\n"
@@ -169,6 +170,7 @@ def build(artifacts: Path):
     guide += "\nBản .10: thêm 5.246 câu và 164 đề tự biên soạn làm trực tiếp. Đăng ký có vai trò học sinh/giáo viên. Học sinh làm đề có sẵn, ôn câu đã sai; giáo viên và quản lý được tạo đề. Giáo viên tạo nhóm, thêm tài khoản đã cấp hoặc gửi mã nhóm cho học sinh tự tham gia; chỉ xem học viên trong phạm vi quản lý. Các liên kết Internet chưa nhập không được tính là đề làm trực tiếp. Nội dung bổ sung chưa được xác minh đầy đủ từng bài SGK. Nâng cấp: dừng bản cũ, sao lưu và chép toàn bộ thư mục state vào bản mới trước khi chạy.\n"
     guide += "\nBản .11 — Tự học 111: bỏ mệnh đề thừa ở 12 câu bằng phiên bản mới; có 991 đề tự biên soạn gắn từ thẻ tham khảo, mỗi đề 20–24 câu, không phải bản sao đề nguồn. 525 thẻ chưa đủ câu vẫn là tham khảo. Tổng 1.461 đề làm trực tiếp và 7.886 câu đang hoạt động. Có xóa tài khoản trong app bằng mật khẩu xác nhận. Đã chuẩn bị khung iOS/cấu hình ký Android; chưa đưa lên cửa hàng vì chưa có tài khoản nhà phát hành/backend HTTPS production và các bước thẩm định.\n"
     guide += "\nBản .14: Báo lỗi nội dung trong câu hỏi và tài liệu; theo dõi ở Cá nhân > Tài khoản > Phản hồi của tôi. Giáo viên/quản lý có Xử lý phản hồi nội dung; trả lời không sửa điểm cũ. Có CSV bảng điểm theo nhóm. Đọc docs/EVENING_CHECKLIST.md để kiểm tra toàn bộ và docs/CONTENT_REPORTS.md để xem quyền, cách nâng cấp schema.\n"
+    guide += "\nBản .15: nhóm có Bài giao và tiến độ > Giao đề có sẵn; học sinh mở Bài được giao ở Tài khoản. Có trạng thái chưa nộp/đang làm/đã nộp và CSV từng đề; điểm lấy lần nộp gần nhất. Giữ bài chưa đồng bộ khi mở đề khác. Xem docs/GROUP_ASSIGNMENTS.md.\n"
     (staging / "HUONG-DAN.txt").write_text(guide, encoding="utf-8-sig")
     for bat in [staging / "start-demo.bat"]:
         content = (

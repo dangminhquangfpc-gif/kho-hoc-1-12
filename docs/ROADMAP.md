@@ -133,3 +133,16 @@ nhưng lớp preview bên trong còn chặn ở bản .13. Xem CONTENT_REPORTS.m
 Checklist kiểm tra toàn bộ bản thử: EVENING_CHECKLIST.md. Còn nội dung chuyên
 môn, chấm lại, AI/OCR, thiết bị thật và triển khai/phát hành; chưa hoàn tất toàn
 bộ kế hoạch hoặc vận hành production.
+
+## Bản thử .15 — giao bài và tiến độ theo đề
+
+Giáo viên giao bản sao riêng của đề có sẵn cho nhóm, xem tiến độ/thành viên chưa
+nộp và CSV riêng từng đề. Đề tạo theo chủ đề có nhóm cũng được thống kê. Học viên
+có Bài được giao, tiếp tục bản nháp cùng mã đề và chỉ thấy kết quả của mình.
+Dùng TeacherExam hiện có, không đổi schema 2. Sửa thời hạn bản nháp đồng nhất
+24 giờ với nộp bài, không để 100 bài đã hoàn thành che mất bài đang làm và hỗ
+trợ nộp dữ liệu legacy JSON null. Xem GROUP_ASSIGNMENTS.md.
+
+Chưa có hạn giao bài/thông báo đẩy, chấm lại thủ công, AI/OCR hoặc liên kết phụ
+huynh. Nội dung chuyên môn và triển khai production/thiết bị/cửa hàng vẫn còn;
+không coi .15 là hoàn tất toàn bộ kế hoạch.

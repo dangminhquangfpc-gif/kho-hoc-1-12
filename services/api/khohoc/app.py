@@ -13,7 +13,7 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 from .database import make_engine, migrate, verify_schema, SCHEMA_VERSION
 from .server_security import validate_shared, reserve
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from sqlalchemy import select, update, delete, text
+from sqlalchemy import select, update, delete, text, or_, cast, String
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 
@@ -215,6 +215,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     from .reports import create_reports_router
 
     app.include_router(create_reports_router(db, accounts))
+    from .assignments import create_assignments_router
+
+    app.include_router(create_assignments_router(db=db, accounts=accounts))
     from .sync import create_sync_router
 
     app.include_router(create_sync_router(db, accounts, public_question))
@@ -572,7 +575,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         # Compare-and-set makes concurrent retries idempotent on SQLite and PostgreSQL.
         changed = session.execute(
             update(Attempt)
-            .where(Attempt.id == attempt.id, Attempt.result.is_(None))
+            .where(
+                Attempt.id == attempt.id,
+                or_(Attempt.result.is_(None), cast(Attempt.result, String) == "null"),
+            )
             .values(answers=body.answers, result=result)
         ).rowcount
         owner = session.get(AccountAttempt, attempt_id)
