@@ -9,7 +9,9 @@ const reportExportMessage =
     'Đã tạo tệp CSV. Bảng gồm kết quả mọi môn, mọi lần nộp của thành viên hiện tại; học viên chưa nộp bài có điểm để trống.';
 Future<void> exportReport(String csv) async {
   final url = html.Url.createObjectUrlFromBlob(
-    html.Blob([utf8.encode(csv)], 'text/csv;charset=utf-8'),
+    html.Blob([
+      utf8.encode(csv.startsWith('\ufeff') ? csv : '\ufeff$csv'),
+    ], 'text/csv;charset=utf-8'),
   );
   final anchor = html.AnchorElement(href: url)
     ..download = 'tu-hoc-111-bang-diem.csv';
