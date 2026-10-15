@@ -37,3 +37,15 @@ khảo, không hiển thị như bài học bám SGK. Đề kiểm tra thuộc p
 nội dung chính xác về sư phạm hoặc phủ đủ các ấn bản. Hiện mới có 75 bài
 Toán 5 được biên soạn theo mục lục đã thu thập. Những môn/lớp khác chưa có
 bài phù hợp phải hiển thị thiếu, không dùng nội dung tổng quát thay thế.
+
+## Trình bày lời giải — bản 2026.10.15.7
+
+Đã soạn lại 139 ví dụ và 278 lời giải bài tập trong 75 tài liệu Toán 5 hiện có. Mỗi ví dụ có đề bài rõ, phần Lời giải từng bước và Đáp số. Mỗi bài tự luyện có lời giải riêng; bài toán có lời văn ghi câu dẫn, phép tính và đơn vị, rồi đáp số. Bài vẽ/nhận xét kết thúc bằng kết luận tương ứng, không tự tạo đáp án số cho câu hỏi không có số.
+
+Các quy tắc ưu tiên diễn đạt bằng lời phù hợp tiểu học, định nghĩa các chữ dùng trong công thức. Bài hình tròn dùng số 3,14 và giải thích bán kính/đường kính trước khi tính. Cộng/trừ thập phân có đặt tính thẳng cột, giữ căn cột trên màn hình nhỏ. Phần mở lời giải căn trái toàn chiều rộng.
+
+Nội dung được tự biên soạn theo mục lục Kết nối tri thức và cách giải toán tiểu học; không tuyên bố đã xác minh nguyên mẫu từng trang SGK. Đã đối chiếu thêm quy tắc chu vi ở nguồn thứ cấp Bài 27 (Loigiaihay) ngày 15/10/2026; không sao chép nguyên lời giải của nguồn. Các môn/lớp còn thiếu vẫn giữ trạng thái thiếu.
+
+`data/pipelines/math5_worked_solutions.py` chứa nội dung đã soạn; không ghép nhãn Lời giải vào chuỗi đáp án ngắn cũ. Kiểm tra số học dùng Fraction để so sánh chính xác các đẳng thức tính được; không thay cho thẩm định sư phạm.
+
+Nâng cấp local giữ nguyên ID bài để yêu thích/đọc gần đây không bị mất. `data/library/document_upgrades.json` liệt kê hash của từng chuyển đổi đã duyệt từ bản gốc .6 sang .7. Trước khi sửa dữ liệu, kiểm tra toàn bộ câu hỏi/đề/tài liệu; chỉ nâng cấp tài liệu đang xuất bản có nội dung khớp hoàn toàn. Giữ nội dung trước đó trong nhật ký, tăng phiên bản và cập nhật ngày sửa. Nội dung người dùng đã sửa riêng không bị tự ghi đè. Sao lưu và chép toàn bộ state khi chuyển gói.

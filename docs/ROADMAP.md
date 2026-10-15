@@ -49,3 +49,7 @@ Bổ sung 1.934 mục nguồn Internet, tổng 2.133 tài liệu/liên kết; g�
 Chi tiết module: [LOCAL_STUDY_MODULE.md](LOCAL_STUDY_MODULE.md).
 
 Chi tiết tài khoản bản .6: [CLASSROOM_ACCOUNTS.md](CLASSROOM_ACCOUNTS.md).
+
+## Bản thử 2026.10.15.7
+
+Hoàn thiện cách trình bày 139 ví dụ và 278 lời giải trong 75 bài Toán 5: kiến thức bằng lời, cách làm từng bước, câu lời giải/phép tính/đơn vị và Đáp số; hiển thị đặt tính giữ cột. Không tăng số bài SGK được ánh xạ và chưa xác minh nguyên mẫu toàn bộ SGK. Xem [TEXTBOOK_LESSONS.md](TEXTBOOK_LESSONS.md).

@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:kho_hoc_mobile/main.dart';
 import 'package:kho_hoc_mobile/repository.dart';
+import 'package:kho_hoc_mobile/library_screen.dart' show DocumentText;
 import 'practice_test.dart' show FakeApi;
 
 class LibraryApi extends FakeApi {
@@ -52,6 +53,38 @@ class PracticeLessonApi extends LibraryApi {
 }
 
 void main() {
+  testWidgets('Calculation columns and final answer remain readable on a phone', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(320, 640);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: Padding(
+            padding: EdgeInsets.all(16),
+            child: DocumentText(
+              'Lời giải\nĐặt tính rồi cộng:\n```\n   3,45\n+  2,70\n-------\n   6,15\n```\nĐáp số: 6,15.',
+            ),
+          ),
+        ),
+      ),
+    );
+    expect(find.text('   3,45\n+  2,70\n-------\n   6,15'), findsOneWidget);
+    expect(find.text('Đáp số: 6,15.'), findsOneWidget);
+    final calculation = tester.widget<SelectableText>(
+      find.byWidgetPredicate(
+        (w) =>
+            w is SelectableText &&
+            w.data == '   3,45\n+  2,70\n-------\n   6,15',
+      ),
+    );
+    expect(calculation.style?.fontFamily, 'monospace');
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('Practice solution is concealed until the learner expands it', (
     tester,
   ) async {

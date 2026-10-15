@@ -514,10 +514,14 @@ class _DocumentState extends ConsumerState<DocumentScreen> {
                   (section['heading'] as String).contains('Đáp án tự kiểm tra'))
                 ExpansionTile(
                   title: Text(section['heading']),
+                  expandedCrossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(16),
-                      child: SelectableText(section['text']),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: DocumentText(section['text']),
+                      ),
                     ),
                   ],
                 )
@@ -527,7 +531,7 @@ class _DocumentState extends ConsumerState<DocumentScreen> {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 8),
-                SelectableText(section['text']),
+                DocumentText(section['text']),
                 const SizedBox(height: 20),
               ],
             ],
@@ -555,4 +559,41 @@ class _DocumentState extends ConsumerState<DocumentScreen> {
       },
     ),
   );
+}
+
+/// Authored calculation blocks keep their columns on narrow phone screens.
+/// Normal paragraphs remain selectable, including the final answer.
+class DocumentText extends StatelessWidget {
+  const DocumentText(this.text, {super.key});
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    if (!text.contains('```')) return SelectableText(text);
+    final parts = text.split('```');
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        for (var i = 0; i < parts.length; i++)
+          if (parts[i].trim().isNotEmpty)
+            if (i.isOdd)
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.all(12),
+                color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: SelectableText(
+                    parts[i].replaceAll(RegExp(r'^\n|\n$'), ''),
+                    style: const TextStyle(
+                      fontFamily: 'monospace',
+                      height: 1.5,
+                    ),
+                  ),
+                ),
+              )
+            else
+              SelectableText(parts[i].trim()),
+      ],
+    );
+  }
 }

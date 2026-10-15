@@ -4,6 +4,8 @@ Monorepo MVP phát triển theo docs/PRODUCT_PLAN.md. Ứng dụng QuizApp Fireb
 
 Bản thử 2026.10.15.6: chọn nhiều chủ đề, bổ sung 731 câu Toán 5, tài khoản học viên và quản lý kết quả trên backend local. Hướng dẫn: [Tài khoản và quản lý học viên](docs/CLASSROOM_ACCOUNTS.md).
 
+Bản thử 2026.10.15.7: trình bày lại lời giải và đáp số trong 75 tài liệu Toán 5; [phạm vi và cách kiểm chứng](docs/TEXTBOOK_LESSONS.md).
+
 ## Thành phần
 
 - apps/mobile: Flutter, Riverpod, GoRouter, Dio; chọn lớp/môn/đề, làm bài, chấm qua API, đánh dấu câu, lưu bài/lịch sử; kho tài liệu, yêu thích/đọc gần đây và tiến độ cục bộ.

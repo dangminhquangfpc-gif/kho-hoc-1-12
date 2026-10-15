@@ -4,6 +4,8 @@ import json
 import re
 from pathlib import Path
 
+from math5_worked_solutions import WORKED, RULES, METHODS, EXAMPLES, TASKS, MISTAKES
+
 ROOT = Path(__file__).resolve().parents[2]
 SKILLS = {}
 
@@ -599,7 +601,22 @@ def build():
         number = int(match.group(1))
         seen.add(number)
         keys = MAP[number]
-        items = [SKILLS[key] for key in keys]
+        assert set(WORKED) == set(METHODS) == set(SKILLS)
+        items = []
+        for key in keys:
+            rule, method, example, _, tasks, _, mistake = SKILLS[key]
+            example_solution, *practice_solutions = WORKED[key]
+            items.append(
+                (
+                    RULES.get(key, rule),
+                    METHODS[key],
+                    EXAMPLES.get(key, example),
+                    example_solution,
+                    TASKS.get(key, tasks),
+                    practice_solutions,
+                    MISTAKES.get(key, mistake),
+                )
+            )
         sections = [
             dict(
                 heading="Mục tiêu và phạm vi",
@@ -614,11 +631,11 @@ def build():
                 [
                     dict(
                         heading=prefix + "Kiến thức và cách làm",
-                        text=rule + "\nCách làm: " + method,
+                        text=rule + "\n\nCách làm:\n" + method,
                     ),
                     dict(
                         heading=prefix + "Ví dụ từng bước",
-                        text=example + "\nLời giải: " + worked,
+                        text="Đề bài: " + example + "\n\n" + worked,
                     ),
                     dict(
                         heading=prefix + "Bài tập tự luyện",
@@ -628,8 +645,8 @@ def build():
                     ),
                     dict(
                         heading=prefix + "Lời giải bài tập",
-                        text="\n".join(
-                            f"{j}. {answer}" for j, answer in enumerate(answers, 1)
+                        text="\n\n".join(
+                            f"Bài {j}.\n{answer}" for j, answer in enumerate(answers, 1)
                         ),
                     ),
                     dict(heading=prefix + "Lỗi cần tránh", text=mistake),

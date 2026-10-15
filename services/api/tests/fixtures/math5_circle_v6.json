@@ -1,0 +1,48 @@
+{
+  "id": "kntt_math5_lesson_27",
+  "grade": 5,
+  "subject": "toan",
+  "title": "Bài 27. Đường tròn. Chu vi và diện tích hình tròn",
+  "topic": "Chủ đề 5. Một số hình phẳng. Chu vi và diện tích",
+  "chapter": "Chủ đề 5. Một số hình phẳng. Chu vi và diện tích",
+  "lesson_order": 27,
+  "curriculum_unit_id": "unit_eb1899df20bc36f42c66",
+  "textbook": "ket_noi_tri_thuc",
+  "kind": "study_notes",
+  "semester": 1,
+  "summary": "Kiến thức, cách làm, ví dụ có lời giải và 2 bài tập tự luyện.",
+  "sections": [
+    {
+      "heading": "Mục tiêu và phạm vi",
+      "text": "Ôn và luyện nội dung Bài 27. Đường tròn. Chu vi và diện tích hình tròn. Ghi chú này tự biên soạn theo mục lục nguồn tham khảo; chưa xác minh mọi ấn bản với nhà xuất bản. Bài có thể cần thêm dạng nâng cao sau khi giáo viên thẩm định."
+    },
+    {
+      "heading": "Kiến thức và cách làm",
+      "text": "Đường kính d = 2r. Dùng π ≈ 3,14: chu vi C = 2r × 3,14; diện tích S = r × r × 3,14.\nCách làm: Xác định bán kính hay đường kính đề cho trước; dùng giá trị π theo yêu cầu."
+    },
+    {
+      "heading": "Ví dụ từng bước",
+      "text": "Hình tròn bán kính 3 cm, dùng π = 3,14.\nLời giải: d = 6 cm; C = 18,84 cm; S = 28,26 cm²."
+    },
+    {
+      "heading": "Bài tập tự luyện",
+      "text": "1. Bán kính 5 cm: tính chu vi với π = 3,14.\n2. Đường kính 4 cm: tính diện tích với π = 3,14."
+    },
+    {
+      "heading": "Lời giải bài tập",
+      "text": "1. 31,4 cm.\n2. r = 2 cm; S = 12,56 cm²."
+    },
+    {
+      "heading": "Lỗi cần tránh",
+      "text": "Không đưa đường kính trực tiếp vào công thức r × r × π."
+    }
+  ],
+  "author": "Kho Học 1–12",
+  "source_name": "Ghi chú tự biên soạn; mục lục tham khảo Loigiaihay",
+  "source_url": "https://loigiaihay.com/giai-toan-lop-5-bai-27-duong-tron-chu-vi-va-dien-tich-hinh-tron-ket-noi-tri-thuc-a156764.html",
+  "source_type": "original",
+  "license": "original_content",
+  "rights_evidence": "Nội dung giải thích và bài tập được soạn riêng; chỉ tên bài/chủ đề và liên kết dùng nhận diện mục lục nguồn. Chưa thẩm định chuyên môn độc lập.",
+  "distribution_allowed": true,
+  "download_allowed": false
+}

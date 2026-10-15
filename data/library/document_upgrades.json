@@ -1,0 +1,380 @@
+{
+  "release": "2026.10.15.7",
+  "transitions": [
+    {
+      "id": "kntt_math5_lesson_01",
+      "from_sha256": "203432cb0a2f1b5924661bb069f61ce3c42df0ad3f4f533b99888111116f671f",
+      "to_sha256": "00d3e1180e064533bbb27e83a589a1bf0545fc992914bf7061e8d0ca192b6443"
+    },
+    {
+      "id": "kntt_math5_lesson_02",
+      "from_sha256": "eb846db67f7a2e21adff97ad56837c9711fc92712b182239d01a83735fc74408",
+      "to_sha256": "b7e67bf27cc024144846647bc6019c48aa849c2b8efae6e3438fbde9170daddb"
+    },
+    {
+      "id": "kntt_math5_lesson_03",
+      "from_sha256": "f7c86c2678bae6193a994165eb14b917b7f75ff24ea3719758da34a91bdba999",
+      "to_sha256": "72dfabbbf615db68bacfed9c3f6e19360b12e555e2073aea1bc47eeb171a876e"
+    },
+    {
+      "id": "kntt_math5_lesson_04",
+      "from_sha256": "66eb0b687734bfd305d1b8169e5e39b1a5b09360543ea780f33b52d9c1302b68",
+      "to_sha256": "41c2302ab130923920c0154d08bcec900b47be0b2a8f2d9d5ad0204747e292dc"
+    },
+    {
+      "id": "kntt_math5_lesson_05",
+      "from_sha256": "78ca9854cb313686a75e53bc443624f3ef1f2ca6722c88d161af0192df835fab",
+      "to_sha256": "a1c4d50a204eeb9ddfc094f75b6b0e9ee649733f26b468c648f6005823d27995"
+    },
+    {
+      "id": "kntt_math5_lesson_06",
+      "from_sha256": "cefc1deeaf3fc28551f19fc7a22b6c3f5caa8c75aa7d02759f004fdad3330a06",
+      "to_sha256": "454ae4dc2dc55a509a5704e3469384c7daa3b386d6f2c4ffd9701ab0d9432279"
+    },
+    {
+      "id": "kntt_math5_lesson_07",
+      "from_sha256": "7bdc7ae2ae3e9fde3c3c57408fa990244f7ba3371728fe8af63f68edd2018bd9",
+      "to_sha256": "08d6dd59d69c5119fdcea38be4c9445b35bb877dee5f1c697090b65255693a88"
+    },
+    {
+      "id": "kntt_math5_lesson_08",
+      "from_sha256": "a9e9e3b6ba73a2f6b229463efc4d609d70c9c2912b3bbf74115cf943d28c8915",
+      "to_sha256": "4a3f3d52f2dfabc22fa034e4ff9547e8b7f5728a35d992c9c136c263b5aac4da"
+    },
+    {
+      "id": "kntt_math5_lesson_09",
+      "from_sha256": "d8bbcd22f67363610af3cc5ee13c4bcd6bafc56255f4390be1f59a92e9e2e55e",
+      "to_sha256": "53cce45e48a0b66476ba474629ed2726beceaf867741fc31568157da16596c50"
+    },
+    {
+      "id": "kntt_math5_lesson_10",
+      "from_sha256": "b67e7a158ad9fa60170db6b225dc802266e730c68b0851a4557f597cf06d8d01",
+      "to_sha256": "7b11b2d828e995ebe9603cf84be93dedd6eb6ac8ec5185d6576db0e188fbce7c"
+    },
+    {
+      "id": "kntt_math5_lesson_11",
+      "from_sha256": "665baff0e441be3bf9240f8d7754f6658b00ba2d099a26f080a2b91a6d7a07f3",
+      "to_sha256": "79dc2cd220b343fe2be6a808710ce1cd8e95f5dcefa0a7d0a8fd9d22192264e4"
+    },
+    {
+      "id": "kntt_math5_lesson_12",
+      "from_sha256": "c1c4f3b5fba9ab80cd10f515bd2463676ed4cdcfdb2fd1339149ec4e97e4cd87",
+      "to_sha256": "ff923fe21c059ad598c5f3a53b98fca1923801cca6505b92a695330221933be0"
+    },
+    {
+      "id": "kntt_math5_lesson_13",
+      "from_sha256": "12136ee01adb6d27dd150694053f1b48c35f023448cd9f51f28ae09e076bee67",
+      "to_sha256": "eaaa88b90d2d0b797fd980c676cde62147ab8701a183bbf07d86eb6771e22934"
+    },
+    {
+      "id": "kntt_math5_lesson_14",
+      "from_sha256": "6e81ecd5ed48ceae7c560a0fca3de3317950142c7b7a19489ae106cbcaf4e637",
+      "to_sha256": "6e9393793c2725bba31b3970a3b099e060f5f0979270a207bbdc83e6f2d20583"
+    },
+    {
+      "id": "kntt_math5_lesson_15",
+      "from_sha256": "179fd33fd6df789a366858e4c78b5259e51331db5c9f3fea609cc953851993c3",
+      "to_sha256": "173ba318cead965aaaf85a922ab221eeab1654130c80892b594272633c62e901"
+    },
+    {
+      "id": "kntt_math5_lesson_16",
+      "from_sha256": "5cda7f076b074472ce4cc23ce37ff2bed6e6870fb28793cecdcd9e2a284ef39c",
+      "to_sha256": "e56accc38044d2ac95f77576691d777c1aaf812150c30cd00450748dfec57bde"
+    },
+    {
+      "id": "kntt_math5_lesson_17",
+      "from_sha256": "7cfad3e28fde1067c00d92e4004422ce021902a22a0c6c74ed55affbcca42f18",
+      "to_sha256": "2a577b1f71da8eee51ec9e9bb715ac7ffce6bb6438c074bb4c3185ffc2655a25"
+    },
+    {
+      "id": "kntt_math5_lesson_18",
+      "from_sha256": "3f902a61be41ced4e82cc7e5af97e8604fbca6ef62f3cd854c93a8c515d418c9",
+      "to_sha256": "5a78dd55e3d9b774d69b59d053f194b10b42cc54ea0ca2ca677df4b8cbca2968"
+    },
+    {
+      "id": "kntt_math5_lesson_19",
+      "from_sha256": "9ec523f02852e00dddce549d78f33d67ec8630fd60d5b0d29e538a15c8a27baf",
+      "to_sha256": "89e84f8386c0400c3a568ab5c34335ebc6d6470e4a2c0661e3aa6977c5b043a6"
+    },
+    {
+      "id": "kntt_math5_lesson_20",
+      "from_sha256": "c6871593b04f5d60018833b4f1e2020023adc3a752a3098810946eb94269013a",
+      "to_sha256": "4b79145572007fcb98aaff756254da5512fa9f39f5c7dbe6552e505fdba86af5"
+    },
+    {
+      "id": "kntt_math5_lesson_21",
+      "from_sha256": "3178abb389962bcd604802436fc8174c9e1af38584ace106abcaf742508f430a",
+      "to_sha256": "e29159c183959f6af6e74c0cbd5773564f277a14fe95e033bf333d5459c612b9"
+    },
+    {
+      "id": "kntt_math5_lesson_22",
+      "from_sha256": "ebf38ae117ad857a6a3353c376cb9ec2845604dc8ae1bfe87715148d22b9d8a1",
+      "to_sha256": "322ba36d2e2a8e7c00286585485c16bcbb96a45f22cc4daa058b551c54e7defb"
+    },
+    {
+      "id": "kntt_math5_lesson_23",
+      "from_sha256": "345100859d3a1dd274fe9df7fea0d238d6a6d8b213a8a218d434859b8428cb38",
+      "to_sha256": "665ee34e98e2236f1d4d44c5454d9c0c22108310f12bcb8e73c722e18439f40f"
+    },
+    {
+      "id": "kntt_math5_lesson_24",
+      "from_sha256": "8bc8ba467f9913154c4673b9af48093fbf767f0e57bebdd06102c8e4e8f8a2c2",
+      "to_sha256": "872477a177ea16d28e4da422bf8c24d574b1beb91aa2dc09842676d2eaae5e32"
+    },
+    {
+      "id": "kntt_math5_lesson_25",
+      "from_sha256": "e39ab20dec30e26e1a3d92e1c87abed5a60cbba6f8a351d7e5bdb8cbf913b34e",
+      "to_sha256": "f5552621b74ea0c9d1113b621cd21eb343e2e39adb9733cb44cb071d92dd9f72"
+    },
+    {
+      "id": "kntt_math5_lesson_26",
+      "from_sha256": "ecf60560525b2ede82ccf1b61269a3aa72788b3328bbc06ab7d0267227cde3d3",
+      "to_sha256": "3272ad0ea6b397a141114adc28e35ed658429b6df399949a9ec6592a390aaef5"
+    },
+    {
+      "id": "kntt_math5_lesson_27",
+      "from_sha256": "652e43a8ac40676f4e70d50355d08ff14a8478062ba4bdb26d9cca331c0f7022",
+      "to_sha256": "e681d9a494e7515372ba129026055dfd8d45a8b4b46ad3301bde6b9b8a7f8e61"
+    },
+    {
+      "id": "kntt_math5_lesson_28",
+      "from_sha256": "9216eb35260dd3b246df1af09d718f447a4a6dd938957424eeec0049f53fc74c",
+      "to_sha256": "55b66b42c63d74ac197bbbab84726188a12e96d2d75c2b69a670f234a8ddda6f"
+    },
+    {
+      "id": "kntt_math5_lesson_29",
+      "from_sha256": "6e1d7e48ab2463746d0a91721061e9f341c72af66b1ebe158419f23b5c2f350b",
+      "to_sha256": "8caeda740424c148495510e0094c73f613ab897a9eb1a22af4719edc87a2a2ea"
+    },
+    {
+      "id": "kntt_math5_lesson_30",
+      "from_sha256": "bc5aa7b0a3045c29d409229950e783484253bc58df089accf7d047e847500954",
+      "to_sha256": "7ea5833910e3c4a198132fd5b70db9e7837408088bc44307d7f25beb73fc137b"
+    },
+    {
+      "id": "kntt_math5_lesson_31",
+      "from_sha256": "c9cdec13d0995b940536e5042299fbfe5f149da1c46c19cfd22eae04779203aa",
+      "to_sha256": "f65ce56a38529e30a53807b888323e884dbf9b5ccd4603e7a941854acac5f4c1"
+    },
+    {
+      "id": "kntt_math5_lesson_32",
+      "from_sha256": "23b35df660dff687a2b711d6ea640394e5da48a0bc09c4a3a69ccc00f2af0093",
+      "to_sha256": "59699273b322fda434da26e497ce671b7b9268a6096bb953206398e548627285"
+    },
+    {
+      "id": "kntt_math5_lesson_33",
+      "from_sha256": "fd68ef167627484f792d9779e7e0efea48812027421202af7eb26bc416d85c65",
+      "to_sha256": "8c54affd209c5d00f35dac5501b703634bc93bb792f45f20eccec4423fcb40b4"
+    },
+    {
+      "id": "kntt_math5_lesson_34",
+      "from_sha256": "a339d6b7255e6faed799a2db4f7d9cc713f34c014c64420b4fa58840d98e5244",
+      "to_sha256": "3b7c9330c3b0c1c2d81111ade29429d6887ecc37698823c2c3d2aba66324a6dd"
+    },
+    {
+      "id": "kntt_math5_lesson_35",
+      "from_sha256": "a58788d3ba316025089b24ae632ed23477bd4da6fef40f55703d257bbb014614",
+      "to_sha256": "ae5aad042302023d84df315edc238c3286088172447199a73427775c44ccf7bd"
+    },
+    {
+      "id": "kntt_math5_lesson_36",
+      "from_sha256": "d2e87b07cb7429f630cd3bf88b55042cacbab4b630b0303d8336afaf6c3a8503",
+      "to_sha256": "3c95e0c002159e4a7ddad09ed17ae18b7d18daab34b618a2c1c1c35b585b2b8d"
+    },
+    {
+      "id": "kntt_math5_lesson_37",
+      "from_sha256": "970e5de0ff7cae65f7ebe0934977f5d2802c10a7a6c6021212a338f9ee4d84e4",
+      "to_sha256": "aa0c1ceab77bda2af4d49f66278a6ccd6e39460e0b24be898158a77be0f44fe3"
+    },
+    {
+      "id": "kntt_math5_lesson_38",
+      "from_sha256": "9ce44d8a3f98431cd5c57e061450d4ac0272d672ff8b021be6a4e38ff7bee456",
+      "to_sha256": "2034a3e2b459e36c2e758db38517e372792048922cb5333a67aec06319234d06"
+    },
+    {
+      "id": "kntt_math5_lesson_39",
+      "from_sha256": "eaceb3211f914982d3190b97cd460b8b5cd6d180b99a9e8615a90d3b27a46ab7",
+      "to_sha256": "6a94417365beb46d6a444f84325d06de5d97401f89e170f7c49e4c1bf84786c0"
+    },
+    {
+      "id": "kntt_math5_lesson_40",
+      "from_sha256": "17032492f9bf370bb63624a4eae8c1e44bdc31b7e5c05dd59d6142e17d249476",
+      "to_sha256": "2958f5c7636987e4ac7f14dd1e12845ae077bfc793630444d1433fa491e6ac6a"
+    },
+    {
+      "id": "kntt_math5_lesson_41",
+      "from_sha256": "75605c05e34a75c9585d64443ca39c646bb7381fed28ba08f53641b0f0ea867a",
+      "to_sha256": "1c4bb2d2dc2832349063a5d2314e14eb9540cc3fe737fb1e19a2e33396618df6"
+    },
+    {
+      "id": "kntt_math5_lesson_42",
+      "from_sha256": "0d0632eb0f9ba5b0070bde9467d4dda7c162765f136281ad5a00f9e9222f8ef5",
+      "to_sha256": "a3f5c9e04c338cd5ee88b3bd376f2e37613e3529514e79ed123c27d4acd602bf"
+    },
+    {
+      "id": "kntt_math5_lesson_43",
+      "from_sha256": "f168231f0df46febe7358be07f8eba55c40c6af2a37d0fe8653d54815c6aa136",
+      "to_sha256": "062f1d660ac62485c444a4a2615a914146f9f4f0034f7c72d7260cb8b5374283"
+    },
+    {
+      "id": "kntt_math5_lesson_44",
+      "from_sha256": "041dd3cb4d2027e6ff133fe7840804f2f0719009964d8ebc8f2cbd176f578130",
+      "to_sha256": "547170e81d2305d01a3953210ed69dd342381c225e9714a83e1d69c5faa2bfde"
+    },
+    {
+      "id": "kntt_math5_lesson_45",
+      "from_sha256": "83f15cd825c87167c721d0a6a5225981b2c0849f4e0fb93d385e9977d144908a",
+      "to_sha256": "39f334055e1368d02207b766d79bacb55c16a9329a5008c8dd80485ca5dc79df"
+    },
+    {
+      "id": "kntt_math5_lesson_46",
+      "from_sha256": "330a7547d728193c8b590f48f1be64ec2c5e46b9ca1d1c549fd52fc7685472bb",
+      "to_sha256": "f7e00f75460789c77d5bc80f3842d9505bf22c2989fad101ece0484a8d73f609"
+    },
+    {
+      "id": "kntt_math5_lesson_47",
+      "from_sha256": "606d3461bf21c11fe4688bf8e65d773587e6b26141732b8aec24012ee7463390",
+      "to_sha256": "36e5cd2c014807bbfb922a4ee2a92bcbec42c9a15d1107c5f621b1fdbfea7754"
+    },
+    {
+      "id": "kntt_math5_lesson_48",
+      "from_sha256": "ae122bb0cdf531392ac4ef59f7db01d30d84e7df9cd93816071b9f3e191efd81",
+      "to_sha256": "c90a6bfe2983bbac5b2c10e6b765dd9ffaad7bbb6fc4b8ff6c0da07b02f528b3"
+    },
+    {
+      "id": "kntt_math5_lesson_49",
+      "from_sha256": "b44d6711f052e395af22b3568a1ea3a741b36a6e09fa1aa48bb02ede316a884c",
+      "to_sha256": "300841d96b2788ee74758ea0148649c022bf28c3965dd4b3577326eb47d36582"
+    },
+    {
+      "id": "kntt_math5_lesson_50",
+      "from_sha256": "9187e36527ea6f8e729a9b015a6d87a8cffeec37781d5b285573ad8c659b5758",
+      "to_sha256": "c3b9b9c25daeb935f3081e32a54fe490f4d95fd98d11c5b636aa611f465bae84"
+    },
+    {
+      "id": "kntt_math5_lesson_51",
+      "from_sha256": "e6eb16640feb0e6a809e636c811546d2b561461ff45ee723f23502459086f103",
+      "to_sha256": "258114a2f31a32c2b206a72f1329600253bc5d8ff9a0685e851d96c05cad6587"
+    },
+    {
+      "id": "kntt_math5_lesson_52",
+      "from_sha256": "65ee3595de645cab289c854e17cb70814be523572af55db00ddf6b1e704208b7",
+      "to_sha256": "5b6e470fe7f2416bbf428ef45174907451ffd62b369691ed2d117804ada1eec0"
+    },
+    {
+      "id": "kntt_math5_lesson_53",
+      "from_sha256": "f88097573e58264712b53a2d4b6039ca66b98b956d891631090b7e011516e0ff",
+      "to_sha256": "dbcd2b73404e27a10f6f826aa58601cc16dc2a1d73ef290fc583b8657f7f41c2"
+    },
+    {
+      "id": "kntt_math5_lesson_54",
+      "from_sha256": "f5b57cd88028d6543b3e39ed4ca323001fa43d3a678f0bd418f550b1896a5924",
+      "to_sha256": "a624e8572928c5a72745ff3dde9ed7f60ca22a868e8f96d5bf891a6944229646"
+    },
+    {
+      "id": "kntt_math5_lesson_55",
+      "from_sha256": "bb8b8a1ed5e9eacfdc92bbc96b7ef45a42a8d130b423b7b96150b72c69e08c08",
+      "to_sha256": "c9a1925575db73e83682fa4c9f06077adde9c7cc803a7aee2c6fa793fe018125"
+    },
+    {
+      "id": "kntt_math5_lesson_56",
+      "from_sha256": "ddebd9c156c8da29b7e38377ab5c94e3b84e36e3f2023087539977538046cbc9",
+      "to_sha256": "e780d2e1c20db7c7726304a4780d1d3aae695bfe96b0a9044bd3efa7718fc5a8"
+    },
+    {
+      "id": "kntt_math5_lesson_57",
+      "from_sha256": "8dd39327dd8be2792c7a54fda0e8de18629f70380669e1a36d9cc9d93fd2878f",
+      "to_sha256": "d87faa6abcb4ae0a3b9d00d326715a90808f1e7dd55fbb3e655362efb6baa85b"
+    },
+    {
+      "id": "kntt_math5_lesson_58",
+      "from_sha256": "0eb3d251bef0ddf5ee00e373399d16e558f1b3c1951278ede09bebc6b3cdd458",
+      "to_sha256": "95fef4bbdf172284f90d196c073adcb935ce2d0586b4f214ef3cc2645af0d276"
+    },
+    {
+      "id": "kntt_math5_lesson_59",
+      "from_sha256": "2f3ae73e88a2782b25e9d74cb1a90fa2b573883ffe0c7999e309dd42b2696828",
+      "to_sha256": "970d6a85c29e8d84ea2b2c1c1c5cff03061a98e80099d7efa2b52e108ffd3f17"
+    },
+    {
+      "id": "kntt_math5_lesson_60",
+      "from_sha256": "85a6aa6819c689f66c217f256969cbb434f4c3cf5ab38bea22fb7148df02e5a9",
+      "to_sha256": "b1c90b92c2288db6d5d74d31609fc54447fb08abbc7a59f9adfb4bf3ca7f66a3"
+    },
+    {
+      "id": "kntt_math5_lesson_61",
+      "from_sha256": "7762f24e0f026353e347fb1bf15b0fb126c1ae672cd8bada768dd3913d532a41",
+      "to_sha256": "c9c8caad4df9639692f6d5df7e423c40fcf8e83f890d6da0731c9ee32d9ff48e"
+    },
+    {
+      "id": "kntt_math5_lesson_62",
+      "from_sha256": "83faeaeb936111df0dfa5eda24aad1c067f2e8e78d268eb7934f88221fcfaff7",
+      "to_sha256": "932cf9dca9abb6d60ed749e7dc1cffcf15f0e89367bf8b8c1b5f297d744cb0c7"
+    },
+    {
+      "id": "kntt_math5_lesson_63",
+      "from_sha256": "df4de398860c8407af94614fe761c446a31cdea1376b48940dcd2f712998b08e",
+      "to_sha256": "987330f92d8a1c53187d6f3f3d13a275db0df64581c6279731ebe88744241e60"
+    },
+    {
+      "id": "kntt_math5_lesson_64",
+      "from_sha256": "b996d6e1eb1b0c368e264abb34c31685b4341cf22b530578778b9bfb1ea54519",
+      "to_sha256": "5d5a5f09e7ad6a093b82528780167b7ce33629d4d221e58842f73902142dc027"
+    },
+    {
+      "id": "kntt_math5_lesson_65",
+      "from_sha256": "8614b4eaacd1708597cb8e0f7b8c764b46d21ee4bc8207141232f252a9e2e640",
+      "to_sha256": "7bed028e146ad42085a06b4b463eac507189130e213f741939e18f3782e568a6"
+    },
+    {
+      "id": "kntt_math5_lesson_66",
+      "from_sha256": "972ce9c38f78878a78520ebac1d9fe2ea704fc0775a7b254068989b80b1c30a3",
+      "to_sha256": "fb1b944c9cae5a3d9a097f846177226139ff6fe10df633dbfff0a39548a77348"
+    },
+    {
+      "id": "kntt_math5_lesson_67",
+      "from_sha256": "f6b3a24119de745f3f0a804fcedb8fe257bf66b22ccfc745db1e32a3c3e06ecd",
+      "to_sha256": "50fb75904036980bf50d11d828f69dc3125f373facb8c6d2e9cf2ba3617cfda5"
+    },
+    {
+      "id": "kntt_math5_lesson_68",
+      "from_sha256": "a0b643bd1c48e82f43b1156a3f92e03d81d9f72ba92b014df6a64edcbc0e4ebc",
+      "to_sha256": "1fe7c35c205468aedae902fbe3f0e6b698451897f24f466ea393f76f3b6256aa"
+    },
+    {
+      "id": "kntt_math5_lesson_69",
+      "from_sha256": "24c10d240da935bccdcfd2984458fcdc898f8a4db07c5e120e784efd224f04ab",
+      "to_sha256": "5a9e87266f94c7b033bfc4658b81ce592b2d39b3bd87a7372c3b66b0d2717f05"
+    },
+    {
+      "id": "kntt_math5_lesson_70",
+      "from_sha256": "02b3ae547736e668e8677ef0fbde9200dfcb58160bca207cc5fd9ea2c699070e",
+      "to_sha256": "dada6587eb70eb4bc43ca726ec5addaa0590fde6ea7aad6a41df751e8b72d38c"
+    },
+    {
+      "id": "kntt_math5_lesson_71",
+      "from_sha256": "f790cbdde8857a0e8ddb7c3a4d1082292134c139a1534097d40a6ff3ed6a3054",
+      "to_sha256": "07152f3df727403f9fce45681a1f71a612f87127d8fcf38812137491f4d5d411"
+    },
+    {
+      "id": "kntt_math5_lesson_72",
+      "from_sha256": "2f505bec616cc27b40e6a7d0ac3418b7541636deb0ba2b294ce04f7ef8758206",
+      "to_sha256": "66d5ef4dd27cd0b002acc1eb50a30303d01c054f13456cc87584ab9c04bd9822"
+    },
+    {
+      "id": "kntt_math5_lesson_73",
+      "from_sha256": "3dc491617b2aa347add1ecaf12a239ed303c0b35017472dd14f86f118da5451e",
+      "to_sha256": "eb9057c537fef20fcaa0c90db902620f96b403bcce00c90f6a8a22c36051c6bf"
+    },
+    {
+      "id": "kntt_math5_lesson_74",
+      "from_sha256": "2852f6f01cdf4d197454286549f4341b0f2d68be82ea2b7128f5fe4599a65b3b",
+      "to_sha256": "26a1e658480e63e39991103dd8eb0dd4b06179a133a056083c84e20a8814b6a8"
+    },
+    {
+      "id": "kntt_math5_lesson_75",
+      "from_sha256": "7c678de69571f2d4510b9d6a6a3149351d5133f28a973b96f86813b95ac52597",
+      "to_sha256": "bfc4327ed0a677e939055748a41b83a10f7f4960f948bc8d086e7855b46b2ccc"
+    }
+  ]
+}

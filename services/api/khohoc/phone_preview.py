@@ -15,6 +15,7 @@ from .library import DocumentInput
 from .schemas import ExamInput, Question
 from .content_fixes import QUESTION_REPLACEMENTS
 from .models import ContentQuestion
+from .document_upgrades import reviewed_transition, upgrade_documents
 from sqlalchemy.orm import Session
 
 PUBLIC = re.compile(
@@ -34,7 +35,9 @@ def canonical_fixture_map(records, model):
     return fixtures
 
 
-def checked_fixture_rows(rows, fixtures, model, payload_key):
+def checked_fixture_rows(
+    rows, fixtures, model, payload_key, *, allow_document_upgrades=False
+):
     """Never interpret a reused fixture ID as approval of changed content."""
     existing = {}
     for row in rows:
@@ -49,7 +52,13 @@ def checked_fixture_rows(rows, fixtures, model, payload_key):
             raise RuntimeError(
                 f"Refusing invalid stored {payload_key} fixture: {record_id}"
             ) from None
-        if canonical != fixtures[record_id]:
+        if canonical != fixtures[record_id] and not (
+            allow_document_upgrades
+            and payload_key == "document"
+            and row["state"] == "published"
+            and row["rights_confirmed"]
+            and reviewed_transition(canonical, fixtures[record_id])
+        ):
             raise RuntimeError(
                 f"Refusing changed {payload_key} fixture: {record_id}; "
                 "review it through admin instead of fixture publication"
@@ -133,7 +142,9 @@ def create_preview():
             notes,
             DocumentInput,
             "document",
+            allow_document_upgrades=True,
         )
+        upgrade_documents(app.state.engine, existing_docs, notes)
         pending = [q for qid, q in questions.items() if qid not in existing]
         for start in range(0, len(pending), 200):
             client.post(
