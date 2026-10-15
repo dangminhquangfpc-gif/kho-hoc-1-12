@@ -218,6 +218,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     from .assignments import create_assignments_router
 
     app.include_router(create_assignments_router(db=db, accounts=accounts))
+    from .ai_tutor import create_ai_tutor_router
+
+    app.include_router(create_ai_tutor_router(db=db, accounts=accounts, engine=engine))
     from .sync import create_sync_router
 
     app.include_router(create_sync_router(db, accounts, public_question))
@@ -565,6 +568,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         needs_review = any(d["score"] is None for d in details)
         result = {
             "attempt_id": attempt.id,
+            "grade": attempt.snapshot["exam"]["grade"],
+            "subject": attempt.snapshot["exam"]["subject"],
             "title": attempt.snapshot["exam"]["title"],
             "score": None if needs_review else sum(d["score"] for d in details),
             "graded_score": sum(d["score"] or 0 for d in details),

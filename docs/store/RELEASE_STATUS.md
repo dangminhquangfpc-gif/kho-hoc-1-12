@@ -1,6 +1,7 @@
 # Tự học 111 — chuẩn bị Google Play và App Store
 
-Bản 0.2.0+11 / demo 2026.10.15.11. Chưa phát hành lên cửa hàng.
+Bản mã nguồn 0.2.0+16 / demo .16; các mốc kỹ thuật cũ được giữ bên dưới.
+Chưa phát hành lên cửa hàng.
 Người dùng xác nhận chưa có Play Console, Apple Developer hoặc backend HTTPS dùng chung.
 Không tạo tài khoản, thanh toán hoặc đưa backend development chứa dữ liệu học viên ra Internet.
 
@@ -97,3 +98,25 @@ Có giao bài theo nhóm, theo dõi tiến độ riêng từng đề và xuất 
 xem dữ liệu của mình. Không thêm SDK, quyền thiết bị, AI hoặc endpoint Internet.
 Chưa có hạn giao bài/thông báo đẩy; trạng thái pilot và điều kiện cửa hàng
 không đổi. Xem GROUP_ASSIGNMENTS.md.
+
+## Bản thử .16 — OCR và trợ giảng tùy chọn
+
+Có OCR chữ in tiếng Việt/Anh chạy thật trong Chromium ở bản web/demo Windows,
+không gửi ảnh lên máy chủ. Tài sản Tesseract có giấy phép, nguồn, phiên bản và
+checksum trong gói. Có xem trước/sửa/xác nhận văn bản; native Android/iOS vẫn
+nhập tay hoặc dán, chưa có OCR/camera hoặc cắt ảnh trong app.
+
+Backend trợ giảng AI mặc định tắt; khóa chỉ đọc từ tệp riêng của operator,
+không có trong ứng dụng. Mỗi yêu cầu cần đăng nhập và xác nhận host/dữ liệu.
+Tham chiếu câu đã nộp là tùy chọn và được công bố rõ. Có quota, hạn kích thước,
+timeout và nhật ký metadata/số token; phản hồi không trở thành điểm chính thức.
+Chưa gọi hoặc đánh giá provider/model thật, chưa có chấm tự luận theo rubric
+hay luồng riêng báo lỗi/xem xét phản hồi AI. Xem [AI_OCR.md](../AI_OCR.md).
+
+Trước khi bật AI cho học sinh thật hoặc nộp cửa hàng, còn phải đánh giá nhà
+cung cấp/model, cơ sở xử lý và đồng ý của người giám hộ, lưu giữ/huấn luyện dữ
+liệu phía provider, kiểm soát nội dung, báo lỗi AI và retention nhật ký. Cần
+khai đúng tài sản/SDK và luồng dữ liệu của bản cụ thể trong Data Safety/App
+Privacy; không dùng trạng thái mặc định tắt để tuyên bố mọi cấu hình không gửi
+dữ liệu ra ngoài. Chưa triển khai Internet, kiểm thử/ký bản .16 trên thiết bị
+thật hoặc mở khóa chế độ production; điều kiện phát hành vẫn chưa hoàn tất.

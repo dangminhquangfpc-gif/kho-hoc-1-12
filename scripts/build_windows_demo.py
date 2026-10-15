@@ -17,6 +17,17 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def build(artifacts: Path):
+    # The shipped OCR worker must match its pinned source assets and licenses.
+    ocr_source = ROOT / "apps/mobile/web/ocr"
+    ocr_built = ROOT / "apps/mobile/build/web/ocr"
+    for line in (ocr_source / "SHA256SUMS").read_text(encoding="ascii").splitlines():
+        ocr_digest, name = line.split("  ", 1)
+        relative = PurePosixPath(name)
+        assert not relative.is_absolute() and ".." not in relative.parts
+        for directory in (ocr_source, ocr_built):
+            asset = directory / name
+            assert not asset.is_symlink()
+            assert hashlib.sha256(asset.read_bytes()).hexdigest() == ocr_digest, name
     runtime = artifacts / "python.3.12.10.nupkg"
     metadata = json.loads(
         (artifacts / "python-runtime-provenance.json").read_text(encoding="utf-8")
@@ -83,6 +94,7 @@ def build(artifacts: Path):
         "docs/CLASSROOM_REPORTS.md",
         "docs/EVENING_CHECKLIST.md",
         "docs/GROUP_ASSIGNMENTS.md",
+        "docs/AI_OCR.md",
         "start-demo.bat",
         "start-demo.sh",
         "LICENSE",
@@ -119,7 +131,7 @@ def build(artifacts: Path):
     (staging / "runtime/provenance.json").write_text(
         json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    guide = """TỰ HỌC 111 — DEMO LOCAL WINDOWS 64-BIT\n\n1. Giải nén toàn bộ ZIP (Extract All), không chạy trực tiếp trong ZIP.\n2. Mở thư mục vừa giải nén, nhấp đúp start-demo.bat.\n3. Giữ cửa sổ đó mở; đợi dòng DEMO READY. Trình duyệt sẽ tự mở http://localhost:8080.\n\nĐã kèm Python 3.12.10 chính thức của Python Software Foundation và thư viện Windows đã khóa phiên bản. Không cần cài Python, Flutter, Node hoặc Supabase. Lần đầu chuẩn bị môi trường có thể mất vài phút; các lần sau nhanh hơn. Không tải thư viện từ Internet khi khởi động trên Windows.\n\nThử: chọn lớp/môn, làm và nộp đề; vào Tài liệu đọc ghi chú/mở PDF; xem Tiến độ/Lịch sử. Có108 câu/12 đề và4 tài liệu tự biên soạn.\n\nĐể dừng, quay lại cửa sổ khởi động và nhấn Ctrl+C. Dữ liệu bài làm lưu trong state/demo.sqlite và trong trình duyệt trên máy này. Không chạy admin/Supabase/AI/OCR.\n\nNếu cổng đã được chương trình khác sử dụng, launcher sẽ thông báo. Có thể mở CMD trong thư mục gói và chạy: start-demo.bat --api-port8011 --port8091 (thêm khoảng trắng: --api-port 8011 --port 8091).\n\nNếu có lỗi, giữ nội dung lỗi trong cửa sổ; log ở state/api.log và state/demo.log. Không xóa dữ liệu state khi muốn giữ bài làm.\n\nGói Windows dùng runtime/wheel Windows64-bit; không dùng Python Windows trong gói này trên macOS/Linux. Backend và giao diện đã kiểm tra trên môi trường Linux; file.bat/runtime Windows chưa chạy trên máy Windows thực tế. Đây là bản thử, chưa phát hành Google Play hoặc nội dung được thẩm định chuyên môn.\n"""
+    guide = """TỰ HỌC 111 — DEMO LOCAL WINDOWS 64-BIT\n\n1. Giải nén toàn bộ ZIP (Extract All), không chạy trực tiếp trong ZIP.\n2. Mở thư mục vừa giải nén, nhấp đúp start-demo.bat.\n3. Giữ cửa sổ đó mở; đợi dòng DEMO READY. Trình duyệt sẽ tự mở http://localhost:8080.\n\nĐã kèm Python 3.12.10 chính thức của Python Software Foundation và thư viện Windows đã khóa phiên bản. Không cần cài Python, Flutter, Node hoặc Supabase. Lần đầu chuẩn bị môi trường có thể mất vài phút; các lần sau nhanh hơn. Không tải thư viện từ Internet khi khởi động trên Windows.\n\nThử: chọn lớp/môn, làm và nộp đề; vào Tài liệu đọc ghi chú/mở PDF; xem Tiến độ/Lịch sử. Có108 câu/12 đề và4 tài liệu tự biên soạn.\n\nĐể dừng, quay lại cửa sổ khởi động và nhấn Ctrl+C. Dữ liệu bài làm lưu trong state/demo.sqlite và trong trình duyệt trên máy này. Không chạy admin/Supabase; OCR xử lý trong trình duyệt, AI mặc định chưa kết nối.\n\nNếu cổng đã được chương trình khác sử dụng, launcher sẽ thông báo. Có thể mở CMD trong thư mục gói và chạy: start-demo.bat --api-port8011 --port8091 (thêm khoảng trắng: --api-port 8011 --port 8091).\n\nNếu có lỗi, giữ nội dung lỗi trong cửa sổ; log ở state/api.log và state/demo.log. Không xóa dữ liệu state khi muốn giữ bài làm.\n\nGói Windows dùng runtime/wheel Windows64-bit; không dùng Python Windows trong gói này trên macOS/Linux. Backend và giao diện đã kiểm tra trên môi trường Linux; file.bat/runtime Windows chưa chạy trên máy Windows thực tế. Đây là bản thử, chưa phát hành Google Play hoặc nội dung được thẩm định chuyên môn.\n"""
     guide = (
         guide.replace("Có108 câu/12 đề và4", "Có 108 câu/12 đề và 4")
         .replace(
@@ -155,8 +167,8 @@ def build(artifacts: Path):
         "Có 108 câu/12 đề và 4 tài liệu",
         f"Có {question_count} bản ghi câu hỏi (gồm câu cũ đã rút/thay thế)/{exam_count} đề và {document_count} tài liệu/liên kết",
     )
-    guide += "\nBản thử 2026.10.15.15. Nếu bài lưu quá hạn hoặc thuộc máy chủ cũ, dùng Khôi phục bài đã lưu; app chỉ giữ đáp án cho câu không đổi. Đã tránh cache giao diện của bản ZIP cũ, không xóa bài làm trong trình duyệt.\n"
-    guide += "\nMới: Luyện đề > Tạo đề theo chủ đề và độ khó (1–50 câu tùy ngân hàng); Tiến độ > Ôn các câu chưa đúng. Thống kê chủ đề chỉ tính lần làm mới nhất của mỗi câu, không phải đánh giá năng lực chính thức. Có thể luyện khách hoặc đăng nhập để lưu kết quả tập trung; chưa tích hợp AI.\n"
+    guide += "\nBản thử 2026.10.15.16. Nếu bài lưu quá hạn hoặc thuộc máy chủ cũ, dùng Khôi phục bài đã lưu; app chỉ giữ đáp án cho câu không đổi. Đã tránh cache giao diện của bản ZIP cũ, không xóa bài làm trong trình duyệt.\n"
+    guide += "\nMới: Luyện đề > Tạo đề theo chủ đề và độ khó (1–50 câu tùy ngân hàng); Tiến độ > Ôn các câu chưa đúng. Thống kê chủ đề chỉ tính lần làm mới nhất của mỗi câu, không phải đánh giá năng lực chính thức. Có thể luyện khách hoặc đăng nhập để lưu kết quả tập trung; AI cần cấu hình dịch vụ thật như hướng dẫn AI_OCR.md.\n"
     guide += "\nTài liệu chỉ hiển thị bài gắn đúng mục lục SGK. Đề kiểm tra Internet ở Luyện đề > Đề giữa kỳ, cuối kỳ và tốt nghiệp từ Internet. 87 bộ luyện Toán 5 mới dùng 344 câu tự biên soạn; các bộ ôn tổng hợp dùng lại câu của bộ luyện theo bài. Chưa chuyển nguyên đề PDF của nguồn Internet vào app.\n"
     guide += "\nTài liệu Internet được liên kết tới trang nguồn, cần mạng để mở. Có bộ lọc giữa/cuối kỳ và năm đề tốt nghiệp; đề quốc gia dùng chung các bộ sách.\n"
     guide += "\nDữ liệu mở rộng hướng tới Kết nối tri thức: 720 biến thể Toán từ 72 dạng; các môn khác có bộ ôn kiến thức nền, một số câu dùng lại giữa các lớp. Chưa đối chiếu từng bài/ấn bản SGK hiện hành.\n"
@@ -171,6 +183,7 @@ def build(artifacts: Path):
     guide += "\nBản .11 — Tự học 111: bỏ mệnh đề thừa ở 12 câu bằng phiên bản mới; có 991 đề tự biên soạn gắn từ thẻ tham khảo, mỗi đề 20–24 câu, không phải bản sao đề nguồn. 525 thẻ chưa đủ câu vẫn là tham khảo. Tổng 1.461 đề làm trực tiếp và 7.886 câu đang hoạt động. Có xóa tài khoản trong app bằng mật khẩu xác nhận. Đã chuẩn bị khung iOS/cấu hình ký Android; chưa đưa lên cửa hàng vì chưa có tài khoản nhà phát hành/backend HTTPS production và các bước thẩm định.\n"
     guide += "\nBản .14: Báo lỗi nội dung trong câu hỏi và tài liệu; theo dõi ở Cá nhân > Tài khoản > Phản hồi của tôi. Giáo viên/quản lý có Xử lý phản hồi nội dung; trả lời không sửa điểm cũ. Có CSV bảng điểm theo nhóm. Đọc docs/EVENING_CHECKLIST.md để kiểm tra toàn bộ và docs/CONTENT_REPORTS.md để xem quyền, cách nâng cấp schema.\n"
     guide += "\nBản .15: nhóm có Bài giao và tiến độ > Giao đề có sẵn; học sinh mở Bài được giao ở Tài khoản. Có trạng thái chưa nộp/đang làm/đã nộp và CSV từng đề; điểm lấy lần nộp gần nhất. Giữ bài chưa đồng bộ khi mở đề khác. Xem docs/GROUP_ASSIGNMENTS.md.\n"
+    guide += "\nBản .16: Ảnh và trợ lý học tập có OCR tiếng Việt local, xem ảnh/sửa chữ/xác nhận trước khi dùng. Có nút nhập OCR ở câu trả lời dạng gõ. AI mặc định tắt vì chưa có dịch vụ; chỉ gửi văn bản sau xác nhận, không gửi ảnh. Xem docs/AI_OCR.md; OCR ảnh hiện chạy web/Windows, chưa native Android/iOS.\n"
     (staging / "HUONG-DAN.txt").write_text(guide, encoding="utf-8-sig")
     for bat in [staging / "start-demo.bat"]:
         content = (

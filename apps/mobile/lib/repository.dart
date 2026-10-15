@@ -34,6 +34,28 @@ class LearningApi {
   }
 
   String get baseUrl => client.options.baseUrl;
+  Future<Json> aiStatus() async => (await client.get<Json>('/ai/status')).data!;
+  Future<Json> explainAi({
+    required int grade,
+    required String subject,
+    required String text,
+    required bool consent,
+    required String expectedProviderHost,
+    String? attemptId,
+    String? questionId,
+  }) async => (await client.post<Json>(
+    '/ai/explain',
+    data: {
+      'grade': grade,
+      'subject': subject,
+      'text': text,
+      'consent': consent,
+      'expected_provider_host': expectedProviderHost,
+      if (attemptId != null) 'attempt_id': attemptId,
+      if (questionId != null) 'question_id': questionId,
+    },
+    options: Options(receiveTimeout: const Duration(seconds: 50)),
+  )).data!;
   Future<Json?> currentUser() async {
     try {
       return (await client.get<Json>('/auth/me')).data;

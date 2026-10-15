@@ -136,3 +136,11 @@ __pycache__/
 *.pgdump
 /deploy/shared/backups/
 .server-venv/
+
+# Private optional AI credentials
+*.api-key
+/deploy/shared/ai.private.yaml
+
+# Redistributed OCR licenses must accompany the vendored binaries
+!apps/mobile/web/ocr/licenses/*.md
+!apps/mobile/web/ocr/licenses/*.txt

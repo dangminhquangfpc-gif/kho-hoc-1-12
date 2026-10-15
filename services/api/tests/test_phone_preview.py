@@ -129,6 +129,20 @@ def test_phone_preview_seed_private_routes_and_rate_limit(tmp_path, monkeypatch)
             "/auth/login",
             json={"username": "teacher", "password": "Teacher-password-123"},
         ).raise_for_status()
+        assert client.get("/ai/status").json()["configured"] is False
+        assert (
+            client.post(
+                "/ai/explain",
+                json={
+                    "grade": 5,
+                    "subject": "toan",
+                    "text": "Giải thích cách làm.",
+                    "consent": True,
+                    "expected_provider_host": "api.openai.com",
+                },
+            ).status_code
+            == 503
+        )
         custom = client.post(
             "/practice-attempts",
             json={"grade": 5, "subject": "toan", "topic": "add_decimal", "count": 3},

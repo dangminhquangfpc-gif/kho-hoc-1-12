@@ -24,9 +24,36 @@ chú hệ thống. Chưa có lịch tự xóa phản hồi theo thời gian.
 
 Chế độ khách lưu bài làm/lịch sử trên thiết bị. Đăng nhập có dữ liệu trên backend đang cấu hình.
 Bản local lưu SQLite trong thư mục state của máy chạy; chưa có dịch vụ cloud production vận hành.
-Không gửi bài tới dịch vụ AI/OCR; các dịch vụ đó chưa được tích hợp hoạt động.
 Khi mở nguồn tham khảo ngoài, trình duyệt truy cập website bên thứ ba theo chính sách của họ;
 việc này cần được xét lại cho chế độ trẻ em trước khi phát hành.
+
+Trong bản web/demo Windows .16, nhận chữ ảnh bằng Tesseract chạy trong trình
+duyệt. Worker, WebAssembly và dữ liệu tiếng Việt/Anh nằm trong gói; ảnh không
+được gửi đến backend hoặc dịch vụ OCR bên ngoài. Ảnh được vẽ lại để bỏ metadata
+EXIF/GPS trước khi xử lý/xem trước; không ghi ảnh vào localStorage/IndexedDB.
+Ảnh và văn bản ở màn hình OCR chỉ giữ trong bộ nhớ, không tự lưu vào lịch sử.
+Nếu người dùng chủ động dùng văn bản cho ô trả lời, văn bản đó được lưu/nộp
+theo quy tắc bài làm thông thường. Native Android/iOS chưa có OCR, vẫn nhập
+hoặc dán văn bản được. Chưa có công cụ cắt ảnh trong ứng dụng.
+
+Trợ giảng AI mặc định tắt và hiện chưa có provider thật được cấu hình/đánh giá
+cho người dùng. Khi operator bật dịch vụ, người đăng nhập phải kiểm tra văn
+bản và xác nhận gửi tới host nhà cung cấp được nêu trong mỗi yêu cầu. Hệ
+thống gửi lớp, môn và văn bản đã sửa qua backend; ảnh và cookie/token đăng
+nhập không nằm trong nội dung gửi AI. Với lựa chọn tham chiếu câu đã nộp, máy
+chủ còn gửi đề gốc, lựa chọn, đáp án và lời giải đã lưu của câu đó. Hộp thoại
+nêu rõ việc sửa ô văn bản không sửa tham chiếu; có thể tắt lựa chọn để chỉ gửi
+văn bản đã kiểm tra. Tên hoặc thông tin riêng tư nằm trong nội dung vẫn có
+thể bị gửi, vì vậy cần loại bỏ trước khi gửi và chọn chế độ phù hợp.
+
+Phản hồi AI chỉ tham khảo, không thay đổi điểm hoặc đáp án. Ứng dụng không tự
+lưu nội dung yêu cầu/phản hồi AI hay ảnh vào nhật ký AI. Nhật ký kỹ thuật giữ
+ID tài khoản, thời điểm, model, trạng thái, số ký tự và số token của lượt thành
+công; quota giữ bộ đếm. Chưa có lịch tự xóa/ẩn danh nhật ký AI. Điều khoản lưu
+giữ, huấn luyện và bên xử lý dữ liệu của nhà cung cấp thật còn cần thẩm định;
+không khẳng định provider không lưu dữ liệu chỉ vì app không lưu văn bản.
+Xác nhận trên màn hình chưa thay thế quy trình người giám hộ cần thiết trước
+khi dùng với trẻ em. Chi tiết kỹ thuật: [AI_OCR.md](../AI_OCR.md).
 
 Hiện dữ liệu học tập được giữ tới khi người dùng hoặc quản lý xóa; chưa có thời hạn tự động xóa.
 Người dùng tự đăng ký có thể xóa tài khoản và kết quả của mình trong Tài khoản bằng mật khẩu xác nhận.
