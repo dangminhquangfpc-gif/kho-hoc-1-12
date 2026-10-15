@@ -233,7 +233,7 @@ class _HomeState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 8),
           const Text('Chọn lớp và môn để luyện tập. Không cần tài khoản.'),
-          const Text('Bản thử 2026.10.15.8'),
+          const Text('Bản thử 2026.10.15.9'),
           if (widget.index == 2)
             Card(
               child: ListTile(

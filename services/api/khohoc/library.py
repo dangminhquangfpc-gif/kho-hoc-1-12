@@ -376,14 +376,30 @@ def create_library_router(
             if not all(term in haystack for term in search_key(search).split()):
                 continue
             found.append(public_document(row))
+        terms = search_key(search).split()
+
+        def rank(item):
+            if not terms:
+                return 0
+            title = search_key(item["title"])
+            if all(term in title for term in terms):
+                return 0
+            metadata = search_key(
+                " ".join([item["title"], item["topic"], item["summary"]])
+            )
+            return 1 if all(term in metadata for term in terms) else 2
+
         if section == "lessons":
             found.sort(
                 key=lambda d: (
+                    rank(d),
                     d.get("lesson_order") is None,
                     d.get("lesson_order") or 0,
                     d["title"],
                 )
             )
+        elif terms:
+            found.sort(key=rank)
         return found[offset : offset + limit]
 
     @router.get("/documents/{document_id}")

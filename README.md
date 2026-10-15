@@ -8,6 +8,8 @@ Bản thử 2026.10.15.7: trình bày lại lời giải và đáp số trong 75
 
 Bản thử 2026.10.15.8: thêm 267 hướng dẫn Toán lớp 1–4, 476 ví dụ và 952 bài tự luyện có lời giải. [Phạm vi và phần còn thiếu](docs/PRIMARY_MATH_GUIDES.md).
 
+Bản thử 2026.10.15.9: thêm 391 hướng dẫn Toán 6–12 (230 bài đánh số cùng phần ôn tập/thực hành). [Phạm vi và giới hạn](docs/SECONDARY_MATH_GUIDES.md).
+
 ## Thành phần
 
 - apps/mobile: Flutter, Riverpod, GoRouter, Dio; chọn lớp/môn/đề, làm bài, chấm qua API, đánh dấu câu, lưu bài/lịch sử; kho tài liệu, yêu thích/đọc gần đây và tiến độ cục bộ.

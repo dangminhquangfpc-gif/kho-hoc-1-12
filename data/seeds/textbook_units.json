@@ -526,8 +526,299 @@
       "edition": null,
       "verified_on": "2026-10-15",
       "alignment_status": "secondary_source_index_not_publisher_verified",
-      "source_html_sha256": "1776c9a1c54667cadba20c2ad0a257202527fe247f8485e0e32c6db59df900f9",
-      "units": []
+      "source_html_sha256": "7bcf8ac84ef4f412728ec0b15e2e76894ded223e97618e63e776ceb5c2f6c557",
+      "units": [
+        {
+          "id": "unit_ac244caa8d8979f4d1c2",
+          "title": "Bài 1. Tính đơn điệu và cực trị của hàm số",
+          "chapter": "Chương 1. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị hàm số",
+          "source_url": "https://loigiaihay.com/bai-1-tinh-don-dieu-va-cuc-tri-cua-ham-so-toan-12-ket-noi-tri-thuc-e35539.html",
+          "semester": 1,
+          "order": 1,
+          "unit_kind": "lesson",
+          "lesson_number": 1
+        },
+        {
+          "id": "unit_ac6cc66bf1ea8f832a83",
+          "title": "Bài 2. Giá trị lớn nhất và giá trị nhỏ nhất của hàm số",
+          "chapter": "Chương 1. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị hàm số",
+          "source_url": "https://loigiaihay.com/bai-2-gia-tri-lon-nhat-va-gia-tri-nho-nhat-cua-ham-so-toan-12-ket-noi-tri-thuc-e35544.html",
+          "semester": 1,
+          "order": 2,
+          "unit_kind": "lesson",
+          "lesson_number": 2
+        },
+        {
+          "id": "unit_3b5f6333fa5d84f8b151",
+          "title": "Bài 3. Đường tiệm cận của đồ thị hàm số",
+          "chapter": "Chương 1. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị hàm số",
+          "source_url": "https://loigiaihay.com/bai-3-duong-tiem-can-cua-do-thi-ham-so-toan-12-ket-noi-tri-thuc-e35545.html",
+          "semester": 1,
+          "order": 3,
+          "unit_kind": "lesson",
+          "lesson_number": 3
+        },
+        {
+          "id": "unit_d4deef6e5e28d7ca9e52",
+          "title": "Bài 4. Khảo sát sự biến thiên và vẽ đồ thị của hàm số",
+          "chapter": "Chương 1. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị hàm số",
+          "source_url": "https://loigiaihay.com/bai-4-khao-sat-su-bien-thien-va-ve-do-thi-cua-ham-so-toan-12-ket-noi-tri-thuc-e35546.html",
+          "semester": 1,
+          "order": 4,
+          "unit_kind": "lesson",
+          "lesson_number": 4
+        },
+        {
+          "id": "unit_00323b99c7980b6a00a4",
+          "title": "Bài 5. Ứng dụng đạo hàm để giải quyết một số vấn đề liên quan đến thực tiễn",
+          "chapter": "Chương 1. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị hàm số",
+          "source_url": "https://loigiaihay.com/bai-5-ung-dung-dao-ham-de-giai-quyet-mot-so-van-de-lien-quan-den-thuc-tien-toan-12-ket-noi-tri-thuc-e35549.html",
+          "semester": 1,
+          "order": 5,
+          "unit_kind": "lesson",
+          "lesson_number": 5
+        },
+        {
+          "id": "unit_215a1ba3a9edb1e145b4",
+          "title": "Bài tập cuối chương 1",
+          "chapter": "Chương 1. Ứng dụng đạo hàm để khảo sát và vẽ đồ thị hàm số",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-i-toan-12-ket-noi-tri-thuc-e35552.html",
+          "semester": 1,
+          "order": 6,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_0d6a4d1ce49c2d35681a",
+          "title": "Bài 6. Vectơ trong không gian",
+          "chapter": "Chương 2. Vectơ và hệ trục tọa độ trong không gian",
+          "source_url": "https://loigiaihay.com/bai-6-vecto-trong-khong-gian-toan-12-ket-noi-tri-thuc-e35587.html",
+          "semester": 1,
+          "order": 7,
+          "unit_kind": "lesson",
+          "lesson_number": 6
+        },
+        {
+          "id": "unit_e845bcd1097b258e1d6c",
+          "title": "Bài 7. Hệ trục tọa độ trong không gian",
+          "chapter": "Chương 2. Vectơ và hệ trục tọa độ trong không gian",
+          "source_url": "https://loigiaihay.com/bai-7-he-truc-toa-do-trong-khong-gian-toan-12-ket-noi-tri-thuc-e35589.html",
+          "semester": 1,
+          "order": 8,
+          "unit_kind": "lesson",
+          "lesson_number": 7
+        },
+        {
+          "id": "unit_60f4a48b02166d9f1515",
+          "title": "Bài 8. Biểu thức tọa độ của các phép toán vectơ",
+          "chapter": "Chương 2. Vectơ và hệ trục tọa độ trong không gian",
+          "source_url": "https://loigiaihay.com/bai-8-bieu-thuc-toa-do-cua-cac-phep-toan-vecto-toan-12-ket-noi-tri-thuc-e35590.html",
+          "semester": 1,
+          "order": 9,
+          "unit_kind": "lesson",
+          "lesson_number": 8
+        },
+        {
+          "id": "unit_bddf08484312b82368da",
+          "title": "Bài tập cuối chương 2",
+          "chapter": "Chương 2. Vectơ và hệ trục tọa độ trong không gian",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-ii-toan-12-ket-noi-tri-thuc-e35614.html",
+          "semester": 1,
+          "order": 10,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_43a65e3856f95aa245bb",
+          "title": "Bài 9. Khoảng biến thiên và khoảng tứ phân vị",
+          "chapter": "Chương 3. Các số đo đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm",
+          "source_url": "https://loigiaihay.com/bai-9-khoang-bien-thien-va-khoang-tu-phan-vi-toan-12-ket-noi-tri-thuc-e35684.html",
+          "semester": 1,
+          "order": 11,
+          "unit_kind": "lesson",
+          "lesson_number": 9
+        },
+        {
+          "id": "unit_b747cb3beaaf19fc65f6",
+          "title": "Bài 10. Phương sai và độ lệch chuẩn",
+          "chapter": "Chương 3. Các số đo đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm",
+          "source_url": "https://loigiaihay.com/bai-10-phuong-sai-va-do-lech-chuan-toan-12-ket-noi-tri-thuc-e35813.html",
+          "semester": 1,
+          "order": 12,
+          "unit_kind": "lesson",
+          "lesson_number": 10
+        },
+        {
+          "id": "unit_b7c6dbd96d793aab018f",
+          "title": "Bài tập cuối chương 3",
+          "chapter": "Chương 3. Các số đo đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-iii-toan-12-ket-noi-tri-thuc-e35814.html",
+          "semester": 1,
+          "order": 13,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_578161ada2c8111c7e89",
+          "title": "Khảo sát và vẽ đồ thị hàm số với phần mềm GeoGebra",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/khao-sat-va-ve-do-thi-ham-so-voi-phan-mem-geogebra-toan-12-ket-noi-tri-thuc-e35847.html",
+          "semester": 1,
+          "order": 14,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_b1f530cc8dbd04ae8bda",
+          "title": "Độ dài gang tay (Gang tay của bạn dài bao nhiêu?)",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/do-dai-gang-tay-gang-tay-cua-ban-dai-bao-nhieu-toan-12-ket-noi-tri-thuc-e36107.html",
+          "semester": 1,
+          "order": 15,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_638ba6dd6f1668ae03b1",
+          "title": "Bài 11. Nguyên hàm",
+          "chapter": "Chương 4. Nguyên hàm và tích phân",
+          "source_url": "https://loigiaihay.com/bai-11-nguyen-ham-toan-12-ket-noi-tri-thuc-e35918.html",
+          "semester": 2,
+          "order": 16,
+          "unit_kind": "lesson",
+          "lesson_number": 11
+        },
+        {
+          "id": "unit_59ec512cb43db3237004",
+          "title": "Bài 12. Tích phân",
+          "chapter": "Chương 4. Nguyên hàm và tích phân",
+          "source_url": "https://loigiaihay.com/bai-12-tich-phan-toan-12-ket-noi-tri-thuc-e35919.html",
+          "semester": 2,
+          "order": 17,
+          "unit_kind": "lesson",
+          "lesson_number": 12
+        },
+        {
+          "id": "unit_46fd2b389248a5d98aa2",
+          "title": "Bài 13. Ứng dụng hình học của tích phân",
+          "chapter": "Chương 4. Nguyên hàm và tích phân",
+          "source_url": "https://loigiaihay.com/bai-13-ung-dung-hinh-hoc-cua-tich-phan-toan-12-ket-noi-tri-thuc-e35921.html",
+          "semester": 2,
+          "order": 18,
+          "unit_kind": "lesson",
+          "lesson_number": 13
+        },
+        {
+          "id": "unit_c769d928c8017a5152f7",
+          "title": "Bài tập cuối chương 4",
+          "chapter": "Chương 4. Nguyên hàm và tích phân",
+          "source_url": "https://loigiaihay.com/on-tap-cuoi-chuong-4-toan-12-ket-noi-tri-thuc-e35924.html",
+          "semester": 2,
+          "order": 19,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_63753bd1c1bdeb680525",
+          "title": "Bài 14. Phương trình mặt phẳng",
+          "chapter": "Chương 5. Phương pháp tọa độ trong không gian",
+          "source_url": "https://loigiaihay.com/bai-14-phuong-trinh-mat-phang-toan-12-ket-noi-tri-thuc-e35953.html",
+          "semester": 2,
+          "order": 20,
+          "unit_kind": "lesson",
+          "lesson_number": 14
+        },
+        {
+          "id": "unit_407e7078eadb366e709f",
+          "title": "Bài 15. Phương trình đường thẳng trong không gian",
+          "chapter": "Chương 5. Phương pháp tọa độ trong không gian",
+          "source_url": "https://loigiaihay.com/bai-15-phuong-trinh-duong-thang-trong-khong-gian-toan-12-ket-noi-tri-thuc-e35956.html",
+          "semester": 2,
+          "order": 21,
+          "unit_kind": "lesson",
+          "lesson_number": 15
+        },
+        {
+          "id": "unit_1ae9d723c620ee2773e8",
+          "title": "Bài 16. Công thức tính góc trong không gian",
+          "chapter": "Chương 5. Phương pháp tọa độ trong không gian",
+          "source_url": "https://loigiaihay.com/bai-16-cong-thuc-tinh-goc-trong-khong-gian-toan-12-ket-noi-tri-thuc-e35957.html",
+          "semester": 2,
+          "order": 22,
+          "unit_kind": "lesson",
+          "lesson_number": 16
+        },
+        {
+          "id": "unit_9e83e2ee5a7fe283233e",
+          "title": "Bài 17. Phương trình mặt cầu",
+          "chapter": "Chương 5. Phương pháp tọa độ trong không gian",
+          "source_url": "https://loigiaihay.com/bai-17-phuong-trinh-mat-cau-toan-12-ket-noi-tri-thuc-e35961.html",
+          "semester": 2,
+          "order": 23,
+          "unit_kind": "lesson",
+          "lesson_number": 17
+        },
+        {
+          "id": "unit_d0bbf7592a0df386c819",
+          "title": "Bài tập cuối chương 5",
+          "chapter": "Chương 5. Phương pháp tọa độ trong không gian",
+          "source_url": "https://loigiaihay.com/on-tap-cuoi-chuong-5-toan-12-ket-noi-tri-thuc-e35962.html",
+          "semester": 2,
+          "order": 24,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_af4528016587455dd27f",
+          "title": "Bài 18. Xác suất có điều kiện",
+          "chapter": "Chương 6. Xác suất có điều kiện",
+          "source_url": "https://loigiaihay.com/bai-18-xac-suat-co-dieu-kien-toan-12-ket-noi-tri-thuc-e35964.html",
+          "semester": 2,
+          "order": 25,
+          "unit_kind": "lesson",
+          "lesson_number": 18
+        },
+        {
+          "id": "unit_4d299bd24d32706bc8d5",
+          "title": "Bài 19. Công thức xác suất toàn phần và công thức Bayes",
+          "chapter": "Chương 6. Xác suất có điều kiện",
+          "source_url": "https://loigiaihay.com/bai-19-cong-thuc-xac-suat-toan-phan-va-cong-thuc-bayes-toan-12-ket-noi-tri-thuc-e35970.html",
+          "semester": 2,
+          "order": 26,
+          "unit_kind": "lesson",
+          "lesson_number": 19
+        },
+        {
+          "id": "unit_42e9c4bcbe3c623867d1",
+          "title": "Bài tập cuối chương 6",
+          "chapter": "Chương 6. Xác suất có điều kiện",
+          "source_url": "https://loigiaihay.com/bai-tap-tap-cuoi-chuong-6-toan-12-ket-noi-tri-thuc-e35979.html",
+          "semester": 2,
+          "order": 27,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_60fe2feae721a5a125f0",
+          "title": "Tính nguyên hàm và tích phân với phần mềm GeoGebra. Tính gần đúng tích phân bằng phương pháp hình thang",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/tinh-nguyen-ham-va-tich-phan-voi-phan-mem-geogebra-tinh-gan-dung-tich-phan-bang-phuong-phap-hinh-thang-toan-12-ket-noi-tri-thuc-e35999.html",
+          "semester": 2,
+          "order": 28,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_076c751b40a4f462ea75",
+          "title": "Bài tập ôn tập cuối năm",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/bai-tap-tap-cuoi-nam-toan-12-ket-noi-tri-thuc-e36008.html",
+          "semester": 2,
+          "order": 29,
+          "unit_kind": "year_review",
+          "lesson_number": null
+        }
+      ]
     },
     {
       "id": "kntt_12_tieng_anh",
@@ -2063,8 +2354,439 @@
       "edition": null,
       "verified_on": "2026-10-15",
       "alignment_status": "secondary_source_index_not_publisher_verified",
-      "source_html_sha256": "cbcb72ddad9c8ddc3fd440561bb44ef604ec1ded28a42c4ce9b90a7d251ddcb9",
-      "units": []
+      "source_html_sha256": "eef58a55957194d883f707787547fcd6cce0aaa671d58a05b71d57c7eb96970f",
+      "units": [
+        {
+          "id": "unit_3c8c33cb406108c030a2",
+          "title": "Bài 1. Giá trị lượng giác của góc lượng giác",
+          "chapter": "Chương 1 Hàm số lượng giác và phương trình lượng giác",
+          "source_url": "https://loigiaihay.com/bai-1-gia-tri-luong-giac-cua-goc-luong-giac-toan-11-ket-noi-tri-thuc-e30741.html",
+          "semester": 1,
+          "order": 1,
+          "unit_kind": "lesson",
+          "lesson_number": 1
+        },
+        {
+          "id": "unit_24f0db91f262fbf6c56c",
+          "title": "Bài 2. Công thức lượng giác",
+          "chapter": "Chương 1 Hàm số lượng giác và phương trình lượng giác",
+          "source_url": "https://loigiaihay.com/bai-2-cong-thuc-luong-giac-toan-11-ket-noi-tri-thuc-e30801.html",
+          "semester": 1,
+          "order": 2,
+          "unit_kind": "lesson",
+          "lesson_number": 2
+        },
+        {
+          "id": "unit_c47d52da3fae87074677",
+          "title": "Bài 3. Hàm số lượng giác",
+          "chapter": "Chương 1 Hàm số lượng giác và phương trình lượng giác",
+          "source_url": "https://loigiaihay.com/bai-3-ham-so-luong-giac-toan-11-ket-noi-tri-thuc-e30802.html",
+          "semester": 1,
+          "order": 3,
+          "unit_kind": "lesson",
+          "lesson_number": 3
+        },
+        {
+          "id": "unit_f8d7fa03b73df65d0e4c",
+          "title": "Bài 4. Phương trình lượng giác cơ bản",
+          "chapter": "Chương 1 Hàm số lượng giác và phương trình lượng giác",
+          "source_url": "https://loigiaihay.com/bai-4-phuong-trinh-luong-giac-co-ban-toan-11-ket-noi-tri-thuc-e30803.html",
+          "semester": 1,
+          "order": 4,
+          "unit_kind": "lesson",
+          "lesson_number": 4
+        },
+        {
+          "id": "unit_25090967990770806bcf",
+          "title": "Bài tập cuối chương 1",
+          "chapter": "Chương 1 Hàm số lượng giác và phương trình lượng giác",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-1-toan-11-ket-noi-tri-thuc-e30804.html",
+          "semester": 1,
+          "order": 5,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_f8b9a2d19dd94d44eef3",
+          "title": "Bài 5. Dãy số",
+          "chapter": "Chương 2 Dãy số. Cấp số cộng và cấp số nhân",
+          "source_url": "https://loigiaihay.com/bai-5-day-so-toan-11-ket-noi-tri-thuc-e31491.html",
+          "semester": 1,
+          "order": 6,
+          "unit_kind": "lesson",
+          "lesson_number": 5
+        },
+        {
+          "id": "unit_9d3973fb93d6e13ce427",
+          "title": "Bài 6. Cấp số cộng",
+          "chapter": "Chương 2 Dãy số. Cấp số cộng và cấp số nhân",
+          "source_url": "https://loigiaihay.com/bai-6-cap-so-cong-toan-11-ket-noi-tri-thuc-e31492.html",
+          "semester": 1,
+          "order": 7,
+          "unit_kind": "lesson",
+          "lesson_number": 6
+        },
+        {
+          "id": "unit_f228668117d763aca88d",
+          "title": "Bài 7. Cấp số nhân",
+          "chapter": "Chương 2 Dãy số. Cấp số cộng và cấp số nhân",
+          "source_url": "https://loigiaihay.com/bai-7-cap-so-nhan-toan-11-ket-noi-tri-thuc-e31493.html",
+          "semester": 1,
+          "order": 8,
+          "unit_kind": "lesson",
+          "lesson_number": 7
+        },
+        {
+          "id": "unit_92c0dd51eed0a286555c",
+          "title": "Bài tập cuối chương 2",
+          "chapter": "Chương 2 Dãy số. Cấp số cộng và cấp số nhân",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-ii-toan-11-ket-noi-tri-thuc-e31494.html",
+          "semester": 1,
+          "order": 9,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_c5d092168a5836733929",
+          "title": "Bài 8. Mẫu số liệu ghép nhóm",
+          "chapter": "Chương 3 Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+          "source_url": "https://loigiaihay.com/bai-8-mau-so-lieu-ghep-nhom-toan-11-ket-noi-tri-thuc-e31519.html",
+          "semester": 1,
+          "order": 10,
+          "unit_kind": "lesson",
+          "lesson_number": 8
+        },
+        {
+          "id": "unit_94776cbd51006d029aed",
+          "title": "Bài 9. Các số đặc trưng đo xu thế trung tâm",
+          "chapter": "Chương 3 Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+          "source_url": "https://loigiaihay.com/bai-9-cac-so-dac-trung-do-xu-the-trung-tam-toan-11-ket-noi-tri-thuc-e31520.html",
+          "semester": 1,
+          "order": 11,
+          "unit_kind": "lesson",
+          "lesson_number": 9
+        },
+        {
+          "id": "unit_0da253eefbd6ac9aab42",
+          "title": "Bài tập cuối chương 3",
+          "chapter": "Chương 3 Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-3-toan-11-ket-noi-tri-thuc-e31521.html",
+          "semester": 1,
+          "order": 12,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_cb0d3565c2554066da97",
+          "title": "Bài 10. Đường thẳng và mặt phẳng trong không gian",
+          "chapter": "Chương 4 Quan hệ song song trong không gian",
+          "source_url": "https://loigiaihay.com/bai-10-duong-thang-va-mat-phang-trong-khong-gian-toan-11-ket-noi-tri-thuc-e31528.html",
+          "semester": 1,
+          "order": 13,
+          "unit_kind": "lesson",
+          "lesson_number": 10
+        },
+        {
+          "id": "unit_1fa8d1062a0da6ea5c36",
+          "title": "Bài 11. Hai đường thẳng song song",
+          "chapter": "Chương 4 Quan hệ song song trong không gian",
+          "source_url": "https://loigiaihay.com/bai-11-hai-duong-thang-song-song-toan-11-ket-noi-tri-thuc-e31531.html",
+          "semester": 1,
+          "order": 14,
+          "unit_kind": "lesson",
+          "lesson_number": 11
+        },
+        {
+          "id": "unit_1f70d3e4b49b732f8351",
+          "title": "Bài 12. Đường thẳng và mặt phẳng song song",
+          "chapter": "Chương 4 Quan hệ song song trong không gian",
+          "source_url": "https://loigiaihay.com/bai-12-duong-thang-va-mat-phang-song-song-toan-11-ket-noi-tri-thuc-e31532.html",
+          "semester": 1,
+          "order": 15,
+          "unit_kind": "lesson",
+          "lesson_number": 12
+        },
+        {
+          "id": "unit_de1bbbe98d4c8b6c6bec",
+          "title": "Bài 13. Hai mặt phẳng song song",
+          "chapter": "Chương 4 Quan hệ song song trong không gian",
+          "source_url": "https://loigiaihay.com/bai-13-hai-mat-phang-song-song-toan-11-ket-noi-tri-thuc-e31533.html",
+          "semester": 1,
+          "order": 16,
+          "unit_kind": "lesson",
+          "lesson_number": 13
+        },
+        {
+          "id": "unit_2fedcd2bfd3f03a9c965",
+          "title": "Bài 14. Phép chiếu song song",
+          "chapter": "Chương 4 Quan hệ song song trong không gian",
+          "source_url": "https://loigiaihay.com/bai-14-phep-chieu-song-song-toan-11-ket-noi-tri-thuc-e31534.html",
+          "semester": 1,
+          "order": 17,
+          "unit_kind": "lesson",
+          "lesson_number": 14
+        },
+        {
+          "id": "unit_98d61d3b27359d725717",
+          "title": "Bài tập cuối chương 4",
+          "chapter": "Chương 4 Quan hệ song song trong không gian",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-4-toan-11-ket-noi-tri-thuc-e31535.html",
+          "semester": 1,
+          "order": 18,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_4a4d8a6ab69079030abf",
+          "title": "Bài 15. Giới hạn của dãy số",
+          "chapter": "Chương 5 Giới hạn.Hàm số liên tục",
+          "source_url": "https://loigiaihay.com/bai-15-gioi-han-cua-day-so-toan-11-ket-noi-tri-thuc-e31542.html",
+          "semester": 1,
+          "order": 19,
+          "unit_kind": "lesson",
+          "lesson_number": 15
+        },
+        {
+          "id": "unit_d6ebc5532ea94661300e",
+          "title": "Bài 16. Giới hạn của hàm số",
+          "chapter": "Chương 5 Giới hạn.Hàm số liên tục",
+          "source_url": "https://loigiaihay.com/bai-16-gioi-han-cua-ham-so-toan-11-ket-noi-tri-thuc-e31543.html",
+          "semester": 1,
+          "order": 20,
+          "unit_kind": "lesson",
+          "lesson_number": 16
+        },
+        {
+          "id": "unit_e858ccd2db877039d1d2",
+          "title": "Bài 17. Hàm số liên tục",
+          "chapter": "Chương 5 Giới hạn.Hàm số liên tục",
+          "source_url": "https://loigiaihay.com/bai-17-ham-so-lien-tuc-toan-11-ket-noi-tri-thuc-e31544.html",
+          "semester": 1,
+          "order": 21,
+          "unit_kind": "lesson",
+          "lesson_number": 17
+        },
+        {
+          "id": "unit_e77df4e5d193f1b88a0b",
+          "title": "Bài tập cuối chương V",
+          "chapter": "Chương 5 Giới hạn.Hàm số liên tục",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-v-toan-11-ket-noi-tri-thuc-e31545.html",
+          "semester": 1,
+          "order": 22,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_ea79a2d0f8e1cc2fcefe",
+          "title": "Bài 18. Lũy thừa với số mũ thực",
+          "chapter": "Chương VI. Hàm số mũ và hàm số lôgarit",
+          "source_url": "https://loigiaihay.com/bai-18-luy-thua-voi-so-mu-thuc-toan-11-ket-noi-tri-thuc-e31935.html",
+          "semester": 2,
+          "order": 23,
+          "unit_kind": "lesson",
+          "lesson_number": 18
+        },
+        {
+          "id": "unit_9e6a8d1fe402fd15fea1",
+          "title": "Bài 19. Lôgarit",
+          "chapter": "Chương VI. Hàm số mũ và hàm số lôgarit",
+          "source_url": "https://loigiaihay.com/bai-19-logarit-toan-11-ket-noi-tri-thuc-e31936.html",
+          "semester": 2,
+          "order": 24,
+          "unit_kind": "lesson",
+          "lesson_number": 19
+        },
+        {
+          "id": "unit_e4be0ecea422db079e4a",
+          "title": "Bài 20. Hàm số mũ và hàm số lôgarit",
+          "chapter": "Chương VI. Hàm số mũ và hàm số lôgarit",
+          "source_url": "https://loigiaihay.com/bai-20-ham-so-mu-va-ham-so-logarit-toan-11-ket-noi-tri-thuc-e31937.html",
+          "semester": 2,
+          "order": 25,
+          "unit_kind": "lesson",
+          "lesson_number": 20
+        },
+        {
+          "id": "unit_022bc43a3d9d77b54213",
+          "title": "Bài 21. Phương trình, bất phương trình mũ và lôgarit",
+          "chapter": "Chương VI. Hàm số mũ và hàm số lôgarit",
+          "source_url": "https://loigiaihay.com/bai-21-phuong-trinh-bat-phuong-trinh-mu-va-logarit-toan-11-ket-noi-tri-thuc-e31939.html",
+          "semester": 2,
+          "order": 26,
+          "unit_kind": "lesson",
+          "lesson_number": 21
+        },
+        {
+          "id": "unit_44f01e8641c62822e5ed",
+          "title": "Bài tập cuối chương VI",
+          "chapter": "Chương VI. Hàm số mũ và hàm số lôgarit",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-vi-toan-11-ket-noi-tri-thuc-e31941.html",
+          "semester": 2,
+          "order": 27,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_cc0bd425d06cc8e9ceb9",
+          "title": "Bài 22. Hai đường thẳng vuông góc",
+          "chapter": "Chương VII. Quan hệ vuông góc trong không gian",
+          "source_url": "https://loigiaihay.com/bai-22-hai-duong-thang-vuong-goc-toan-11-ket-noi-tri-thuc-e31959.html",
+          "semester": 2,
+          "order": 28,
+          "unit_kind": "lesson",
+          "lesson_number": 22
+        },
+        {
+          "id": "unit_25dd5563a1760dd4ddb5",
+          "title": "Bài 23. Đường thẳng vuông góc với mặt phẳng",
+          "chapter": "Chương VII. Quan hệ vuông góc trong không gian",
+          "source_url": "https://loigiaihay.com/bai-23-duong-thang-vuong-goc-voi-mat-phang-toan-11-ket-noi-tri-thuc-e31960.html",
+          "semester": 2,
+          "order": 29,
+          "unit_kind": "lesson",
+          "lesson_number": 23
+        },
+        {
+          "id": "unit_422ddbf71bca165311df",
+          "title": "Bài 24. Phép chiếu vuông góc. Góc giữa đường thẳng và mặt phẳng",
+          "chapter": "Chương VII. Quan hệ vuông góc trong không gian",
+          "source_url": "https://loigiaihay.com/bai-24-phep-chieu-vuong-goc-goc-giua-duong-thang-va-mat-phang-toan-11-ket-noi-tri-thuc-e31961.html",
+          "semester": 2,
+          "order": 30,
+          "unit_kind": "lesson",
+          "lesson_number": 24
+        },
+        {
+          "id": "unit_f254996f3670196e8497",
+          "title": "Bài 25. Hai mặt phẳng vuông góc",
+          "chapter": "Chương VII. Quan hệ vuông góc trong không gian",
+          "source_url": "https://loigiaihay.com/bai-25-hai-mat-phang-vuong-goc-toan-11-ket-noi-tri-thuc-e31962.html",
+          "semester": 2,
+          "order": 31,
+          "unit_kind": "lesson",
+          "lesson_number": 25
+        },
+        {
+          "id": "unit_bcbdec0f221843f16d06",
+          "title": "Bài 26. Khoảng cách",
+          "chapter": "Chương VII. Quan hệ vuông góc trong không gian",
+          "source_url": "https://loigiaihay.com/bai-26-khoang-cach-toan-11-ket-noi-tri-thuc-e31963.html",
+          "semester": 2,
+          "order": 32,
+          "unit_kind": "lesson",
+          "lesson_number": 26
+        },
+        {
+          "id": "unit_bae759ccc53ec7e41cba",
+          "title": "Bài 27. Thể tích",
+          "chapter": "Chương VII. Quan hệ vuông góc trong không gian",
+          "source_url": "https://loigiaihay.com/bai-27-the-tich-toan-11-ket-noi-tri-thuc-e31964.html",
+          "semester": 2,
+          "order": 33,
+          "unit_kind": "lesson",
+          "lesson_number": 27
+        },
+        {
+          "id": "unit_61543244bb2fb706df24",
+          "title": "Bài tập cuối chương VII",
+          "chapter": "Chương VII. Quan hệ vuông góc trong không gian",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-vii-toan-11-ket-noi-tri-thuc-e31965.html",
+          "semester": 2,
+          "order": 34,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_963e498ca11ec7cec2d7",
+          "title": "Bài 28. Biến cố hợp, biến cố giao, biến cố độc lập",
+          "chapter": "Chương VIII. Các quy tắc tính xác suất",
+          "source_url": "https://loigiaihay.com/bai-28-bien-co-hop-bien-co-giao-bien-co-doc-lap-toan-11-ket-noi-tri-thuc-e31967.html",
+          "semester": 2,
+          "order": 35,
+          "unit_kind": "lesson",
+          "lesson_number": 28
+        },
+        {
+          "id": "unit_2b30e8a300bf7f3f978f",
+          "title": "Bài 29. Công thức cộng xác suất",
+          "chapter": "Chương VIII. Các quy tắc tính xác suất",
+          "source_url": "https://loigiaihay.com/bai-29-cong-thuc-cong-xac-suat-toan-11-ket-noi-tri-thuc-e31968.html",
+          "semester": 2,
+          "order": 36,
+          "unit_kind": "lesson",
+          "lesson_number": 29
+        },
+        {
+          "id": "unit_f545c2e470dca3ed1f32",
+          "title": "Bài 30. Công thức nhân xác suất cho hai biến cố độc lập",
+          "chapter": "Chương VIII. Các quy tắc tính xác suất",
+          "source_url": "https://loigiaihay.com/bai-30-cong-thuc-nhan-xac-suat-cho-hai-bien-co-doc-lap-toan-11-ket-noi-tri-thuc-e31969.html",
+          "semester": 2,
+          "order": 37,
+          "unit_kind": "lesson",
+          "lesson_number": 30
+        },
+        {
+          "id": "unit_b4f4cf61163b66c68c0d",
+          "title": "Bài tập cuối chương VIII",
+          "chapter": "Chương VIII. Các quy tắc tính xác suất",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-viii-toan-11-ket-noi-tri-thuc-e31970.html",
+          "semester": 2,
+          "order": 38,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_48cae561f459dcc6b36f",
+          "title": "Bài 31. Định nghĩa và ý nghĩa của đạo hàm",
+          "chapter": "Chương IX. Đạo hàm",
+          "source_url": "https://loigiaihay.com/bai-31-dinh-nghia-va-y-nghia-cua-dao-ham-toan-11-ket-noi-tri-thuc-e31972.html",
+          "semester": 2,
+          "order": 39,
+          "unit_kind": "lesson",
+          "lesson_number": 31
+        },
+        {
+          "id": "unit_e1476672529cd17f21f4",
+          "title": "Bài 32. Các quy tắc tính đạo hàm",
+          "chapter": "Chương IX. Đạo hàm",
+          "source_url": "https://loigiaihay.com/bai-32-cac-quy-tac-tinh-dao-ham-toan-11-ket-noi-tri-thuc-e31973.html",
+          "semester": 2,
+          "order": 40,
+          "unit_kind": "lesson",
+          "lesson_number": 32
+        },
+        {
+          "id": "unit_7a20b59159d2c01bc04f",
+          "title": "Bài 33. Đạo hàm cấp hai",
+          "chapter": "Chương IX. Đạo hàm",
+          "source_url": "https://loigiaihay.com/bai-33-dao-ham-cap-hai-toan-11-ket-noi-tri-thuc-e31974.html",
+          "semester": 2,
+          "order": 41,
+          "unit_kind": "lesson",
+          "lesson_number": 33
+        },
+        {
+          "id": "unit_7796b14b2f934381fd9e",
+          "title": "Bài tập cuối chương IX",
+          "chapter": "Chương IX. Đạo hàm",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-ix-toan-11-ket-noi-tri-thuc-e31975.html",
+          "semester": 2,
+          "order": 42,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_0e0406d854f19978537d",
+          "title": "Bài tập cuối năm",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-nam-toan-11-ket-noi-tri-thuc-e32141.html",
+          "semester": 2,
+          "order": 43,
+          "unit_kind": "year_review",
+          "lesson_number": null
+        }
+      ]
     },
     {
       "id": "kntt_11_tieng_anh",
@@ -3625,8 +4347,399 @@
       "edition": null,
       "verified_on": "2026-10-15",
       "alignment_status": "secondary_source_index_not_publisher_verified",
-      "source_html_sha256": "ff352763bf7ad43c2ddff37fbf68d7fbe414ffd750ffd9e2b5f538e756155083",
-      "units": []
+      "source_html_sha256": "2694e55e1ae181ef44179bbe9815579fabd41a98abe187f800ea7c556977c824",
+      "units": [
+        {
+          "id": "unit_9193ea23ca7a5ceabbe5",
+          "title": "Bài 1. Mệnh đề",
+          "chapter": "Chương I. Mệnh đề và tập hợp",
+          "source_url": "https://loigiaihay.com/bai-1-menh-de-toan-10-ket-noi-tri-thuc-e24909.html",
+          "semester": 1,
+          "order": 1,
+          "unit_kind": "lesson",
+          "lesson_number": 1
+        },
+        {
+          "id": "unit_1cec7fc80f760eaf83ae",
+          "title": "Bài 2. Tập hợp và các phép toán trên tập hợp",
+          "chapter": "Chương I. Mệnh đề và tập hợp",
+          "source_url": "https://loigiaihay.com/bai-2-tap-hop-va-cac-phep-toan-tren-tap-hop-toan-10-ket-noi-tri-thuc-e24958.html",
+          "semester": 1,
+          "order": 2,
+          "unit_kind": "lesson",
+          "lesson_number": 2
+        },
+        {
+          "id": "unit_bab1ab0919a0af912f42",
+          "title": "Bài tập cuối chương I",
+          "chapter": "Chương I. Mệnh đề và tập hợp",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-i-toan-10-ket-noi-tri-thuc-e24959.html",
+          "semester": 1,
+          "order": 3,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_d8333d647a032496714c",
+          "title": "Bài 3. Bất phương trình bậc nhất hai ẩn",
+          "chapter": "Chương II. Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
+          "source_url": "https://loigiaihay.com/bai-3-bat-phuong-trinh-bac-nhat-hai-an-toan-10-ket-noi-tri-thuc-e24960.html",
+          "semester": 1,
+          "order": 4,
+          "unit_kind": "lesson",
+          "lesson_number": 3
+        },
+        {
+          "id": "unit_6e11f411a683d54e838a",
+          "title": "Bài 4. Hệ bất phương trình bậc nhất hai ẩn",
+          "chapter": "Chương II. Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
+          "source_url": "https://loigiaihay.com/bai-4-he-bat-phuong-trinh-bac-nhat-hai-an-toan-10-ket-noi-tri-thuc-e24961.html",
+          "semester": 1,
+          "order": 5,
+          "unit_kind": "lesson",
+          "lesson_number": 4
+        },
+        {
+          "id": "unit_fe7b7d878f1807e6a46f",
+          "title": "Bài tập cuối chương II",
+          "chapter": "Chương II. Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-ii-toan-10-ket-noi-tri-thuc-e24964.html",
+          "semester": 1,
+          "order": 6,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_33f2a705bb8cb91415da",
+          "title": "Bài 5. Giá trị lượng giác của một góc từ 0 đến 180",
+          "chapter": "Chương III. Hệ thức lượng trong tam giác",
+          "source_url": "https://loigiaihay.com/bai-5-gia-tri-luong-giac-cua-mot-goc-tu-0-den-180-toan-10-ket-noi-tri-thuc-e24965.html",
+          "semester": 1,
+          "order": 7,
+          "unit_kind": "lesson",
+          "lesson_number": 5
+        },
+        {
+          "id": "unit_5d17101b0fcbf36a8fc7",
+          "title": "Bài 6. Hệ thức lượng trong tam giác",
+          "chapter": "Chương III. Hệ thức lượng trong tam giác",
+          "source_url": "https://loigiaihay.com/bai-6-he-thuc-luong-trong-tam-giac-toan-10-ket-noi-tri-thuc-e24966.html",
+          "semester": 1,
+          "order": 8,
+          "unit_kind": "lesson",
+          "lesson_number": 6
+        },
+        {
+          "id": "unit_4f99a9783ccafa7129ef",
+          "title": "Bài tập cuối chương III",
+          "chapter": "Chương III. Hệ thức lượng trong tam giác",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-iii-toan-10-ket-noi-tri-thuc-e24967.html",
+          "semester": 1,
+          "order": 9,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_f451eb94aba3b976dc3f",
+          "title": "Bài 7. Các khái niệm mở đầu",
+          "chapter": "Chương IV. Vectơ",
+          "source_url": "https://loigiaihay.com/bai-7-cac-khai-niem-mo-dau-toan-10-ket-noi-tri-thuc-e24968.html",
+          "semester": 1,
+          "order": 10,
+          "unit_kind": "lesson",
+          "lesson_number": 7
+        },
+        {
+          "id": "unit_35570c1ba3868a37dcce",
+          "title": "Bài 8. Tổng và hiệu của hai vectơ",
+          "chapter": "Chương IV. Vectơ",
+          "source_url": "https://loigiaihay.com/bai-8-tong-va-hieu-cua-hai-vecto-toan-10-ket-noi-tri-thuc-e24969.html",
+          "semester": 1,
+          "order": 11,
+          "unit_kind": "lesson",
+          "lesson_number": 8
+        },
+        {
+          "id": "unit_0acf148eb8e4bb35847f",
+          "title": "Bài 9. Tích của một vecto với một số",
+          "chapter": "Chương IV. Vectơ",
+          "source_url": "https://loigiaihay.com/bai-9-tich-cua-mot-vecto-voi-mot-so-toan-10-ket-noi-tri-thuc-e24970.html",
+          "semester": 1,
+          "order": 12,
+          "unit_kind": "lesson",
+          "lesson_number": 9
+        },
+        {
+          "id": "unit_bc93c5164c7a004bef56",
+          "title": "Bài 10. Vectơ trong mặt phẳng tọa độ",
+          "chapter": "Chương IV. Vectơ",
+          "source_url": "https://loigiaihay.com/bai-10-vecto-trong-mat-phang-toa-do-toan-10-ket-noi-tri-thuc-e24971.html",
+          "semester": 1,
+          "order": 13,
+          "unit_kind": "lesson",
+          "lesson_number": 10
+        },
+        {
+          "id": "unit_93b57e2cbb681a240dc4",
+          "title": "Bài 11. Tích vô hướng của hai vecto",
+          "chapter": "Chương IV. Vectơ",
+          "source_url": "https://loigiaihay.com/bai-11-tich-vo-huong-cua-hai-vecto-toan-10-ket-noi-tri-thuc-e24972.html",
+          "semester": 1,
+          "order": 14,
+          "unit_kind": "lesson",
+          "lesson_number": 11
+        },
+        {
+          "id": "unit_fac48c6537399b73a06f",
+          "title": "Bài tập cuối chương IV",
+          "chapter": "Chương IV. Vectơ",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-iv-toan-10-ket-noi-tri-thuc-e24973.html",
+          "semester": 1,
+          "order": 15,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_427cac5b5ce32258a87a",
+          "title": "Bài 12. Số gần đúng và sai số",
+          "chapter": "Chương V. Các số đặc trưng của mẫu số liệu không ghép nhóm",
+          "source_url": "https://loigiaihay.com/bai-12-so-gan-dung-va-sai-so-toan-10-ket-noi-tri-thuc-e24974.html",
+          "semester": 1,
+          "order": 16,
+          "unit_kind": "lesson",
+          "lesson_number": 12
+        },
+        {
+          "id": "unit_5b3f8997def7dd6a11c2",
+          "title": "Bài 13. Các số đặc trưng đo xu thế trung tâm",
+          "chapter": "Chương V. Các số đặc trưng của mẫu số liệu không ghép nhóm",
+          "source_url": "https://loigiaihay.com/bai-13-cac-so-dac-trung-do-xu-the-trung-tam-toan-10-ket-noi-tri-thuc-e24975.html",
+          "semester": 1,
+          "order": 17,
+          "unit_kind": "lesson",
+          "lesson_number": 13
+        },
+        {
+          "id": "unit_6891753b2b7e4ee1ab06",
+          "title": "Bài 14. Các số đặc trưng đo độ phân tán",
+          "chapter": "Chương V. Các số đặc trưng của mẫu số liệu không ghép nhóm",
+          "source_url": "https://loigiaihay.com/bai-14-cac-so-dac-trung-do-do-phan-tan-toan-10-ket-noi-tri-thuc-e24976.html",
+          "semester": 1,
+          "order": 18,
+          "unit_kind": "lesson",
+          "lesson_number": 14
+        },
+        {
+          "id": "unit_34be0d983fb7d8850c2d",
+          "title": "Bài tập cuối chương V",
+          "chapter": "Chương V. Các số đặc trưng của mẫu số liệu không ghép nhóm",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-v-toan-10-ket-noi-tri-thuc-e24977.html",
+          "semester": 1,
+          "order": 19,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_4bba1ebb0dc4c42221ab",
+          "title": "Bài 1. Tìm hiểu một số kiến thức về tài chính",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/bai-1-tim-hieu-mot-so-kien-thuc-ve-tai-chinh-toan-10-ket-noi-tri-thuc-e26393.html",
+          "semester": 1,
+          "order": 20,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_559861eca40a505e5b9a",
+          "title": "Bài 2. Mạng xã hội: Lợi và hại",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/bai-2-mang-xa-hoi-loi-va-hai-toan-10-ket-noi-tri-thuc-e26394.html",
+          "semester": 1,
+          "order": 21,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_a073719c63447ea51ada",
+          "title": "Bài 15. Hàm số",
+          "chapter": "Chương VI. Hàm số, đồ thị và ứng dụng",
+          "source_url": "https://loigiaihay.com/bai-15-ham-so-toan-10-ket-noi-tri-thuc-e26642.html",
+          "semester": 2,
+          "order": 22,
+          "unit_kind": "lesson",
+          "lesson_number": 15
+        },
+        {
+          "id": "unit_bceeee4be1f430e48128",
+          "title": "Bài 16. Hàm số bậc hai",
+          "chapter": "Chương VI. Hàm số, đồ thị và ứng dụng",
+          "source_url": "https://loigiaihay.com/bai-16-ham-so-bac-hai-toan-10-ket-noi-tri-thuc-e26650.html",
+          "semester": 2,
+          "order": 23,
+          "unit_kind": "lesson",
+          "lesson_number": 16
+        },
+        {
+          "id": "unit_8f3f6bed2a3a50cdeef6",
+          "title": "Bài 17. Dấu của tam thức bậc hai",
+          "chapter": "Chương VI. Hàm số, đồ thị và ứng dụng",
+          "source_url": "https://loigiaihay.com/bai-17-dau-cua-tam-thuc-bac-hai-toan-10-ket-noi-tri-thuc-e26651.html",
+          "semester": 2,
+          "order": 24,
+          "unit_kind": "lesson",
+          "lesson_number": 17
+        },
+        {
+          "id": "unit_effababc1385bad17b6c",
+          "title": "Bài 18. Phương trình quy về phương trình bậc hai",
+          "chapter": "Chương VI. Hàm số, đồ thị và ứng dụng",
+          "source_url": "https://loigiaihay.com/bai-18-phuong-trinh-quy-ve-phuong-trinh-bac-hai-toan-10-ket-noi-tri-thuc-e26652.html",
+          "semester": 2,
+          "order": 25,
+          "unit_kind": "lesson",
+          "lesson_number": 18
+        },
+        {
+          "id": "unit_084de16bccd4fd26b088",
+          "title": "Bài tập cuối chương VI",
+          "chapter": "Chương VI. Hàm số, đồ thị và ứng dụng",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-vi-toan-10-ket-noi-tri-thuc-e27422.html",
+          "semester": 2,
+          "order": 26,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_ee204f544d621370c611",
+          "title": "Bài 19. Phương trình đường thẳng",
+          "chapter": "Chương VII. Phương pháp tọa độ trong mặt phẳng",
+          "source_url": "https://loigiaihay.com/bai-19-phuong-trinh-duong-thang-toan-10-ket-noi-tri-thuc-e27705.html",
+          "semester": 2,
+          "order": 27,
+          "unit_kind": "lesson",
+          "lesson_number": 19
+        },
+        {
+          "id": "unit_a9d725cb5d2ea978ba63",
+          "title": "Bài 20. Vị trí tương đối giữa hai đường thẳng. Góc và khoảng cách",
+          "chapter": "Chương VII. Phương pháp tọa độ trong mặt phẳng",
+          "source_url": "https://loigiaihay.com/bai-20-vi-tri-tuong-doi-giua-hai-duong-thang-goc-va-khoang-cach-toan-10-ket-noi-tri-thuc-e27718.html",
+          "semester": 2,
+          "order": 28,
+          "unit_kind": "lesson",
+          "lesson_number": 20
+        },
+        {
+          "id": "unit_9dd00e8877634fa140a1",
+          "title": "Bài 21. Đường tròn trong mặt phẳng tọa độ",
+          "chapter": "Chương VII. Phương pháp tọa độ trong mặt phẳng",
+          "source_url": "https://loigiaihay.com/bai-21-duong-tron-trong-mat-phang-toa-do-toan-10-ket-noi-tri-thuc-e27720.html",
+          "semester": 2,
+          "order": 29,
+          "unit_kind": "lesson",
+          "lesson_number": 21
+        },
+        {
+          "id": "unit_549d800c46970bcec0c8",
+          "title": "Bài 22. Ba đường conic",
+          "chapter": "Chương VII. Phương pháp tọa độ trong mặt phẳng",
+          "source_url": "https://loigiaihay.com/bai-22-ba-duong-conic-toan-10-ket-noi-tri-thuc-e27809.html",
+          "semester": 2,
+          "order": 30,
+          "unit_kind": "lesson",
+          "lesson_number": 22
+        },
+        {
+          "id": "unit_95d968891d964024f3fd",
+          "title": "Bài tập cuối chương VII",
+          "chapter": "Chương VII. Phương pháp tọa độ trong mặt phẳng",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-vii-toan-10-ket-noi-tri-thuc-e27812.html",
+          "semester": 2,
+          "order": 31,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_741f9c216e0b739eb7d1",
+          "title": "Bài 23. Quy tắc đếm",
+          "chapter": "Chương VIII. Đại số tổ hợp",
+          "source_url": "https://loigiaihay.com/bai-23-quy-tac-dem-toan-10-ket-noi-tri-thuc-e27810.html",
+          "semester": 2,
+          "order": 32,
+          "unit_kind": "lesson",
+          "lesson_number": 23
+        },
+        {
+          "id": "unit_b20ef24e29e616755d50",
+          "title": "Bài 24. Hoán vị, chỉnh hợp và tổ hợp",
+          "chapter": "Chương VIII. Đại số tổ hợp",
+          "source_url": "https://loigiaihay.com/bai-24-hoan-vi-chinh-hop-va-to-hop-toan-10-ket-noi-tri-thuc-e27851.html",
+          "semester": 2,
+          "order": 33,
+          "unit_kind": "lesson",
+          "lesson_number": 24
+        },
+        {
+          "id": "unit_1f5931f2e5b8814acf87",
+          "title": "Bài 25. Nhị thức Newton",
+          "chapter": "Chương VIII. Đại số tổ hợp",
+          "source_url": "https://loigiaihay.com/bai-25-nhi-thuc-newton-toan-10-ket-noi-tri-thuc-e27852.html",
+          "semester": 2,
+          "order": 34,
+          "unit_kind": "lesson",
+          "lesson_number": 25
+        },
+        {
+          "id": "unit_8d27673c6bc4baeac439",
+          "title": "Bài tập cuối chương VIII",
+          "chapter": "Chương VIII. Đại số tổ hợp",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-viii-toan-10-ket-noi-tri-thuc-e27853.html",
+          "semester": 2,
+          "order": 35,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_ff29518f944788603203",
+          "title": "Bài 26. Biến cố và định nghĩa cổ điển của xác suất",
+          "chapter": "Chương IX. Tính xác suất theo định nghĩa cổ điển",
+          "source_url": "https://loigiaihay.com/bai-26-bien-co-va-dinh-nghia-co-dien-cua-xac-suat-toan-10-ket-noi-tri-thuc-e27862.html",
+          "semester": 2,
+          "order": 36,
+          "unit_kind": "lesson",
+          "lesson_number": 26
+        },
+        {
+          "id": "unit_24cbec407ea865dbebde",
+          "title": "Bài 27. Thực hành tính xác suất theo định nghĩa cổ điển",
+          "chapter": "Chương IX. Tính xác suất theo định nghĩa cổ điển",
+          "source_url": "https://loigiaihay.com/bai-27-thuc-hanh-tinh-xac-suat-theo-dinh-nghia-co-dien-toan-10-ket-noi-tri-thuc-e27863.html",
+          "semester": 2,
+          "order": 37,
+          "unit_kind": "lesson",
+          "lesson_number": 27
+        },
+        {
+          "id": "unit_27acefb882234ecac2a7",
+          "title": "Bài tập cuối chương IX",
+          "chapter": "Chương IX. Tính xác suất theo định nghĩa cổ điển",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-ix-toan-10-ket-noi-tri-thuc-e27865.html",
+          "semester": 2,
+          "order": 38,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_a7962aa21501ff86ffbc",
+          "title": "Bài tập ôn tập cuối năm",
+          "chapter": "Chương IX. Tính xác suất theo định nghĩa cổ điển",
+          "source_url": "https://loigiaihay.com/bai-tap-on-tap-cuoi-nam-toan-10-ket-noi-tri-thuc-e27866.html",
+          "semester": 2,
+          "order": 39,
+          "unit_kind": "year_review",
+          "lesson_number": null
+        }
+      ]
     },
     {
       "id": "kntt_10_tieng_anh",
@@ -4637,8 +5750,629 @@
       "edition": null,
       "verified_on": "2026-10-15",
       "alignment_status": "secondary_source_index_not_publisher_verified",
-      "source_html_sha256": "41f117e45ee1e26c50aae4883f5cb46cbfb0b9208309106f1a3fbfcc1ec12163",
-      "units": []
+      "source_html_sha256": "a4be07be84d938b13e9681eaab57e44e72b9abceae22e0b41051c7c82740e5bf",
+      "units": [
+        {
+          "id": "unit_0aec870c76a5188cfec3",
+          "title": "Bài 1. Khái niệm phương trình và hệ hai phương trình bậc nhất hai ẩn",
+          "chapter": "Chương 1. Phương trình và hệ hai phương trình bậc nhất hai ẩn",
+          "source_url": "https://loigiaihay.com/bai-1-khai-niem-phuong-trinh-va-he-hai-phuong-trinh-bac-nhat-hai-an-toan-9-ket-noi-tri-thuc-e34937.html",
+          "semester": 1,
+          "order": 1,
+          "unit_kind": "lesson",
+          "lesson_number": 1
+        },
+        {
+          "id": "unit_84f2cb9cc2c7fa1985be",
+          "title": "Bài 2. Giải hệ hai phương trình bậc nhất hai ẩn",
+          "chapter": "Chương 1. Phương trình và hệ hai phương trình bậc nhất hai ẩn",
+          "source_url": "https://loigiaihay.com/bai-2-giai-he-hai-phuong-trinh-bac-nhat-hai-an-toan-9-ket-noi-tri-thuc-e34938.html",
+          "semester": 1,
+          "order": 2,
+          "unit_kind": "lesson",
+          "lesson_number": 2
+        },
+        {
+          "id": "unit_a76349d043e2348e7034",
+          "title": "Luyện tập chung trang 19",
+          "chapter": "Chương 1. Phương trình và hệ hai phương trình bậc nhất hai ẩn",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-19-toan-9-ket-noi-tri-thuc-e34939.html",
+          "semester": 1,
+          "order": 3,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_5e0f6120ab54aa615d65",
+          "title": "Bài 3. Giải bài toán bằng cách lập hệ phương trình",
+          "chapter": "Chương 1. Phương trình và hệ hai phương trình bậc nhất hai ẩn",
+          "source_url": "https://loigiaihay.com/bai-3-giai-bai-toan-bang-cach-lap-he-phuong-trinh-toan-9-ket-noi-tri-thuc-e34940.html",
+          "semester": 1,
+          "order": 4,
+          "unit_kind": "lesson",
+          "lesson_number": 3
+        },
+        {
+          "id": "unit_fb48397873ed6839cb5d",
+          "title": "Bài tập cuối chương 1",
+          "chapter": "Chương 1. Phương trình và hệ hai phương trình bậc nhất hai ẩn",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-1-toan-9-ket-noi-tri-thuc-e34941.html",
+          "semester": 1,
+          "order": 5,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_dc882a32384a398cf582",
+          "title": "Bài 4. Phương trình quy về phương trình bậc nhất một ẩn",
+          "chapter": "Chương 2. Phương trình và bất phương trình bậc nhất một ẩn",
+          "source_url": "https://loigiaihay.com/bai-4-phuong-trinh-quy-ve-phuong-trinh-bac-nhat-mot-an-toan-9-ket-noi-tri-thuc-e34942.html",
+          "semester": 1,
+          "order": 6,
+          "unit_kind": "lesson",
+          "lesson_number": 4
+        },
+        {
+          "id": "unit_d03b04ebbb983695c23d",
+          "title": "Bài 5. Bất đẳng thức và tính chất",
+          "chapter": "Chương 2. Phương trình và bất phương trình bậc nhất một ẩn",
+          "source_url": "https://loigiaihay.com/bai-5-bat-dang-thuc-va-tinh-chat-toan-9-ket-noi-tri-thuc-e34943.html",
+          "semester": 1,
+          "order": 7,
+          "unit_kind": "lesson",
+          "lesson_number": 5
+        },
+        {
+          "id": "unit_cca9e2a601e06fccc4a9",
+          "title": "Luyện tập chung trang 36",
+          "chapter": "Chương 2. Phương trình và bất phương trình bậc nhất một ẩn",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-36-toan-9-ket-noi-tri-thuc-e34944.html",
+          "semester": 1,
+          "order": 8,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_20f454726b313f8c5947",
+          "title": "Bài 6. Bất phương trình bậc nhất một ẩn",
+          "chapter": "Chương 2. Phương trình và bất phương trình bậc nhất một ẩn",
+          "source_url": "https://loigiaihay.com/bai-6-bat-phuong-trinh-bac-nhat-mot-an-toan-9-ket-noi-tri-thuc-e34945.html",
+          "semester": 1,
+          "order": 9,
+          "unit_kind": "lesson",
+          "lesson_number": 6
+        },
+        {
+          "id": "unit_383d83aeaf00eaffbd43",
+          "title": "Bài tập cuối chương 2",
+          "chapter": "Chương 2. Phương trình và bất phương trình bậc nhất một ẩn",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-2-toan-9-ket-noi-tri-thuc-e34946.html",
+          "semester": 1,
+          "order": 10,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_fb68f7f8695083982758",
+          "title": "Bài 7. Căn bậc hai và căn thức bậc hai",
+          "chapter": "Chương 3. Căn bậc hai và căn bậc ba",
+          "source_url": "https://loigiaihay.com/bai-7-can-bac-hai-va-can-thuc-bac-hai-toan-9-ket-noi-tri-thuc-e34947.html",
+          "semester": 1,
+          "order": 11,
+          "unit_kind": "lesson",
+          "lesson_number": 7
+        },
+        {
+          "id": "unit_dfbd531ef4653a9925f6",
+          "title": "Bài 8. Khai căn bậc hai với phép nhân và phép chia",
+          "chapter": "Chương 3. Căn bậc hai và căn bậc ba",
+          "source_url": "https://loigiaihay.com/bai-8-khai-can-bac-hai-voi-phep-nhan-va-phep-chia-toan-9-ket-noi-tri-thuc-e34948.html",
+          "semester": 1,
+          "order": 12,
+          "unit_kind": "lesson",
+          "lesson_number": 8
+        },
+        {
+          "id": "unit_ffd22e23365e782a32a8",
+          "title": "Luyện tập chung trang 52",
+          "chapter": "Chương 3. Căn bậc hai và căn bậc ba",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-52-toan-9-ket-noi-tri-thuc-e34949.html",
+          "semester": 1,
+          "order": 13,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_c5e2378f4413c48ccb51",
+          "title": "Bài 9. Biến đổi đơn giản và rút gọn biểu thức chứa căn thức bậc hai",
+          "chapter": "Chương 3. Căn bậc hai và căn bậc ba",
+          "source_url": "https://loigiaihay.com/bai-9-bien-doi-don-gian-va-rut-gon-bieu-thuc-chua-can-thuc-bac-hai-toan-9-ket-noi-tri-thuc-e34950.html",
+          "semester": 1,
+          "order": 14,
+          "unit_kind": "lesson",
+          "lesson_number": 9
+        },
+        {
+          "id": "unit_aeac66dbaccdf0abf2db",
+          "title": "Bài 10. Căn bậc ba và căn thức bậc ba",
+          "chapter": "Chương 3. Căn bậc hai và căn bậc ba",
+          "source_url": "https://loigiaihay.com/bai-10-can-bac-ba-va-can-thuc-bac-ba-toan-9-ket-noi-tri-thuc-e34951.html",
+          "semester": 1,
+          "order": 15,
+          "unit_kind": "lesson",
+          "lesson_number": 10
+        },
+        {
+          "id": "unit_037ec5bacc7a231def3d",
+          "title": "Luyện tập chung trang 63",
+          "chapter": "Chương 3. Căn bậc hai và căn bậc ba",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-63-toan-9-ket-noi-tri-thuc-e34952.html",
+          "semester": 1,
+          "order": 16,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_1cdab300b259b75ab0b3",
+          "title": "Bài tập cuối chương 3",
+          "chapter": "Chương 3. Căn bậc hai và căn bậc ba",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-3-toan-9-ket-noi-tri-thuc-e34953.html",
+          "semester": 1,
+          "order": 17,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_dcdbee3505fd494b258c",
+          "title": "Bài 11. Tỉ số lượng giác của góc nhọn",
+          "chapter": "Chương 4. Hệ thức lượng trong tam giác vuông",
+          "source_url": "https://loigiaihay.com/bai-11-ti-so-luong-giac-cua-goc-nhon-toan-9-ket-noi-tri-thuc-e34954.html",
+          "semester": 1,
+          "order": 18,
+          "unit_kind": "lesson",
+          "lesson_number": 11
+        },
+        {
+          "id": "unit_e0a0119945c2bfce4cc4",
+          "title": "Bài 12. Một số hệ thức giữa cạnh, góc trong tam giác vuông và ứng dụng",
+          "chapter": "Chương 4. Hệ thức lượng trong tam giác vuông",
+          "source_url": "https://loigiaihay.com/bai-12-mot-so-he-thuc-giua-canh-goc-trong-tam-giac-vuong-va-ung-dung-toan-9-ket-noi-tri-thuc-e34955.html",
+          "semester": 1,
+          "order": 19,
+          "unit_kind": "lesson",
+          "lesson_number": 12
+        },
+        {
+          "id": "unit_01f82b2c23bfb78995f9",
+          "title": "Luyện tập chung trang 79",
+          "chapter": "Chương 4. Hệ thức lượng trong tam giác vuông",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-79-toan-9-ket-noi-tri-thuc-e34956.html",
+          "semester": 1,
+          "order": 20,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_e5f616d8ced34d39e115",
+          "title": "Bài tập cuối chương 4",
+          "chapter": "Chương 4. Hệ thức lượng trong tam giác vuông",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-4-toan-9-ket-noi-tri-thuc-e34957.html",
+          "semester": 1,
+          "order": 21,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_5f24dee24063d5bd10f0",
+          "title": "Bài 13. Mở đầu về đường tròn",
+          "chapter": "Chương 5. Đường tròn",
+          "source_url": "https://loigiaihay.com/bai-13-mo-dau-ve-duong-tron-toan-9-ket-noi-tri-thuc-e34958.html",
+          "semester": 1,
+          "order": 22,
+          "unit_kind": "lesson",
+          "lesson_number": 13
+        },
+        {
+          "id": "unit_d70dfee2f1be489e7eeb",
+          "title": "Bài 14. Cung và dây của một đường tròn",
+          "chapter": "Chương 5. Đường tròn",
+          "source_url": "https://loigiaihay.com/bai-14-cung-va-day-cua-mot-duong-tron-toan-9-ket-noi-tri-thuc-e34959.html",
+          "semester": 1,
+          "order": 23,
+          "unit_kind": "lesson",
+          "lesson_number": 14
+        },
+        {
+          "id": "unit_00fc2704bc47ddd2c9c7",
+          "title": "Bài 15. Độ dài của cung tròn. Diện tích hình quạt tròn và hình vành khuyên",
+          "chapter": "Chương 5. Đường tròn",
+          "source_url": "https://loigiaihay.com/bai-15-do-dai-cua-cung-tron-dien-tich-hinh-quat-tron-va-hinh-vanh-khuyen-toan-9-ket-noi-tri-thuc-e34960.html",
+          "semester": 1,
+          "order": 24,
+          "unit_kind": "lesson",
+          "lesson_number": 15
+        },
+        {
+          "id": "unit_53ee0dcd1160598d72d6",
+          "title": "Luyện tập chung trang 96",
+          "chapter": "Chương 5. Đường tròn",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-96-toan-9-ket-noi-tri-thuc-e34961.html",
+          "semester": 1,
+          "order": 25,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_8787135d48f71639af7b",
+          "title": "Bài 16. Vị trí tương đối của đường thẳng và đường tròn",
+          "chapter": "Chương 5. Đường tròn",
+          "source_url": "https://loigiaihay.com/bai-16-vi-tri-tuong-doi-cua-duong-thang-va-duong-tron-toan-9-ket-noi-tri-thuc-e34962.html",
+          "semester": 1,
+          "order": 26,
+          "unit_kind": "lesson",
+          "lesson_number": 16
+        },
+        {
+          "id": "unit_921b9dd7d8df1afcfd18",
+          "title": "Bài 17. Vị trí tương đối của hai đường tròn",
+          "chapter": "Chương 5. Đường tròn",
+          "source_url": "https://loigiaihay.com/bai-17-vi-tri-tuong-doi-cua-hai-duong-tron-toan-9-ket-noi-tri-thuc-e34963.html",
+          "semester": 1,
+          "order": 27,
+          "unit_kind": "lesson",
+          "lesson_number": 17
+        },
+        {
+          "id": "unit_804570845ef4eaa75361",
+          "title": "Luyện tập chung trang 108",
+          "chapter": "Chương 5. Đường tròn",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-108-toan-9-ket-noi-tri-thuc-e34964.html",
+          "semester": 1,
+          "order": 28,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_87a961c30670281d82bb",
+          "title": "Bài tập cuối chương 5",
+          "chapter": "Chương 5. Đường tròn",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-5-toan-9-ket-noi-tri-thuc-e34965.html",
+          "semester": 1,
+          "order": 29,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_2c63400a60b1e82d4d2d",
+          "title": "Pha chế dung dịch theo nồng độ yêu cầu",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/pha-che-dung-dich-theo-nong-do-yeu-cau-toan-9-ket-noi-tri-thuc-e34966.html",
+          "semester": 1,
+          "order": 30,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_15fb88663057a5de04ad",
+          "title": "Bài 18. Hàm số y = ax² (a ≠ 0)",
+          "chapter": "Chương 6. Hàm số y = ax² (a ≠ 0). Phương trình bậc hai một ẩn",
+          "source_url": "https://loigiaihay.com/bai-18-ham-so-y-ax2-a-khac-0-toan-9-ket-noi-tri-thuc-e34968.html",
+          "semester": 2,
+          "order": 31,
+          "unit_kind": "lesson",
+          "lesson_number": 18
+        },
+        {
+          "id": "unit_72d0f326cadb3beb5487",
+          "title": "Bài 19. Phương trình bậc hai một ẩn",
+          "chapter": "Chương 6. Hàm số y = ax² (a ≠ 0). Phương trình bậc hai một ẩn",
+          "source_url": "https://loigiaihay.com/bai-19-phuong-trinh-bac-hai-mot-an-toan-9-ket-noi-tri-thuc-e34969.html",
+          "semester": 2,
+          "order": 32,
+          "unit_kind": "lesson",
+          "lesson_number": 19
+        },
+        {
+          "id": "unit_bf11557531daef1b9224",
+          "title": "Luyện tập chung trang 18",
+          "chapter": "Chương 6. Hàm số y = ax² (a ≠ 0). Phương trình bậc hai một ẩn",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-18-toan-9-ket-noi-tri-thuc-e34970.html",
+          "semester": 2,
+          "order": 33,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_1fd89a1ef9cd736a55b9",
+          "title": "Bài 20. Định lí Viète và ứng dụng",
+          "chapter": "Chương 6. Hàm số y = ax² (a ≠ 0). Phương trình bậc hai một ẩn",
+          "source_url": "https://loigiaihay.com/bai-20-dinh-li-viete-va-ung-dung-toan-9-ket-noi-tri-thuc-e34971.html",
+          "semester": 2,
+          "order": 34,
+          "unit_kind": "lesson",
+          "lesson_number": 20
+        },
+        {
+          "id": "unit_2a7c7ca849023ca92553",
+          "title": "Bài 21. Giải bài toán bằng cách lập phương trình",
+          "chapter": "Chương 6. Hàm số y = ax² (a ≠ 0). Phương trình bậc hai một ẩn",
+          "source_url": "https://loigiaihay.com/bai-21-giai-bai-toan-bang-cach-lap-phuong-trinh-toan-9-ket-noi-tri-thuc-e34972.html",
+          "semester": 2,
+          "order": 35,
+          "unit_kind": "lesson",
+          "lesson_number": 21
+        },
+        {
+          "id": "unit_941c14b1e7d13ed0d89b",
+          "title": "Luyện tập chung trang 28",
+          "chapter": "Chương 6. Hàm số y = ax² (a ≠ 0). Phương trình bậc hai một ẩn",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-28-toan-9-ket-noi-tri-thuc-e34973.html",
+          "semester": 2,
+          "order": 36,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_4a02cd6abf42b71354ff",
+          "title": "Bài tập cuối chương 6",
+          "chapter": "Chương 6. Hàm số y = ax² (a ≠ 0). Phương trình bậc hai một ẩn",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-6-toan-9-ket-noi-tri-thuc-e34974.html",
+          "semester": 2,
+          "order": 37,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_d3f244accbe5f34a24cc",
+          "title": "Bài 22. Bảng tần số và biểu đồ tần số",
+          "chapter": "Chương 7. Tần số và tần số tương đối",
+          "source_url": "https://loigiaihay.com/bai-22-bang-tan-so-va-bieu-do-tan-so-toan-9-ket-noi-tri-thuc-e34975.html",
+          "semester": 2,
+          "order": 38,
+          "unit_kind": "lesson",
+          "lesson_number": 22
+        },
+        {
+          "id": "unit_0dc8817dc2db8388310c",
+          "title": "Bài 23. Bảng tần số tương đối và biểu đồ tần số tương đối",
+          "chapter": "Chương 7. Tần số và tần số tương đối",
+          "source_url": "https://loigiaihay.com/bai-23-bang-tan-so-tuong-doi-va-bieu-do-tan-so-tuong-doi-toan-9-ket-noi-tri-thuc-e34976.html",
+          "semester": 2,
+          "order": 39,
+          "unit_kind": "lesson",
+          "lesson_number": 23
+        },
+        {
+          "id": "unit_17b48b63f529c26f8bae",
+          "title": "Luyện tập chung trang 43",
+          "chapter": "Chương 7. Tần số và tần số tương đối",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-43-toan-9-ket-noi-tri-thuc-e34977.html",
+          "semester": 2,
+          "order": 40,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_e2f9de4d7815239e36f3",
+          "title": "Bài 24. Bảng tần số, tần số tương đối ghép nhóm và biểu đồ",
+          "chapter": "Chương 7. Tần số và tần số tương đối",
+          "source_url": "https://loigiaihay.com/bai-24-bang-tan-so-tan-so-tuong-doi-ghep-nhom-va-bieu-do-toan-9-ket-noi-tri-thuc-e34978.html",
+          "semester": 2,
+          "order": 41,
+          "unit_kind": "lesson",
+          "lesson_number": 24
+        },
+        {
+          "id": "unit_588845ddf6428144f022",
+          "title": "Bài tập cuối chương 7",
+          "chapter": "Chương 7. Tần số và tần số tương đối",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-7-toan-9-ket-noi-tri-thuc-e34979.html",
+          "semester": 2,
+          "order": 42,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_8c9c3c8156eb0fe6061a",
+          "title": "Bài 25. Phép thử ngẫu nhiên và không gian mẫu",
+          "chapter": "Chương 8. Xác suất của biến cố trong một số mô hình xác suất đơn giản",
+          "source_url": "https://loigiaihay.com/bai-25-phep-thu-ngau-nhien-va-khong-gian-mau-toan-9-ket-noi-tri-thuc-e34980.html",
+          "semester": 2,
+          "order": 43,
+          "unit_kind": "lesson",
+          "lesson_number": 25
+        },
+        {
+          "id": "unit_d56a1a9f437a3d282edc",
+          "title": "Bài 26. Xác suất của biến cố liên quan tới phép thử",
+          "chapter": "Chương 8. Xác suất của biến cố trong một số mô hình xác suất đơn giản",
+          "source_url": "https://loigiaihay.com/bai-26-xac-suat-cua-bien-co-lien-quan-toi-phep-thu-toan-9-ket-noi-tri-thuc-e34981.html",
+          "semester": 2,
+          "order": 44,
+          "unit_kind": "lesson",
+          "lesson_number": 26
+        },
+        {
+          "id": "unit_bbeb54f7ef714000773b",
+          "title": "Luyện tập chung trang 64",
+          "chapter": "Chương 8. Xác suất của biến cố trong một số mô hình xác suất đơn giản",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-64-toan-9-ket-noi-tri-thuc-e34982.html",
+          "semester": 2,
+          "order": 45,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_4a4a6622a69390a7717d",
+          "title": "Bài tập cuối chương 8",
+          "chapter": "Chương 8. Xác suất của biến cố trong một số mô hình xác suất đơn giản",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-8-toan-9-ket-noi-tri-thuc-e34983.html",
+          "semester": 2,
+          "order": 46,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_849dcb66933c336933f2",
+          "title": "Bài 27. Góc nội tiếp",
+          "chapter": "Chương 9. Đường tròn ngoại tiếp và đường tròn nội tiếp",
+          "source_url": "https://loigiaihay.com/bai-27-goc-noi-tiep-toan-9-ket-noi-tri-thuc-e34984.html",
+          "semester": 2,
+          "order": 47,
+          "unit_kind": "lesson",
+          "lesson_number": 27
+        },
+        {
+          "id": "unit_fe2406e34b2a8cfa77e6",
+          "title": "Bài 28. Đường tròn ngoại tiếp và đường tròn nội tiếp của một tam giác",
+          "chapter": "Chương 9. Đường tròn ngoại tiếp và đường tròn nội tiếp",
+          "source_url": "https://loigiaihay.com/bai-28-duong-tron-ngoai-tiep-va-duong-tron-noi-tiep-cua-mot-tam-giac-toan-9-ket-noi-tri-thuc-e34985.html",
+          "semester": 2,
+          "order": 48,
+          "unit_kind": "lesson",
+          "lesson_number": 28
+        },
+        {
+          "id": "unit_100c5eecc51d4d7703af",
+          "title": "Luyện tập chung trang 78",
+          "chapter": "Chương 9. Đường tròn ngoại tiếp và đường tròn nội tiếp",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-78-toan-9-ket-noi-tri-thuc-e34986.html",
+          "semester": 2,
+          "order": 49,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_ce385c4a017eeb41235d",
+          "title": "Bài 29. Tứ giác nội tiếp",
+          "chapter": "Chương 9. Đường tròn ngoại tiếp và đường tròn nội tiếp",
+          "source_url": "https://loigiaihay.com/bai-29-tu-giac-noi-tiep-toan-9-ket-noi-tri-thuc-e34987.html",
+          "semester": 2,
+          "order": 50,
+          "unit_kind": "lesson",
+          "lesson_number": 29
+        },
+        {
+          "id": "unit_e1ff7f8cba847b3e1352",
+          "title": "Bài 30. Đa giác đều",
+          "chapter": "Chương 9. Đường tròn ngoại tiếp và đường tròn nội tiếp",
+          "source_url": "https://loigiaihay.com/bai-30-da-giac-deu-toan-9-ket-noi-tri-thuc-e34988.html",
+          "semester": 2,
+          "order": 51,
+          "unit_kind": "lesson",
+          "lesson_number": 30
+        },
+        {
+          "id": "unit_1be47526e3c9c651e1e8",
+          "title": "Luyện tập chung trang 90",
+          "chapter": "Chương 9. Đường tròn ngoại tiếp và đường tròn nội tiếp",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-90-toan-9-ket-noi-tri-thuc-e34989.html",
+          "semester": 2,
+          "order": 52,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_da73f62ea21d848968a8",
+          "title": "Bài tập cuối chương 9",
+          "chapter": "Chương 9. Đường tròn ngoại tiếp và đường tròn nội tiếp",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-9-toan-9-ket-noi-tri-thuc-e34990.html",
+          "semester": 2,
+          "order": 53,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_79eb70abd6f60a9d5b5c",
+          "title": "Bài 31. Hình trụ và hình nón",
+          "chapter": "Chương 10. Một số hình khối trong thực tiễn",
+          "source_url": "https://loigiaihay.com/bai-31-hinh-tru-va-hinh-non-toan-9-ket-noi-tri-thuc-e34991.html",
+          "semester": 2,
+          "order": 54,
+          "unit_kind": "lesson",
+          "lesson_number": 31
+        },
+        {
+          "id": "unit_46ef157d1c0b322a1097",
+          "title": "Bài 32. Hình cầu",
+          "chapter": "Chương 10. Một số hình khối trong thực tiễn",
+          "source_url": "https://loigiaihay.com/bai-32-hinh-cau-toan-9-ket-noi-tri-thuc-e34992.html",
+          "semester": 2,
+          "order": 55,
+          "unit_kind": "lesson",
+          "lesson_number": 32
+        },
+        {
+          "id": "unit_9870e9154196e6dae2bd",
+          "title": "Luyện tập chung trang 106",
+          "chapter": "Chương 10. Một số hình khối trong thực tiễn",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-106-toan-9-ket-noi-tri-thuc-e34993.html",
+          "semester": 2,
+          "order": 56,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_178277b7642d80440851",
+          "title": "Bài tập cuối chương 10",
+          "chapter": "Chương 10. Một số hình khối trong thực tiễn",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-10-toan-9-ket-noi-tri-thuc-e34994.html",
+          "semester": 2,
+          "order": 57,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_1b669d96bf642e647d3d",
+          "title": "Giải phương trình, hệ phương trình và vẽ đồ thị hàm số với phần mềm GeoGebra",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/giai-phuong-trinh-he-phuong-trinh-va-ve-do-thi-ham-so-voi-phan-mem-geogebra-toan-9-ket-noi-tri-thuc-e34995.html",
+          "semester": 2,
+          "order": 58,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_0ed30b4bd695688090a8",
+          "title": "Vẽ hình đơn giản với phần mềm Geogebra",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/ve-hinh-don-gian-voi-phan-mem-geogebra-toan-9-ket-noi-tri-thuc-e34996.html",
+          "semester": 2,
+          "order": 59,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_b190637269601f74c90c",
+          "title": "Xác định tần số, tần số tương đối, vẽ các biểu đồ biểu diễn bảng tần số, tần số tương đối bằng Excel",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/xac-dinh-tan-so-tan-so-tuong-doi-ve-cac-bieu-do-bieu-dien-bang-tan-so-tan-so-tuong-doi-bang-excel-toan-9-ket-noi-tri-thuc-e34997.html",
+          "semester": 2,
+          "order": 60,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_b24a0a7823a858e70f43",
+          "title": "Gene trội trong các thế hệ lai",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/gene-troi-trong-cac-the-he-lai-toan-9-ket-noi-tri-thuc-e36251.html",
+          "semester": 2,
+          "order": 61,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_656e3a7159ebf2e2f066",
+          "title": "Bài tập ôn tập cuối năm",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/bai-tap-on-tap-cuoi-nam-e34936.html",
+          "semester": 2,
+          "order": 62,
+          "unit_kind": "year_review",
+          "lesson_number": null
+        }
+      ]
     },
     {
       "id": "kntt_9_ngu_van",
@@ -6410,8 +8144,759 @@
       "edition": null,
       "verified_on": "2026-10-15",
       "alignment_status": "secondary_source_index_not_publisher_verified",
-      "source_html_sha256": "6b7dfa9026f2f39252f124cb533ccdb543a783ef6004b76fc3e32f755cbf52d1",
-      "units": []
+      "source_html_sha256": "795ea2df2819f1bf6e5d49f28f4d8037f7ccfd657148fb148a1861f02d0245b4",
+      "units": [
+        {
+          "id": "unit_450cea9283520f84c9f7",
+          "title": "Bài 1. Đơn thức",
+          "chapter": "Chương 1 Đa thức",
+          "source_url": "https://loigiaihay.com/bai-1-don-thuc-toan-8-ket-noi-tri-thuc-e30815.html",
+          "semester": 1,
+          "order": 1,
+          "unit_kind": "lesson",
+          "lesson_number": 1
+        },
+        {
+          "id": "unit_0ab541710705bc0ebd15",
+          "title": "Bài 2. Đa thức",
+          "chapter": "Chương 1 Đa thức",
+          "source_url": "https://loigiaihay.com/bai-2-da-thuc-toan-8-ket-noi-tri-thuc-e30816.html",
+          "semester": 1,
+          "order": 2,
+          "unit_kind": "lesson",
+          "lesson_number": 2
+        },
+        {
+          "id": "unit_a4809d210e5fbd512983",
+          "title": "Bài 3. Phép cộng và phép trừ đa thức",
+          "chapter": "Chương 1 Đa thức",
+          "source_url": "https://loigiaihay.com/bai-3-phep-cong-va-phep-tru-da-thuc-toan-8-ket-noi-tri-thuc-e30817.html",
+          "semester": 1,
+          "order": 3,
+          "unit_kind": "lesson",
+          "lesson_number": 3
+        },
+        {
+          "id": "unit_edf472286ff5e3419407",
+          "title": "Luyện tập chung trang 17",
+          "chapter": "Chương 1 Đa thức",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-17-toan-8-ket-noi-tri-thuc-e30819.html",
+          "semester": 1,
+          "order": 4,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_c0c3611c584e8c045c2a",
+          "title": "Bài 4. Phép nhân đa thức",
+          "chapter": "Chương 1 Đa thức",
+          "source_url": "https://loigiaihay.com/bai-4-phep-nhan-da-thuc-toan-8-ket-noi-tri-thuc-e30820.html",
+          "semester": 1,
+          "order": 5,
+          "unit_kind": "lesson",
+          "lesson_number": 4
+        },
+        {
+          "id": "unit_ca8fe76de46ec0b4704d",
+          "title": "Bài 5. Phép chia đa thức cho đơn thức",
+          "chapter": "Chương 1 Đa thức",
+          "source_url": "https://loigiaihay.com/bai-5-phep-chia-da-thuc-cho-don-thuc-toan-8-ket-noi-tri-thuc-e30822.html",
+          "semester": 1,
+          "order": 6,
+          "unit_kind": "lesson",
+          "lesson_number": 5
+        },
+        {
+          "id": "unit_b128be0cdab6fb4a1caa",
+          "title": "Luyện tập chung trang 25",
+          "chapter": "Chương 1 Đa thức",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-25-toan-8-ket-noi-tri-thuc-e30824.html",
+          "semester": 1,
+          "order": 7,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_1fd7d85d4c713dc4cfd2",
+          "title": "Bài tập cuối chương 1",
+          "chapter": "Chương 1 Đa thức",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-1-toan-8-ket-noi-tri-thuc-e30826.html",
+          "semester": 1,
+          "order": 8,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_4efb595cb2787508ce26",
+          "title": "Bài 6. Hiệu hai bình phương. Bình phương của một tổng hay một hiệu",
+          "chapter": "Chương 2 Hằng đẳng thức đáng nhớ và ứng dụng",
+          "source_url": "https://loigiaihay.com/bai-6-hieu-hai-binh-phuong-binh-phuong-cua-mot-tong-hay-mot-hieu-toan-8-ket-noi-tri-thuc-e31064.html",
+          "semester": 1,
+          "order": 9,
+          "unit_kind": "lesson",
+          "lesson_number": 6
+        },
+        {
+          "id": "unit_89e1bcb054cca24bc83d",
+          "title": "Bài 7. Lập phương của một tổng. Lập phương của một hiệu",
+          "chapter": "Chương 2 Hằng đẳng thức đáng nhớ và ứng dụng",
+          "source_url": "https://loigiaihay.com/bai-7-lap-phuong-cua-mot-tong-lap-phuong-cua-mot-hieu-toan-8-ket-noi-tri-thuc-e31065.html",
+          "semester": 1,
+          "order": 10,
+          "unit_kind": "lesson",
+          "lesson_number": 7
+        },
+        {
+          "id": "unit_3cb51fa8518e96822bf1",
+          "title": "Bài 8. Tổng và hiệu hai lập phương",
+          "chapter": "Chương 2 Hằng đẳng thức đáng nhớ và ứng dụng",
+          "source_url": "https://loigiaihay.com/bai-8-tong-va-hieu-hai-lap-phuong-toan-8-ket-noi-tri-thuc-e31066.html",
+          "semester": 1,
+          "order": 11,
+          "unit_kind": "lesson",
+          "lesson_number": 8
+        },
+        {
+          "id": "unit_01c88c2d3a80dbe1bb0c",
+          "title": "Luyện tập chung trang 40",
+          "chapter": "Chương 2 Hằng đẳng thức đáng nhớ và ứng dụng",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-40-toan-8-ket-noi-tri-thuc-e31068.html",
+          "semester": 1,
+          "order": 12,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_4628b5f4a4bc5dd85e31",
+          "title": "Bài 9. Phân tích đa thức thành nhân tử",
+          "chapter": "Chương 2 Hằng đẳng thức đáng nhớ và ứng dụng",
+          "source_url": "https://loigiaihay.com/bai-9-phan-tich-da-thuc-thanh-nhan-tu-toan-8-ket-noi-tri-thuc-e31069.html",
+          "semester": 1,
+          "order": 13,
+          "unit_kind": "lesson",
+          "lesson_number": 9
+        },
+        {
+          "id": "unit_f5c4a251651451375752",
+          "title": "Luyện tập chung trang 45",
+          "chapter": "Chương 2 Hằng đẳng thức đáng nhớ và ứng dụng",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-45-toan-8-ket-noi-tri-thuc-e31070.html",
+          "semester": 1,
+          "order": 14,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_69bf74e6b6a6eadfbd2b",
+          "title": "Bài tập cuối chương 2",
+          "chapter": "Chương 2 Hằng đẳng thức đáng nhớ và ứng dụng",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-2-toan-8-ket-noi-tri-thuc-e31071.html",
+          "semester": 1,
+          "order": 15,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_6fbb4576040066d0f0ef",
+          "title": "Bài 10. Tứ giác",
+          "chapter": "Chương 3. Tứ giác",
+          "source_url": "https://loigiaihay.com/bai-10-tu-giac-toan-8-ket-noi-tri-thuc-e31341.html",
+          "semester": 1,
+          "order": 16,
+          "unit_kind": "lesson",
+          "lesson_number": 10
+        },
+        {
+          "id": "unit_7b5a2a7a5637154626c9",
+          "title": "Bài 11. Hình thang cân",
+          "chapter": "Chương 3. Tứ giác",
+          "source_url": "https://loigiaihay.com/bai-11-hinh-thang-can-toan-8-ket-noi-tri-thuc-e31342.html",
+          "semester": 1,
+          "order": 17,
+          "unit_kind": "lesson",
+          "lesson_number": 11
+        },
+        {
+          "id": "unit_08354dddcdf45f0f4ecf",
+          "title": "Luyện tập chung trang 56",
+          "chapter": "Chương 3. Tứ giác",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-56-toan-8-ket-noi-tri-thuc-e31343.html",
+          "semester": 1,
+          "order": 18,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_76f337a0d2b2bf190268",
+          "title": "Bài 12. Hình bình hành",
+          "chapter": "Chương 3. Tứ giác",
+          "source_url": "https://loigiaihay.com/bai-12-hinh-binh-hanh-toan-8-ket-noi-tri-thuc-e31344.html",
+          "semester": 1,
+          "order": 19,
+          "unit_kind": "lesson",
+          "lesson_number": 12
+        },
+        {
+          "id": "unit_1c696d8b2427a6db6724",
+          "title": "Luyện tập chung trang 62",
+          "chapter": "Chương 3. Tứ giác",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-62-toan-8-ket-noi-tri-thuc-e31345.html",
+          "semester": 1,
+          "order": 20,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_2ae15a389c89a5454175",
+          "title": "Bài 13. Hình chữ nhật",
+          "chapter": "Chương 3. Tứ giác",
+          "source_url": "https://loigiaihay.com/bai-13-hinh-chu-nhat-toan-8-ket-noi-tri-thuc-e31346.html",
+          "semester": 1,
+          "order": 21,
+          "unit_kind": "lesson",
+          "lesson_number": 13
+        },
+        {
+          "id": "unit_86365f04b15fa4e05cbe",
+          "title": "Bài 14. Hình thoi và hình vuông",
+          "chapter": "Chương 3. Tứ giác",
+          "source_url": "https://loigiaihay.com/bai-14-hinh-thoi-va-hinh-vuong-toan-8-ket-noi-tri-thuc-e31347.html",
+          "semester": 1,
+          "order": 22,
+          "unit_kind": "lesson",
+          "lesson_number": 14
+        },
+        {
+          "id": "unit_bd99b3ee1d70b4e8d2b7",
+          "title": "Luyện tập chung trang 73",
+          "chapter": "Chương 3. Tứ giác",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-73-toan-8-ket-noi-tri-thuc-e31348.html",
+          "semester": 1,
+          "order": 23,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_ebeadcba6c51301b9e35",
+          "title": "Bài tập cuối chương 3",
+          "chapter": "Chương 3. Tứ giác",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-3-toan-8-ket-noi-tri-thuc-e31349.html",
+          "semester": 1,
+          "order": 24,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_4c0902d580704ac4ad91",
+          "title": "Bài 15. Định lí Thales trong tam giác",
+          "chapter": "Chương 4 Định lí Thales",
+          "source_url": "https://loigiaihay.com/bai-15-dinh-li-thales-trong-tam-giac-toan-8-ket-noi-tri-thuc-e31440.html",
+          "semester": 1,
+          "order": 25,
+          "unit_kind": "lesson",
+          "lesson_number": 15
+        },
+        {
+          "id": "unit_e5e27209d1ffc7e48c36",
+          "title": "Bài 16. Đường trung bình của tam giác",
+          "chapter": "Chương 4 Định lí Thales",
+          "source_url": "https://loigiaihay.com/bai-16-duong-trung-binh-cua-tam-giac-toan-8-ket-noi-tri-thuc-e31441.html",
+          "semester": 1,
+          "order": 26,
+          "unit_kind": "lesson",
+          "lesson_number": 16
+        },
+        {
+          "id": "unit_8fb54f7c228db88fc4b3",
+          "title": "Bài 17. Tính chất đường phân giác của tam giác",
+          "chapter": "Chương 4 Định lí Thales",
+          "source_url": "https://loigiaihay.com/bai-17-tinh-chat-duong-phan-giac-cua-tam-giac-toan-8-ket-noi-tri-thuc-e31442.html",
+          "semester": 1,
+          "order": 27,
+          "unit_kind": "lesson",
+          "lesson_number": 17
+        },
+        {
+          "id": "unit_05f921a270cd281f27e4",
+          "title": "Luyện tập chung trang 87",
+          "chapter": "Chương 4 Định lí Thales",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-87-toan-8-ket-noi-tri-thuc-e31443.html",
+          "semester": 1,
+          "order": 28,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_b0664a218d39a9a61d4d",
+          "title": "Bài tập cuối chương 4",
+          "chapter": "Chương 4 Định lí Thales",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-4-toan-8-ket-noi-tri-thuc-e31444.html",
+          "semester": 1,
+          "order": 29,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_b8fdaab88611fe9dbe93",
+          "title": "Bài 18. Thu thập và phân loại dữ liệu",
+          "chapter": "Chương 5 Dữ liệu và biểu đồ",
+          "source_url": "https://loigiaihay.com/bai-18-thu-thap-va-phan-loai-du-lieu-toan-8-ket-noi-tri-thuc-e31496.html",
+          "semester": 1,
+          "order": 30,
+          "unit_kind": "lesson",
+          "lesson_number": 18
+        },
+        {
+          "id": "unit_0bef937ddd1cd180e635",
+          "title": "Bài 19. Biểu diễn dữ liệu bằng bảng, biểu đồ",
+          "chapter": "Chương 5 Dữ liệu và biểu đồ",
+          "source_url": "https://loigiaihay.com/bai-19-bieu-dien-du-lieu-bang-bang-bieu-do-toan-8-ket-noi-tri-thuc-e31497.html",
+          "semester": 1,
+          "order": 31,
+          "unit_kind": "lesson",
+          "lesson_number": 19
+        },
+        {
+          "id": "unit_e22b2a2091d8befa55c6",
+          "title": "Bài 20. Phân tích dữ liệu thống kê dựa vào biểu đồ",
+          "chapter": "Chương 5 Dữ liệu và biểu đồ",
+          "source_url": "https://loigiaihay.com/bai-20-phan-tich-du-lieu-thong-ke-dua-vao-bieu-do-toan-8-ket-noi-tri-thuc-e31498.html",
+          "semester": 1,
+          "order": 32,
+          "unit_kind": "lesson",
+          "lesson_number": 20
+        },
+        {
+          "id": "unit_ad9e7c1217b843f4b500",
+          "title": "Luyện tập chung trang 106",
+          "chapter": "Chương 5 Dữ liệu và biểu đồ",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-106-toan-8-ket-noi-tri-thuc-e31499.html",
+          "semester": 1,
+          "order": 33,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_7c1f61a54be681a2f81c",
+          "title": "Bài tập cuối chương 5",
+          "chapter": "Chương 5 Dữ liệu và biểu đồ",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-5-toan-8-ket-noi-tri-thuc-e31500.html",
+          "semester": 1,
+          "order": 34,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_65ce4f168f60bfb8c574",
+          "title": "Công thức lãi kép",
+          "chapter": "Hoạt động thực hành trải nghiệm Tập 1",
+          "source_url": "https://loigiaihay.com/cong-thuc-lai-kep-toan-8-ket-noi-tri-thuc-e31904.html",
+          "semester": 1,
+          "order": 35,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_3008b5b0adb6c080fe9a",
+          "title": "Thực hiện tính toán trên đa thức với phần mềm GeoGebra",
+          "chapter": "Hoạt động thực hành trải nghiệm Tập 1",
+          "source_url": "https://loigiaihay.com/thuc-hien-tinh-toan-tren-da-thuc-voi-phan-mem-geogebra-toan-8-ket-noi-tri-thuc-e31905.html",
+          "semester": 1,
+          "order": 36,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_23fc4629eb80c248b277",
+          "title": "Vẽ hình đơn giản với phần mềm GeoGebra",
+          "chapter": "Hoạt động thực hành trải nghiệm Tập 1",
+          "source_url": "https://loigiaihay.com/ve-hinh-don-gian-voi-phan-mem-geogebra-toan-8-ket-noi-tri-thuc-e31906.html",
+          "semester": 1,
+          "order": 37,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_853119f6ed3696957657",
+          "title": "Phân tích đặc điểm khí hậu Việt Nam",
+          "chapter": "Hoạt động thực hành trải nghiệm Tập 1",
+          "source_url": "https://loigiaihay.com/phan-tich-dac-diem-khi-hau-viet-nam-toan-8-ket-noi-tri-thuc-e31907.html",
+          "semester": 1,
+          "order": 38,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_c79e3eea0600c7a4a54c",
+          "title": "Bài 21. Phân thức đại số",
+          "chapter": "Chương 6 Phân thức đại số",
+          "source_url": "https://loigiaihay.com/bai-21-phan-thuc-dai-so-e31661.html",
+          "semester": 2,
+          "order": 39,
+          "unit_kind": "lesson",
+          "lesson_number": 21
+        },
+        {
+          "id": "unit_407f3bfd4b400710b933",
+          "title": "Bài 22. Tính chất cơ bản của phân thức đại số",
+          "chapter": "Chương 6 Phân thức đại số",
+          "source_url": "https://loigiaihay.com/bai-22-tinh-chat-co-ban-cua-phan-thuc-dai-so-toan-8-ket-noi-tri-thuc-e31808.html",
+          "semester": 2,
+          "order": 40,
+          "unit_kind": "lesson",
+          "lesson_number": 22
+        },
+        {
+          "id": "unit_98f64782b3200e66047b",
+          "title": "Luyện tập chung trang 13",
+          "chapter": "Chương 6 Phân thức đại số",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-13-toan-8-ket-noi-tri-thuc-e31809.html",
+          "semester": 2,
+          "order": 41,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_8b192a1778fe5756bfed",
+          "title": "Bài 23. Phép cộng và phép trừ phân thức đại số",
+          "chapter": "Chương 6 Phân thức đại số",
+          "source_url": "https://loigiaihay.com/bai-23-phep-cong-va-phep-tru-phan-thuc-dai-so-toan-8-ket-noi-tri-thuc-e31810.html",
+          "semester": 2,
+          "order": 42,
+          "unit_kind": "lesson",
+          "lesson_number": 23
+        },
+        {
+          "id": "unit_1d12f191666307750266",
+          "title": "Bài 24. Phép nhân và phép chia phân thức đại số",
+          "chapter": "Chương 6 Phân thức đại số",
+          "source_url": "https://loigiaihay.com/bai-24-phep-nhan-va-phep-chia-phan-thuc-dai-so-toan-8-ket-noi-tri-thuc-e31811.html",
+          "semester": 2,
+          "order": 43,
+          "unit_kind": "lesson",
+          "lesson_number": 24
+        },
+        {
+          "id": "unit_cc8ca60bbf49269542e1",
+          "title": "Luyện tập chung trang 23",
+          "chapter": "Chương 6 Phân thức đại số",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-23-toan-8-ket-noi-tri-thuc-e31812.html",
+          "semester": 2,
+          "order": 44,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_ee9fb45947da140f65c9",
+          "title": "Bài tập cuối chương 6",
+          "chapter": "Chương 6 Phân thức đại số",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-6-toan-8-ket-noi-tri-thuc-e31813.html",
+          "semester": 2,
+          "order": 45,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_4a0073966f46f4127be5",
+          "title": "Bài 25. Phương trình bậc nhất một ẩn",
+          "chapter": "Chương 7 Phương trình bậc nhất và hàm số bậc nhất",
+          "source_url": "https://loigiaihay.com/bai-25-phuong-trinh-bac-nhat-mot-an-toan-8-ket-noi-tri-thuc-e31814.html",
+          "semester": 2,
+          "order": 46,
+          "unit_kind": "lesson",
+          "lesson_number": 25
+        },
+        {
+          "id": "unit_b65b1c14ee44a31d9ea6",
+          "title": "Bài 26. Giải bài toán bằng cách lập phương trình",
+          "chapter": "Chương 7 Phương trình bậc nhất và hàm số bậc nhất",
+          "source_url": "https://loigiaihay.com/bai-26-giai-bai-toan-bang-cach-lap-phuong-trinh-toan-8-ket-noi-tri-thuc-e31815.html",
+          "semester": 2,
+          "order": 47,
+          "unit_kind": "lesson",
+          "lesson_number": 26
+        },
+        {
+          "id": "unit_8adae7f201b1bb32cb42",
+          "title": "Luyện tập chung trang 37",
+          "chapter": "Chương 7 Phương trình bậc nhất và hàm số bậc nhất",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-37-toan-8-ket-noi-tri-thuc-e31816.html",
+          "semester": 2,
+          "order": 48,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_c9cccfc084d356d31280",
+          "title": "Bài 27. Khái niệm hàm số và đồ thị của hàm số",
+          "chapter": "Chương 7 Phương trình bậc nhất và hàm số bậc nhất",
+          "source_url": "https://loigiaihay.com/bai-27-khai-niem-ham-so-va-do-thi-cua-ham-so-toan-8-ket-noi-tri-thuc-e31817.html",
+          "semester": 2,
+          "order": 49,
+          "unit_kind": "lesson",
+          "lesson_number": 27
+        },
+        {
+          "id": "unit_8b9250ec0b3648fa46c1",
+          "title": "Bài 28. Hàm số bậc nhất và đồ thị của hàm số bậc nhất",
+          "chapter": "Chương 7 Phương trình bậc nhất và hàm số bậc nhất",
+          "source_url": "https://loigiaihay.com/bai-28-ham-so-bac-nhat-va-do-thi-cua-ham-so-bac-nhat-toan-8-ket-noi-tri-thuc-e31818.html",
+          "semester": 2,
+          "order": 50,
+          "unit_kind": "lesson",
+          "lesson_number": 28
+        },
+        {
+          "id": "unit_a3ab704836477aa0670d",
+          "title": "Bài 29. Hệ số góc của đường thẳng",
+          "chapter": "Chương 7 Phương trình bậc nhất và hàm số bậc nhất",
+          "source_url": "https://loigiaihay.com/bai-29-he-so-goc-cua-duong-thang-toan-8-ket-noi-tri-thuc-e31819.html",
+          "semester": 2,
+          "order": 51,
+          "unit_kind": "lesson",
+          "lesson_number": 29
+        },
+        {
+          "id": "unit_50409897a4d246f4e0f1",
+          "title": "Luyện tập chung trang 55",
+          "chapter": "Chương 7 Phương trình bậc nhất và hàm số bậc nhất",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-55-toan-8-ket-noi-tri-thuc-e31820.html",
+          "semester": 2,
+          "order": 52,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_478b2ec2e4ecd72a16a8",
+          "title": "Bài tập cuối chương 7",
+          "chapter": "Chương 7 Phương trình bậc nhất và hàm số bậc nhất",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-7-toan-8-ket-noi-tri-thuc-e31821.html",
+          "semester": 2,
+          "order": 53,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_d3b6d26a2a4748d22276",
+          "title": "Bài 30. Kết quả có thể và kết quả thuận lợi",
+          "chapter": "Chương 8 Mở đầu về tính xác suất của biến cố",
+          "source_url": "https://loigiaihay.com/bai-30-ket-qua-co-the-va-ket-qua-thuan-loi-toan-8-ket-noi-tri-thuc-e31822.html",
+          "semester": 2,
+          "order": 54,
+          "unit_kind": "lesson",
+          "lesson_number": 30
+        },
+        {
+          "id": "unit_871644ba6f34720a3bb4",
+          "title": "Bài 31. Cách tính xác suất của biến cố bằng tỉ số",
+          "chapter": "Chương 8 Mở đầu về tính xác suất của biến cố",
+          "source_url": "https://loigiaihay.com/bai-31-cach-tinh-xac-suat-cua-bien-co-bang-ti-so-toan-8-ket-noi-tri-thuc-e31823.html",
+          "semester": 2,
+          "order": 55,
+          "unit_kind": "lesson",
+          "lesson_number": 31
+        },
+        {
+          "id": "unit_e66f587d348109aa6df7",
+          "title": "Bài 32. Mối liên hệ giữa xác suất thực nghiệm với xác suất ứng dụng",
+          "chapter": "Chương 8 Mở đầu về tính xác suất của biến cố",
+          "source_url": "https://loigiaihay.com/bai-32-moi-lien-he-giua-xac-suat-thuc-nghiem-voi-xac-suat-ung-dung-toan-8-ket-noi-tri-thuc-e31825.html",
+          "semester": 2,
+          "order": 56,
+          "unit_kind": "lesson",
+          "lesson_number": 32
+        },
+        {
+          "id": "unit_7e3f30c46ec1d1913c29",
+          "title": "Luyện tập chung trang 74",
+          "chapter": "Chương 8 Mở đầu về tính xác suất của biến cố",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-74-toan-8-ket-noi-tri-thuc-e31826.html",
+          "semester": 2,
+          "order": 57,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_b893898ad1f7915179d7",
+          "title": "Bài tập cuối chương 8",
+          "chapter": "Chương 8 Mở đầu về tính xác suất của biến cố",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-8-toan-8-ket-noi-tri-thuc-e31835.html",
+          "semester": 2,
+          "order": 58,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_0f9f69c444c55eb9dd4d",
+          "title": "Bài 33. Hai tam giác đồng dạng",
+          "chapter": "Chương 9 Tam giác đồng dạng",
+          "source_url": "https://loigiaihay.com/bai-33-hai-tam-giac-dong-dang-toan-8-ket-noi-tri-thuc-e31828.html",
+          "semester": 2,
+          "order": 59,
+          "unit_kind": "lesson",
+          "lesson_number": 33
+        },
+        {
+          "id": "unit_b028a759f239159aa751",
+          "title": "Bài 34. Ba trường hợp đồng dạng của hai tam giác",
+          "chapter": "Chương 9 Tam giác đồng dạng",
+          "source_url": "https://loigiaihay.com/bai-34-ba-truong-hop-dong-dang-cua-hai-tam-giac-toan-8-ket-noi-tri-thuc-e31829.html",
+          "semester": 2,
+          "order": 60,
+          "unit_kind": "lesson",
+          "lesson_number": 34
+        },
+        {
+          "id": "unit_97d26af629e2a31d2e6e",
+          "title": "Luyện tập chung trang 91",
+          "chapter": "Chương 9 Tam giác đồng dạng",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-91-toan-8-ket-noi-tri-thuc-e31830.html",
+          "semester": 2,
+          "order": 61,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_f067e77f030a9c5b6fa7",
+          "title": "Bài 35. Định lí Pythagore và ứng dụng",
+          "chapter": "Chương 9 Tam giác đồng dạng",
+          "source_url": "https://loigiaihay.com/bai-35-dinh-li-pythagore-va-ung-dung-toan-8-ket-noi-tri-thuc-e31831.html",
+          "semester": 2,
+          "order": 62,
+          "unit_kind": "lesson",
+          "lesson_number": 35
+        },
+        {
+          "id": "unit_be5bc7bf1c24d9cdce4f",
+          "title": "Bài 36. Các trường hợp đồng dạng của hai tam giác vuông",
+          "chapter": "Chương 9 Tam giác đồng dạng",
+          "source_url": "https://loigiaihay.com/bai-36-cac-truong-hop-dong-dang-cua-hai-tam-giac-vuong-toan-8-ket-noi-tri-thuc-e31832.html",
+          "semester": 2,
+          "order": 63,
+          "unit_kind": "lesson",
+          "lesson_number": 36
+        },
+        {
+          "id": "unit_24d361087e405466b22b",
+          "title": "Bài 37. Hình đồng dạng",
+          "chapter": "Chương 9 Tam giác đồng dạng",
+          "source_url": "https://loigiaihay.com/bai-37-hinh-dong-dang-toan-8-ket-noi-tri-thuc-e31833.html",
+          "semester": 2,
+          "order": 64,
+          "unit_kind": "lesson",
+          "lesson_number": 37
+        },
+        {
+          "id": "unit_377dea5aa85867afe987",
+          "title": "Luyện tập chung trang 108",
+          "chapter": "Chương 9 Tam giác đồng dạng",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-108-toan-8-ket-noi-tri-thuc-e31834.html",
+          "semester": 2,
+          "order": 65,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_fcb5e1f9d29cb0bd9130",
+          "title": "Bài tập cuối chương 9",
+          "chapter": "Chương 9 Tam giác đồng dạng",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-9-toan-8-ket-noi-tri-thuc-e31827.html",
+          "semester": 2,
+          "order": 66,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_bfaf11439abbb7f2d50b",
+          "title": "Bài 38. Hình chóp tam giác đều",
+          "chapter": "Chương 10 Một số hình khối trong thực tiễn",
+          "source_url": "https://loigiaihay.com/bai-38-hinh-chop-tam-giac-deu-toan-8-ket-noi-tri-thuc-e31836.html",
+          "semester": 2,
+          "order": 67,
+          "unit_kind": "lesson",
+          "lesson_number": 38
+        },
+        {
+          "id": "unit_b955c46a42e666fefd22",
+          "title": "Bài 39. Hình chóp tứ giác đều",
+          "chapter": "Chương 10 Một số hình khối trong thực tiễn",
+          "source_url": "https://loigiaihay.com/bai-39-hinh-chop-tu-giac-deu-toan-8-ket-noi-tri-thuc-e31837.html",
+          "semester": 2,
+          "order": 68,
+          "unit_kind": "lesson",
+          "lesson_number": 39
+        },
+        {
+          "id": "unit_81391706c33e5d10f58d",
+          "title": "Luyện tập chung trang 121",
+          "chapter": "Chương 10 Một số hình khối trong thực tiễn",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-121-toan-8-ket-noi-tri-thuc-e31838.html",
+          "semester": 2,
+          "order": 69,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_5b58d9e51a3288f46609",
+          "title": "Bài tập cuối chương 10",
+          "chapter": "Chương 10 Một số hình khối trong thực tiễn",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-10-toan-8-ket-noi-tri-thuc-e31839.html",
+          "semester": 2,
+          "order": 70,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_7ad8ec1b90f882bb7f0c",
+          "title": "Một vài ứng dụng của hàm số bậc nhất trong tài chính",
+          "chapter": "Hoạt động thực hành trải nghiệm Tập 2",
+          "source_url": "https://loigiaihay.com/mot-vai-ung-dung-cua-ham-so-bac-nhat-trong-tai-chinh-toan-8-ket-noi-tri-thuc-e31953.html",
+          "semester": 2,
+          "order": 71,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_3e1b85277f4384d2d0f1",
+          "title": "Ứng dụng định lí Thalès, định lí Pythagore và tam giác đồng dạng để đo chiều cao, khoảng cách",
+          "chapter": "Hoạt động thực hành trải nghiệm Tập 2",
+          "source_url": "https://loigiaihay.com/ung-dung-dinh-li-thales-dinh-li-pythagore-va-tam-giac-dong-dang-de-do-chieu-cao-khoang-cach-toan-8-ket-noi-tri-thuc-e31954.html",
+          "semester": 2,
+          "order": 72,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_d0292c88b59c779f9379",
+          "title": "Thực hành tính toán trên phân thức đại số và vẽ đồ thị hàm số với phần mềm GeoGebra",
+          "chapter": "Hoạt động thực hành trải nghiệm Tập 2",
+          "source_url": "https://loigiaihay.com/thuc-hanh-tinh-toan-tren-phan-thuc-dai-so-va-ve-do-thi-ham-so-voi-phan-mem-geogebra-toan-8-ket-noi-tri-thuc-e31955.html",
+          "semester": 2,
+          "order": 73,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_4b78097e78334ad35ae2",
+          "title": "Mô tả thí nghiệm ngẫu nhiên với phần mềm Excel",
+          "chapter": "Hoạt động thực hành trải nghiệm Tập 2",
+          "source_url": "https://loigiaihay.com/mo-ta-thi-nghiem-ngau-nhien-voi-phan-mem-excel-toan-8-ket-noi-tri-thuc-e31976.html",
+          "semester": 2,
+          "order": 74,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_22cf81a2e328334494d4",
+          "title": "Bài tập ôn tập cuối năm",
+          "chapter": "Hoạt động thực hành trải nghiệm Tập 2",
+          "source_url": "https://loigiaihay.com/bai-tap-on-tap-cuoi-nam-toan-8-ket-noi-tri-thuc-e31908.html",
+          "semester": 2,
+          "order": 75,
+          "unit_kind": "year_review",
+          "lesson_number": null
+        }
+      ]
     },
     {
       "id": "kntt_8_tieng_anh",
@@ -7680,8 +10165,699 @@
       "edition": null,
       "verified_on": "2026-10-15",
       "alignment_status": "secondary_source_index_not_publisher_verified",
-      "source_html_sha256": "22d3614bf730536531b5ae2c77548ee282dc2773911d69782485f20b9485bd47",
-      "units": []
+      "source_html_sha256": "feb15999b9d4b8c99aa1831a6ff75d80552bc3c1ba6175f53e225463c1983e54",
+      "units": [
+        {
+          "id": "unit_ab77d07c0dc268855319",
+          "title": "Bài 1. Tập hợp các số hữu tỉ",
+          "chapter": "Chương I. Số hữu tỉ",
+          "source_url": "https://loigiaihay.com/bai-1-tap-hop-cac-so-huu-ti-trang-5-sgk-toan-7-ket-noi-tri-thuc-e24906.html",
+          "semester": 1,
+          "order": 1,
+          "unit_kind": "lesson",
+          "lesson_number": 1
+        },
+        {
+          "id": "unit_32c4e273d73304b6edc4",
+          "title": "Bài 2. Cộng, trừ, nhân, chia số hữu tỉ",
+          "chapter": "Chương I. Số hữu tỉ",
+          "source_url": "https://loigiaihay.com/bai-2-cong-tru-nhan-chia-so-huu-ti-trang-10-sgk-toan-7-ket-noi-tri-thuc-e24937.html",
+          "semester": 1,
+          "order": 2,
+          "unit_kind": "lesson",
+          "lesson_number": 2
+        },
+        {
+          "id": "unit_2122942155cbd92e0cf4",
+          "title": "Luyện tập chung trang 14",
+          "chapter": "Chương I. Số hữu tỉ",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-14-toan-7-ket-noi-tri-thuc-e24938.html",
+          "semester": 1,
+          "order": 3,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_5d2ecaa183b37a1e9e2a",
+          "title": "Bài 3. Lũy thừa với số mũ tự nhiên của một số hữu tỉ",
+          "chapter": "Chương I. Số hữu tỉ",
+          "source_url": "https://loigiaihay.com/bai-3-luy-thua-voi-so-mu-tu-nhien-cua-mot-so-huu-ti-trang-16-sgk-toan-7-ket-noi-tri-thuc-e24939.html",
+          "semester": 1,
+          "order": 4,
+          "unit_kind": "lesson",
+          "lesson_number": 3
+        },
+        {
+          "id": "unit_44adc4b27b9bcd7fb9a3",
+          "title": "Bài 4. Thứ tự thực hiện các phép tính. Quy tắc chuyển vế",
+          "chapter": "Chương I. Số hữu tỉ",
+          "source_url": "https://loigiaihay.com/bai-4-thu-tu-thuc-hien-cac-phep-tinh-quy-tac-chuyen-ve-trang-20-sgk-toan-7-ket-noi-tri-thuc-e24940.html",
+          "semester": 1,
+          "order": 5,
+          "unit_kind": "lesson",
+          "lesson_number": 4
+        },
+        {
+          "id": "unit_bc1ebdc69d8805ef44c8",
+          "title": "Luyện tập chung trang 23",
+          "chapter": "Chương I. Số hữu tỉ",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-23-toan-7-ket-noi-tri-thuc-e24941.html",
+          "semester": 1,
+          "order": 6,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_29ed6695d7f2931d0e4d",
+          "title": "Bài tập cuối chương I",
+          "chapter": "Chương I. Số hữu tỉ",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-i-trang+25-toan-7-ket-noi-tri-thuc-e24942.html",
+          "semester": 1,
+          "order": 7,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_8b771f0ba6c2e2c91050",
+          "title": "Bài 5. Làm quen với số thập phân vô hạn tuần hoàn",
+          "chapter": "Chương II. Số thực",
+          "source_url": "https://loigiaihay.com/bai-5-lam-quen-voi-so-thap-phan-vo-han-tuan-hoan-trang-26-toan-7-ket-noi-tri-thuc-e24979.html",
+          "semester": 1,
+          "order": 8,
+          "unit_kind": "lesson",
+          "lesson_number": 5
+        },
+        {
+          "id": "unit_dd5054ce6ca72ae913ed",
+          "title": "Bài 6. Số vô tỉ. Căn bậc hai số học",
+          "chapter": "Chương II. Số thực",
+          "source_url": "https://loigiaihay.com/bai-6-so-vo-ti-can-bac-hai-so-hoc-trang-29-toan-7-ket-noi-tri-thuc-e24980.html",
+          "semester": 1,
+          "order": 9,
+          "unit_kind": "lesson",
+          "lesson_number": 6
+        },
+        {
+          "id": "unit_c9c25d216ce265007d62",
+          "title": "Bài 7. Tập hợp các số thực",
+          "chapter": "Chương II. Số thực",
+          "source_url": "https://loigiaihay.com/bai-7-tap-hop-cac-so-thuc-trang-33-sgk-toan-7-ket-noi-tri-thuc-e24981.html",
+          "semester": 1,
+          "order": 10,
+          "unit_kind": "lesson",
+          "lesson_number": 7
+        },
+        {
+          "id": "unit_68e7e7610648e984a973",
+          "title": "Luyện tập chung trang 37",
+          "chapter": "Chương II. Số thực",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-37-toan-7-ket-noi-tri-thuc-e24982.html",
+          "semester": 1,
+          "order": 11,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_091cf0cb786928174991",
+          "title": "Bài tập cuối chương II",
+          "chapter": "Chương II. Số thực",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-ii-trang-39-sgk-toan-7-ket-noi-tri-thuc-e24983.html",
+          "semester": 1,
+          "order": 12,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_ee33d0d4e8320469d5df",
+          "title": "Bài 8. Góc ở vị trí đặc biệt. Tia phân giác của một góc",
+          "chapter": "Chương III. Góc và đường thẳng song song",
+          "source_url": "https://loigiaihay.com/bai-8-goc-o-vi-tri-dac-biet-tia-phan-giac-cua-mot-goc-trang-40-sgk-toan-7-ket-noi-tri-thuc-e24986.html",
+          "semester": 1,
+          "order": 13,
+          "unit_kind": "lesson",
+          "lesson_number": 8
+        },
+        {
+          "id": "unit_f265440f9b32178a2307",
+          "title": "Bài 9. Hai đường thẳng song song và dấu hiệu nhận biết",
+          "chapter": "Chương III. Góc và đường thẳng song song",
+          "source_url": "https://loigiaihay.com/bai-9-hai-duong-thang-song-song-va-dau-hieu-nhan-biet-trang-46-sgk-toan-7-ket-noi-tri-thuc-e24987.html",
+          "semester": 1,
+          "order": 14,
+          "unit_kind": "lesson",
+          "lesson_number": 9
+        },
+        {
+          "id": "unit_a70a52b250e586b746b2",
+          "title": "Luyện tập chung trang 50",
+          "chapter": "Chương III. Góc và đường thẳng song song",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-50-toan-7-ket-noi-tri-thuc-e24988.html",
+          "semester": 1,
+          "order": 15,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_8bb0bed778a89083178c",
+          "title": "Bài 10. Tiên đề Euclid. Tính chất của hai đường thẳng song song",
+          "chapter": "Chương III. Góc và đường thẳng song song",
+          "source_url": "https://loigiaihay.com/bai-10-tien-de-euclid-tinh-chat-cua-hai-duong-thang-song-song-trang-51-sgk-toan-7-ket-noi-tri-thuc-e24989.html",
+          "semester": 1,
+          "order": 16,
+          "unit_kind": "lesson",
+          "lesson_number": 10
+        },
+        {
+          "id": "unit_cac153e46cc15b8ffd3a",
+          "title": "Bài 11. Định lí và chứng minh định lí",
+          "chapter": "Chương III. Góc và đường thẳng song song",
+          "source_url": "https://loigiaihay.com/bai-11-dinh-li-va-chung-minh-dinh-li-trang-55-sgk-toan-7-ket-noi-tri-thuc-e24990.html",
+          "semester": 1,
+          "order": 17,
+          "unit_kind": "lesson",
+          "lesson_number": 11
+        },
+        {
+          "id": "unit_d5a242292f8f9d0f6741",
+          "title": "Luyện tập chung trang 58",
+          "chapter": "Chương III. Góc và đường thẳng song song",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-58-toan-7-ket-noi-tri-thuc-e24991.html",
+          "semester": 1,
+          "order": 18,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_ecbeefa2bfabf9bc62d9",
+          "title": "Bài tập cuối chương III",
+          "chapter": "Chương III. Góc và đường thẳng song song",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-iii-trang-59-sgk-toan-7-ket-noi-tri-thuc-e24992.html",
+          "semester": 1,
+          "order": 19,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_a1afa61894519e28232d",
+          "title": "Bài 12. Tổng các góc trong một tam giác",
+          "chapter": "Chương IV. Tam giác bằng nhau",
+          "source_url": "https://loigiaihay.com/bai-12-tong-cac-goc-trong-mot-tam-giac-trang-60-sgk-toan-7-ket-noi-tri-thuc-e25402.html",
+          "semester": 1,
+          "order": 20,
+          "unit_kind": "lesson",
+          "lesson_number": 12
+        },
+        {
+          "id": "unit_2ec31247d1a1aeb519b4",
+          "title": "Bài 13. Hai tam giác bằng nhau. Trường hợp bằng nhau thứ nhất của tam giác",
+          "chapter": "Chương IV. Tam giác bằng nhau",
+          "source_url": "https://loigiaihay.com/bai-13-hai-tam-giac-bang-nhau-truong-hop-bang-nhau-thu-nhat-cua-tam-giac-trang-63-sgk-toan-7-ket-noi-tri-thuc-e25403.html",
+          "semester": 1,
+          "order": 21,
+          "unit_kind": "lesson",
+          "lesson_number": 13
+        },
+        {
+          "id": "unit_7b33c9131dc1f6c5f2af",
+          "title": "Luyện tập chung trang 68",
+          "chapter": "Chương IV. Tam giác bằng nhau",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-68-toan-7-ket-noi-tri-thuc-e25404.html",
+          "semester": 1,
+          "order": 22,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_dd1f2fb2c76711b9df50",
+          "title": "Bài 14. Trường hợp bằng nhau thứ hai và thứ ba của tam giác",
+          "chapter": "Chương IV. Tam giác bằng nhau",
+          "source_url": "https://loigiaihay.com/bai-14-truong-hop-bang-nhau-thu-hai-va-thu-ba-cua-tam-giac-trang-70-sgktoan-7-ket-noi-tri-thuc-e25405.html",
+          "semester": 1,
+          "order": 23,
+          "unit_kind": "lesson",
+          "lesson_number": 14
+        },
+        {
+          "id": "unit_1dcd792496c66b6792d6",
+          "title": "Luyện tập chung trang 74",
+          "chapter": "Chương IV. Tam giác bằng nhau",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-74-toan-7-ket-noi-tri-thuc-e25406.html",
+          "semester": 1,
+          "order": 24,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_0623548fec874835b6a5",
+          "title": "Bài 15. Các trường hợp bằng nhau của tam giác vuông",
+          "chapter": "Chương IV. Tam giác bằng nhau",
+          "source_url": "https://loigiaihay.com/bai-15-cac-truong-hop-bang-nhau-cua-tam-giac-vuong-trang-75-sgktoan-7-ket-noi-tri-thuc-e25407.html",
+          "semester": 1,
+          "order": 25,
+          "unit_kind": "lesson",
+          "lesson_number": 15
+        },
+        {
+          "id": "unit_b2a721e596a95c15868b",
+          "title": "Bài 16. Tam giác cân. Đường trung trực của đoạn thẳng",
+          "chapter": "Chương IV. Tam giác bằng nhau",
+          "source_url": "https://loigiaihay.com/bai-16-tam-giac-can-duong-trung-truc-cua-doan-thang-trang-80-sgk-toan-7-ket-noi-tri-thuc-e25408.html",
+          "semester": 1,
+          "order": 26,
+          "unit_kind": "lesson",
+          "lesson_number": 16
+        },
+        {
+          "id": "unit_cc0c6bb15de5d1b32f13",
+          "title": "Luyện tập chung trang 85",
+          "chapter": "Chương IV. Tam giác bằng nhau",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-85-toan-7-ket-noi-tri-thuc-e25409.html",
+          "semester": 1,
+          "order": 27,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_b4e9aed7bae3757601cb",
+          "title": "Bài tập cuối chương IV",
+          "chapter": "Chương IV. Tam giác bằng nhau",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-iv-trang-87-sgk-toan-7-ket-noi-tri-thuc-e25410.html",
+          "semester": 1,
+          "order": 28,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_a4ceda51fba68c1a6920",
+          "title": "Bài 17. Thu thập và phân loại dữ liệu",
+          "chapter": "Chương V. Thu thập và biểu diễn dữ liệu",
+          "source_url": "https://loigiaihay.com/bai-17-thu-thap-va-phan-loai-du-lieu-trang-88-sgk-toan-7-ket-noi-tri-thuc-e25411.html",
+          "semester": 1,
+          "order": 29,
+          "unit_kind": "lesson",
+          "lesson_number": 17
+        },
+        {
+          "id": "unit_c7d22bca1984ee9dfa36",
+          "title": "Bài 18. Biểu đồ hình quạt tròn",
+          "chapter": "Chương V. Thu thập và biểu diễn dữ liệu",
+          "source_url": "https://loigiaihay.com/bai-18-bieu-do-hinh-quat-tron-trang-93-sgk-toan-7-ket-noi-tri-thuc-e25412.html",
+          "semester": 1,
+          "order": 30,
+          "unit_kind": "lesson",
+          "lesson_number": 18
+        },
+        {
+          "id": "unit_8e618c3a9b15bc12cc7f",
+          "title": "Bài 19. Biểu đồ đoạn thẳng",
+          "chapter": "Chương V. Thu thập và biểu diễn dữ liệu",
+          "source_url": "https://loigiaihay.com/bai-19-bieu-do-doan-thang-trang-100-sgk-toan-7-ket-noi-tri-thuc-e25413.html",
+          "semester": 1,
+          "order": 31,
+          "unit_kind": "lesson",
+          "lesson_number": 19
+        },
+        {
+          "id": "unit_232def5c4063d916a0ed",
+          "title": "Luyện tập chung trang 106",
+          "chapter": "Chương V. Thu thập và biểu diễn dữ liệu",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-106-toan-7-ket-noi-tri-thuc-e25414.html",
+          "semester": 1,
+          "order": 32,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_ad61d6f22518c30c11c0",
+          "title": "Bài tập cuối chương V",
+          "chapter": "Chương V. Thu thập và biểu diễn dữ liệu",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-v-trang-108-sgk-toan-7-ket-noi-tri-thuc-e25415.html",
+          "semester": 1,
+          "order": 33,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_bcac5c3c5609010e9b35",
+          "title": "Vẽ hình đơn giản với phần mềm GeoGebra",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/ve-hinh-don-gian-voi-phan-mem-geogebra-toan-7-ket-noi-tri-thuc-e25416.html",
+          "semester": 1,
+          "order": 34,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_fc10c6ec33b08ca31aa6",
+          "title": "Dân số và cơ cấu dân số Việt Nam",
+          "chapter": "Hoạt động thực hành trải nghiệm",
+          "source_url": "https://loigiaihay.com/dan-so-va-co-cau-dan-so-viet-nam-toan-7-ket-noi-tri-thuc-e25417.html",
+          "semester": 1,
+          "order": 35,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_375d282e7960d3344b53",
+          "title": "Bài 20. Tỉ lệ thức",
+          "chapter": "Chương VI. Tỉ lệ thức và đại lượng tỉ lệ",
+          "source_url": "https://loigiaihay.com/bai-20-ti-le-thuc-trang-4-sgk-toan-7-ket-noi-tri-thuc-e26496.html",
+          "semester": 2,
+          "order": 36,
+          "unit_kind": "lesson",
+          "lesson_number": 20
+        },
+        {
+          "id": "unit_27db8f27743aaed96d0e",
+          "title": "Bài 21. Tính chất của dãy tỉ số bằng nhau",
+          "chapter": "Chương VI. Tỉ lệ thức và đại lượng tỉ lệ",
+          "source_url": "https://loigiaihay.com/bai-21-tinh-chat-cua-day-ti-so-bang-nhau-trang-8-sgk-toan-7-ket-noi-tri-thuc-e26497.html",
+          "semester": 2,
+          "order": 37,
+          "unit_kind": "lesson",
+          "lesson_number": 21
+        },
+        {
+          "id": "unit_be02a3e0b2ec6b7d1dc5",
+          "title": "Luyện tập chung trang 10",
+          "chapter": "Chương VI. Tỉ lệ thức và đại lượng tỉ lệ",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-10-sgk-toan-7-ket-noi-tri-thuc-e26498.html",
+          "semester": 2,
+          "order": 38,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_69739a27dff5ee4b858d",
+          "title": "Bài 22. Đại lượng tỉ lệ thuận",
+          "chapter": "Chương VI. Tỉ lệ thức và đại lượng tỉ lệ",
+          "source_url": "https://loigiaihay.com/bai-22-dai-luong-ti-le-thuan-trang-11-sgk-toan-7-ket-noi-tri-thuc-e26499.html",
+          "semester": 2,
+          "order": 39,
+          "unit_kind": "lesson",
+          "lesson_number": 22
+        },
+        {
+          "id": "unit_7cbde2c452ac57fddc47",
+          "title": "Bài 23. Đại lượng tỉ lệ nghịch",
+          "chapter": "Chương VI. Tỉ lệ thức và đại lượng tỉ lệ",
+          "source_url": "https://loigiaihay.com/bai-23-dai-luong-ti-le-nghich-trang-15-sgk-toan-7-ket-noi-tri-thuc-e26500.html",
+          "semester": 2,
+          "order": 40,
+          "unit_kind": "lesson",
+          "lesson_number": 23
+        },
+        {
+          "id": "unit_bee2fb587675fb4f65ee",
+          "title": "Luyện tập chung trang 19",
+          "chapter": "Chương VI. Tỉ lệ thức và đại lượng tỉ lệ",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-19-sgk-toan-7-ket-noi-tri-thuc-e26501.html",
+          "semester": 2,
+          "order": 41,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_8a65dc7609b15c0a0f24",
+          "title": "Bài tập cuối chương VI",
+          "chapter": "Chương VI. Tỉ lệ thức và đại lượng tỉ lệ",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-vi-trang-21-sgk-toan-7-ket-noi-tri-thuc-e26502.html",
+          "semester": 2,
+          "order": 42,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_ef8f06376fb1b046c293",
+          "title": "Bài 24. Biểu thức đại số",
+          "chapter": "Chương VII. Biểu thức đại số và đa thức một biến",
+          "source_url": "https://loigiaihay.com/bai-24-bieu-thuc-dai-so-trang-22-sgk-toan-7-ket-noi-tri-thuc-e26517.html",
+          "semester": 2,
+          "order": 43,
+          "unit_kind": "lesson",
+          "lesson_number": 24
+        },
+        {
+          "id": "unit_92a2da1b8f1eb0adb7f1",
+          "title": "Bài 25. Đa thức một biến",
+          "chapter": "Chương VII. Biểu thức đại số và đa thức một biến",
+          "source_url": "https://loigiaihay.com/bai-25-da-thuc-mot-bien-trang-25-sgk-toan-7-ket-noi-tri-thuc-e26518.html",
+          "semester": 2,
+          "order": 44,
+          "unit_kind": "lesson",
+          "lesson_number": 25
+        },
+        {
+          "id": "unit_e76437e85e99555db6e1",
+          "title": "Bài 26. Phép cộng và phép trừ đa thức một biến",
+          "chapter": "Chương VII. Biểu thức đại số và đa thức một biến",
+          "source_url": "https://loigiaihay.com/bai-26-phep-cong-va-phep-tru-da-thuc-mot-bien-trang-31-sgk-toan-7-ket-noi-tri-thuc-e26519.html",
+          "semester": 2,
+          "order": 45,
+          "unit_kind": "lesson",
+          "lesson_number": 26
+        },
+        {
+          "id": "unit_173d1bca4322a644cb22",
+          "title": "Luyện tập chung trang 34",
+          "chapter": "Chương VII. Biểu thức đại số và đa thức một biến",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-34-sgk-toan-7-ket-noi-tri-thuc-e26520.html",
+          "semester": 2,
+          "order": 46,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_fccec41c35c65ef7c372",
+          "title": "Bài 27. Phép nhân đa thức một biến",
+          "chapter": "Chương VII. Biểu thức đại số và đa thức một biến",
+          "source_url": "https://loigiaihay.com/bai-27-phep-nhan-da-thuc-mot-bien-trang-36-sgk-toan-7-ket-noi-tri-thuc-e26521.html",
+          "semester": 2,
+          "order": 47,
+          "unit_kind": "lesson",
+          "lesson_number": 27
+        },
+        {
+          "id": "unit_e441ec77f8cc953f7ef6",
+          "title": "Bài 28. Phép chia đa thức một biến",
+          "chapter": "Chương VII. Biểu thức đại số và đa thức một biến",
+          "source_url": "https://loigiaihay.com/bai-28-phep-chia-da-thuc-mot-bien-trang-39-sgk-toan-7-ket-noi-tri-thuc-e26522.html",
+          "semester": 2,
+          "order": 48,
+          "unit_kind": "lesson",
+          "lesson_number": 28
+        },
+        {
+          "id": "unit_3b282e7562d14b17bc6a",
+          "title": "Luyện tập chung trang 44",
+          "chapter": "Chương VII. Biểu thức đại số và đa thức một biến",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-44-sgk-toan-7-ket-noi-tri-thuc-e26523.html",
+          "semester": 2,
+          "order": 49,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_a59a009ab25362cef3a0",
+          "title": "Bài tập cuối chương VII",
+          "chapter": "Chương VII. Biểu thức đại số và đa thức một biến",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-vii-trang-46-sgk-toan-7-ket-noi-tri-thuc-e26524.html",
+          "semester": 2,
+          "order": 50,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_bbb7544e42593b84664a",
+          "title": "Bài 29. Làm quen với biến cố",
+          "chapter": "Chương VIII. Làm quen với biến cố và xác suất của biến cố",
+          "source_url": "https://loigiaihay.com/bai-29-lam-quen-voi-bien-co-trang-47-sgk-toan-7-ket-noi-tri-thuc-e26548.html",
+          "semester": 2,
+          "order": 51,
+          "unit_kind": "lesson",
+          "lesson_number": 29
+        },
+        {
+          "id": "unit_5d4c76dce6d301436612",
+          "title": "Bài 30. Làm quen với xác suất của biến cố",
+          "chapter": "Chương VIII. Làm quen với biến cố và xác suất của biến cố",
+          "source_url": "https://loigiaihay.com/bai-30-lam-quen-voi-xac-suat-cua-bien-co-trang-51-sgk-toan-7-ket-noi-tri-thuc-e26549.html",
+          "semester": 2,
+          "order": 52,
+          "unit_kind": "lesson",
+          "lesson_number": 30
+        },
+        {
+          "id": "unit_3998bfac45a0fa42f94a",
+          "title": "Luyện tập chung trang 56",
+          "chapter": "Chương VIII. Làm quen với biến cố và xác suất của biến cố",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-56-sgk-toan-7-ket-noi-tri-thuc-e26550.html",
+          "semester": 2,
+          "order": 53,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_7d6349bd008270a3c574",
+          "title": "Bài tập cuối chương VIII",
+          "chapter": "Chương VIII. Làm quen với biến cố và xác suất của biến cố",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-viii-trang-58-sgk-toan-7-ket-noi-tri-thuc-e26551.html",
+          "semester": 2,
+          "order": 54,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_78b949519aa63c887a28",
+          "title": "Bài 31. Quan hệ giữa góc và cạnh đối diện trong một tam giác",
+          "chapter": "Chương IX. Quan hệ giữa các yếu tố trong tam giác",
+          "source_url": "https://loigiaihay.com/bai-31-quan-he-giua-goc-va-canh-doi-dien-trong-mot-tam-giac-trang-59-sgk-toan-7-ket-noi-tri-thuc-e26643.html",
+          "semester": 2,
+          "order": 55,
+          "unit_kind": "lesson",
+          "lesson_number": 31
+        },
+        {
+          "id": "unit_9c301929101a1937eb71",
+          "title": "Bài 32. Quan hệ giữa đường vuông góc và đường xiên",
+          "chapter": "Chương IX. Quan hệ giữa các yếu tố trong tam giác",
+          "source_url": "https://loigiaihay.com/bai-32-quan-he-giua-duong-vuong-goc-va-duong-xien-trang-63-sgk-toan-7-ket-noi-tri-thuc-e26644.html",
+          "semester": 2,
+          "order": 56,
+          "unit_kind": "lesson",
+          "lesson_number": 32
+        },
+        {
+          "id": "unit_0ff41eaa5c929ea21643",
+          "title": "Bài 33. Quan hệ giữa ba cạnh của một tam giác",
+          "chapter": "Chương IX. Quan hệ giữa các yếu tố trong tam giác",
+          "source_url": "https://loigiaihay.com/bai-33-quan-he-giua-ba-canh-cua-mot-tam-giac-trang-66-sgk-toan-7-ket-noi-tri-thuc-e26645.html",
+          "semester": 2,
+          "order": 57,
+          "unit_kind": "lesson",
+          "lesson_number": 33
+        },
+        {
+          "id": "unit_e3b563d3c2e599b53aa4",
+          "title": "Luyện tập chung trang 70",
+          "chapter": "Chương IX. Quan hệ giữa các yếu tố trong tam giác",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-70-sgk-toan-7-ket-noi-tri-thuc-e26646.html",
+          "semester": 2,
+          "order": 58,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_6d0f606a57aaa7fd0dae",
+          "title": "Bài 34. Sự đồng quy của ba đường trung tuyến, ba đường phân giác trong một tam giác",
+          "chapter": "Chương IX. Quan hệ giữa các yếu tố trong tam giác",
+          "source_url": "https://loigiaihay.com/bai-34-su-dong-quy-cua-ba-duong-trung-tuyen-ba-duong-phan-giac-trong-mot-tam-giac-trang-72-sgk-toan-7-ket-noi-tri-thuc-e26647.html",
+          "semester": 2,
+          "order": 59,
+          "unit_kind": "lesson",
+          "lesson_number": 34
+        },
+        {
+          "id": "unit_0d84f2bdf59c3fa40b72",
+          "title": "Bài 35. Sự đồng quy của ba đường trung trực, ba đường cao trong một tam giác",
+          "chapter": "Chương IX. Quan hệ giữa các yếu tố trong tam giác",
+          "source_url": "https://loigiaihay.com/bai-35-su-dong-quy-cua-ba-duong-trung-truc-ba-duong-cao-trong-mot-tam-giac-trang-77-sgk-toan-7-ket-noi-tri-thuc-e26648.html",
+          "semester": 2,
+          "order": 60,
+          "unit_kind": "lesson",
+          "lesson_number": 35
+        },
+        {
+          "id": "unit_52d218134863407f0760",
+          "title": "Luyện tập chung trang 82",
+          "chapter": "Chương IX. Quan hệ giữa các yếu tố trong tam giác",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-82-sgk-toan-7-ket-noi-tri-thuc-e26880.html",
+          "semester": 2,
+          "order": 61,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_c83ee8e716f928243757",
+          "title": "Bài tập cuối chương IX",
+          "chapter": "Chương IX. Quan hệ giữa các yếu tố trong tam giác",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-ix-trang-84-sgk-toan-7-ket-noi-tri-thuc-e26881.html",
+          "semester": 2,
+          "order": 62,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_aa8fffca1cd20b20f57e",
+          "title": "Bài 36. Hình hộp chữ nhật và hình lập phương",
+          "chapter": "Chương X. Một số hình khối trong thực tiễn",
+          "source_url": "https://loigiaihay.com/bai-36-hinh-hop-chu-nhat-va-hinh-lap-phuong-trang-85-sgk-toan-7-ket-noi-tri-thuc-e26882.html",
+          "semester": 2,
+          "order": 63,
+          "unit_kind": "lesson",
+          "lesson_number": 36
+        },
+        {
+          "id": "unit_87b886dc4bff3a20a173",
+          "title": "Luyện tập trang 92",
+          "chapter": "Chương X. Một số hình khối trong thực tiễn",
+          "source_url": "https://loigiaihay.com/luyen-tap-trang-92-sgk-toan-7-ket-noi-tri-thuc-e26883.html",
+          "semester": 2,
+          "order": 64,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_5338e36d2aa0498b06ec",
+          "title": "Bài 37. Hình lăng trụ đứng tam giác và hình lăng trụ đứng tứ giác",
+          "chapter": "Chương X. Một số hình khối trong thực tiễn",
+          "source_url": "https://loigiaihay.com/bai-37-hinh-lang-tru-dung-tam-giac-va-hinh-lang-tru-dung-tu-giac-trang-94-sgk-toan-7-ket-noi-tri-thuc-e26884.html",
+          "semester": 2,
+          "order": 65,
+          "unit_kind": "lesson",
+          "lesson_number": 37
+        },
+        {
+          "id": "unit_2ed6cfeed6d49664e3bb",
+          "title": "Luyện tập trang 100",
+          "chapter": "Chương X. Một số hình khối trong thực tiễn",
+          "source_url": "https://loigiaihay.com/luyen-tap-trang-100-sgk-toan-7-ket-noi-tri-thuc-e26885.html",
+          "semester": 2,
+          "order": 66,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_e323ad26ef5e99252013",
+          "title": "Bài tập cuối chương X",
+          "chapter": "Chương X. Một số hình khối trong thực tiễn",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-x-trang-102-sgk-toan-7-ket-noi-tri-thuc-e26886.html",
+          "semester": 2,
+          "order": 67,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_ee24c90dd43bca86a72d",
+          "title": "Đại lượng tỉ lệ trong đời sống",
+          "chapter": "Hoạt động thực hành trải nghiệm tập 2",
+          "source_url": "https://loigiaihay.com/dai-luong-ti-le-trong-doi-song-toan-7-ket-noi-tri-thuc-e28905.html",
+          "semester": 2,
+          "order": 68,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_5a91a5cdd06985837cd0",
+          "title": "Hộp quà và chân đế lịch để bàn của em",
+          "chapter": "Hoạt động thực hành trải nghiệm tập 2",
+          "source_url": "https://loigiaihay.com/hop-qua-va-chan-de-lich-de-ban-cua-em-toan-7-ket-noi-tri-thuc-e28906.html",
+          "semester": 2,
+          "order": 69,
+          "unit_kind": "activity",
+          "lesson_number": null
+        }
+      ]
     },
     {
       "id": "kntt_7_tieng_anh",
@@ -8912,8 +12088,749 @@
       "edition": null,
       "verified_on": "2026-10-15",
       "alignment_status": "secondary_source_index_not_publisher_verified",
-      "source_html_sha256": "39272320a1b1fe869bbde167c0dec851885a12ac18c9b7363abbd331f466caab",
-      "units": []
+      "source_html_sha256": "f5f2585ebf5a65fb3190b0f2b85671560e8432cbeab91428c79127d3dbdf4ad4",
+      "units": [
+        {
+          "id": "unit_89e1972774ec70e0d44a",
+          "title": "Bài 1. Tập hợp",
+          "chapter": "CHƯƠNG I. TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-1-tap-hop-e22310.html",
+          "semester": 1,
+          "order": 1,
+          "unit_kind": "lesson",
+          "lesson_number": 1
+        },
+        {
+          "id": "unit_7f8f999e41aacc940984",
+          "title": "Bài 2. Cách ghi số tự nhiên",
+          "chapter": "CHƯƠNG I. TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-2-cach-ghi-so-tu-nhien-e22311.html",
+          "semester": 1,
+          "order": 2,
+          "unit_kind": "lesson",
+          "lesson_number": 2
+        },
+        {
+          "id": "unit_55a58d9fdcddb904bfc6",
+          "title": "Bài 3. Thứ tự trong tập hợp các số tự nhiên",
+          "chapter": "CHƯƠNG I. TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-3-thu-tu-trong-tap-hop-cac-so-tu-nhien-e22312.html",
+          "semester": 1,
+          "order": 3,
+          "unit_kind": "lesson",
+          "lesson_number": 3
+        },
+        {
+          "id": "unit_7a91323c70e1ed775d9a",
+          "title": "Bài 4. Phép cộng và phép trừ số tự nhiên",
+          "chapter": "CHƯƠNG I. TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-4-phep-cong-va-phep-tru-so-tu-nhien-e22313.html",
+          "semester": 1,
+          "order": 4,
+          "unit_kind": "lesson",
+          "lesson_number": 4
+        },
+        {
+          "id": "unit_3b2cb8a49600299c7dd0",
+          "title": "Bài 5. Phép nhân và phép chia số tự nhiên",
+          "chapter": "CHƯƠNG I. TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-5-phep-nhan-va-phep-chia-so-tu-nhien-e22314.html",
+          "semester": 1,
+          "order": 5,
+          "unit_kind": "lesson",
+          "lesson_number": 5
+        },
+        {
+          "id": "unit_fe1e38c064da2ddce3a2",
+          "title": "Luyện tập chung trang 20",
+          "chapter": "CHƯƠNG I. TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-20-e22417.html",
+          "semester": 1,
+          "order": 6,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_4b0bb2124d262e721d20",
+          "title": "Bài 6. Lũy thừa với số mũ tự nhiên",
+          "chapter": "CHƯƠNG I. TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-6-luy-thua-voi-so-mu-tu-nhien-e22315.html",
+          "semester": 1,
+          "order": 7,
+          "unit_kind": "lesson",
+          "lesson_number": 6
+        },
+        {
+          "id": "unit_992e5907f9cc7396bcd9",
+          "title": "Bài 7. Thứ tự thực hiện các phép tính",
+          "chapter": "CHƯƠNG I. TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-7-thu-tu-thuc-hien-cac-phep-tinh-e22316.html",
+          "semester": 1,
+          "order": 8,
+          "unit_kind": "lesson",
+          "lesson_number": 7
+        },
+        {
+          "id": "unit_dcc0942d0e643708c961",
+          "title": "Luyện tập chung trang 27",
+          "chapter": "CHƯƠNG I. TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-27-e22418.html",
+          "semester": 1,
+          "order": 9,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_554babcb3f90baaf896f",
+          "title": "Bài tập cuối chương I",
+          "chapter": "CHƯƠNG I. TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-I-e22317.html",
+          "semester": 1,
+          "order": 10,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_7111d5d9fedc288d6ef4",
+          "title": "Bài 8. Quan hệ chia hết và tính chất",
+          "chapter": "CHƯƠNG II. TÍNH CHIA HẾT TRONG TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-8-quan-he-chia-het-va-tinh-chat-e22318.html",
+          "semester": 1,
+          "order": 11,
+          "unit_kind": "lesson",
+          "lesson_number": 8
+        },
+        {
+          "id": "unit_2cee2f4d7372c19f231c",
+          "title": "Bài 9. Dấu hiệu chia hết",
+          "chapter": "CHƯƠNG II. TÍNH CHIA HẾT TRONG TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-9-dau-hieu-chia-het-e22319.html",
+          "semester": 1,
+          "order": 12,
+          "unit_kind": "lesson",
+          "lesson_number": 9
+        },
+        {
+          "id": "unit_e26c46be0a185a3dd7d7",
+          "title": "Bài 10. Số nguyên tố",
+          "chapter": "CHƯƠNG II. TÍNH CHIA HẾT TRONG TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-10-so-nguyen-to-e22320.html",
+          "semester": 1,
+          "order": 13,
+          "unit_kind": "lesson",
+          "lesson_number": 10
+        },
+        {
+          "id": "unit_756eed625a85fe1a3b3f",
+          "title": "Luyện tập chung trang 43",
+          "chapter": "CHƯƠNG II. TÍNH CHIA HẾT TRONG TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-43-e22419.html",
+          "semester": 1,
+          "order": 14,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_4c881af7662101fa67f2",
+          "title": "Bài 11. Ước chung. Ước chung lớn nhất",
+          "chapter": "CHƯƠNG II. TÍNH CHIA HẾT TRONG TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-11-uoc-chung-uoc-chung-lon-nhat-e22321.html",
+          "semester": 1,
+          "order": 15,
+          "unit_kind": "lesson",
+          "lesson_number": 11
+        },
+        {
+          "id": "unit_240b902b894790a0efd2",
+          "title": "Bài 12. Bội chung. Bội chung nhỏ nhất",
+          "chapter": "CHƯƠNG II. TÍNH CHIA HẾT TRONG TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-12-boi-chung-boi-chung-nho-nhat-e22322.html",
+          "semester": 1,
+          "order": 16,
+          "unit_kind": "lesson",
+          "lesson_number": 12
+        },
+        {
+          "id": "unit_7984a68d6889827a3ce6",
+          "title": "Luyện tập chung trang 54",
+          "chapter": "CHƯƠNG II. TÍNH CHIA HẾT TRONG TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-54-e22420.html",
+          "semester": 1,
+          "order": 17,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_e602e1df67bcc225384e",
+          "title": "Bài tập cuối chương II",
+          "chapter": "CHƯƠNG II. TÍNH CHIA HẾT TRONG TẬP HỢP CÁC SỐ TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-II-e22323.html",
+          "semester": 1,
+          "order": 18,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_5c1121b977be741f5972",
+          "title": "Bài 13. Tập hợp các số nguyên",
+          "chapter": "CHƯƠNG III. SỐ NGUYÊN",
+          "source_url": "https://loigiaihay.com/bai-13-tap-hop-cac-so-nguyen-e22324.html",
+          "semester": 1,
+          "order": 19,
+          "unit_kind": "lesson",
+          "lesson_number": 13
+        },
+        {
+          "id": "unit_f2e8aa8c098e286046c6",
+          "title": "Bài 14. Phép cộng và phép trừ số nguyên",
+          "chapter": "CHƯƠNG III. SỐ NGUYÊN",
+          "source_url": "https://loigiaihay.com/bai-14-phep-cong-va-phep-tru-so-nguyen-e22325.html",
+          "semester": 1,
+          "order": 20,
+          "unit_kind": "lesson",
+          "lesson_number": 14
+        },
+        {
+          "id": "unit_1f777ff7d5fbbe78abac",
+          "title": "Bài 15. Quy tắc dấu ngoặc",
+          "chapter": "CHƯƠNG III. SỐ NGUYÊN",
+          "source_url": "https://loigiaihay.com/bai-15-quy-tac-dau-ngoac-e22326.html",
+          "semester": 1,
+          "order": 21,
+          "unit_kind": "lesson",
+          "lesson_number": 15
+        },
+        {
+          "id": "unit_722c4d55d1d07e4848a9",
+          "title": "Luyện tập chung trang 69",
+          "chapter": "CHƯƠNG III. SỐ NGUYÊN",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-69-e22421.html",
+          "semester": 1,
+          "order": 22,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_923f48f8108c7fc17d18",
+          "title": "Bài 16. Phép nhân số nguyên",
+          "chapter": "CHƯƠNG III. SỐ NGUYÊN",
+          "source_url": "https://loigiaihay.com/bai-16-phep-nhan-so-nguyen-e22327.html",
+          "semester": 1,
+          "order": 23,
+          "unit_kind": "lesson",
+          "lesson_number": 16
+        },
+        {
+          "id": "unit_6f764eee41fc07f043d3",
+          "title": "Bài 17. Phép chia hết. Ước và bội của một số nguyên",
+          "chapter": "CHƯƠNG III. SỐ NGUYÊN",
+          "source_url": "https://loigiaihay.com/bai-17-uoc-va-boi-cua-mot-so-nguyen-e22328.html",
+          "semester": 1,
+          "order": 24,
+          "unit_kind": "lesson",
+          "lesson_number": 17
+        },
+        {
+          "id": "unit_8ce49208ed08c5815377",
+          "title": "Luyện tập chung trang 75",
+          "chapter": "CHƯƠNG III. SỐ NGUYÊN",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-75-e22422.html",
+          "semester": 1,
+          "order": 25,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_14f42ed6314c89964e97",
+          "title": "Bài tập cuối chương III",
+          "chapter": "CHƯƠNG III. SỐ NGUYÊN",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-III-e22329.html",
+          "semester": 1,
+          "order": 26,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_0fa28c05a9f148033ec5",
+          "title": "Bài 18. Hình tam giác đều. Hình vuông. Hình lục giác đều",
+          "chapter": "CHƯƠNG IV. MỘT SỐ HÌNH PHẲNG TRONG THỰC TIỄN",
+          "source_url": "https://loigiaihay.com/bai-18-hinh-tam-giac-deu-hinh-vuong-hinh-luc-giac-deu-e22330.html",
+          "semester": 1,
+          "order": 27,
+          "unit_kind": "lesson",
+          "lesson_number": 18
+        },
+        {
+          "id": "unit_606bbaa37b477a0388ff",
+          "title": "Bài 19. Hình chữ nhật. Hình thoi. Hình bình hành. Hình thang cân",
+          "chapter": "CHƯƠNG IV. MỘT SỐ HÌNH PHẲNG TRONG THỰC TIỄN",
+          "source_url": "https://loigiaihay.com/bai-19-hinh-chu-nhat-hinh-thoi-hinh-binh-hanh-hinh-thang-can-e22331.html",
+          "semester": 1,
+          "order": 28,
+          "unit_kind": "lesson",
+          "lesson_number": 19
+        },
+        {
+          "id": "unit_2d973ea5287177a4998f",
+          "title": "Bài 20. Chu vi và diện tích của một số tứ giác đã học",
+          "chapter": "CHƯƠNG IV. MỘT SỐ HÌNH PHẲNG TRONG THỰC TIỄN",
+          "source_url": "https://loigiaihay.com/bai-20-chu-vi-va-dien-tich-cua-mot-so-tu-giac-da-hoc-e22332.html",
+          "semester": 1,
+          "order": 29,
+          "unit_kind": "lesson",
+          "lesson_number": 20
+        },
+        {
+          "id": "unit_233f9232be3e9ac381f4",
+          "title": "Luyện tập chung trang 95",
+          "chapter": "CHƯƠNG IV. MỘT SỐ HÌNH PHẲNG TRONG THỰC TIỄN",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-95-e22423.html",
+          "semester": 1,
+          "order": 30,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_36dd25bda721cbe100d9",
+          "title": "Bài tập cuối chương IV",
+          "chapter": "CHƯƠNG IV. MỘT SỐ HÌNH PHẲNG TRONG THỰC TIỄN",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-IV-e22333.html",
+          "semester": 1,
+          "order": 31,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_ee37f8c0ca3058bcd972",
+          "title": "Bài 21. Hình có trục đối xứng",
+          "chapter": "CHƯƠNG V.TÍNH ĐỐI XỨNG CỦA HÌNH PHẲNG TRONG TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-21-hinh-co-truc-doi-xung-e22334.html",
+          "semester": 1,
+          "order": 32,
+          "unit_kind": "lesson",
+          "lesson_number": 21
+        },
+        {
+          "id": "unit_08e99e40d429554893ab",
+          "title": "Bài 22. Hình có tâm đối xứng",
+          "chapter": "CHƯƠNG V.TÍNH ĐỐI XỨNG CỦA HÌNH PHẲNG TRONG TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-22-hinh-co-tam-doi-xung-e22335.html",
+          "semester": 1,
+          "order": 33,
+          "unit_kind": "lesson",
+          "lesson_number": 22
+        },
+        {
+          "id": "unit_926001dc736a8ace2939",
+          "title": "Luyện tập chung trang 108",
+          "chapter": "CHƯƠNG V.TÍNH ĐỐI XỨNG CỦA HÌNH PHẲNG TRONG TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-108-e22424.html",
+          "semester": 1,
+          "order": 34,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_17fb2b27499676306ae0",
+          "title": "Bài tập cuối chương V",
+          "chapter": "CHƯƠNG V.TÍNH ĐỐI XỨNG CỦA HÌNH PHẲNG TRONG TỰ NHIÊN",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-V-e22336.html",
+          "semester": 1,
+          "order": 35,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_489fc49c2c76494df71d",
+          "title": "Tấm thiệp và phòng học của em",
+          "chapter": "HOẠT ĐỘNG THỰC HÀNH TRẢI NGHIỆM KÌ 1",
+          "source_url": "https://loigiaihay.com/tam-thiep-va-phong-hoc-cua-em-e22584.html",
+          "semester": 1,
+          "order": 36,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_b0d5ca1b4cf960394d16",
+          "title": "Vẽ hình đơn giản với phần mềm GeoGebra",
+          "chapter": "HOẠT ĐỘNG THỰC HÀNH TRẢI NGHIỆM KÌ 1",
+          "source_url": "https://loigiaihay.com/ve-hinh-don-gian-voi-phan-mem-geogebra-e22363.html",
+          "semester": 1,
+          "order": 37,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_0303e6c264f522d57188",
+          "title": "Sử dụng máy tính cầm tay",
+          "chapter": "HOẠT ĐỘNG THỰC HÀNH TRẢI NGHIỆM KÌ 1",
+          "source_url": "https://loigiaihay.com/su-dung-may-tinh-cam-tay-e22585.html",
+          "semester": 1,
+          "order": 38,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_29262e31075d5f1d5bde",
+          "title": "Bài 23. Mở rộng phân số. Phân số bằng nhau",
+          "chapter": "CHƯƠNG VI. PHÂN SỐ",
+          "source_url": "https://loigiaihay.com/bai-23-mo-rong-phan-so-phan-so-bang-nhau-e22337.html",
+          "semester": 2,
+          "order": 39,
+          "unit_kind": "lesson",
+          "lesson_number": 23
+        },
+        {
+          "id": "unit_c92f4b92438bf703fe34",
+          "title": "Bài 24. So sánh phân số. Hỗn số dương",
+          "chapter": "CHƯƠNG VI. PHÂN SỐ",
+          "source_url": "https://loigiaihay.com/bai-24-so-sanh-phan-so-hon-so-duong-e22338.html",
+          "semester": 2,
+          "order": 40,
+          "unit_kind": "lesson",
+          "lesson_number": 24
+        },
+        {
+          "id": "unit_03f6fbdda3e1c369b22c",
+          "title": "Luyện tập chung trang 13",
+          "chapter": "CHƯƠNG VI. PHÂN SỐ",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-13-e22425.html",
+          "semester": 2,
+          "order": 41,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_b07885cd70ce447cc2a0",
+          "title": "Bài 25. Phép cộng và phép trừ phân số",
+          "chapter": "CHƯƠNG VI. PHÂN SỐ",
+          "source_url": "https://loigiaihay.com/bai-25-phep-cong-va-phep-tru-phan-so-e22339.html",
+          "semester": 2,
+          "order": 42,
+          "unit_kind": "lesson",
+          "lesson_number": 25
+        },
+        {
+          "id": "unit_b84d6614da55934de050",
+          "title": "Bài 26. Phép nhân và phép chia phân số",
+          "chapter": "CHƯƠNG VI. PHÂN SỐ",
+          "source_url": "https://loigiaihay.com/bai-26-phep-nhan-va-phep-chia-phan-so-e22340.html",
+          "semester": 2,
+          "order": 43,
+          "unit_kind": "lesson",
+          "lesson_number": 26
+        },
+        {
+          "id": "unit_8dac3f05dcaa67df9045",
+          "title": "Bài 27. Hai bài toán về phân số",
+          "chapter": "CHƯƠNG VI. PHÂN SỐ",
+          "source_url": "https://loigiaihay.com/bai-27-hai-bai-toan-ve-phan-so-e22341.html",
+          "semester": 2,
+          "order": 44,
+          "unit_kind": "lesson",
+          "lesson_number": 27
+        },
+        {
+          "id": "unit_15cb8dcf5e4cf272c27b",
+          "title": "Luyện tập chung trang 25",
+          "chapter": "CHƯƠNG VI. PHÂN SỐ",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-25-e22426.html",
+          "semester": 2,
+          "order": 45,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_457535149eb1c7026dbf",
+          "title": "Bài tập cuối chương VI",
+          "chapter": "CHƯƠNG VI. PHÂN SỐ",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-VI-e22342.html",
+          "semester": 2,
+          "order": 46,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_060e882a41dd9d7ce355",
+          "title": "Bài 28. Số thập phân",
+          "chapter": "CHƯƠNG VII.SỐ THẬP PHÂN",
+          "source_url": "https://loigiaihay.com/bai-28-so-thap-phan-e22343.html",
+          "semester": 2,
+          "order": 47,
+          "unit_kind": "lesson",
+          "lesson_number": 28
+        },
+        {
+          "id": "unit_1492304eb573bda68728",
+          "title": "Bài 29. Tính toán với số thập phân",
+          "chapter": "CHƯƠNG VII.SỐ THẬP PHÂN",
+          "source_url": "https://loigiaihay.com/bai-29-tinh-toan-voi-so-thap-phan-e22344.html",
+          "semester": 2,
+          "order": 48,
+          "unit_kind": "lesson",
+          "lesson_number": 29
+        },
+        {
+          "id": "unit_eddc2a4fc5b14cc7c74a",
+          "title": "Bài 30. Làm tròn và ước lượng",
+          "chapter": "CHƯƠNG VII.SỐ THẬP PHÂN",
+          "source_url": "https://loigiaihay.com/bai-30-lam-tron-va-uoc-luong-e22345.html",
+          "semester": 2,
+          "order": 49,
+          "unit_kind": "lesson",
+          "lesson_number": 30
+        },
+        {
+          "id": "unit_faa2e61324042e3e851a",
+          "title": "Bài 31. Một số bài toán về tỉ số và tỉ số phần trăm",
+          "chapter": "CHƯƠNG VII.SỐ THẬP PHÂN",
+          "source_url": "https://loigiaihay.com/bai-31-mot-so-bai-toan-ve-ti-so-va-ti-so-phan-tram-e22346.html",
+          "semester": 2,
+          "order": 50,
+          "unit_kind": "lesson",
+          "lesson_number": 31
+        },
+        {
+          "id": "unit_d07a552777df62dca4c8",
+          "title": "Luyện tập chung trang 41",
+          "chapter": "CHƯƠNG VII.SỐ THẬP PHÂN",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-41-e22427.html",
+          "semester": 2,
+          "order": 51,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_a4e9c168a57c531c8119",
+          "title": "Bài tập cuối chương VII",
+          "chapter": "CHƯƠNG VII.SỐ THẬP PHÂN",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-VII-e22347.html",
+          "semester": 2,
+          "order": 52,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_9912748b6b1230022f90",
+          "title": "Bài 32. Điểm và đường thẳng",
+          "chapter": "CHƯƠNG VIII. NHỮNG HÌNH HÌNH HỌC CƠ BẢN",
+          "source_url": "https://loigiaihay.com/bai-32-diem-va-duong-thang-e22348.html",
+          "semester": 2,
+          "order": 53,
+          "unit_kind": "lesson",
+          "lesson_number": 32
+        },
+        {
+          "id": "unit_e2ef279f37f8fee80330",
+          "title": "Bài 33. Điểm nằm giữa hai điểm. Tia",
+          "chapter": "CHƯƠNG VIII. NHỮNG HÌNH HÌNH HỌC CƠ BẢN",
+          "source_url": "https://loigiaihay.com/bai-33-diem-nam-giua-hai-diem-tia-e22349.html",
+          "semester": 2,
+          "order": 54,
+          "unit_kind": "lesson",
+          "lesson_number": 33
+        },
+        {
+          "id": "unit_a834366ad8fb60ca367b",
+          "title": "Bài 34. Đoạn thẳng. Độ dài đoạn thẳng",
+          "chapter": "CHƯƠNG VIII. NHỮNG HÌNH HÌNH HỌC CƠ BẢN",
+          "source_url": "https://loigiaihay.com/bai-34-doan-thang-do-dai-doan-thang-e22350.html",
+          "semester": 2,
+          "order": 55,
+          "unit_kind": "lesson",
+          "lesson_number": 34
+        },
+        {
+          "id": "unit_2759b57f204d7c386438",
+          "title": "Bài 35. Trung điểm của đoạn thẳng",
+          "chapter": "CHƯƠNG VIII. NHỮNG HÌNH HÌNH HỌC CƠ BẢN",
+          "source_url": "https://loigiaihay.com/bai-35-trung-diem-cua-doan-thang-e22351.html",
+          "semester": 2,
+          "order": 56,
+          "unit_kind": "lesson",
+          "lesson_number": 35
+        },
+        {
+          "id": "unit_6a2b854aea26c2cb6b44",
+          "title": "Luyện tập chung trang 57",
+          "chapter": "CHƯƠNG VIII. NHỮNG HÌNH HÌNH HỌC CƠ BẢN",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-57-e22428.html",
+          "semester": 2,
+          "order": 57,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_fc4784ab1f2918935a5e",
+          "title": "Bài 36. Góc",
+          "chapter": "CHƯƠNG VIII. NHỮNG HÌNH HÌNH HỌC CƠ BẢN",
+          "source_url": "https://loigiaihay.com/bai-36-goc-e22352.html",
+          "semester": 2,
+          "order": 58,
+          "unit_kind": "lesson",
+          "lesson_number": 36
+        },
+        {
+          "id": "unit_e814a83ef214cf330322",
+          "title": "Bài 37. Số đo góc",
+          "chapter": "CHƯƠNG VIII. NHỮNG HÌNH HÌNH HỌC CƠ BẢN",
+          "source_url": "https://loigiaihay.com/bai-37-so-do-goc-e22353.html",
+          "semester": 2,
+          "order": 59,
+          "unit_kind": "lesson",
+          "lesson_number": 37
+        },
+        {
+          "id": "unit_13794f6b1ddc4b58713d",
+          "title": "Luyện tập chung trang 65",
+          "chapter": "CHƯƠNG VIII. NHỮNG HÌNH HÌNH HỌC CƠ BẢN",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-65-e22429.html",
+          "semester": 2,
+          "order": 60,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_edb9a8a44a6f23f6804a",
+          "title": "Bài tập cuối chương VIII",
+          "chapter": "CHƯƠNG VIII. NHỮNG HÌNH HÌNH HỌC CƠ BẢN",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-VIII-e22354.html",
+          "semester": 2,
+          "order": 61,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_00c037f904149008482c",
+          "title": "Bài 38. Dữ liệu và thu thập dữ liệu",
+          "chapter": "CHƯƠNG IX. DỮ LIỆU VÀ XÁC SUẤT THỰC NGHIỆM",
+          "source_url": "https://loigiaihay.com/bai-38-du-lieu-va-thu-thap-du-lieu-e22355.html",
+          "semester": 2,
+          "order": 62,
+          "unit_kind": "lesson",
+          "lesson_number": 38
+        },
+        {
+          "id": "unit_58800e422bb7c3c5a10e",
+          "title": "Bài 39. Bảng thống kê và biểu đồ tranh",
+          "chapter": "CHƯƠNG IX. DỮ LIỆU VÀ XÁC SUẤT THỰC NGHIỆM",
+          "source_url": "https://loigiaihay.com/bai-39-bang-thong-ke-va-bieu-do-tranh-e22356.html",
+          "semester": 2,
+          "order": 63,
+          "unit_kind": "lesson",
+          "lesson_number": 39
+        },
+        {
+          "id": "unit_9e9ea2f86895b33bf589",
+          "title": "Bài 40. Biểu đồ cột",
+          "chapter": "CHƯƠNG IX. DỮ LIỆU VÀ XÁC SUẤT THỰC NGHIỆM",
+          "source_url": "https://loigiaihay.com/bai-40-bieu-do-cot-e22357.html",
+          "semester": 2,
+          "order": 64,
+          "unit_kind": "lesson",
+          "lesson_number": 40
+        },
+        {
+          "id": "unit_730b728b4522eaf76cb5",
+          "title": "Bài 41. Biểu đồ cột kép",
+          "chapter": "CHƯƠNG IX. DỮ LIỆU VÀ XÁC SUẤT THỰC NGHIỆM",
+          "source_url": "https://loigiaihay.com/bai-41-bieu-do-cot-kep-e22358.html",
+          "semester": 2,
+          "order": 65,
+          "unit_kind": "lesson",
+          "lesson_number": 41
+        },
+        {
+          "id": "unit_cca7755ec7410a6536e6",
+          "title": "Bài 42. Kết quả có thể và sự kiện trong trò chơi, thí nghiệm",
+          "chapter": "CHƯƠNG IX. DỮ LIỆU VÀ XÁC SUẤT THỰC NGHIỆM",
+          "source_url": "https://loigiaihay.com/bai-42-ket-qua-co-the-va-su-kien-trong-tro-choi-thi-nghiem-e22359.html",
+          "semester": 2,
+          "order": 66,
+          "unit_kind": "lesson",
+          "lesson_number": 42
+        },
+        {
+          "id": "unit_3731a3c6c2a067d897ed",
+          "title": "Bài 43. Xác suất thực nghiệm",
+          "chapter": "CHƯƠNG IX. DỮ LIỆU VÀ XÁC SUẤT THỰC NGHIỆM",
+          "source_url": "https://loigiaihay.com/bai-43-xac-suat-thuc-nghiem-e22360.html",
+          "semester": 2,
+          "order": 67,
+          "unit_kind": "lesson",
+          "lesson_number": 43
+        },
+        {
+          "id": "unit_051a4317bf16bf1376ef",
+          "title": "Luyện tập chung trang 97",
+          "chapter": "CHƯƠNG IX. DỮ LIỆU VÀ XÁC SUẤT THỰC NGHIỆM",
+          "source_url": "https://loigiaihay.com/luyen-tap-chung-trang-97-e22431.html",
+          "semester": 2,
+          "order": 68,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_b4701540bd02398b9d0e",
+          "title": "Bài tập cuối chương IX",
+          "chapter": "CHƯƠNG IX. DỮ LIỆU VÀ XÁC SUẤT THỰC NGHIỆM",
+          "source_url": "https://loigiaihay.com/bai-tap-cuoi-chuong-IX-e22470.html",
+          "semester": 2,
+          "order": 69,
+          "unit_kind": "review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_ecde0451183e5c2772bc",
+          "title": "Kế hoạch chi tiêu cá nhân và gia đình",
+          "chapter": "HOẠT ĐỘNG THỰC HÀNH TRẢI NGHIỆM KÌ 2",
+          "source_url": "https://loigiaihay.com/ke-hoach-chi-tieu-ca-nhan-va-gia-dinh-e22361.html",
+          "semester": 2,
+          "order": 70,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_8b9aff981a9ae51c2141",
+          "title": "Vẽ hình đơn giản với phần mềm Geogbra tập 2",
+          "chapter": "HOẠT ĐỘNG THỰC HÀNH TRẢI NGHIỆM KÌ 2",
+          "source_url": "https://loigiaihay.com/ve-hinh-don-gian-voi-phan-mem-geogbra-e22586.html",
+          "semester": 2,
+          "order": 71,
+          "unit_kind": "activity",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_87baf0bc2760871677b4",
+          "title": "Bài tập ôn tập cuối năm phần số và đại số",
+          "chapter": "HOẠT ĐỘNG THỰC HÀNH TRẢI NGHIỆM KÌ 2",
+          "source_url": "https://loigiaihay.com/bai-tap-on-tap-cuoi-nam-phan-so-va-dai-so-e22483.html",
+          "semester": 2,
+          "order": 72,
+          "unit_kind": "year_review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_b2b79cc851691606b449",
+          "title": "Bài tập ôn tập cuối năm phần hình học và đo lường",
+          "chapter": "HOẠT ĐỘNG THỰC HÀNH TRẢI NGHIỆM KÌ 2",
+          "source_url": "https://loigiaihay.com/bai-tap-on-tap-cuoi-nam-phan-hinh-hoc-va-do-luong-e22484.html",
+          "semester": 2,
+          "order": 73,
+          "unit_kind": "year_review",
+          "lesson_number": null
+        },
+        {
+          "id": "unit_d689fb9a0e3726920ae3",
+          "title": "Bài tập ôn tập cuối năm phần một số yếu tố thống kê và xác suất",
+          "chapter": "HOẠT ĐỘNG THỰC HÀNH TRẢI NGHIỆM KÌ 2",
+          "source_url": "https://loigiaihay.com/bai-tap-on-tap-cuoi-nam-phan-mot-so-yeu-to-thong-ke-va-xac-suat-e22486.html",
+          "semester": 2,
+          "order": 74,
+          "unit_kind": "year_review",
+          "lesson_number": null
+        }
+      ]
     },
     {
       "id": "kntt_6_khoa_hoc_tu_nhien",

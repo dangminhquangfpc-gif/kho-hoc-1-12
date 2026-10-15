@@ -116,3 +116,7 @@ tiến độ đã hoàn tất kiểm tra trên gói giải nén.
 ## Bản 2026.10.15.8 — hướng dẫn Toán ngoài lớp 5
 
 88 kiểm thử backend và 23 kiểm thử Flutter đạt; Flutter analyze và web release build đạt. Kiểm tra 267 bài mới khớp ID/tiêu đề/URL mục lục, có 476 ví dụ và 952 bài luyện kèm lời giải/đáp số, các đẳng thức tính được chính xác bằng Fraction, miền số và số chữ số của bài tính phù hợp lớp. Gói nâng cấp từ .7 nhập đủ bài, tổng Toán 1–5 có 342 hướng dẫn; số tài khoản/kết quả và phiên bản 75 bài Toán 5 giữ nguyên. Chưa xác nhận đủ toàn SGK, chưa thẩm định sư phạm độc lập hoặc nghiệm thu Windows thật.
+
+## Bản 2026.10.15.9 — hướng dẫn Toán 6–12
+
+93 kiểm thử backend và 23 kiểm thử Flutter đạt; analyze, web release build và Ruff đạt. Kiểm tra 391 mục khớp nguồn mục lục, gồm 230 bài đánh số liên tục; 610 ví dụ và 1.220 bài tự luyện có lời giải/đáp số. Kiểm tra độc lập 22 đáp số bằng Sympy, cùng lãi kép và quy tắc hình thang. Gói giải nén nâng cấp giữ tài khoản, kết quả và phiên bản tài liệu cũ; API trả đủ hướng dẫn cho cả 7 lớp. Chromium mở được Nguyên hàm và Bayes cùng lời giải trên backend thực. Tìm kiếm ưu tiên tên bài đã có kiểm thử hồi quy. Chưa nghiệm thu Windows/Android thật, chưa thẩm định sư phạm độc lập hoặc xác nhận mọi dạng bài/trang SGK; các môn ngoài Toán còn thiếu.

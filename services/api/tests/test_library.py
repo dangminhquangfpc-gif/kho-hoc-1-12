@@ -139,7 +139,17 @@ def test_review_visibility_admin_auth_and_audit(client):
 
 
 def test_vietnamese_search_filters_and_paging(client):
-    publish(client)
+    publish(
+        client,
+        document(
+            sections=[
+                {
+                    "heading": "Ghi chú",
+                    "text": "Hướng dẫn cộng và trừ. Đạo hàm chỉ được nhắc trong nội dung, không phải chủ đề chính.",
+                }
+            ]
+        ),
+    )
     publish(
         client,
         document(

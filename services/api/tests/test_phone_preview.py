@@ -26,11 +26,18 @@ def test_phone_preview_seed_private_routes_and_rate_limit(tmp_path, monkeypatch)
             d["kind"] != "exam" and d["source_type"] != "link_only" for d in lessons
         )
         assert (
-            client.get(
-                "/documents",
-                params={"grade": 6, "subject": "toan", "section": "lessons"},
-            ).json()
-            == []
+            len(
+                client.get(
+                    "/documents",
+                    params={
+                        "grade": 6,
+                        "subject": "toan",
+                        "section": "lessons",
+                        "limit": 100,
+                    },
+                ).json()
+            )
+            == 74
         )
         references = client.get(
             "/documents",
@@ -50,10 +57,23 @@ def test_phone_preview_seed_private_routes_and_rate_limit(tmp_path, monkeypatch)
         partial = client.get(
             "/curriculum", params={"grade": 6, "subject": "toan"}
         ).json()
-        assert partial["authored_count"] == 0 and all(
-            u["content_status"] == "missing" for u in partial["units"]
+        assert partial["authored_count"] == partial["unit_count"] == 74
+        assert all(
+            u["document_id"] and u["content_status"] == "authored_pending_review"
+            for u in partial["units"]
         )
-        for grade, count in [(1, 41), (2, 74), (3, 79), (4, 73)]:
+        for grade, count in [
+            (1, 41),
+            (2, 74),
+            (3, 79),
+            (4, 73),
+            (7, 69),
+            (8, 75),
+            (9, 62),
+            (10, 39),
+            (11, 43),
+            (12, 29),
+        ]:
             guide_index = client.get(
                 "/curriculum", params={"grade": grade, "subject": "toan"}
             ).json()

@@ -57,3 +57,7 @@ Hoàn thiện cách trình bày 139 ví dụ và 278 lời giải trong 75 bài 
 ## Bản thử 2026.10.15.8
 
 Bổ sung 267 bài hướng dẫn Toán 1–4 vào các mục nguồn đã ghi nhận; tổng Toán 1–5 là 342 hướng dẫn. Có thêm 476 ví dụ và 952 bài tự luyện kèm lời giải, đáp số; chưa phải câu mới chấm tự động. Mục lục vẫn có chỗ thiếu và các môn/lớp khác còn cần soạn. Xem [PRIMARY_MATH_GUIDES.md](PRIMARY_MATH_GUIDES.md).
+
+## Bản thử 2026.10.15.9
+
+Sửa đọc mục lục Toán 6–12, thêm 391 hướng dẫn gồm 230 bài đánh số, 610 ví dụ và 1.220 bài luyện có lời giải. Tổng Toán 1–12 là 733 mục có hướng dẫn theo dữ liệu nguồn. Không khẳng định đầy đủ mọi dạng bài/trang/ấn bản; các môn ngoài Toán còn thiếu. Xem [SECONDARY_MATH_GUIDES.md](SECONDARY_MATH_GUIDES.md).
