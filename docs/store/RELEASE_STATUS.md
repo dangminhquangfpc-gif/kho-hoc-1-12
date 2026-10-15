@@ -83,3 +83,10 @@ Thêm xuất CSV kết quả nhóm có phân quyền chủ nhóm, xử lý tiế
 công thức bảng tính. Web tải tệp; native sao chép CSV, chưa lưu tệp trực tiếp.
 Đây là báo cáo toàn bộ lịch sử học của thành viên hiện tại. Không thay đổi
 trạng thái pilot/production hoặc điều kiện ký, thử nghiệm thiết bị và cửa hàng.
+
+## Bản thử .14
+
+Có luồng báo lỗi nội dung và người quản lý/giáo viên trả lời theo quyền học viên.
+Không phải kiểm duyệt sư phạm độc lập, không phải chấm lại bài hoặc xác minh
+vai trò giáo viên. Chưa tích hợp thông báo đẩy/email, AI/OCR hoặc triển khai
+backend Internet; điều kiện phát hành cửa hàng vẫn chưa hoàn tất.

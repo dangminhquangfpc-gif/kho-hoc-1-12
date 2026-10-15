@@ -94,6 +94,25 @@ class LearningApi {
         '/auth/password',
         data: {'current_password': current, 'new_password': next},
       )).data!;
+  Future<Json> sendContentReport(Json body) async =>
+      (await client.post<Json>('/content-reports', data: body)).data!;
+  Future<List<Json>> contentReports({
+    bool review = false,
+    String? status,
+    int offset = 0,
+  }) async => (await client.get<List<dynamic>>(
+    review ? '/classroom/content-reports' : '/content-reports',
+    queryParameters: {
+      if (status != null) 'status': status,
+      'offset': offset,
+      'limit': 30,
+    },
+  )).data!.cast<Json>();
+  Future<Json> reviewContentReport(String id, Json body) async =>
+      (await client.post<Json>(
+        '/classroom/content-reports/$id/review',
+        data: body,
+      )).data!;
   Future<List<Json>> classroomGroups() async =>
       (await client.get<List<dynamic>>('/classroom/groups')).data!.cast<Json>();
   Future<String> groupResultsCsv(String id) async => (await client.get<String>(

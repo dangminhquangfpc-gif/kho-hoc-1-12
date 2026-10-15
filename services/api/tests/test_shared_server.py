@@ -303,6 +303,9 @@ def test_postgres_transfer_preserves_accounts_and_invalidates_sessions(
             )
         )
         db.commit()
+    # A real v13 local source has no feedback table yet.
+    with source.begin() as db:
+        db.execute(text("DROP TABLE content_reports"))
     copy_sqlite(source_path, engine)
     with Session(engine) as db:
         assert db.get(LearningUser, "moved").display_name == "Học viên chuyển máy chủ"
@@ -439,7 +442,7 @@ def test_shared_readiness_rejects_changed_schema_and_budget_failures_are_503(
     assert response.json() == {"status": "unavailable", "mode": "shared"}
     assert one.get("/health").status_code == 200
     with engine.begin() as connection:
-        connection.execute(text("UPDATE app_schema_version SET version=1"))
+        connection.execute(text("UPDATE app_schema_version SET version=2"))
 
     def unavailable(*args):
         raise SQLAlchemyError("private diagnostic must not reach clients")
@@ -480,3 +483,48 @@ def test_group_report_aggregate_on_postgresql_and_sqlite(school):
     assert len(rows) == 2 and rows[1][4:6] == ["1", "75.0"]
     login(two, "student")
     assert two.get(f"/classroom/groups/{group['id']}/results.csv").status_code == 403
+
+
+def test_feedback_persists_across_servers_and_shared_legacy_migration(school):
+    from khohoc.database import verify_schema
+
+    one, two, engine, q, postgres = school
+    login(one)
+    attempt = one.post("/exams/sync-exam/attempts").json()
+    report = one.post(
+        "/content-reports",
+        json={
+            "target_kind": "question",
+            "target_id": q["id"],
+            "attempt_id": attempt["id"],
+            "category": "unclear",
+            "message": "Xin giải thích rõ cách làm bài này.",
+        },
+    )
+    assert report.status_code == 201, report.text
+    rid = report.json()["id"]
+    login(two, "manager")
+    inbox = two.get("/classroom/content-reports").json()
+    assert inbox[0]["id"] == rid
+    reviewed = two.post(
+        f"/classroom/content-reports/{rid}/review",
+        json={
+            "revision": 1,
+            "status": "resolved",
+            "response": "Tôi đã kiểm tra và sẽ bổ sung hướng dẫn.",
+        },
+    )
+    assert reviewed.status_code == 200
+    assert (
+        one.get("/content-reports").json()[0]["response"] == reviewed.json()["response"]
+    )
+    with engine.begin() as connection:
+        connection.execute(text("DROP TABLE content_reports"))
+        connection.execute(text("UPDATE app_schema_version SET version=1"))
+    with pytest.raises(RuntimeError):
+        verify_schema(engine)
+    migrate(engine)
+    migrate(engine)
+    verify_schema(engine)
+    assert one.get("/auth/me").json()["id"] == "student"
+    assert one.get("/content-reports").json() == []

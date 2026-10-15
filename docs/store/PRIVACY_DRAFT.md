@@ -14,6 +14,14 @@ Giáo viên xem kết quả học viên họ cấp tài khoản hoặc học vi�
 quản lý hệ thống có phạm vi quản lý rộng hơn. Vai trò giáo viên tự đăng ký chưa được xác minh nghề nghiệp.
 Việc tham gia nhóm không cho giáo viên quyền đặt lại mật khẩu/xóa tài khoản tự đăng ký của học viên.
 
+Khi báo lỗi nội dung, hệ thống lưu loại vấn đề, mô tả, mã nội dung, trích đoạn
+lúc báo và thời gian; người xử lý lưu giải thích và trạng thái. Giáo viên đang
+quản lý học viên/người quản lý hệ thống có thể xem theo phạm vi quyền. Không
+gửi phiếu tới dịch vụ AI hoặc bên ngoài. Không nhập thông tin riêng tư vào phiếu.
+Phiếu được giữ tới khi người gửi xóa tài khoản; khi người xử lý xóa tài khoản,
+phần trả lời và định danh người đó trên phiếu của học viên được thay bằng ghi
+chú hệ thống. Chưa có lịch tự xóa phản hồi theo thời gian.
+
 Chế độ khách lưu bài làm/lịch sử trên thiết bị. Đăng nhập có dữ liệu trên backend đang cấu hình.
 Bản local lưu SQLite trong thư mục state của máy chạy; chưa có dịch vụ cloud production vận hành.
 Không gửi bài tới dịch vụ AI/OCR; các dịch vụ đó chưa được tích hợp hoạt động.

@@ -34,7 +34,7 @@ def copy_sqlite(source_path, target):
                 if table.name in excluded:
                     continue
                 if not inspect(incoming).has_table(table.name):
-                    if table.name == "attempt_drafts":
+                    if table.name in {"attempt_drafts", "content_reports"}:
                         continue
                     raise ValueError("Source schema incomplete")
                 result = incoming.execute(select(table)).mappings()

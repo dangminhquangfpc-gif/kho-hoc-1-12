@@ -9,8 +9,9 @@ Không mở cổng PostgreSQL hoặc API ra Internet.
 
 - PostgreSQL 17 qua psycopg, connection pool kiểm tra kết nối; migration offline
   có khóa PostgreSQL và phiên bản schema. Backend shared chỉ kiểm tra schema,
-  không tự tạo bảng khi khởi động. Phiên bản hiện tại là baseline 1; chưa có công
-  cụ tự nâng/hạ cấp mọi schema tương lai.
+  không tự tạo bảng khi khởi động. Phiên bản hiện tại là schema 2, có migration
+  bổ sung từ baseline 1 cho phản hồi nội dung; chưa có công cụ nâng/hạ cấp mọi
+  schema tương lai. Xem CONTENT_REPORTS.md trước khi nâng bản đang có dữ liệu.
 - Tài khoản database riêng cho API: DML và sequence; không có quyền tạo bảng,
   đổi schema hoặc quản trị role. Tài khoản owner chỉ dùng bảo trì.
 - HTTPS bắt buộc, kiểm tra Host, Origin và Sec-Fetch-Site; cookie HttpOnly,

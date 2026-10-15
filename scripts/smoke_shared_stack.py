@@ -264,6 +264,18 @@ def main():
             )
             assert submitted["score"] == float(question["max_score"])
             assert request("/account/results")[0]["id"] == attempt["id"]
+            feedback = request(
+                "/content-reports",
+                {
+                    "target_kind": "question",
+                    "target_id": question["id"],
+                    "attempt_id": attempt["id"],
+                    "category": "unclear",
+                    "message": "Kiểm thử lưu phản hồi qua sao lưu và phục hồi.",
+                },
+                status=201,
+            )
+
             request(
                 "/auth/login", {"username": "other", "password": password}, device=1
             )
@@ -341,6 +353,7 @@ def main():
             assert restored[0]["id"] == attempt["id"]
             assert restored[0]["result"]["score"] == submitted["score"]
             assert driver.sql("tuhoc", "SELECT count(*) FROM learning_records") == b"0"
+            assert request("/content-reports")[0]["id"] == feedback["id"]
             for service in ["api", "db"]:
                 ident = subprocess.check_output(
                     command + ["ps", "-q", service], text=True

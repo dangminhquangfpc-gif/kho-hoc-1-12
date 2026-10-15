@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, inspect, text
 from sqlalchemy.engine import make_url
 from .models import Base
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 
 def make_engine(url):
@@ -24,9 +24,11 @@ def make_engine(url):
     )
 
 
-def verify_columns(connection):
+def verify_columns(connection, skip=()):
     inspector = inspect(connection)
     for table in Base.metadata.sorted_tables:
+        if table.name in skip:
+            continue
         columns = {column["name"] for column in inspector.get_columns(table.name)}
         if not set(table.columns.keys()) <= columns:
             raise RuntimeError(
@@ -51,13 +53,22 @@ def migrate(engine):
             .scalars()
             .all()
         )
-        if versions and versions != [SCHEMA_VERSION]:
+        if versions not in ([], [1], [SCHEMA_VERSION]):
             raise RuntimeError(
                 "Unsupported schema version; explicit migration required"
             )
-        Base.metadata.create_all(connection)
-        verify_columns(connection)
         if not versions:
+            # Local v13 SQLite has no version table; preserve rows and add absent tables.
+            Base.metadata.create_all(connection)
+        elif versions == [1]:
+            # Explicit additive 1 -> 2 migration. Refuse unrelated baseline drift.
+            from .models import ContentReport
+
+            verify_columns(connection, skip=(ContentReport.__tablename__,))
+            ContentReport.__table__.create(connection, checkfirst=True)
+        verify_columns(connection)
+        if versions != [SCHEMA_VERSION]:
+            connection.execute(text("DELETE FROM app_schema_version"))
             connection.execute(
                 text("INSERT INTO app_schema_version (version) VALUES (:version)"),
                 {"version": SCHEMA_VERSION},

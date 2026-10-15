@@ -1,3 +1,4 @@
+import 'content_reports.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:go_router/go_router.dart';
@@ -541,6 +542,7 @@ class _DocumentState extends ConsumerState<DocumentScreen> {
             Text('Quyền sử dụng: $licenseName'),
             const Text('Trạng thái: Đang hiển thị trong bản thử'),
             Text('Cập nhật: $updatedLabel'),
+            ReportContentButton(kind: 'document', targetId: d['id']),
             if (d['exam_year'] != null) Text('Năm đề thi: ${d["exam_year"]}'),
             if (d['source_verified_on'] != null)
               Text('Kiểm tra nguồn: ${d["source_verified_on"]}'),

@@ -134,6 +134,18 @@ def test_phone_preview_seed_private_routes_and_rate_limit(tmp_path, monkeypatch)
             json={"grade": 5, "subject": "toan", "topic": "add_decimal", "count": 3},
         )
         assert custom.status_code == 201 and len(custom.json()["questions"]) == 3
+        attempt_id = custom.json()["id"]
+        assert any(
+            row["id"] == attempt_id for row in client.get("/account/attempts").json()
+        )
+        assert client.get(f"/account/attempts/{attempt_id}").status_code == 200
+        saved = client.post(
+            f"/account/attempts/{attempt_id}/draft", json={"revision": 0, "answers": {}}
+        )
+        assert saved.status_code == 200
+        assert (
+            client.get(f"/account/attempts/{attempt_id}").json()["draft_revision"] == 1
+        )
         group = client.post(
             "/classroom/groups", json={"name": "Nhóm kiểm tra bản đóng gói"}
         )

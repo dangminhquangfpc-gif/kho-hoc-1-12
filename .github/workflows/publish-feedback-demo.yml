@@ -1,0 +1,19 @@
+name: Publish content feedback Windows demo
+on:
+  push:
+    branches: [feature/content-feedback-20261015]
+permissions:
+  contents: write
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify and upload content feedback demo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd demo-package
+          sha256sum --check tu-hoc-111-demo-windows.zip.sha256
+          gh release view demo-tu-hoc-111-2026-10-15-v14 --repo "$GITHUB_REPOSITORY" || gh release create demo-tu-hoc-111-2026-10-15-v14 --draft --target "$GITHUB_SHA" --title 'Tự học 111 · v14 · Báo lỗi và phản hồi nội dung' --notes 'Bản thử Windows local. Thêm báo lỗi câu hỏi, tài liệu và phản hồi có phân quyền; chưa triển khai backend Internet hoặc phát hành cửa hàng. Dừng bản cũ, sao lưu và chép nguyên thư mục state sang bản mới trước khi chạy.' --repo "$GITHUB_REPOSITORY"
+          gh release upload demo-tu-hoc-111-2026-10-15-v14 tu-hoc-111-demo-windows.zip tu-hoc-111-demo-windows.zip.sha256 --clobber --repo "$GITHUB_REPOSITORY"

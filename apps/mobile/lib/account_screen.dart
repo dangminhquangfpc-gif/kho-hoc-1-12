@@ -1,3 +1,4 @@
+import 'content_reports.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -295,6 +296,27 @@ class _AccountState extends ConsumerState<AccountScreen> {
                   onPressed: () => context.go('/classroom'),
                   icon: const Icon(Icons.groups),
                   label: const Text('Quản lý học viên và kết quả'),
+                ),
+              TextButton.icon(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const ContentReportsScreen(),
+                  ),
+                ),
+                icon: const Icon(Icons.flag_outlined),
+                label: const Text('Phản hồi của tôi'),
+              ),
+              if (['manager', 'teacher'].contains(user['role']))
+                TextButton.icon(
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ContentReportsScreen(review: true),
+                    ),
+                  ),
+                  icon: const Icon(Icons.feedback_outlined),
+                  label: const Text('Xử lý phản hồi nội dung'),
                 ),
               if (user['role'] == 'student') const GroupPanel(student: true),
               Row(

@@ -32,7 +32,7 @@ def load_script(name):
 ops = load_script("backup_postgres")
 
 
-def envelope(tmp_path, key, created=None, database="school"):
+def envelope(tmp_path, key, created=None, database="school", schema_version=1):
     created = created or ops.utcnow()
     plaintext = tmp_path / ("plain-" + secrets.token_hex(4))
     plaintext.write_bytes(b"PGDMP" + secrets.token_bytes(2 * ops.BLOCK + 37))
@@ -45,7 +45,7 @@ def envelope(tmp_path, key, created=None, database="school"):
         key,
         dict(
             format=1,
-            schema_version=1,
+            schema_version=schema_version,
             database=database,
             created_at=created.isoformat(),
         ),
@@ -426,3 +426,13 @@ def test_operations_auto_source_rejects_external_or_ambiguous_database(
     )
     with pytest.raises(ValueError):
         driver.configured_database()
+
+
+@pytest.mark.parametrize("schema_version", [1, 2])
+def test_operations_accepts_archives_before_and_after_feedback_migration(
+    tmp_path, schema_version
+):
+    key = secrets.token_bytes(32)
+    archive = envelope(tmp_path, key, schema_version=schema_version)
+    metadata = ops.unseal(archive, tmp_path / "decoded", key)
+    assert metadata["schema_version"] == schema_version

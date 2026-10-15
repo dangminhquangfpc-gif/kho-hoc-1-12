@@ -128,3 +128,30 @@ class AttemptDraft(Base):
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
     )
+
+
+class ContentReport(Base):
+    __tablename__ = "content_reports"
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    reporter_id: Mapped[str] = mapped_column(
+        ForeignKey("learning_users.id", ondelete="CASCADE"), index=True
+    )
+    target_kind: Mapped[str] = mapped_column(String(20))
+    target_id: Mapped[str] = mapped_column(String(80))
+    target_title: Mapped[str] = mapped_column(String(300))
+    excerpt: Mapped[str] = mapped_column(Text)
+    category: Mapped[str] = mapped_column(String(30))
+    message: Mapped[str] = mapped_column(Text)
+    status: Mapped[str] = mapped_column(String(20), default="open", index=True)
+    active_key: Mapped[str | None] = mapped_column(
+        String(64), unique=True, nullable=True
+    )
+    response: Mapped[str] = mapped_column(Text, default="")
+    reviewed_by: Mapped[str | None] = mapped_column(String(36), nullable=True)
+    revision: Mapped[int] = mapped_column(Integer, default=1)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+    )
